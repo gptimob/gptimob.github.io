@@ -939,6 +939,7 @@ var LEAKS = {
       box.appendChild(el);
     });
     var pn=(ans.nome||'').trim().split(' ')[0]||'';
+    if(pn) pn = pn.charAt(0).toUpperCase() + pn.slice(1).toLowerCase();
     document.getElementById('resName').textContent = pn ? ', '+pn : '';
     var txt='Olá! Acabei de fazer o diagnóstico no site.%0A%0ANome: '+enc(ans.nome)+
       '%0AEmpresa: '+enc(ans.empresa)+'%0ACidade: '+enc(ans.cidade)+

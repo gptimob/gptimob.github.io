@@ -555,6 +555,36 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
   margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.13);
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:rgba(255,255,255,.42);
 }
+
+/* ---------- correções de contraste ----------
+   Componentes herdados da imersão que estavam em fundo invertido. */
+
+/* rail: texto escuro sobre seção escura */
+.sec-dark .rail div{border-top-color:rgba(255,255,255,.22)}
+.sec-dark .rail div:first-child{border-top-color:var(--cyan)}
+.sec-dark .rail div:nth-child(2){border-top-color:#7ADCF2}
+.sec-dark .rail div:nth-child(3){border-top-color:var(--teal)}
+.sec-dark .rail div:nth-child(4){border-top-color:#5BD3C4}
+.sec-dark .rail .w{color:var(--cyan)}
+.sec-dark .rail h3{color:#fff}
+.sec-dark .rail p{color:rgba(255,255,255,.78)}
+
+/* included: texto claro sobre card branco */
+.kprice .included li{color:var(--ink-2)}
+.kprice .included li::before{color:var(--teal)}
+
+/* scarcity: texto claro sobre fundo bege */
+.sec-band .scarcity,.sec:not(.sec-dark) .scarcity{
+  border-color:rgba(27,79,216,.35);color:var(--ink-2);background:rgba(27,79,216,.03);
+}
+.sec-band .scarcity b,.sec:not(.sec-dark) .scarcity b{color:var(--ink)}
+.sec-band .scarcity span:first-child,.sec:not(.sec-dark) .scarcity span:first-child{color:var(--blue)}
+.sec-band .scarcity a,.sec:not(.sec-dark) .scarcity a{color:var(--blue);font-weight:600}
+
+/* keeps: chips claros sobre fundo bege */
+.sec:not(.sec-dark) .keeps{border-top-color:var(--line)}
+.sec:not(.sec-dark) .keeps p{color:var(--blue)}
+.sec:not(.sec-dark) .keeps span{color:var(--ink-2);border-color:var(--line);background:#fff}
 </style>
 </head>
 <body>
@@ -831,7 +861,7 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
 
     <div class="kprice rv">
       <div>
-        <p class="vl"><sup>R$</sup>397</p>
+        <p class="vl"><sup>R$</sup>597</p>
         <p class="dt">Pagamento único · parcelamento disponível no checkout</p>
         <a class="btn btn-primary" href="#" data-checkout>Comprar o Kit Essencial <span class="arw">→</span></a>
       </div>

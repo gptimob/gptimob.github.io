@@ -249,9 +249,10 @@ a.agent{text-decoration:none;color:inherit}
 
 .crm-group{margin-bottom:22px}
 .crm-group:last-child{margin-bottom:0}
-.logos-crm{grid-template-columns:repeat(5,1fr)}
-.logos-omni{grid-template-columns:repeat(5,1fr)}
-@media (max-width:680px){.logos-omni{grid-template-columns:repeat(3,1fr)}}
+.logos.logos-crm{grid-template-columns:repeat(4,1fr)}
+.logos.logos-omni{grid-template-columns:repeat(4,1fr)}
+@media (max-width:900px){.logos.logos-crm,.logos.logos-omni{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:600px){.logos.logos-crm,.logos.logos-omni{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:680px){.logos-crm{grid-template-columns:repeat(2,1fr)}}
 .crm-label{
   font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
@@ -918,10 +919,8 @@ a.agent{text-decoration:none;color:inherit}
         <div class="logo-cell"><img src="/logos/bitrix.jpeg" alt="Bitrix24" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/pipedrive.jpeg" alt="Pipedrive" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/trello.jpeg" alt="Trello" loading="lazy"></div>
-      </div>
-      <div class="crms" style="margin-top:12px">
-        <span class="crm">Universal</span>
-        <span class="crm">Vobi</span>
+        <div class="logo-cell"><img src="/logos/universal.jpeg" alt="Universal Software" loading="lazy"></div>
+        <div class="logo-cell"><img src="/logos/vobi.jpeg" alt="Vobi" loading="lazy"></div>
       </div>
     </div>
     <div class="crm-group">

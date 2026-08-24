@@ -527,6 +527,16 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
   margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.13);
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:rgba(255,255,255,.42);
 }
+
+/* ---------- chamada do diagnóstico ---------- */
+.diag-call{
+  border:1px solid var(--line);border-radius:20px;background:#fff;
+  padding:clamp(26px,3.2vw,38px);
+}
+.dc-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0 0 14px}
+.diag-call h3{font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:clamp(20px,2.4vw,26px);line-height:1.15;margin:0 0 12px}
+.dc-t{font-size:15.5px;color:var(--ink-2);line-height:1.6;margin:0 0 24px}
+.diag-call .btn{width:100%}
 </style>
 </head>
 <body>
@@ -1015,7 +1025,7 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
           </div>
         </div>
         <ul class="host-facts">
-          <li><b>1.000+</b><span>corretores treinados em IA aplicada ao mercado imobiliário</span></li>
+          <li><b>1.200+</b><span>corretores treinados em IA aplicada ao mercado imobiliário</span></li>
           <li><b>7</b><span>agentes prontos da linha OS Business, adaptados à sua operação</span></li>
           <li><b>100%</b><span>do trabalho focado em um único mercado: o imobiliário</span></li>
         </ul>
@@ -1128,56 +1138,25 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
   <div class="wrap form-grid">
     <div class="form-side rv">
       <p class="eyebrow">Diagnóstico gratuito</p>
-      <h2>Cinco perguntas. Sem enrolação.</h2>
-      <p class="lede">Antes de qualquer proposta, uma conversa de 30 minutos para entender a operação e dizer com honestidade se a imersão faz sentido agora — ou se o melhor é resolver outra coisa primeiro.</p>
+      <h2>Quinze perguntas. Sem enrolação.</h2>
+      <p class="lede">Antes de qualquer proposta, um diagnóstico de três minutos para entender a operação e dizer com honestidade se a imersão faz sentido agora — ou se o melhor é resolver outra coisa primeiro.</p>
       <ol>
-        <li>Você preenche o formulário ao lado</li>
-        <li>Retornamos pelo WhatsApp em até 1 dia útil</li>
-        <li>Conversa de diagnóstico de 30 minutos</li>
+        <li>Você responde o diagnóstico online</li>
+        <li>Analisamos as respostas em até 24 horas</li>
+        <li>Conversa de devolutiva de 30 minutos</li>
         <li>Proposta com escopo, datas e valor fechado</li>
         <li>Reserva da agenda e preparação prévia com a gestão</li>
       </ol>
     </div>
 
     <div class="rv">
-      <form class="f" id="lead">
-        <div class="two">
-          <div class="field"><label for="nome">Seu nome</label><input id="nome" name="nome" required></div>
-          <div class="field"><label for="empresa">Imobiliária ou construtora</label><input id="empresa" name="empresa" required></div>
-        </div>
-        <div class="two">
-          <div class="field"><label for="cidade">Cidade / estado</label><input id="cidade" name="cidade" required></div>
-          <div class="field"><label for="zap">WhatsApp</label><input id="zap" name="zap" inputmode="tel" placeholder="(00) 00000-0000" required></div>
-        </div>
-        <div class="two">
-          <div class="field">
-            <label for="tamanho">Tamanho do time</label>
-            <select id="tamanho" name="tamanho" required>
-              <option value="">Selecione</option>
-              <option>Até 10 pessoas</option>
-              <option>De 11 a 25 pessoas</option>
-              <option>De 26 a 50 pessoas</option>
-              <option>Mais de 50 pessoas</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="cargo">Seu papel na empresa</label>
-            <select id="cargo" name="cargo" required>
-              <option value="">Selecione</option>
-              <option>Sócio ou diretor</option>
-              <option>Gestor comercial</option>
-              <option>Marketing</option>
-              <option>Outro</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label for="dor">O que mais trava a operação hoje</label>
-          <textarea id="dor" name="dor" placeholder="Ex.: leads que ficam sem resposta, cadastro de locação que demora dias, time que não produz conteúdo..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="justify-content:center">Solicitar diagnóstico <span class="arw">→</span></button>
-        <p class="fine">Suas informações são usadas apenas para o contato comercial da GPTImob. Sem lista, sem disparo em massa.</p>
-      </form>
+      <div class="diag-call">
+        <p class="dc-k">É o mesmo diagnóstico para toda a linha</p>
+        <h3>Ao final você já vê onde a sua operação está perdendo.</h3>
+        <p class="dc-t">Não é formulário de contato. São quinze perguntas sobre a sua operação e, ao terminar, a tela mostra os três pontos onde você perde mais — e se o caminho é a imersão, um agente, ou os dois.</p>
+        <a class="btn btn-primary" href="/diagnostico/" style="justify-content:center">Fazer o diagnóstico <span class="arw">→</span></a>
+        <p class="fine" style="margin-top:14px">Gratuito, sem compromisso. Leva cerca de três minutos.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1296,26 +1275,6 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
   els.forEach(function(e){io.observe(e)});
 })();
 
-/* ---- envio do formulário ----
-   Hoje monta a mensagem e abre o WhatsApp.
-   RAFAEL: troque o número abaixo e, se quiser gravar em planilha,
-   troque este bloco por um fetch para a URL do seu Apps Script. */
-(function(){
-  var WHATS='555400000000'; // ← trocar
-  document.getElementById('lead').addEventListener('submit',function(e){
-    e.preventDefault();
-    var d=new FormData(e.target), g=function(k){return (d.get(k)||'').toString().trim();};
-    var msg='Olá! Quero o diagnóstico da Imersão de Implantação.\n\n'+
-      'Nome: '+g('nome')+'\n'+
-      'Empresa: '+g('empresa')+'\n'+
-      'Cidade: '+g('cidade')+'\n'+
-      'WhatsApp: '+g('zap')+'\n'+
-      'Time: '+g('tamanho')+'\n'+
-      'Papel: '+g('cargo')+'\n'+
-      'O que trava hoje: '+g('dor');
-    window.open('https://wa.me/'+WHATS+'?text='+encodeURIComponent(msg),'_blank');
-  });
-})();
 </script>
 </body>
 </html>
