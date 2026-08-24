@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit Essencial do Corretor · GPTImob — a IA que conhece a sua carteira</title>
+<meta name="description" content="Seis skills que instalam IA na rotina do corretor de imóveis. Pagamento único, acesso vitalício, rodando no seu próprio Claude.">
+<meta name="theme-color" content="#FAFAF7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   GPTImob · Imersão de Implantação
+   Tokens
+   ============================================================ */
+:root{
+  --paper:#FAFAF7;
+  --paper-2:#F3F3EE;
+  --ink:#0C1A2B;
+  --ink-2:#4E5C6B;
+  --ink-3:#7C8896;
+  --line:#E3E3DA;
+  --blue:#1B4FD8;
+  --blue-deep:#0A2568;
+  --cyan:#29D3F0;
+  --teal:#0E9488;
+  --coral:#FF6B5A;
+  --grad:linear-gradient(118deg,#0A2568 0%,#1B4FD8 52%,#29D3F0 100%);
+
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+
+  --pad:clamp(20px,5vw,64px);
+  --maxw:1160px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* eyebrow / labels ------------------------------------------------ */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--blue);
+  display:flex;align-items:center;gap:10px;
+  margin:0 0 22px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--blue);flex:none}
+.eyebrow.on-dark{color:var(--cyan)}
+.eyebrow.on-dark::before{background:var(--cyan)}
+
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.03;margin:0}
+h1{font-size:clamp(38px,6.4vw,74px)}
+h2{font-size:clamp(30px,4.4vw,50px);line-height:1.06}
+h3{font-size:20px;letter-spacing:-.015em;line-height:1.2}
+em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transparent 62%,rgba(41,211,240,.42) 62%)}
+
+.lede{font-size:clamp(17px,2vw,20px);color:var(--ink-2);max-width:56ch;line-height:1.55}
+
+/* buttons --------------------------------------------------------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--body);font-weight:600;font-size:16px;
+  padding:15px 26px;border-radius:100px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 8px 22px -10px rgba(27,79,216,.75)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(27,79,216,.8)}
+.btn-ghost{border-color:var(--line);background:#fff;color:var(--ink)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-light{background:#fff;color:var(--blue-deep)}
+.btn-light:hover{transform:translateY(-2px)}
+.btn .arw{transition:transform .18s ease}
+.btn:hover .arw{transform:translateX(3px)}
+
+/* nav ------------------------------------------------------------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(250,250,247,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:66px}
+.brand{display:flex;align-items:baseline;gap:9px;font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:19px;text-decoration:none}
+.brand span{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.nav .btn{padding:10px 18px;font-size:14px}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;overflow:hidden;padding:clamp(56px,9vw,104px) 0 0}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(to right,rgba(27,79,216,.07) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(27,79,216,.07) 1px,transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(120% 80% at 78% 0%,#000 0%,transparent 68%);
+  mask-image:radial-gradient(120% 80% at 78% 0%,#000 0%,transparent 68%);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";position:absolute;top:-180px;right:-140px;width:560px;height:560px;
+  background:radial-gradient(circle,rgba(41,211,240,.30),transparent 62%);
+  pointer-events:none;
+}
+.hero-in{position:relative;z-index:2}
+.hero h1{max-width:17ch;margin-bottom:26px}
+.hero .lede{margin-bottom:34px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero-note{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:18px;letter-spacing:.02em}
+
+/* metric strip ---------------------------------------------------- */
+.strip{
+  position:relative;z-index:2;
+  margin-top:clamp(46px,6vw,74px);
+  border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.strip div{padding:26px 26px 30px;border-right:1px solid var(--line)}
+.strip div:first-child{padding-left:0}
+.strip div:last-child{border-right:0}
+.strip dt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.strip dd{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(17px,1.7vw,21px);letter-spacing:-.02em;line-height:1.2}
+.strip dd small{display:block;font-family:var(--body);font-weight:400;font-size:14px;color:var(--ink-2);letter-spacing:0;margin-top:5px}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+.sec{padding:clamp(64px,8.5vw,116px) 0}
+.sec-band{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-dark{background:var(--blue-deep);color:#fff;position:relative;overflow:hidden}
+.sec-dark::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(80% 100% at 100% 0%,rgba(41,211,240,.22),transparent 60%);
+  pointer-events:none;
+}
+.sec-dark .wrap{position:relative;z-index:2}
+.sec-dark h2,.sec-dark h3{color:#fff}
+.sec-dark .lede{color:rgba(255,255,255,.74)}
+.sec-head{max-width:62ch;margin-bottom:clamp(38px,5vw,58px)}
+.sec-head h2{margin-bottom:20px}
+
+/* quotes ---------------------------------------------------------- */
+.quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.quote{background:var(--paper);padding:clamp(26px,3.4vw,40px)}
+.quote p{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(18px,2.1vw,23px);line-height:1.32;letter-spacing:-.02em}
+.quote .who{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-top:18px;display:block}
+.quote .mk{font-family:var(--display);font-size:40px;line-height:.6;color:var(--cyan);display:block;margin-bottom:14px}
+.after-quotes{margin-top:40px;font-size:clamp(19px,2.3vw,25px);font-family:var(--display);font-weight:700;letter-spacing:-.025em;max-width:34ch;line-height:1.2}
+
+/* versus ---------------------------------------------------------- */
+.versus{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.vcol{border:1px solid var(--line);border-radius:16px;padding:clamp(24px,3vw,34px);background:#fff}
+.vcol.win{border-color:transparent;background:#fff;box-shadow:0 0 0 2px var(--blue), 0 20px 40px -28px rgba(27,79,216,.6)}
+.vtag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.vcol.win .vtag{color:var(--blue)}
+.vcol h3{margin-bottom:22px}
+.vlist{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.vlist li{display:flex;gap:12px;font-size:16px;line-height:1.45;color:var(--ink-2)}
+.vlist li::before{content:"—";color:var(--ink-3);flex:none}
+.vcol.win .vlist li{color:var(--ink)}
+.vcol.win .vlist li::before{content:"→";color:var(--blue);font-weight:600}
+
+/* ============================================================
+   Faixa de clientes (marquee)
+   ============================================================ */
+.trust{background:#fff;border-bottom:1px solid var(--line);padding:30px 0 34px;overflow:hidden}
+.trust-lab{
+  text-align:center;margin:0;font-family:var(--mono);font-size:11px;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);
+}
+.marquee{
+  margin-top:24px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+.mq-track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.trust:hover .mq-track{animation-play-state:paused}
+.mq-item{
+  flex:none;display:flex;align-items:center;justify-content:center;
+  height:52px;padding-right:clamp(38px,5vw,64px);
+}
+.mq-item img{
+  max-height:52px;width:auto;object-fit:contain;
+  opacity:.92;transition:opacity .25s ease,transform .25s ease;
+}
+.mq-item:hover img{opacity:1;transform:scale(1.04)}
+.mq-name{
+  font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.025em;
+  color:var(--ink-3);white-space:nowrap;
+}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .mq-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center;gap:10px 0}
+  .marquee{-webkit-mask-image:none;mask-image:none}
+}
+
+/* ============================================================
+   Antes × depois por setor
+   ============================================================ */
+.ba{display:grid;gap:12px}
+.ba-head,.ba-row{display:grid;grid-template-columns:186px 1fr 1fr;gap:12px;align-items:stretch}
+.ba-head{padding:0 0 4px}
+.ba-head span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:0 22px}
+.ba-head .h-antes{color:rgba(255,255,255,.5)}
+.ba-head .h-depois{color:var(--cyan)}
+.ba-sector{
+  display:flex;align-items:center;
+  font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.02em;
+  line-height:1.15;color:#fff;padding-right:8px;
+}
+.ba-cell{border-radius:14px;padding:20px 22px;font-size:15.5px;line-height:1.5}
+.ba-cell.antes{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.6)}
+.ba-cell.depois{background:rgba(41,211,240,.09);border:1px solid rgba(41,211,240,.34);color:#fff}
+.cell-lab{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px}
+.ba-cell.antes .cell-lab{color:rgba(255,255,255,.45)}
+.ba-cell.depois .cell-lab{color:var(--cyan)}
+.keeps{margin-top:clamp(38px,4.5vw,54px);border-top:1px solid rgba(255,255,255,.16);padding-top:26px}
+.keeps p{margin:0 0 16px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.keeps div{display:flex;flex-wrap:wrap;gap:9px}
+.keeps span{
+  font-size:14px;color:rgba(255,255,255,.85);line-height:1;
+  border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:10px 16px;
+}
+
+/* ============================================================
+   Fluxo GPTImob OS Business (infográfico)
+   ============================================================ */
+.flow{display:grid}
+.frow{display:grid;gap:0;align-items:stretch}
+.frow.top{grid-template-columns:.66fr 46px 1.7fr}
+.frow.bot{grid-template-columns:1fr 46px 1fr 46px 1.25fr}
+.node{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;position:relative}
+.node-h{font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:-.01em;text-transform:uppercase;margin:0 0 9px;line-height:1.15}
+.node-p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.45}
+.badge{
+  position:absolute;top:-11px;left:20px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;border-radius:100px;padding:4px 11px;
+  background:#FFF1EC;color:#C1462F;border:1px solid #FAD2C6;
+}
+.badge.blue{background:rgba(27,79,216,.07);color:var(--blue);border-color:rgba(27,79,216,.26)}
+.harrow{display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:17px}
+.down{display:flex;justify-content:center;padding:13px 0;color:var(--blue);font-size:17px;line-height:1}
+
+.bchips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.bchips span{
+  border:1px solid rgba(27,79,216,.22);color:var(--blue);background:rgba(27,79,216,.05);
+  border-radius:9px;padding:9px 10px;font-size:12.5px;text-align:center;line-height:1.2;
+}
+
+.osbar{
+  background:var(--grad);color:#fff;border-radius:16px;padding:22px 26px;
+  display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.osbar h3{font-size:clamp(19px,2.3vw,24px);margin:0 0 6px}
+.osbar p{margin:0;font-size:14.5px;color:rgba(255,255,255,.78)}
+.osbar .pill{
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;flex:none;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.32);
+  border-radius:100px;padding:9px 16px;
+}
+
+.skills{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.skill{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 14px}
+.skill b{display:block;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:0;text-transform:uppercase;line-height:1.18;margin-bottom:9px}
+.skill span{font-size:12.5px;color:var(--ink-2);line-height:1.38;display:block}
+
+.connectors{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px;display:grid;grid-template-columns:.85fr 3fr;gap:18px;align-items:center}
+.conn-lab{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--coral);margin:0}
+.conn-lab small{display:block;font-family:var(--body);font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink-2);margin-top:6px;line-height:1.35}
+.conn-list{display:flex;flex-wrap:wrap;gap:9px 20px;margin:0}
+.conn-list span{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+
+.node.tealed{border-color:rgba(14,148,136,.4);border-style:dashed}
+.node.tealed .node-h{color:var(--teal)}
+.node.filled{background:var(--teal);border-color:transparent;color:#fff}
+.node.filled .node-p{color:rgba(255,255,255,.85)}
+.frow.bot .harrow{color:var(--teal)}
+
+.flow-tag{text-align:center;margin:34px auto 0;max-width:44ch}
+.flow-tag b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(19px,2.5vw,27px);letter-spacing:-.025em;line-height:1.12}
+.flow-tag span{display:block;margin-top:10px;font-size:15.5px;color:var(--ink-2);line-height:1.5}
+
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:clamp(44px,5vw,64px)}
+.layer{border-top:2px solid var(--blue);padding-top:18px}
+.layer:nth-child(2){border-top-color:#1B77E4}
+.layer:nth-child(3){border-top-color:var(--cyan)}
+.layer .n{font-family:var(--mono);font-size:11px;letter-spacing:.13em;color:var(--blue);margin:0 0 9px}
+.layer h3{font-size:17px;margin-bottom:7px}
+.layer p{margin:0;font-size:15px;color:var(--ink-2);line-height:1.5}
+.arch-foot{margin:26px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--ink-3);text-align:center}
+.arch-img{width:100%;border:1px solid var(--line);border-radius:18px;box-shadow:0 26px 50px -36px rgba(12,26,43,.5)}
+
+/* ============================================================
+   SIGNATURE — grade dos dois dias
+   ============================================================ */
+.turno{
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blue);margin:34px 0 4px;
+}
+.turno::after{content:"";flex:1;height:1px;background:var(--line)}
+.panel.d2 .turno{color:var(--teal)}
+.panel.prep .turno{color:var(--ink-3)}
+.sched + .turno{margin-top:44px}
+.days-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.tab{
+  font-family:var(--body);font-size:15px;font-weight:600;
+  background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:14px 20px;cursor:pointer;text-align:left;line-height:1.25;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.tab b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:400;margin-bottom:6px}
+.tab:hover{transform:translateY(-1px)}
+.tab[aria-selected="true"]{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),0 14px 30px -22px rgba(27,79,216,.9)}
+.tab[aria-selected="true"] b{color:var(--blue)}
+.tab.t2[aria-selected="true"]{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal),0 14px 30px -22px rgba(14,148,136,.9)}
+.tab.t2[aria-selected="true"] b{color:var(--teal)}
+.tab.t0{border-style:dashed}
+.tab.t0[aria-selected="true"]{border-style:solid;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink),0 14px 30px -22px rgba(12,26,43,.7)}
+.tab.t0[aria-selected="true"] b{color:var(--ink)}
+.prep-note{
+  margin:28px 0 0;padding:18px 22px;border-left:2px solid var(--blue);
+  background:rgba(27,79,216,.05);border-radius:0 12px 12px 0;
+  font-size:16px;color:var(--ink-2);line-height:1.5;max-width:70ch;
+}
+
+.panel[hidden]{display:none}
+.day-meta{
+  display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;
+  padding:16px 0 26px;border-bottom:1px solid var(--line);margin-bottom:8px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--ink-2);
+}
+.day-meta .pip{width:9px;height:9px;border-radius:50%;background:var(--blue);display:inline-block;margin-right:8px;vertical-align:middle}
+.panel.d2 .day-meta .pip{background:var(--teal)}
+
+.sched{list-style:none;margin:0;padding:0}
+.sched li{position:relative;padding:22px 0 22px 28px}
+.sched li + li{border-top:1px solid var(--line)}
+.sched li::before{
+  content:"";position:absolute;left:0;top:30px;width:8px;height:8px;border-radius:50%;
+  background:var(--blue);
+}
+.panel.d2 .sched li::before{background:var(--teal)}
+.panel.prep .sched li::before{background:var(--ink-3)}
+.sched h3{margin-bottom:8px}
+.sched p{margin:0;color:var(--ink-2);font-size:16px;line-height:1.5;max-width:64ch}
+.sched .who{
+  display:inline-block;margin-top:12px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
+  border:1px solid rgba(27,79,216,.28);border-radius:100px;padding:5px 12px;
+}
+.panel.d2 .sched .who{color:var(--teal);border-color:rgba(14,148,136,.32)}
+
+/* piloto ---------------------------------------------------------- */
+.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:12px}
+.rail div{border-top:2px solid var(--line);padding-top:20px}
+.rail div:first-child{border-top-color:var(--blue)}
+.rail div:nth-child(2){border-top-color:#1B77E4}
+.rail div:nth-child(3){border-top-color:var(--cyan)}
+.rail div:nth-child(4){border-top-color:var(--teal)}
+.rail .w{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.rail h3{font-size:17px;margin-bottom:8px}
+.rail p{margin:0;font-size:15.5px;color:var(--ink-2);line-height:1.5}
+
+/* quem conduz ----------------------------------------------------- */
+.host{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,64px);align-items:start}
+.host-card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.host-photo{aspect-ratio:4/5;background:var(--grad);display:flex;align-items:flex-end;padding:24px;color:#fff}
+.host-photo .nm{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.03em;line-height:1.05}
+.host-photo .rl{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;opacity:.85;margin-top:8px}
+.host-facts{list-style:none;margin:0;padding:0}
+.host-facts li{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 20px;border-top:1px solid var(--line);font-size:15px}
+.host-facts li:first-child{border-top:0}
+.host-facts b{font-family:var(--display);font-size:19px;letter-spacing:-.02em;color:var(--blue)}
+.host-body p{color:var(--ink-2);font-size:17px}
+.host-body p:first-child{margin-top:0}
+.logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.logos span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--line);border-radius:100px;padding:8px 15px;color:var(--ink-2);background:#fff}
+
+/* faq ------------------------------------------------------------- */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:24px 46px 24px 0;position:relative;
+  font-family:var(--display);font-weight:700;font-size:clamp(18px,2vw,21px);letter-spacing:-.02em;line-height:1.28;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:22px;color:var(--blue);transition:transform .2s ease;
+}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 8% 26px 0;color:var(--ink-2);font-size:16.5px;line-height:1.6;max-width:72ch}
+.faq .a p{margin:0 0 12px}
+.faq .a p:last-child{margin-bottom:0}
+
+/* investimento ---------------------------------------------------- */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:30px}
+.price{border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:26px;background:rgba(255,255,255,.04)}
+.price .sz{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.price .vl{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:-.03em;line-height:1}
+.price .vl sup{font-size:15px;font-weight:500;vertical-align:top;opacity:.7;margin-right:3px}
+.price .dt{margin-top:12px;font-size:15px;color:rgba(255,255,255,.66);line-height:1.45}
+.included{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 28px}
+.included li{display:flex;gap:11px;font-size:15.5px;color:rgba(255,255,255,.82);line-height:1.45}
+.included li::before{content:"✓";color:var(--cyan);flex:none;font-weight:600}
+.scarcity{
+  margin-top:34px;border:1px dashed rgba(41,211,240,.5);border-radius:14px;
+  padding:20px 24px;font-size:15.5px;color:rgba(255,255,255,.8);
+  display:flex;gap:14px;align-items:flex-start;
+}
+.scarcity b{color:#fff}
+
+/* form ------------------------------------------------------------ */
+.form-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,70px);align-items:start}
+.f{display:grid;gap:16px}
+.field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.field input,.field select,.field textarea{
+  width:100%;font-family:var(--body);font-size:16px;color:var(--ink);
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+  transition:border-color .16s ease,box-shadow .16s ease;
+}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,79,216,.14)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-side h2{margin-bottom:18px}
+.form-side ol{margin:26px 0 0;padding:0;list-style:none;counter-reset:s}
+.form-side ol li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line);font-size:15.5px;color:var(--ink-2)}
+.form-side ol li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--blue);padding-top:3px}
+.fine{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);line-height:1.6}
+
+/* footer ---------------------------------------------------------- */
+.foot{border-top:1px solid var(--line);padding:38px 0;font-size:14px;color:var(--ink-3)}
+.foot-in{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--blue)}
+
+/* reveal ---------------------------------------------------------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.6,.2,1),transform .6s cubic-bezier(.2,.6,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* responsive ------------------------------------------------------ */
+@media (max-width:960px){
+  .strip{grid-template-columns:1fr 1fr}
+  .strip div{border-bottom:1px solid var(--line);padding-left:0}
+  .strip div:nth-child(2n){border-right:0;padding-left:22px}
+  .quotes{grid-template-columns:1fr}
+  .versus{grid-template-columns:1fr}
+  .rail{grid-template-columns:1fr 1fr}
+  .ba-head{display:none}
+  .ba-row{grid-template-columns:1fr;gap:10px}
+  .ba-sector{font-size:19px;padding-top:10px}
+  .cell-lab{display:block}
+  .frow.top,.frow.bot{grid-template-columns:1fr}
+  .harrow{padding:12px 0}
+  .harrow span{display:inline-block;transform:rotate(90deg)}
+  .skills{grid-template-columns:repeat(4,1fr)}
+  .connectors{grid-template-columns:1fr}
+  .layers{grid-template-columns:1fr}
+  .host{grid-template-columns:1fr}
+  .host-card{max-width:340px}
+  .price-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .nav .btn{display:none}
+  .strip{grid-template-columns:1fr}
+  .strip div{border-right:0;padding-left:0}
+  .rail{grid-template-columns:1fr}
+  .included{grid-template-columns:1fr}
+  .skills{grid-template-columns:repeat(2,1fr)}
+  .bchips{grid-template-columns:1fr 1fr}
+  .osbar{flex-direction:column;align-items:flex-start}
+  .two{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+
+/* ---------- adições Kit Essencial ---------- */
+.kfacts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px}
+@media (max-width:760px){.kfacts{grid-template-columns:1fr}}
+.kskill{
+  border:1px solid var(--line);border-radius:18px;background:#fff;
+  padding:clamp(22px,2.8vw,30px);position:relative;overflow:hidden;
+}
+.kskill::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}
+.kskill .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--blue);display:block;margin-bottom:10px}
+.kskill h3{font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:21px;margin:0 0 8px}
+.kskill > p{font-size:15px;color:var(--ink-2);margin:0 0 16px;line-height:1.55}
+.kskill ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.kskill li{font-size:14px;color:var(--ink-2);padding-left:18px;position:relative;line-height:1.45}
+.kskill li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+
+.kprice{
+  border:1px solid var(--line);border-radius:22px;background:#fff;
+  padding:clamp(28px,3.6vw,44px);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,52px);align-items:center;
+}
+@media (max-width:820px){.kprice{grid-template-columns:1fr}}
+.kprice .vl{font-family:var(--display);font-weight:800;font-size:clamp(48px,7vw,74px);letter-spacing:-.045em;line-height:1;margin:0 0 6px}
+.kprice .vl sup{font-size:.36em;top:-.75em;position:relative;margin-right:4px;opacity:.65}
+.kprice .dt{font-size:15px;color:var(--ink-2);margin:0 0 24px}
+
+
+/* ---------- rodapé padrão ---------- */
+.foot{padding:60px 0 44px;background:#080F19;color:rgba(255,255,255,.7);border:none;margin:0}
+.foot .wrap{max-width:1160px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+@media (max-width:820px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.foot-grid{grid-template-columns:1fr}}
+.foot-brand{
+  display:flex;align-items:baseline;gap:9px;text-decoration:none;color:#fff;
+  font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:19px;
+}
+.foot-brand span{
+  font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.42);
+}
+.foot-tag{font-size:15px;color:rgba(255,255,255,.55);max-width:32ch;margin:12px 0 0}
+.foot h5{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan);margin:0 0 14px;font-weight:400;
+}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.foot li{margin:0}
+.foot a{font-size:15px;color:rgba(255,255,255,.72);text-decoration:none;transition:color .16s ease}
+.foot a:hover{color:#fff}
+.foot-btm{
+  margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.13);
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:rgba(255,255,255,.42);
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">GPTImob <span>Kit Essencial do Corretor</span></a>
+    <a class="btn btn-primary" href="#investimento">Quero o Kit <span class="arw">→</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-in">
+    <p class="eyebrow">Produto digital · corretores de imóveis</p>
+    <h1>A IA já sabe vender imóvel. Ela só <em class="hl">não conhece os seus</em>.</h1>
+    <p class="lede">Não é curso e não é lista de prompt. São seis skills que você instala no seu Claude e que já sabem quem você é, onde você atua e o que está na sua carteira — para você parar de explicar tudo de novo a cada conversa.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#investimento">Quero o Kit <span class="arw">→</span></a>
+      <a class="btn btn-ghost" href="#dentro">Ver o que vem dentro</a>
+    </div>
+    <p class="hero-note">Pagamento único · acesso imediato · sem mensalidade</p>
+
+    <dl class="strip">
+      <div><dt>Formato</dt><dd>Digital<small>Você baixa e implanta no seu ritmo</small></dd></div>
+      <div><dt>Onde roda</dt><dd>No seu Claude<small>Na sua conta, com os seus dados</small></dd></div>
+      <div><dt>O que recebe</dt><dd>6 skills<small>Mais o passo a passo de instalação</small></dd></div>
+      <div><dt>Acesso</dt><dd>Vitalício<small>Atualizações incluídas, sem renovação</small></dd></div>
+    </dl>
+  </div>
+</header>
+
+<!-- ======================= O PROBLEMA ======================= -->
+<section class="sec sec-band">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">O problema</p>
+      <h2>Não falta ferramenta. Falta a ferramenta <em class="hl">saber quem você é</em>.</h2>
+      <p class="lede">Todo corretor que chega até aqui já tentou usar IA de alguma forma. O que trava é sempre o mesmo ponto.</p>
+    </div>
+
+    <div class="quotes rv">
+      <div class="quote">
+        <span class="mk">“</span>
+        <p>Toda vez tenho que explicar de novo quem eu sou, onde eu atuo e como eu falo.</p>
+        <span class="who">Corretor autônomo · 6 anos de mercado</span>
+      </div>
+      <div class="quote">
+        <span class="mk">“</span>
+        <p>O texto sai bonito e sai genérico. Não parece meu, parece de qualquer corretor.</p>
+        <span class="who">Corretora · carteira de alto padrão</span>
+      </div>
+      <div class="quote">
+        <span class="mk">“</span>
+        <p>Sei que devia fazer follow-up. Só que não lembro de quem, nem quando, nem o que dizer.</p>
+        <span class="who">Corretor · 200 conversas abertas</span>
+      </div>
+      <div class="quote">
+        <span class="mk">“</span>
+        <p>Assisti três cursos de IA. Continuo abrindo o chat e olhando para a tela em branco.</p>
+        <span class="who">Corretor · equipe de imobiliária</span>
+      </div>
+    </div>
+
+    <p class="after-quotes rv">Curso ensina a usar. Skill já chega sabendo o que fazer.</p>
+  </div>
+</section>
+
+<!-- ======================= O QUE VEM DENTRO ======================= -->
+<section class="sec" id="dentro">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">O que vem dentro</p>
+      <h2>Seis skills que cobrem o ciclo do corretor, <em class="hl">com o mesmo contexto</em>.</h2>
+      <p class="lede">Cada uma resolve uma etapa. Instaladas juntas, compartilham o que a primeira aprendeu sobre você — configura uma vez, vale para as quatro.</p>
+    </div>
+
+    <div class="kfacts rv">
+      <div class="kskill">
+        <span class="n">Skill 01 · a base</span>
+        <h3>Onboarding</h3>
+        <p>A primeira que você instala e a que faz as outras funcionarem. Ela entrevista você e monta o seu Perfil Mestre.</p>
+        <ul>
+          <li>Quem você é, há quanto tempo atua e como se posiciona</li>
+          <li>Sua região, seus bairros e o tipo de imóvel que domina</li>
+          <li>O seu jeito de falar, para o texto sair com a sua voz</li>
+          <li>Seu processo comercial e as objeções que mais ouve</li>
+        </ul>
+      </div>
+      <div class="kskill">
+        <span class="n">Skill 02 · para quem</span>
+        <h3>Persona</h3>
+        <p>Descobre para quem cada imóvel da sua carteira realmente vende, antes de você gastar tempo divulgando para o público errado.</p>
+        <ul>
+          <li>Perfil do comprador ideal para cada imóvel</li>
+          <li>O que motiva a compra e o que costuma travar</li>
+          <li>Onde essa pessoa está e como ela procura imóvel</li>
+          <li>Compara um cliente real com as personas mapeadas</li>
+        </ul>
+      </div>
+      <div class="kskill">
+        <span class="n">Skill 03 · o que dizer</span>
+        <h3>Conteúdo</h3>
+        <p>Define o que comunicar e quando, para você parar de acordar sem saber o que postar e de repetir sempre o mesmo formato.</p>
+        <ul>
+          <li>Calendário editorial com os temas da sua região</li>
+          <li>Legendas e carrosséis no seu tom de voz</li>
+          <li>Ideias a partir dos imóveis que você já tem</li>
+          <li>Equilíbrio entre post de imóvel e post que gera autoridade</li>
+        </ul>
+      </div>
+      <div class="kskill">
+        <span class="n">Skill 04 · gravação</span>
+        <h3>Roteiros Que Colam</h3>
+        <p>Transforma um imóvel da sua carteira em roteiro falado, pronto para gravar sem travar na frente da câmera.</p>
+        <ul>
+          <li>Cole o link do anúncio e receba o roteiro</li>
+          <li>Gancho pensado para segurar nos primeiros segundos</li>
+          <li>Texto no seu tom, não em tom de locutor</li>
+          <li>Serve para Reels, stories e vídeo de WhatsApp</li>
+        </ul>
+      </div>
+      <div class="kskill">
+        <span class="n">Skill 05 · relacionamento</span>
+        <h3>Followup Matador PRO</h3>
+        <p>A cadência que faz o cliente responder, aplicada à sua carteira real — não um modelo genérico de mensagem.</p>
+        <ul>
+          <li>Sequência de contatos com intervalo e motivo definidos</li>
+          <li>Mensagem diferente para cada momento da negociação</li>
+          <li>Reativação de conversa parada sem parecer cobrança</li>
+          <li>Versão ampliada da isca gratuita, com mais cenários</li>
+        </ul>
+      </div>
+      <div class="kskill">
+        <span class="n">Skill 06 · fechamento</span>
+        <h3>Closer</h3>
+        <p>Você cola a conversa com o cliente e recebe o diagnóstico da oportunidade e a próxima melhor ação.</p>
+        <ul>
+          <li>Leitura do estágio real da negociação</li>
+          <li>Tratamento das objeções que apareceram na conversa</li>
+          <li>Sugestão de mensagem para avançar, pronta para enviar</li>
+          <li>O que perguntar para descobrir o que está escondido</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= COMO INSTALAR ======================= -->
+<section class="sec sec-dark" id="instalar">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow on-dark">Como instalar</p>
+      <h2>Da compra ao primeiro roteiro, <em class="hl">na mesma tarde</em>.</h2>
+      <p class="lede">Não precisa saber programar nem instalar nada no computador. Se você sabe anexar um arquivo, sabe fazer isso.</p>
+    </div>
+    <div class="rail rv">
+      <div>
+        <p class="w">Passo 1</p>
+        <h3>Compra e acesso</h3>
+        <p>Pagamento único no checkout. O acesso chega no seu e-mail na hora, sem espera de liberação.</p>
+      </div>
+      <div>
+        <p class="w">Passo 2</p>
+        <h3>Instalação guiada</h3>
+        <p>O guia mostra onde colar cada skill dentro do seu Claude. São poucos minutos por skill.</p>
+      </div>
+      <div>
+        <p class="w">Passo 3</p>
+        <h3>Seu perfil</h3>
+        <p>Você conversa uma vez com a skill de Onboarding e ela monta o seu Perfil Mestre. É a única etapa que pede tempo seu.</p>
+      </div>
+      <div>
+        <p class="w">Passo 4</p>
+        <h3>Uso no dia a dia</h3>
+        <p>A partir daí você chama a skill que precisar e ela já sabe quem você é. Sem reexplicar nada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= A DIFERENÇA ======================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">A diferença</p>
+      <h2>Aprender sobre IA é uma coisa. <em class="hl">Ter a IA pronta</em> é outra.</h2>
+    </div>
+    <div class="versus rv">
+      <div class="vcol">
+        <p class="vtag">O que o mercado costuma vender</p>
+        <h3>Curso de IA para corretor</h3>
+        <ul class="vlist">
+          <li>Ensina a escrever prompt — e você escreve todos eles</li>
+          <li>Usa exemplos de imóveis que não são os seus</li>
+          <li>Termina no certificado e no grupo de WhatsApp</li>
+          <li>Depende de você lembrar e aplicar sozinho</li>
+          <li>Na segunda-feira, a tela continua em branco</li>
+        </ul>
+      </div>
+      <div class="vcol win">
+        <p class="vtag">O que o Kit Essencial entrega</p>
+        <h3>Skills instaladas e configuradas</h3>
+        <ul class="vlist">
+          <li>Você não escreve prompt: chama a skill pelo nome</li>
+          <li>Trabalha com a sua carteira e a sua região</li>
+          <li>Termina com seis rotinas funcionando</li>
+          <li>O contexto fica salvo, não se perde entre conversas</li>
+          <li>O primeiro roteiro sai no dia da instalação</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="keeps rv">
+      <p>E fica instalado na sua conta</p>
+      <div>
+        <span>Perfil Mestre do corretor</span>
+        <span>As 6 skills configuradas</span>
+        <span>Seu tom de voz salvo</span>
+        <span>Sua região e carteira</span>
+        <span>Guia de instalação</span>
+        <span>Atualizações futuras</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PARA QUEM ======================= -->
+<section class="sec sec-band">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Antes de comprar</p>
+      <h2>Para quem serve — e para quem <em class="hl">não serve</em>.</h2>
+      <p class="lede">Preferimos perder a venda a ter alguém frustrado com o produto errado.</p>
+    </div>
+    <div class="versus rv">
+      <div class="vcol win">
+        <p class="vtag">Faz sentido para você se</p>
+        <h3>É o seu caso</h3>
+        <ul class="vlist">
+          <li>Você atende clientes pelo WhatsApp todo dia</li>
+          <li>Tem imóveis na carteira e precisa divulgá-los</li>
+          <li>Já tentou usar IA e achou o resultado genérico</li>
+          <li>Perde negócio por não conseguir manter o follow-up</li>
+          <li>Prefere resolver por conta, no seu ritmo</li>
+        </ul>
+      </div>
+      <div class="vcol">
+        <p class="vtag">Melhor não comprar se</p>
+        <h3>Não é o seu caso</h3>
+        <ul class="vlist">
+          <li>Procura um robô que atenda os clientes no seu lugar</li>
+          <li>Quer alguém configurando tudo para você</li>
+          <li>Busca solução para uma equipe inteira</li>
+          <li>Espera resultado sem dedicar a primeira hora de setup</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="scarcity rv">
+      <span>◆</span>
+      <p style="margin:0"><b>Se for esse o caso.</b> Atendimento automático de leads e solução para o time inteiro são outra linha — os <a href="/#imobiliarias">agentes de IA para imobiliárias</a> resolvem esse problema, e a imersão prepara a equipe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= INVESTIMENTO ======================= -->
+<section class="sec" id="investimento">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Investimento</p>
+      <h2>Paga uma vez. <em class="hl">Usa para sempre</em>.</h2>
+      <p class="lede">Sem assinatura, sem renovação e sem degrau escondido. As atualizações das skills entram no mesmo acesso.</p>
+    </div>
+
+    <div class="kprice rv">
+      <div>
+        <p class="vl"><sup>R$</sup>397</p>
+        <p class="dt">Pagamento único · parcelamento disponível no checkout</p>
+        <a class="btn btn-primary" href="#" data-checkout>Comprar o Kit Essencial <span class="arw">→</span></a>
+      </div>
+      <ul class="included" style="margin:0">
+        <li>As 6 skills: Onboarding, Persona, Conteúdo, Roteiros, Followup PRO e Closer</li>
+        <li>Guia de instalação passo a passo</li>
+        <li>Atualizações das skills incluídas</li>
+        <li>Acesso imediato após a compra</li>
+        <li>Sem mensalidade e sem fidelidade</li>
+        <li>Funciona na sua conta, com os seus dados</li>
+      </ul>
+    </div>
+    <!-- ▲▲ RAFAEL: trocar o valor acima e os dois links data-checkout ▲▲ -->
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="sec sec-band" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Antes de comprar</p>
+      <h2>O que provavelmente está <em class="hl">passando pela sua cabeça</em>.</h2>
+    </div>
+    <div class="faq rv">
+      <details>
+        <summary>Preciso pagar o Claude por fora?</summary>
+        <div class="a"><p>Sim, e preferimos dizer isso antes da compra. As skills rodam dentro do Claude, então você precisa de uma conta lá. O plano gratuito serve para conhecer; quem usa no dia a dia costuma ir para o Pro.</p><p>É um custo separado, pago direto à Anthropic, e não passa pela GPTImob.</p></div>
+      </details>
+      <details>
+        <summary>Não entendo nada de tecnologia. Vou conseguir instalar?</summary>
+        <div class="a"><p>Se você sabe anexar um arquivo no WhatsApp, consegue. Não há nada para programar nem instalar no computador — a instalação acontece dentro do Claude, e o guia mostra cada tela.</p></div>
+      </details>
+      <details>
+        <summary>Qual a diferença para o Followup Matador gratuito?</summary>
+        <div class="a"><p>O gratuito entrega a cadência de follow-up para você aplicar e ver funcionando. O Kit traz a versão PRO, com mais cenários, e soma outras três skills que trabalham com o mesmo perfil.</p><p>Se ainda não testou, comece pelo gratuito. É a melhor forma de saber se esse jeito de trabalhar combina com você.</p></div>
+      </details>
+      <details>
+        <summary>Isso substitui um CRM?</summary>
+        <div class="a"><p>Não. O Kit não guarda seus clientes nem controla seu funil — ele ajuda você a produzir e a decidir o que fazer em cada conversa. Se o que você procura é organização de funil a partir do WhatsApp, o <a href="https://guidoguia.com.br" target="_blank" rel="noopener">Guido</a> é a ferramenta certa.</p></div>
+      </details>
+      <details>
+        <summary>Trabalho numa imobiliária. Posso usar mesmo assim?</summary>
+        <div class="a"><p>Pode. O Kit é individual e trabalha com a sua carteira, seja ela própria ou da empresa em que você atua. Nada do que você configura sai da sua conta.</p><p>Se a sua imobiliária quiser equipar o time inteiro, existe formato para isso — vale conversar com a gestão.</p></div>
+      </details>
+      <details>
+        <summary>Meus dados e os dos meus clientes ficam seguros?</summary>
+        <div class="a"><p>Tudo o que você configura fica na sua conta do Claude. A GPTImob não tem acesso ao seu perfil, à sua carteira nem às suas conversas.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CTA FINAL ======================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head rv" style="text-align:center;margin-left:auto;margin-right:auto">
+      <p class="eyebrow" style="justify-content:center">Comece hoje</p>
+      <h2>Sua próxima gravação pode sair <em class="hl">ainda hoje</em>.</h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto">Instala, conversa uma vez com a skill de Onboarding e já cola o link do primeiro imóvel.</p>
+    </div>
+    <div class="hero-cta rv" style="justify-content:center">
+      <a class="btn btn-primary" href="#" data-checkout>Comprar o Kit Essencial <span class="arw">→</span></a>
+      <a class="btn btn-ghost" href="https://followup.gptimob.com.br" target="_blank" rel="noopener">Testar o Followup gratuito</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="foot-brand" href="/">GPTImob <span>IA imobili&aacute;ria</span></a>
+        <p class="foot-tag">Intelig&ecirc;ncia artificial aplicada ao mercado imobili&aacute;rio.</p>
+      </div>
+      <div>
+        <h5>Imobili&aacute;rias</h5>
+        <ul>
+          <li><a href="/#imobiliarias">Agentes de IA</a></li>
+          <li><a href="/imersao/">Imers&atilde;o de implanta&ccedil;&atilde;o</a></li>
+          <li><a href="/#diagnostico">Diagn&oacute;stico gratuito</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Corretores</h5>
+        <ul>
+          <li><a href="https://guidoguia.com.br" target="_blank" rel="noopener">Guido</a></li>
+          <li><a href="/kit-essencial/">Kit Essencial</a></li>
+          <li><a href="https://followup.gptimob.com.br" target="_blank" rel="noopener">Followup Matador</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contato</h5>
+        <ul>
+          <li><a href="https://wa.me/5554999166672?text=Vim%20do%20site%20da%20GPTImob%20e%20quero%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-btm">&copy; 2026 GPTImob</div>
+  </div>
+</footer>
+
+<script>
+/* ---- reveal no scroll ---- */
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(function(e){e.classList.add('in')});return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+
+</body>
+</html>
