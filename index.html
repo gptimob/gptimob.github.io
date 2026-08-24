@@ -249,7 +249,9 @@ a.agent{text-decoration:none;color:inherit}
 
 .crm-group{margin-bottom:22px}
 .crm-group:last-child{margin-bottom:0}
-.logos-crm{grid-template-columns:repeat(4,1fr)}
+.logos-crm{grid-template-columns:repeat(5,1fr)}
+.logos-omni{grid-template-columns:repeat(5,1fr)}
+@media (max-width:680px){.logos-omni{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:680px){.logos-crm{grid-template-columns:repeat(2,1fr)}}
 .crm-label{
   font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
@@ -445,7 +447,7 @@ a.agent{text-decoration:none;color:inherit}
 /* ============================================================
    Logos
    ============================================================ */
-.logos{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.logos{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
 @media (max-width:980px){.logos{grid-template-columns:repeat(5,1fr)}}
 @media (max-width:680px){.logos{grid-template-columns:repeat(3,1fr)}}
 .logo-cell{
@@ -876,6 +878,9 @@ a.agent{text-decoration:none;color:inherit}
       <div class="logo-cell"><img src="/logos/qualita.jpeg" alt="Qualitá Imóveis" loading="lazy"></div>
       <div class="logo-cell"><img src="/logos/eco.jpeg" alt="Eco Construtora" loading="lazy"></div>
       <div class="logo-cell"><img src="/logos/realiza.jpeg" alt="Realiza Negócios" loading="lazy"></div>
+      <div class="logo-cell"><img src="/logos/cancian.jpeg" alt="Cancian Imóveis" loading="lazy"></div>
+      <div class="logo-cell"><img src="/logos/vetta.jpeg" alt="Vetta" loading="lazy"></div>
+      <div class="logo-cell"><img src="/logos/lokatell.jpeg" alt="Lokatell" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -911,6 +916,8 @@ a.agent{text-decoration:none;color:inherit}
         <div class="logo-cell"><img src="/logos/cv.jpeg" alt="CV CRM" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/rdstation.jpeg" alt="RD Station" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/bitrix.jpeg" alt="Bitrix24" loading="lazy"></div>
+        <div class="logo-cell"><img src="/logos/pipedrive.jpeg" alt="Pipedrive" loading="lazy"></div>
+        <div class="logo-cell"><img src="/logos/trello.jpeg" alt="Trello" loading="lazy"></div>
       </div>
       <div class="crms" style="margin-top:12px">
         <span class="crm">Universal</span>
@@ -919,9 +926,12 @@ a.agent{text-decoration:none;color:inherit}
     </div>
     <div class="crm-group">
       <p class="crm-label">Atendimento e OMNICHANNEL</p>
-      <div class="crms">
-        <span class="crm">Realmate</span>
-        <span class="crm">Chatwoot</span>
+      <div class="logos logos-omni">
+        <div class="logo-cell"><img src="/logos/realmate.jpeg" alt="Realmate" loading="lazy"></div>
+        <div class="logo-cell"><img src="/logos/digisac.jpeg" alt="Digisac" loading="lazy"></div>
+        <div class="logo-cell"><img src="/logos/chatwoot.jpeg" alt="Chatwoot" loading="lazy"></div>
+      </div>
+      <div class="crms" style="margin-top:12px">
         <span class="crm">WhatsApp Business</span>
         <span class="crm">API Oficial da Meta</span>
         <span class="crm" style="border-style:dashed;color:var(--ink-3)">o seu, sob consulta</span>
