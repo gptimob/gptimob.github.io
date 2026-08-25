@@ -3,8 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Imersão de Implantação · GPTImob — dois dias para instalar a IA na sua imobiliária</title>
-<meta name="description" content="Dois dias presenciais dentro da sua imobiliária ou construtora. Dia 1 com a diretoria e os times internos. Dia 2 com os corretores. Seu time sai com o projeto de IA da casa operando.">
+<title>Imersão de implantação de IA para imobiliárias · GPTImob</title>
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="GPTImob">
+<meta property="og:title" content="Imersão de implantação de IA para imobiliárias · GPTImob">
+<meta property="og:description" content="Dois dias presenciais na sua imobiliária ou construtora. O time sai com a IA da casa configurada e 30 dias de operação assistida inclusos.">
+<meta property="og:url" content="https://gptimob.com.br/imersao/">
+<meta property="og:image" content="https://gptimob.com.br/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gptimob.com.br/imersao/">
+<meta name="description" content="Dois dias presenciais na sua imobiliária ou construtora. O time sai com a IA da casa configurada e 30 dias de operação assistida inclusos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -384,7 +394,13 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
 /* quem conduz ----------------------------------------------------- */
 .host{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,64px);align-items:start}
 .host-card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
-.host-photo{aspect-ratio:4/5;background:var(--grad);display:flex;align-items:flex-end;padding:24px;color:#fff}
+.host-photo{aspect-ratio:4/5;background:var(--grad);position:relative;overflow:hidden;color:#fff}
+.host-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.host-photo::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:58%;
+  background:linear-gradient(to top,rgba(10,37,104,.92) 0%,rgba(10,37,104,.6) 45%,transparent 100%);
+}
+.host-name{position:absolute;left:0;right:0;bottom:0;padding:24px;z-index:2}
 .host-photo .nm{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.03em;line-height:1.05}
 .host-photo .rl{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;opacity:.85;margin-top:8px}
 .host-facts{list-style:none;margin:0;padding:0}
@@ -551,6 +567,9 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
 .quote-cta h3{font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:clamp(20px,2.4vw,26px);color:#fff;margin:0 0 10px}
 .quote-cta p{font-size:15.5px;color:rgba(255,255,255,.72);margin:0}
 .quote-cta .btn{flex:none}
+.quote-cta{margin-bottom:clamp(36px,5vw,56px)}
+.sec-dark .included{margin-top:clamp(12px,2vw,20px);gap:16px 28px}
+.sec-dark .included li{align-items:flex-start}
 </style>
 </head>
 <body>
@@ -1033,7 +1052,8 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
     <div class="host rv">
       <div class="host-card">
         <div class="host-photo">
-          <div>
+          <img src="/img/rafael.jpg" alt="Rafael Comin, fundador da GPTImob" loading="lazy" width="900" height="1200">
+          <div class="host-name">
             <div class="nm">Rafael Comin</div>
             <div class="rl">Fundador · GPTImob</div>
           </div>
