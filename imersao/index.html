@@ -537,6 +537,20 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
 .diag-call h3{font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:clamp(20px,2.4vw,26px);line-height:1.15;margin:0 0 12px}
 .dc-t{font-size:15.5px;color:var(--ink-2);line-height:1.6;margin:0 0 24px}
 .diag-call .btn{width:100%}
+
+.price .fmt{
+  font-family:var(--display);font-weight:800;letter-spacing:-.03em;
+  font-size:clamp(22px,2.6vw,28px);line-height:1.1;color:var(--cyan);margin:0 0 10px;
+}
+.quote-cta{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;
+  border:1px solid rgba(255,255,255,.2);border-radius:20px;
+  background:rgba(255,255,255,.06);padding:clamp(24px,3vw,34px);margin-top:16px;
+}
+.quote-cta > div{max-width:56ch}
+.quote-cta h3{font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:clamp(20px,2.4vw,26px);color:#fff;margin:0 0 10px}
+.quote-cta p{font-size:15.5px;color:rgba(255,255,255,.72);margin:0}
+.quote-cta .btn{flex:none}
 </style>
 </head>
 <body>
@@ -1072,7 +1086,7 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
       </details>
       <details>
         <summary>Quanto custa?</summary>
-        <div class="a"><p>A implantação tem um valor único, definido pelo tamanho do time e pela quantidade de processos que entram nos dois dias. Os 30 dias de operação assistida já estão inclusos.</p><p>Depois desse período, a manutenção mensal é opcional e proporcional ao uso. As faixas estão logo abaixo — o valor exato sai depois do diagnóstico, que é gratuito.</p></div>
+        <div class="a"><p>A implantação tem um valor único, definido pelo tamanho do time e pela quantidade de processos que entram nos dois dias. Os 30 dias de operação assistida já estão inclusos.</p><p>Depois desse período, a manutenção mensal é opcional e proporcional ao uso. O valor exato sai depois do diagnóstico, que é gratuito.</p></div>
       </details>
       <details>
         <summary>Precisamos pagar licença do Claude por fora?</summary>
@@ -1091,29 +1105,36 @@ em.hl{font-style:italic;font-weight:700;background:linear-gradient(180deg,transp
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow on-dark">Investimento</p>
-      <h2>Uma implantação. <em class="hl">Valor único</em>, por porte de time.</h2>
-      <p class="lede">A faixa é definida pelo número de pessoas envolvidas e pela quantidade de processos que entram nos dois dias.</p>
+      <h2>Uma implantação. <em class="hl">Valor único</em>, sem mensalidade obrigatória.</h2>
+      <p class="lede">O escopo é definido pelo número de pessoas envolvidas e pela quantidade de processos que entram nos dois dias. Os 30 dias de operação assistida já estão inclusos.</p>
     </div>
 
-    <!-- ▼▼ RAFAEL: trocar os valores abaixo ▼▼ -->
     <div class="price-grid rv">
       <div class="price">
         <p class="sz">Até 10 pessoas</p>
-        <p class="vl"><sup>R$</sup>00.000</p>
+        <p class="fmt">Uma loja</p>
         <p class="dt">Imobiliária de uma loja. Dias 1 e 2 com o time completo.</p>
       </div>
       <div class="price">
         <p class="sz">De 11 a 25 pessoas</p>
-        <p class="vl"><sup>R$</sup>00.000</p>
-        <p class="dt">O formato mais comum. Dia 1 com gestão e times internos, dia 2 com os corretores.</p>
+        <p class="fmt">Formato mais comum</p>
+        <p class="dt">Dia 1 com gestão e times internos, dia 2 com os corretores.</p>
       </div>
       <div class="price">
         <p class="sz">Acima de 25 · redes</p>
-        <p class="vl">Sob proposta</p>
+        <p class="fmt">Multiunidade</p>
         <p class="dt">Múltiplas lojas ou construtora com equipe própria. Dia 2 replicado por unidade.</p>
       </div>
     </div>
-    <!-- ▲▲ RAFAEL: trocar os valores acima ▲▲ -->
+
+    <div class="quote-cta rv">
+      <div>
+        <h3>Cada implantação tem escopo próprio.</h3>
+        <p>O valor depende do tamanho do time e de quantos processos entram nos dois dias. Fale com a gente e receba o orçamento da sua operação.</p>
+      </div>
+      <a class="btn btn-primary" href="https://wa.me/5554999166672?text=Vim%20do%20site%20da%20GPTImob%20e%20quero%20solicitar%20or%C3%A7amento%20da%20imers%C3%A3o." target="_blank" rel="noopener">Solicitar orçamento <span class="arw">→</span></a>
+    </div>
+
 
     <ul class="included rv">
       <li>Dois dias presenciais na sua empresa</li>
