@@ -274,33 +274,14 @@
     </div>
   </div>
 
-  <div class="reveal" id="reveal">
-    <div class="check">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#2f8bff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <h2 class="reveal-title">Prontinho, seu acesso liberou.</h2>
-    <p class="reveal-sub">Guardamos seu WhatsApp — se travar em algo, chamamos por lá.</p>
-
-    <a class="btn-link" href="#" id="aula-link" target="_blank" rel="noopener">
-      <button type="button">▶&nbsp; Assistir a aula agora</button>
-    </a>
-    <a class="btn-link" href="#" id="skill-link" target="_blank" rel="noopener">
-      <button type="button" class="btn-outline">⬇&nbsp; Baixar a skill (.zip)</button>
-    </a>
-  </div>
-
   <footer>Followup Matador · GPTImob</footer>
 </div>
 
 <script>
   // ---- CONFIGURE AQUI antes de publicar ----
   const AULA_URL  = "/followup/aula/";
-  const SKILL_URL = "https://drive.google.com/file/d/1X5h9ZajB2KZy8LsqemYtnWNRxUmSdgJ8/view?usp=drive_link";
   const SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbywNjnsFtXwNZkGypMZg877RRBCASy975Gal7KVLL6w3xWdiTc47hQbF-1zlPvEdwbf/exec";
   // -------------------------------------------
-
-  document.getElementById('aula-link').href = AULA_URL;
-  document.getElementById('skill-link').href = SKILL_URL;
 
   const input = document.getElementById('whatsapp');
   input.addEventListener('input', () => {
@@ -336,21 +317,36 @@
       // backup local, caso a planilha esteja fora do ar
       try { localStorage.setItem(`lead:${Date.now()}:${digits}`, JSON.stringify(payload)); } catch(e){}
 
-      // envia para a planilha do Google Sheets
+      // envia para a planilha do Google Sheets.
+      // sendBeacon garante a entrega mesmo com a página trocando em seguida
       if (SHEET_WEBHOOK_URL && !SHEET_WEBHOOK_URL.includes('SUA-URL')) {
-        fetch(SHEET_WEBHOOK_URL, {
-          method: 'POST',
-          mode: 'no-cors', // Apps Script não devolve CORS; seguimos sem ler a resposta
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify(payload)
-        }).catch(()=>{});
+        const corpo = JSON.stringify(payload);
+        let enviado = false;
+        if (navigator.sendBeacon) {
+          try {
+            enviado = navigator.sendBeacon(
+              SHEET_WEBHOOK_URL,
+              new Blob([corpo], { type: 'text/plain;charset=UTF-8' })
+            );
+          } catch (e) { enviado = false; }
+        }
+        if (!enviado) {
+          fetch(SHEET_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            keepalive: true,
+            headers: { 'Content-Type': 'text/plain' },
+            body: corpo
+          }).catch(()=>{});
+        }
       }
     } catch (err) {
       console.error('Falha ao registrar lead (seguindo mesmo assim):', err);
     }
 
-    document.querySelector('.form-wrap').classList.add('hide');
-    document.getElementById('reveal').classList.add('show');
+    // vai direto para a aula
+    submitBtn.textContent = 'Liberando acesso...';
+    window.location.href = AULA_URL;
   });
 
   // partículas discretas, decorativo
