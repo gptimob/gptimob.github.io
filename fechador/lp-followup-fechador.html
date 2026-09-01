@@ -128,6 +128,11 @@
     max-width:38ch;
   }
   .promise b{color:var(--chrome); font-weight:700;}
+  .highlight{
+    color:var(--gold);
+    font-weight:800;
+    text-shadow:0 0 14px rgba(255,181,69,.45);
+  }
 
   form{display:flex; flex-direction:column; gap:10px; margin-top:2px;}
 
@@ -241,7 +246,7 @@
   <p class="money-line">Cada cliente parado é venda que você já perdeu sem saber.</p>
 
   <p class="promise">
-    Veja como o assistente organiza seus follow-ups direto na agenda — e libere o download pra qualquer negócio que atende cliente por WhatsApp, <b>de graça</b>.
+    Veja como o assistente organiza seus follow-ups direto na agenda — e libere o download pra qualquer negócio que atende cliente por WhatsApp, <span class="highlight">de graça</span>.
   </p>
 
   <div class="form-wrap">
@@ -282,7 +287,7 @@
 
 <script>
   // ---- CONFIGURE AQUI antes de publicar ----
-  const AULA_URL          = "https://gptimob.com.br/fechador/aula.html";
+  const AULA_URL          = "https://gptimob.com.br/fechador/pagina-aula-followup-fechador.html";
   const SKILL_URL         = "https://drive.google.com/file/d/1ui5GZ5Q4KswcleNlkjnO2lSqTsjy8H6i/view?usp=drive_link";
   const SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx_LAj3o5BqqubvqHBQ2QfVlg-zpwm9JuoWPPKVwY5f9dEacdacGB7KYhHcMgzK33K2/exec";
   // -------------------------------------------
@@ -338,6 +343,7 @@
 
     document.querySelector('.form-wrap').classList.add('hide');
     document.getElementById('reveal').classList.add('show');
+    setTimeout(() => { window.location.href = AULA_URL; }, 400);
   });
 
   for (let i=0;i<10;i++){
