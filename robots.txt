@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# páginas de destino de campanha e de entrega, fora do índice
+Disallow: /diagnostico/
+Disallow: /followup/aula/
+
+Sitemap: https://gptimob.com.br/sitemap.xml
