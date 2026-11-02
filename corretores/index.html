@@ -124,7 +124,7 @@ p:last-child{margin-bottom:0}
   transition:color .16s ease;
 }
 .nav-links a:hover{color:var(--blue)}
-@media (max-width:860px){.nav-links{display:none}}
+@media (max-width:940px){.nav-links{display:none}}
 
 /* ============================================================
    Hero
@@ -384,6 +384,32 @@ p:last-child{margin-bottom:0}
   html{scroll-behavior:auto}
   *{transition:none!important;animation:none!important}
 }
+
+@media (max-width:1100px){.nav-links{gap:20px}.nav-links a{font-size:14.5px}.brand span{display:none}}
+@media (max-width:560px){.nav-in{gap:10px}.brand{white-space:nowrap}.nav-in .btn-sm{padding:10px 14px;font-size:13.5px;white-space:nowrap}}
+/* Menu mobile (botão ☰) */
+.nav-tog{
+  display:none;flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);
+  background:#fff;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;
+}
+.nav-tog span{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink);transition:transform .2s ease,opacity .2s ease}
+.nav.open .nav-tog span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav.open .nav-tog span:nth-child(2){opacity:0}
+.nav.open .nav-tog span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+@media (max-width:940px){
+  .nav-tog{display:inline-flex}
+  .nav-links{
+    display:none;position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    padding:6px var(--pad) 18px;box-shadow:0 24px 40px -28px rgba(12,26,43,.45);
+  }
+  .nav.open .nav-links{display:flex}
+  .nav-links a{padding:15px 0;font-size:17px;color:var(--ink);border-bottom:1px solid var(--line)}
+  .nav-links a:last-child{border-bottom:0}
+}
+@media (max-width:400px){.nav-in .btn-sm{padding:10px 13px;font-size:13px}.nav-tog{width:40px;height:40px}}
 </style>
 <style>
 .prods{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -467,12 +493,17 @@ p:last-child{margin-bottom:0}
 <nav class="nav">
   <div class="wrap nav-in">
     <a class="brand" href="/">GPTImob <span>IA imobiliária</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="/#imobiliarias">Imobiliárias</a>
       <a href="/corretores/">Corretores</a>
+      <a href="/dna/">DNA Imob</a>
+      <a href="/raiox/">Raio-X</a>
       <a href="/#empresa">A GPTImob</a>
     </div>
-    <a class="btn btn-primary btn-sm" href="https://wa.me/5554999166672?text=Vim%20do%20site%20da%20GPTImob%20e%20quero%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Falar no WhatsApp</a>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="https://wa.me/5554999166672?text=Vim%20do%20site%20da%20GPTImob%20e%20quero%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <button class="nav-tog" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </nav>
 
@@ -588,6 +619,7 @@ p:last-child{margin-bottom:0}
         <h5>Imobili&aacute;rias</h5>
         <ul>
           <li><a href="/#imobiliarias">Agentes de IA</a></li>
+          <li><a href="/dna/">DNA Imob</a></li>
           <li><a href="/imersao/">Imers&atilde;o de implanta&ccedil;&atilde;o</a></li>
           <li><a href="/#diagnostico">Diagn&oacute;stico gratuito</a></li>
         </ul>
@@ -597,6 +629,7 @@ p:last-child{margin-bottom:0}
         <ul>
           <li><a href="https://guidoguia.com.br" target="_blank" rel="noopener">Guido</a></li>
           <li><a href="/kit-essencial/">Kit Essencial</a></li>
+          <li><a href="/raiox/">Raio-X da Negocia&ccedil;&atilde;o</a></li>
           <li><a href="/followup/">Followup Matador</a></li>
         </ul>
       </div>
@@ -611,5 +644,16 @@ p:last-child{margin-bottom:0}
   </div>
 </footer>
 
+<script>
+(function(){
+  var nav=document.querySelector('.nav'),btn=nav&&nav.querySelector('.nav-tog');
+  if(!btn) return;
+  function set(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o?'true':'false');btn.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');}
+  btn.addEventListener('click',function(){set(!nav.classList.contains('open'));});
+  nav.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+  document.addEventListener('click',function(e){if(!nav.contains(e.target))set(false);});
+})();
+</script>
 </body>
 </html>

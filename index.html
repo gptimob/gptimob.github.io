@@ -590,6 +590,30 @@ a.agent{text-decoration:none;color:inherit}
   margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.13);
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:rgba(255,255,255,.42);
 }
+
+/* Menu mobile (botão ☰) */
+.nav-tog{
+  display:none;flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);
+  background:#fff;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;
+}
+.nav-tog span{display:block;width:18px;height:2px;border-radius:2px;background:var(--ink);transition:transform .2s ease,opacity .2s ease}
+.nav.open .nav-tog span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav.open .nav-tog span:nth-child(2){opacity:0}
+.nav.open .nav-tog span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+@media (max-width:940px){
+  .nav-tog{display:inline-flex}
+  .nav-links{
+    display:none;position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    padding:6px var(--pad) 18px;box-shadow:0 24px 40px -28px rgba(12,26,43,.45);
+  }
+  .nav.open .nav-links{display:flex}
+  .nav-links a{padding:15px 0;font-size:17px;color:var(--ink);border-bottom:1px solid var(--line)}
+  .nav-links a:last-child{border-bottom:0}
+}
+@media (max-width:400px){.nav-in .btn-sm{padding:10px 13px;font-size:13px}.nav-tog{width:40px;height:40px}}
 </style>
 </head>
 <body>
@@ -597,14 +621,17 @@ a.agent{text-decoration:none;color:inherit}
 <nav class="nav">
   <div class="wrap nav-in">
     <a class="brand" href="/">GPTImob <span>IA imobiliária</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="#imobiliarias">Imobiliárias</a>
       <a href="#corretores">Corretores</a>
       <a href="/dna/">DNA Imob</a>
       <a href="/raiox/">Raio-X</a>
       <a href="#empresa">A GPTImob</a>
     </div>
-    <a class="btn btn-primary btn-sm" href="/diagnostico/">Solicitar diagnóstico</a>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="/diagnostico/">Solicitar diagnóstico</a>
+      <button class="nav-tog" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </nav>
 
@@ -1199,5 +1226,16 @@ a.agent{text-decoration:none;color:inherit}
 })();
 </script>
 
+<script>
+(function(){
+  var nav=document.querySelector('.nav'),btn=nav&&nav.querySelector('.nav-tog');
+  if(!btn) return;
+  function set(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o?'true':'false');btn.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');}
+  btn.addEventListener('click',function(){set(!nav.classList.contains('open'));});
+  nav.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+  document.addEventListener('click',function(e){if(!nav.contains(e.target))set(false);});
+})();
+</script>
 </body>
 </html>
