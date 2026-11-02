@@ -441,20 +441,24 @@ a.agent{text-decoration:none;color:inherit}
 .intel-link:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* ============================================================
-   Inteligência v2: vitrines com telas
+   Inteligência v2: vitrines com carrossel de telas
    ============================================================ */
 .show{
   --acc:#047857;--acc-soft:#EEF9F4;--acc-tint:#E3F4EC;
   --acc-metal:linear-gradient(100deg,#053B2C 0%,#0E8F68 30%,#7EE8C2 47%,#0E8F68 62%,#064A37 100%);
-  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,64px);align-items:center;
+  display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+  grid-template-areas:"head vis" "rest vis";grid-template-rows:auto 1fr;
+  column-gap:clamp(28px,5vw,64px);align-items:start;
 }
-.show + .show{margin-top:clamp(56px,7vw,96px)}
+.show + .show{margin-top:clamp(64px,8vw,104px)}
 .show-rx{
   --acc:#2433E8;--acc-soft:#EEF0FE;--acc-tint:#E8EBFD;
   --acc-metal:linear-gradient(100deg,#0A1A8F 0%,#2433E8 30%,#8E9BFF 47%,#2433E8 62%,#0B1C9C 100%);
-  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  grid-template-columns:minmax(0,7fr) minmax(0,4fr);grid-template-areas:"vis head" "vis rest";
 }
-.show-rx .show-txt{order:2}
+.show-head{grid-area:head;align-self:end;padding-top:clamp(0px,4vw,48px)}
+.show-vis{grid-area:vis;min-width:0}
+.show-rest{grid-area:rest;padding-top:6px}
 .show-kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
 .show h3{
   font-size:clamp(32px,4vw,48px);letter-spacing:-.04em;margin-bottom:14px;
@@ -469,42 +473,57 @@ a.agent{text-decoration:none;color:inherit}
 .show-link{font-size:15px;font-weight:600;color:var(--acc);text-decoration:none}
 .show-link:hover{text-decoration:underline;text-underline-offset:3px}
 
-.show-vis{
-  display:block;position:relative;text-decoration:none;border-radius:24px;
+/* carrossel */
+.car{
+  border-radius:24px;border:1px solid var(--line);padding:clamp(16px,2.6vw,30px) 0 clamp(14px,2vw,22px);
   background:radial-gradient(120% 90% at 100% 0%,var(--acc-tint),transparent 70%),var(--paper-2);
-  border:1px solid var(--line);padding:clamp(18px,3vw,36px);overflow:hidden;
-  transition:transform .25s ease,box-shadow .25s ease;
 }
-.show-vis:hover{transform:translateY(-4px);box-shadow:0 30px 60px -36px rgba(12,26,43,.45)}
+.car-track{
+  display:flex;gap:clamp(14px,2vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;
+  scroll-padding-inline:clamp(16px,2.6vw,30px);padding:4px clamp(16px,2.6vw,30px) 18px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;outline:none;
+}
+.car-track::-webkit-scrollbar{display:none}
+.car-slide{margin:0;flex:none;scroll-snap-align:start}
+.car-slide figcaption{display:flex;gap:10px;margin-top:14px;font-size:14px;line-height:1.45;color:var(--ink-2)}
+.car-slide figcaption b{color:var(--ink);font-weight:600}
+.cap-n{font-family:var(--mono);font-size:11.5px;color:var(--acc);padding-top:2px;flex:none}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:14px;padding:0 16px}
+.car-btn{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .16s,color .16s,opacity .16s;
+}
+.car-btn:hover{border-color:var(--acc);color:var(--acc)}
+.car-btn[disabled]{opacity:.35;cursor:default}
+.car-dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.car-dots button{width:8px;height:8px;border-radius:8px;border:0;padding:0;background:#C9CFCB;cursor:pointer;transition:width .25s,background .25s}
+.car-dots button[aria-selected="true"]{width:22px;background:var(--acc)}
 
-/* janela de navegador (DNA) */
+/* DNA: janela de navegador */
+.car-dna .car-slide{width:calc(100% - 2*clamp(16px,2.6vw,30px))}
 .bw{background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(12,26,43,.45)}
-.bw img{width:100%;height:auto}
 .bw-bar{display:flex;align-items:center;gap:6px;height:30px;padding:0 12px;background:#F1F3F1;border-bottom:1px solid var(--line)}
 .bw-bar i{width:9px;height:9px;border-radius:50%;background:#D5DAD6}
 .bw-bar span{margin-left:10px;font-family:var(--mono);font-size:10.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bw-float{width:68%;margin:-6% 0 0 auto;position:relative;z-index:2;aspect-ratio:1400/560}
-.bw-float img{object-fit:cover;object-position:top;height:100%}
+.shot{aspect-ratio:16/10;background:#F4F6F5}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:left top}
 
-/* celulares (Raio-X) */
-.phones{display:flex;justify-content:center;gap:clamp(12px,3vw,28px);padding-top:4px}
-.ph{
-  width:min(46%,250px);border-radius:30px;overflow:hidden;background:#fff;
-  border:7px solid #0B1220;box-shadow:0 26px 50px -26px rgba(11,18,32,.6);
-}
+/* Raio-X: celulares */
+.car-rx .car-slide{width:min(42%,250px)}
+.ph{border-radius:28px;overflow:hidden;background:#fff;border:7px solid #0B1220;box-shadow:0 22px 44px -26px rgba(11,18,32,.6)}
 .ph img{width:100%;height:auto}
-.ph-2{margin-top:clamp(28px,5vw,56px)}
-.show-vis:has(.phones){padding-bottom:0}
-.show-vis .phones{margin-bottom:calc(-1 * clamp(40px,6vw,80px))}
 
 @media (max-width:860px){
-  .show,.show-rx{grid-template-columns:1fr}
-  .show-rx .show-txt{order:0}
-  .show-vis{order:-1}
+  .show,.show-rx{grid-template-columns:1fr;grid-template-areas:"head" "vis" "rest";grid-template-rows:auto}
+  .show-head{padding-top:0}
   .show-line{max-width:none}
-  .bw > img{aspect-ratio:16/10;object-fit:cover;object-position:left top}
-  .bw-float{width:78%;aspect-ratio:16/9}
-  .bw-float img{object-position:left top}
+  .show-rest{padding-top:24px}
+  .car{margin:0 calc(-1 * var(--pad));border-radius:0;border-left:0;border-right:0}
+  .car-track{scroll-padding-inline:var(--pad);padding-inline:var(--pad)}
+  .car-dna .car-slide{width:calc(100% - 2*var(--pad) - 24px)}
+  .shot{aspect-ratio:4/3}
+  .shot img{object-fit:cover;object-position:left top}
+  .car-rx .car-slide{width:62%}
 }
 
 /* ============================================================
@@ -1044,48 +1063,115 @@ a.agent{text-decoration:none;color:inherit}
     </div>
 
     <div class="show show-dna">
-      <div class="show-txt">
+      <div class="show-head">
         <p class="show-kicker">Para a diretoria</p>
         <h3>DNA Imob</h3>
         <p class="show-line">Um painel com quem fecha, o que gira e o que fazer primeiro.</p>
-        <ul class="chips">
-          <li>CRM + WhatsApp</li><li>Plano de ação</li><li>Leitura mensal</li>
-        </ul>
-        <div class="show-cta">
-          <a class="btn btn-acc btn-sm" href="/dna/">Conhecer o DNA Imob <span aria-hidden="true">&rarr;</span></a>
-          <a class="show-link" href="/dna/modelo/">Ver painel de exemplo</a>
+      </div>
+      <div class="show-vis">
+        <div class="car car-dna" data-car>
+          <div class="car-track" tabindex="0" aria-label="Telas do painel DNA Imob">
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>DNA Imob · Imobiliária Modelo</span></div><div class="shot"><img src="/dna/img/1-visao.jpg" alt="Painel DNA Imob: Visão geral" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">01</span><span><b>Visão geral</b> Os números do ano, com a frase principal em destaque.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>DNA Imob · Imobiliária Modelo</span></div><div class="shot"><img src="/dna/img/2-roteiro.jpg" alt="Painel DNA Imob: Roteiro que fecha" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">02</span><span><b>Roteiro que fecha</b> Os passos que mais aparecem nas conversas de quem fechou.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>DNA Imob · Imobiliária Modelo</span></div><div class="shot"><img src="/dna/img/3-carga.jpg" alt="Painel DNA Imob: Carga ideal por corretor" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">03</span><span><b>Carga ideal por corretor</b> A partir de quantos atendimentos o corretor começa a perder venda.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>DNA Imob · Imobiliária Modelo</span></div><div class="shot"><img src="/dna/img/7-acoes.jpg" alt="Painel DNA Imob: Plano de ação" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">04</span><span><b>Plano de ação</b> As ações em ordem de prioridade, com o porquê e como medir.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>DNA Imob · Imobiliária Modelo</span></div><div class="shot"><img src="/dna/img/4-sdr.jpg" alt="Painel DNA Imob: O time que a IA substitui" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">05</span><span><b>O time que a IA substitui</b> Quantos SDRs seriam precisos para atender como a IA atende.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>DNA Imob · Imobiliária Modelo</span></div><div class="shot"><img src="/dna/img/5-oferta.jpg" alt="Painel DNA Imob: Oferta × demanda" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">06</span><span><b>Oferta × demanda</b> Onde a carteira não acompanha o que o cliente procura.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>DNA Imob · Imobiliária Modelo</span></div><div class="shot"><img src="/dna/img/6-perfil.jpg" alt="Painel DNA Imob: Quem fecha" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">07</span><span><b>Quem fecha</b> Idade, renda, imóvel e bairros de quem compra em cada faixa.</span></figcaption>
+            </figure>
+          </div>
+          <div class="car-nav">
+            <button class="car-btn car-prev" type="button" aria-label="Tela anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="car-dots" role="tablist" aria-label="Telas do DNA Imob"></div>
+            <button class="car-btn car-next" type="button" aria-label="Próxima tela"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
         </div>
       </div>
-      <a class="show-vis" href="/dna/modelo/" aria-label="Abrir o painel de exemplo do DNA Imob">
-        <div class="bw">
-          <div class="bw-bar"><i></i><i></i><i></i><span>Painel DNA Imob · Imobiliária Modelo</span></div>
-          <img src="/dna/img/1-visao.jpg" width="1400" height="517" alt="Visão geral do painel DNA Imob com vendas, locações e conversão" loading="lazy">
+      <div class="show-rest">
+        <ul class="chips"><li>CRM + WhatsApp</li><li>Plano de ação</li><li>Leitura mensal</li></ul>
+        <div class="show-cta">
+          <a class="btn btn-acc btn-sm" href="/dna/">Conhecer o DNA Imob <span aria-hidden="true">&rarr;</span></a>
+          <a class="show-link" href="/dna/modelo/">Abrir o painel de exemplo</a>
         </div>
-        <div class="bw bw-float">
-          <img src="/dna/img/7-acoes.jpg" width="1400" height="793" alt="Plano de ação em ordem de prioridade" loading="lazy">
-        </div>
-      </a>
+      </div>
     </div>
 
     <div class="show show-rx">
-      <div class="show-txt">
+      <div class="show-head">
         <p class="show-kicker">Para o corretor</p>
         <h3>Raio-X da Negociação</h3>
         <p class="show-line">Mande a conversa, áudios inclusos. Receba o que trava e a próxima mensagem.</p>
-        <ul class="chips">
-          <li>Lê os áudios</li><li>Temperatura do cliente</li><li>Próxima mensagem</li>
-        </ul>
-        <div class="show-cta">
-          <a class="btn btn-acc btn-sm" href="/raiox/">Fazer o Raio-X <span aria-hidden="true">&rarr;</span></a>
-          <a class="show-link" href="/raiox/exemplo/">Ver relatório de exemplo</a>
+      </div>
+      <div class="show-vis">
+        <div class="car car-rx" data-car>
+          <div class="car-track" tabindex="0" aria-label="Telas do relatório Raio-X">
+            <figure class="car-slide">
+              <div class="ph"><img src="/v2/img/rx/1-veredito.jpg" width="780" height="1600" alt="Relatório Raio-X: Veredito" loading="lazy"></div>
+              <figcaption><span class="cap-n">01</span><span><b>Veredito</b> O cliente resumido numa frase.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="ph"><img src="/v2/img/rx/2-temperatura.jpg" width="780" height="1600" alt="Relatório Raio-X: Temperatura" loading="lazy"></div>
+              <figcaption><span class="cap-n">02</span><span><b>Temperatura</b> Quão quente está e o que trava.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="ph"><img src="/v2/img/rx/3-imovel.jpg" width="780" height="1600" alt="Relatório Raio-X: O imóvel que ele busca" loading="lazy"></div>
+              <figcaption><span class="cap-n">03</span><span><b>O imóvel que ele busca</b> Critérios, faixa e o que ele evita.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="ph"><img src="/v2/img/rx/4-perfil.jpg" width="780" height="1600" alt="Relatório Raio-X: Perfil e linguagem" loading="lazy"></div>
+              <figcaption><span class="cap-n">04</span><span><b>Perfil e linguagem</b> Como falar para ser ouvido.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="ph"><img src="/v2/img/rx/5-intencao.jpg" width="780" height="1600" alt="Relatório Raio-X: Compra e condução" loading="lazy"></div>
+              <figcaption><span class="cap-n">05</span><span><b>Compra e condução</b> Notas para o cliente e para o corretor.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="ph"><img src="/v2/img/rx/6-linha-do-tempo.jpg" width="780" height="1600" alt="Relatório Raio-X: Linha do tempo" loading="lazy"></div>
+              <figcaption><span class="cap-n">06</span><span><b>Linha do tempo</b> Como a negociação andou.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="ph"><img src="/v2/img/rx/7-objecoes.jpg" width="780" height="1600" alt="Relatório Raio-X: Objeções" loading="lazy"></div>
+              <figcaption><span class="cap-n">07</span><span><b>Objeções</b> O que vai aparecer e como responder.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="ph"><img src="/v2/img/rx/8-proxima.jpg" width="780" height="1600" alt="Relatório Raio-X: Próxima ação" loading="lazy"></div>
+              <figcaption><span class="cap-n">08</span><span><b>Próxima ação</b> A mensagem pronta para enviar.</span></figcaption>
+            </figure>
+          </div>
+          <div class="car-nav">
+            <button class="car-btn car-prev" type="button" aria-label="Tela anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="car-dots" role="tablist" aria-label="Telas do Raio-X"></div>
+            <button class="car-btn car-next" type="button" aria-label="Próxima tela"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
         </div>
       </div>
-      <a class="show-vis" href="/raiox/exemplo/" aria-label="Abrir o relatório de exemplo do Raio-X">
-        <div class="phones">
-          <div class="ph"><img src="/v2/img/raiox-veredito.jpg" width="780" height="1600" alt="Relatório Raio-X: veredito da negociação" loading="lazy"></div>
-          <div class="ph ph-2"><img src="/v2/img/raiox-temperatura.jpg" width="780" height="1600" alt="Relatório Raio-X: temperatura do cliente" loading="lazy"></div>
+      <div class="show-rest">
+        <ul class="chips"><li>Lê os áudios</li><li>Temperatura do cliente</li><li>Próxima mensagem</li></ul>
+        <div class="show-cta">
+          <a class="btn btn-acc btn-sm" href="/raiox/">Fazer o Raio-X <span aria-hidden="true">&rarr;</span></a>
+          <a class="show-link" href="/raiox/exemplo/">Abrir o relatório de exemplo</a>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
@@ -1303,6 +1389,46 @@ a.agent{text-decoration:none;color:inherit}
   nav.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
   document.addEventListener('click',function(e){if(!nav.contains(e.target))set(false);});
+})();
+</script>
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-car]').forEach(function(car){
+    var track=car.querySelector('.car-track'),slides=[].slice.call(track.children),
+        dotsBox=car.querySelector('.car-dots'),prev=car.querySelector('.car-prev'),next=car.querySelector('.car-next'),
+        dots=[],cur=0,timer=null,stopped=reduce,visible=false;
+    slides.forEach(function(sl,i){
+      var d=document.createElement('button');d.type='button';d.setAttribute('role','tab');
+      d.setAttribute('aria-label','Tela '+(i+1)+' de '+slides.length);
+      d.addEventListener('click',function(){stop();go(i);});dotsBox.appendChild(d);dots.push(d);
+    });
+    function maxLeft(){return track.scrollWidth-track.clientWidth;}
+    function go(i){
+      i=Math.max(0,Math.min(slides.length-1,i));
+      var pad=parseFloat(getComputedStyle(track).scrollPaddingLeft)||0;
+      track.scrollTo({left:Math.min(slides[i].offsetLeft-track.offsetLeft-pad,maxLeft()),behavior:reduce?'auto':'smooth'});
+    }
+    function sync(){
+      var pad=parseFloat(getComputedStyle(track).scrollPaddingLeft)||0,best=0,bd=1e9;
+      if(track.scrollLeft>=maxLeft()-4){best=slides.length-1;}
+      else slides.forEach(function(sl,i){var dd=Math.abs(sl.offsetLeft-track.offsetLeft-pad-track.scrollLeft);if(dd<bd){bd=dd;best=i;}});
+      cur=best;
+      dots.forEach(function(d,i){d.setAttribute('aria-selected',i===cur?'true':'false');});
+      prev.disabled=track.scrollLeft<=4;next.disabled=track.scrollLeft>=maxLeft()-4;
+    }
+    var raf;track.addEventListener('scroll',function(){cancelAnimationFrame(raf);raf=requestAnimationFrame(sync);},{passive:true});
+    prev.addEventListener('click',function(){stop();go(cur-1);});
+    next.addEventListener('click',function(){stop();go(cur+1);});
+    ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){track.addEventListener(ev,stop,{passive:true});});
+    function stop(){stopped=true;clearInterval(timer);timer=null;}
+    function tick(){if(document.hidden||!visible)return;go(next.disabled?0:cur+1);}
+    function play(){if(!stopped&&!timer)timer=setInterval(tick,4200);}
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible)play();},{threshold:.5}).observe(car);
+    }
+    window.addEventListener('resize',sync);sync();
+  });
 })();
 </script>
 </body>
