@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Relatório modelo · DNA Imob</title>
+<meta name="description" content="Relatório modelo do DNA Imob, com uma imobiliária fictícia da cidade de São Paulo e números fictícios.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://gptimob.com.br/dna/modelo/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gptimob.com.br/dna/modelo/">
+<meta property="og:title" content="Relatório modelo · DNA Imob">
+<meta property="og:description" content="Relatório modelo do DNA Imob, com uma imobiliária fictícia da cidade de São Paulo e números fictícios.">
+<meta property="og:image" content="https://gptimob.com.br/og-cover.jpg">
+<meta name="theme-color" content="#06120E">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: faixa verde-noite no topo (nome + abas), conteúdo em grade de 12 colunas sobre papel claro; o esmeralda marca só o que importa. */
+:root {
+  --band: #06120e;          /* faixa da marca (verde-noite DNA Imob) */
+  --band-ink: #eef6f2;
+  --band-muted: #9fb8ad;
+  --gold: #34d399;          /* esmeralda claro (destaques na faixa) */
+  --bg: #f4f7f5;
+  --surface: #ffffff;
+  --ink: #161614;
+  --ink-2: #4f4d47;
+  --ink-3: #7a776e;
+  --line: #dde5e0;
+  --grid: #e7eee9;
+  --gold-ink: #047857;      /* esmeralda legível sobre claro (texto) */
+  --gold-soft: #dff6ec;
+  --s1: #2563a8;            /* série 1 (azul) — validada */
+  --s2: #059669;            /* série 2 / destaque nos gráficos (esmeralda) */
+  --rest: #cdd8d2;          /* barras não destacadas */
+  --m3: #1baf7a; --m4: #6250d6; /* séries 3 e 4 (só no gráfico de origens) */
+  --c-crit: #d03b3b; --c-warn: #fab219; --c-good: #0ca30c; --good-ink: #087a08; --c-info: #2563a8;
+  --crit-soft: #fbe9e7; --warn-soft: #fdf3dc; --good-soft: #e6f5e6; --info-soft: #e7eef8;
+  --hero-bg: #06120e; --hero-ink: #ffffff; --hero-num: #34d399; --on-accent: #ffffff;
+  --f-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --hero-bg: #0c2219; --hero-ink: #eef6f2; --hero-num: #34d399; --on-accent: #06120e;
+  --bg: #0d1210; --surface: #151c18; --ink: #f0eee7; --ink-2: #c4c1b6; --ink-3: #8f8c82; --line: #2e2d2a; --grid: #262523;
+  --gold-ink: #34d399; --gold-soft: #10291f; --s1: #4f86c6; --s2: #10b981; --rest: #3b4741; --m3: #199e70; --m4: #9085e9;
+  --crit-soft: #3a1f1d; --warn-soft: #3a2f12; --good-soft: #15301a; --good-ink: #5fd35f; --info-soft: #172537; --c-info: #4f86c6; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --hero-bg: #0c2219; --hero-ink: #eef6f2; --hero-num: #34d399; --on-accent: #06120e;
+  --bg: #0d1210; --surface: #151c18; --ink: #f0eee7; --ink-2: #c4c1b6; --ink-3: #8f8c82; --line: #2e2d2a; --grid: #262523;
+  --gold-ink: #34d399; --gold-soft: #10291f; --s1: #4f86c6; --s2: #10b981; --rest: #3b4741; --m3: #199e70; --m4: #9085e9;
+  --crit-soft: #3a1f1d; --warn-soft: #3a2f12; --good-soft: #15301a; --good-ink: #5fd35f; --info-soft: #172537; --c-info: #4f86c6; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
+.wrap { max-width: 1260px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, .num { font-family: var(--f-display); }
+h2, h3 { text-wrap: balance; margin: 0; }
+
+/* Faixa da marca */
+.brand { background: var(--band); color: var(--band-ink); }
+.brand .wrap { padding-block: 28px 20px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: end; }
+.logo-tile { display: inline-block; background: #fff; border-radius: 10px; padding: 8px 12px; margin-bottom: 18px; }
+.brand img { height: 48px; width: auto; display: block; }
+.logo-tile.wordmark { background: none; padding: 0; border-radius: 0; }
+.wordmark { font: 700 30px/1 var(--f-display); letter-spacing: .14em; color: var(--band-ink); }
+.wordmark small { display: block; font: 500 12px/1 var(--f-body); letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-top: 8px; }
+.brand .demo { display: inline-block; font: 600 11px var(--f-display); letter-spacing: .06em; text-transform: uppercase; color: #06120e; background: var(--gold); padding: 3px 8px; border-radius: 999px; margin-bottom: 6px; }
+.brand h1 { font-size: clamp(26px, 3.4vw, 40px); font-weight: 600; letter-spacing: -0.01em; margin: 0; line-height: 1.1; }
+.brand p { margin: 8px 0 0; color: var(--band-muted); max-width: 70ch; }
+.brand .meta { text-align: right; color: var(--band-muted); font-size: 13px; line-height: 1.6; }
+.brand .meta b { color: var(--band-ink); font-weight: 500; }
+
+.stick { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
+.tabbar { background: var(--band); border-bottom: 1px solid #1b3329; }
+.tabbar .wrap { display: flex; gap: 12px; align-items: center; justify-content: space-between; padding-block: 0; }
+.tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { appearance: none; background: none; border: 0; color: var(--band-muted); font: 500 14px var(--f-display); padding: 14px 12px 12px; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+.tab:hover { color: var(--band-ink); }
+.tab[aria-selected="true"] { color: var(--band-ink); border-bottom-color: var(--gold); }
+.tab:focus-visible, .seg button:focus-visible, .tbtn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.finbar { background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: 0 6px 16px -12px rgba(0,0,0,.35); }
+.finbar .wrap { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding-block: 10px; }
+.finbar[hidden] { display: none; }
+.finbar .fin-l { font: 600 13px var(--f-display); color: var(--ink-2); letter-spacing: .02em; }
+.seg { display: inline-flex; border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 3px; flex: none; }
+.seg button { appearance: none; border: 0; background: none; color: var(--ink-2); font: 600 15px var(--f-display); padding: 8px 22px; border-radius: 999px; cursor: pointer; }
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--s2); color: var(--on-accent); }
+.lead h2 .fin { color: var(--gold-ink); }
+@media (max-width: 640px) { .seg button { padding: 7px 18px; } th, td { padding: 7px 6px; } }
+
+main .wrap { padding-block: 28px 56px; }
+.panel { display: grid; gap: 20px; }
+.lead { display: grid; gap: 6px; margin-bottom: 4px; }
+.lead h2 { font-size: 26px; font-weight: 600; }
+.lead p { margin: 0; color: var(--ink-2); max-width: 78ch; }
+.eyebrow { font: 600 12px var(--f-display); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-ink); }
+
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; }
+.c12 { grid-column: span 12; } .c8 { grid-column: span 8; } .c7 { grid-column: span 7; } .c6 { grid-column: span 6; } .c5 { grid-column: span 5; } .c4 { grid-column: span 4; } .c3 { grid-column: span 3; }
+@media (max-width: 980px) { .c8, .c7, .c6, .c5, .c4 { grid-column: span 12; } .c3 { grid-column: span 6; } }
+@media (max-width: 520px) { .c3 { grid-column: span 12; } .brand .wrap { grid-template-columns: 1fr; } .brand .meta { text-align: left; } }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; align-content: start; }
+.card h3 { font-size: 17px; font-weight: 600; line-height: 1.3; }
+.card .sub { margin: -6px 0 0; color: var(--ink-3); font-size: 13px; }
+.card-head { display: flex; gap: 12px; justify-content: space-between; align-items: flex-start; }
+.card-head > div { display: grid; gap: 4px; min-width: 0; }
+.tbtn { appearance: none; border: 1px solid var(--line); background: none; color: var(--ink-2); font: 500 12px var(--f-body); padding: 4px 10px; border-radius: 6px; cursor: pointer; flex: none; }
+.tbtn:hover { border-color: var(--ink-3); color: var(--ink); }
+.chart { position: relative; width: 100%; min-width: 0; overflow: hidden; }
+.chart canvas { display: block; max-width: 100%; }
+.takeaway { margin: 0; padding: 10px 12px; background: var(--gold-soft); border-radius: 8px; color: var(--ink); font-size: 14px; }
+.takeaway.top { font-size: 16px; line-height: 1.45; padding: 12px 14px; font-weight: 500; }
+.takeaway.top b { font-weight: 700; }
+.hero { background: var(--hero-bg); color: var(--hero-ink); border-radius: 14px; padding: 22px 26px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 22px; align-items: center; }
+.hero-num { font: 700 clamp(40px, 5.6vw, 64px)/1 var(--f-display); color: var(--hero-num); letter-spacing: -0.02em; white-space: nowrap; }
+.hero p { margin: 0; font: 500 clamp(18px, 2vw, 23px)/1.35 var(--f-display); text-wrap: balance; max-width: 52ch; }
+.hero p b { color: var(--hero-num); font-weight: 700; }
+@media (max-width: 640px) { .hero { grid-template-columns: 1fr; gap: 10px; padding: 18px; } .hero-num { white-space: normal; } }
+.takeaway b { color: var(--gold-ink); }
+.note { margin: 0; color: var(--ink-3); font-size: 12.5px; }
+
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--ink-3); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+td.n, th.n { text-align: right; }
+tr:last-child td { border-bottom: 0; }
+
+/* KPIs */
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; display: grid; gap: 4px; min-width: 0; }
+.kpi .lbl { font-size: 13px; color: var(--ink-2); }
+.kpi .num { font-size: clamp(24px, 2.6vw, 32px); font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; }
+.kpi .ctx { font-size: 12.5px; color: var(--ink-3); }
+.kpi .ctx b { color: var(--ink-2); font-weight: 600; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.kpis:has(> :nth-child(6):last-child) { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.kpis:has(> :nth-child(5):last-child) { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.kpis:has(> :nth-child(4):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1180px) { .kpis:has(> :nth-child(6):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); } .kpis:has(> :nth-child(5):last-child) { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } }
+@media (max-width: 760px) { .kpis:has(> :nth-child(6):last-child), .kpis:has(> :nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.mini { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.mini .num { font-size: 26px; font-weight: 600; }
+.mini .lbl { font-size: 13px; color: var(--ink-2); }
+.mini.hl { border-color: var(--gold); background: var(--gold-soft); }
+
+/* Destaques */
+.highlights { display: grid; gap: 0; }
+.hl-row { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.hl-row:last-child { border-bottom: 0; }
+.hl-row .num { font-size: 26px; font-weight: 600; color: var(--gold-ink); }
+.hl-row p { margin: 0; color: var(--ink-2); }
+.hl-row p b { color: var(--ink); font-weight: 600; }
+
+/* Atenção e melhorias */
+.alerts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.alert { border-radius: var(--r); padding: 16px 18px; display: grid; gap: 8px; border: 1px solid var(--line); background: var(--surface); }
+.pill { display: inline-flex; align-items: center; gap: 6px; font: 600 12px var(--f-display); letter-spacing: .03em; padding: 3px 10px; border-radius: 999px; width: fit-content; }
+.pill svg { width: 13px; height: 13px; }
+.pill.crit { background: var(--crit-soft); color: var(--c-crit); }
+.pill.warn { background: var(--warn-soft); color: var(--ink); }
+.pill.warn svg { color: #b97f00; }
+.pill.info { background: var(--info-soft); color: var(--c-info); }
+.alert h3 { font-size: 16px; }
+.alert p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.alert .ev { font-family: var(--f-display); font-weight: 600; color: var(--ink); }
+.actions { display: grid; gap: 12px; }
+.action { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; }
+.action .idx { font: 600 22px var(--f-display); color: var(--gold-ink); }
+.action h3 { font-size: 17px; margin-bottom: 6px; }
+.action dl { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 14px; margin: 8px 0 0; font-size: 14px; }
+.action dt { color: var(--ink-3); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding-top: 2px; }
+.action dd { margin: 0; color: var(--ink-2); }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font: 500 12px var(--f-body); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--line); color: var(--ink-2); }
+@media (max-width: 520px) { .action { grid-template-columns: 1fr; } .action dl { grid-template-columns: 1fr; } .hl-row { grid-template-columns: 1fr; gap: 4px; } }
+
+.pill.good { background: var(--good-soft); color: var(--good-ink); }
+.pill.neutral { background: var(--grid); color: var(--ink-2); }
+table.cmp td { vertical-align: top; }
+table.cmp td.strong { font-weight: 600; color: var(--ink); }
+.rownote { display: block; color: var(--ink-3); font-size: 12px; margin-top: 2px; }
+.verdict { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.vcol { display: grid; gap: 10px; align-content: start; }
+.vcol ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: var(--ink-2); font-size: 14px; }
+.vcol li b { color: var(--ink); }
+@media (max-width: 980px) { .verdict { grid-template-columns: 1fr; } }
+.calc-l { font-size: 14px; color: var(--ink-2); }
+.calc-l b { color: var(--ink); font-family: var(--f-display); }
+input[type=range] { width: 100%; accent-color: var(--s2); margin: -4px 0 4px; }
+.foot { color: var(--ink-3); font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 12px; display: grid; gap: 6px; }
+.foot p { margin: 0; max-width: 110ch; }
+#tt { position: fixed; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* Plano de ação em destaque */
+.plan-head { display: grid; gap: 6px; margin-top: 28px; padding-top: 28px; border-top: 2px solid var(--line); }
+.plan-head h2 { font-size: clamp(28px, 3.4vw, 38px); font-weight: 700; letter-spacing: -0.01em; }
+.plan-head p { margin: 0; color: var(--ink-2); max-width: 78ch; font-size: 15px; }
+.actions { gap: 16px; }
+.action { grid-template-columns: 104px minmax(0, 1fr); gap: 20px; padding: 22px 24px; align-items: start; }
+.action.top3 { background: var(--gold-soft); border-color: transparent; }
+.action .idx { font: 700 clamp(52px, 6vw, 76px)/0.9 var(--f-display); color: var(--s2); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; text-align: center; }
+.act-body { display: grid; gap: 8px; min-width: 0; }
+.action h3 { font-size: 21px; margin: 0; line-height: 1.25; }
+.act-desc { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 92ch; }
+.act-why { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 6px; }
+.act-why > div { border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; }
+.act-why .why { background: var(--info-soft); }
+.act-why .how { background: var(--good-soft); }
+.act-why .k { font: 700 11px var(--f-display); letter-spacing: .09em; text-transform: uppercase; }
+.act-why .why .k { color: var(--c-info); }
+.act-why .how .k { color: var(--good-ink); }
+.act-why p { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.action .tags { gap: 6px; }
+.action .tag { font: 600 12px var(--f-body); padding: 3px 10px; border-radius: 999px; border: 1px solid transparent; }
+.t-cap { background: color-mix(in srgb, var(--c-info) 15%, var(--surface)); color: var(--c-info); }
+.t-ven { background: color-mix(in srgb, var(--good-ink) 15%, var(--surface)); color: var(--good-ink); }
+.t-ret { background: color-mix(in srgb, var(--m4) 16%, var(--surface)); color: var(--m4); }
+.t-adm { background: var(--grid); color: var(--ink-2); }
+.t-ate { background: color-mix(in srgb, var(--s2) 16%, var(--surface)); color: var(--gold-ink); }
+.t-mkt { background: color-mix(in srgb, var(--c-crit) 13%, var(--surface)); color: var(--c-crit); }
+.t-dad { background: color-mix(in srgb, var(--m3) 16%, var(--surface)); color: var(--m3); }
+.t-alto { background: var(--c-crit); color: #fff; }
+.t-rap { background: transparent; color: var(--good-ink); border-color: var(--good-ink) !important; }
+@media (max-width: 640px) { .action { grid-template-columns: 1fr; gap: 6px; padding: 18px; } .action .idx { text-align: left; } .act-why { grid-template-columns: 1fr; } }
+
+/* Roteiro que fecha */
+.roteiro .steps { list-style: none; margin: 0; padding: 0; display: grid; }
+.step { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.step:last-child { border-bottom: 0; }
+.st-n { width: 40px; height: 40px; border-radius: 50%; background: var(--s2); color: var(--on-accent); font: 700 18px var(--f-display); display: grid; place-items: center; }
+.st-b { display: grid; gap: 2px; min-width: 0; }
+.st-t { font: 700 12px var(--f-display); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-ink); }
+.st-b p { margin: 0; font-size: 16px; font-weight: 600; color: var(--ink); line-height: 1.35; }
+.st-c { display: grid; grid-template-columns: auto auto; gap: 0 8px; align-items: baseline; font-variant-numeric: tabular-nums; min-width: 150px; }
+.st-com { font: 700 21px var(--f-display); color: var(--good-ink); text-align: right; }
+.st-sem { font: 600 15px var(--f-display); color: var(--ink-3); text-align: right; }
+.st-l { font-size: 12px; color: var(--ink-3); }
+.nao { background: var(--crit-soft); border-radius: 10px; padding: 12px 16px; }
+.nao .k { font: 700 11px var(--f-display); letter-spacing: .09em; text-transform: uppercase; color: var(--c-crit); }
+.nao ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; color: var(--ink); font-size: 14px; }
+@media (max-width: 640px) { .step { grid-template-columns: 44px minmax(0, 1fr); } .st-c { grid-column: 2; min-width: 0; justify-content: start; } .st-com, .st-sem { text-align: left; } }
+</style>
+
+<header class="brand">
+  <div class="wrap">
+    <div>
+      <span class="logo-tile wordmark" role="img" aria-label="Imobiliária Modelo">IMOBILIÁRIA<small>Modelo · São Paulo</small></span>
+      <h1>Negócios, clientes e carteira</h1>
+      <p>O que os dados do CRM e das conversas de WhatsApp mostram sobre quem fecha com uma imobiliária na cidade de São Paulo, os imóveis que giram e onde estão as oportunidades.</p>
+    </div>
+    <div class="meta"><span class="demo">Demonstração · números fictícios</span><br>Dados até <b id="m-data"></b><br>CRM + WhatsApp oficial<br>Preparado por <b>DNA Imob · GPTImob</b></div>
+  </div>
+</header>
+<div class="stick">
+<nav class="tabbar" aria-label="Seções">
+  <div class="wrap">
+    <div class="tabs" role="tablist" id="tabs"></div>
+  </div>
+</nav>
+<div class="finbar" id="finbar">
+  <div class="wrap">
+    <span class="fin-l" id="fin-l">Mostrando dados de:</span>
+    <div class="seg" id="seg" role="group" aria-labelledby="fin-l">
+      <button type="button" data-fin="loc" aria-pressed="true">Locação</button>
+      <button type="button" data-fin="venda" aria-pressed="false">Venda</button>
+    </div>
+  </div>
+</div>
+</div>
+<main><div class="wrap" id="main"></div></main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const DATA = {"gerado":"28/10/2026","loc":{"por_ano":[{"ano":2021,"negocios":1840,"valor":4655200,"comissao":442244,"mediana":2300},{"ano":2022,"negocios":1960,"valor":5390000,"comissao":512050,"mediana":2500},{"ano":2023,"negocios":2050,"valor":6088500,"comissao":578408,"mediana":2700},{"ano":2024,"negocios":2180,"valor":7074100,"comissao":672040,"mediana":2950},{"ano":2025,"negocios":2360,"valor":8307200,"comissao":789184,"mediana":3200},{"ano":2026,"negocios":2050,"valor":7779750,"comissao":739076,"mediana":3450}],"n_perfil":6680,"sazonalidade":[214.9,187.6,173.6,148.4,180.6,189.7,182.0,204.4,205.8,193.2,177.8,163.1],"idade":{"faixas":[{"k":"até 24","n":595,"p":8.9},{"k":"25–34","n":2278,"p":34.1},{"k":"35–44","n":1910,"p":28.6},{"k":"45–54","n":1022,"p":15.3},{"k":"55–64","n":548,"p":8.2},{"k":"65+","n":327,"p":4.9}],"mediana":36.2,"cobertura":83.1},"origem_ddd":[{"k":"Grande SP (11)","n":5237,"p":78.4},{"k":"Interior de SP","n":528,"p":7.9},{"k":"Nordeste","n":274,"p":4.1},{"k":"Baixada Santista (13)","n":174,"p":2.6},{"k":"Minas Gerais","n":160,"p":2.4},{"k":"Sul","n":127,"p":1.9},{"k":"RJ / ES","n":107,"p":1.6},{"k":"Outros estados","n":73,"p":1.1}],"fora_por_ano":[{"ano":2021,"p":14.2},{"ano":2022,"p":15.1},{"ano":2023,"p":16.4},{"ano":2024,"p":18.0},{"ano":2025,"p":19.7},{"ano":2026,"p":21.6}],"renda_mediana":11500,"renda_cobertura":74.2,"perfil_faixa":[{"k":"até R$ 2.500","n":2140,"idade":31.4,"renda":8200,"tipo":"Apartamento","dorm":"2 dorm. (68%)","bairros":"Mooca, Ipiranga, Santana"},{"k":"R$ 2.500–3.500","n":2290,"idade":35.8,"renda":11600,"tipo":"Apartamento","dorm":"2 dorm. (57%)","bairros":"Vila Mariana, Tatuapé, Saúde"},{"k":"R$ 3.500–5.000","n":1420,"idade":40.2,"renda":16500,"tipo":"Apartamento","dorm":"3 dorm. (54%)","bairros":"Pinheiros, Perdizes, Brooklin"},{"k":"acima de R$ 5.000","n":830,"idade":44.1,"renda":26000,"tipo":"Apartamento","dorm":"3 dorm. (61%)","bairros":"Moema, Vila Olímpia, Itaim Bibi"}],"profissoes":[{"k":"Engenheiro","p":9.8},{"k":"Empresário / proprietário","p":9.1},{"k":"Indústria / metalúrgico","p":7.4},{"k":"Administrativo","p":6.2},{"k":"Professor","p":4.1},{"k":"Profissional de TI","p":3.9},{"k":"Vendedor / comercial","p":3.7},{"k":"Saúde / enfermagem","p":3.2},{"k":"Servidor público","p":2.8},{"k":"Aposentado","p":2.5}],"prof_cobertura":71.4,"tipo":[{"k":"Apartamento","p":63.4},{"k":"Casa / sobrado","p":14.2},{"k":"Sala comercial","p":8.1},{"k":"Loja / salão","p":5.6},{"k":"Kitnet / studio","p":4.3},{"k":"Galpão","p":2.6},{"k":"Cobertura","p":1.8}],"quartos":[{"k":"Sem quartos (sala/loja)","p":13.4},{"k":"1 quarto","p":9.8},{"k":"2 quartos","p":46.3},{"k":"3 quartos","p":26.1},{"k":"4+ quartos","p":4.4}],"faixa_valor":[{"k":"até R$ 1,5 mil","p":4.8},{"k":"R$ 1,5 mil – R$ 2 mil","p":9.6},{"k":"R$ 2 mil – R$ 2,5 mil","p":15.2},{"k":"R$ 2,5 mil – R$ 3 mil","p":17.9},{"k":"R$ 3 mil – R$ 3,5 mil","p":15.6},{"k":"R$ 3,5 mil – R$ 4,5 mil","p":14.1},{"k":"R$ 4,5 mil – R$ 6 mil","p":10.4},{"k":"R$ 6 mil – R$ 10 mil","p":8.1},{"k":"acima de R$ 10 mil","p":4.3}],"bairros":[{"k":"Vila Mariana","n":512,"p":7.7},{"k":"Pinheiros","n":401,"p":6.0},{"k":"Moema","n":388,"p":5.8},{"k":"Perdizes","n":344,"p":5.1},{"k":"Tatuapé","n":322,"p":4.8},{"k":"Saúde","n":286,"p":4.3},{"k":"Santana","n":268,"p":4.0},{"k":"Brooklin","n":251,"p":3.8},{"k":"Mooca","n":236,"p":3.5},{"k":"Butantã","n":219,"p":3.3},{"k":"Lapa","n":198,"p":3.0},{"k":"Ipiranga","n":187,"p":2.8}],"cidade":{"ZS":38.6,"ZO":27.4,"ZL":15.2,"ZN":11.3,"CE":7.5},"area_mediana":null,"ciclo":{"mediana":9.0,"p75":20,"registro_mesmo_dia":10.2},"ciclo_faixas":[{"k":"1–7 dias","p":41.2},{"k":"8–15 dias","p":25.6},{"k":"16–30 dias","p":17.4},{"k":"31–60 dias","p":9.8},{"k":"mais de 60 dias","p":6.0}],"visita":{"uma_visita":47.0,"visitou_o_fechado":100.0},"aderencia":{"uso_teto":84,"acima_teto":9.1,"bairro":72.4,"tipo":90.2},"midia_ano":{"anos":[2021,2022,2023,2024,2025,2026],"series":[{"k":"Portais Grupo ZAP","v":[41.2,39.8,37.1,34.6,31.2,28.4]},{"k":"Google Ads","v":[22.4,24.6,25.8,24.1,22.7,21.9]},{"k":"WhatsApp orgânico (site e Instagram)","v":[5.1,6.8,9.4,13.2,17.6,21.4]},{"k":"OLX / Imovelweb","v":[14.3,13.1,12.4,11.8,10.6,9.7]}]},"corretores_neg":[{"k":"Aline Bertolucci","n":620,"soma":2046000,"mediana":3200},{"k":"Diego Montanari","n":560,"soma":1848000,"mediana":3200},{"k":"Priscila Okamoto","n":510,"soma":1683000,"mediana":3200},{"k":"Rafael Zanetti","n":470,"soma":1551000,"mediana":3200},{"k":"Tatiane Moura","n":430,"soma":1419000,"mediana":3200},{"k":"Vinícius Castanho","n":390,"soma":1287000,"mediana":3200},{"k":"Débora Lemes","n":350,"soma":1155000,"mediana":3200},{"k":"Henrique Sakamoto","n":310,"soma":1023000,"mediana":3200},{"k":"Natália Furlan","n":280,"soma":924000,"mediana":3200}],"base":{"n":41200,"funil":[{"k":"Atendimentos","n":41200},{"k":"Receberam imóvel","n":27150},{"k":"Visitaram","n":8940},{"k":"Fizeram proposta","n":3950},{"k":"Fecharam negócio","n":1854}],"conv":4.5,"sem_carrinho":34.1,"em_aberto":3820,"descarte":[{"k":"Parou de responder","p":42.8},{"k":"Alugou com particular / outra imobiliária","p":17.8},{"k":"Nunca respondeu","p":9.6},{"k":"Desistiu de alugar","p":7.9},{"k":"Fora do perfil de mercado","p":5.7},{"k":"Não busca imóvel","p":2.9},{"k":"Lead duplicado","p":2.1},{"k":"Setor errado","p":1.9},{"k":"Cadastro não aprovado","p":1.1}],"por_midia":[{"k":"Indicação","n":980,"p":23.1},{"k":"Plantão / presencial nas agências","n":720,"p":18.6},{"k":"Placas no imóvel","n":840,"p":11.4},{"k":"Site da imobiliária","n":3920,"p":6.7},{"k":"Google Ads","n":8800,"p":5.0},{"k":"Portais Grupo ZAP","n":11400,"p":4.3},{"k":"WhatsApp orgânico","n":6900,"p":3.9},{"k":"OLX / Imovelweb","n":4300,"p":3.1},{"k":"WhatsApp (Rafa)","n":1700,"p":3.0},{"k":"Meta Ads – WhatsApp","n":980,"p":0.0},{"k":"Meta Ads – site","n":660,"p":0.0}],"por_resposta":[{"k":"até 5 min","n":23210,"p":5.2},{"k":"5–30 min","n":6441,"p":5.4},{"k":"30 min–2 h","n":2860,"p":4.1},{"k":"2–24 h","n":4486,"p":3.6},{"k":"mais de 24 h","n":4203,"p":2.1}],"por_quando":[{"k":"Dia útil, horário comercial","n":25209,"p":5.4},{"k":"Dia útil, fora do horário","n":8773,"p":3.6},{"k":"Fim de semana, de dia","n":4609,"p":3.1},{"k":"Fim de semana, à noite","n":2610,"p":2.2}],"por_carrinho":[{"k":"Nenhum","n":14048,"p":0.0},{"k":"1 imóvel","n":17657,"p":4.6},{"k":"2 imóveis","n":4553,"p":12.9},{"k":"3 imóveis","n":2443,"p":16.4},{"k":"4 ou mais","n":2499,"p":22.1}],"por_teto":[{"k":"até R$ 2.500","n":10500,"p":3.1},{"k":"R$ 2.500–3.500","n":9550,"p":4.6},{"k":"R$ 3.500–5.000","n":5600,"p":6.2},{"k":"acima de R$ 5.000","n":3000,"p":7.4},{"k":"Sem orçamento","n":12550,"p":3.6}],"por_origem":[{"k":"Grande SP (11)","n":32300,"p":4.4},{"k":"Interior de SP","n":3250,"p":5.0},{"k":"Outros estados","n":5650,"p":4.9}],"por_corretor":[{"k":"Aline Bertolucci","n":5400,"p":5.6},{"k":"Diego Montanari","n":5100,"p":4.9},{"k":"Priscila Okamoto","n":4900,"p":5.2},{"k":"Rafael Zanetti","n":4700,"p":3.8},{"k":"Tatiane Moura","n":4500,"p":4.4},{"k":"Vinícius Castanho","n":4300,"p":4.7},{"k":"Débora Lemes","n":4100,"p":3.5},{"k":"Henrique Sakamoto","n":3900,"p":4.1},{"k":"Natália Furlan","n":3700,"p":3.2}],"resposta_mes":[{"k":"11/25","ate5":25.9,"mediana":12.0},{"k":"12/25","ate5":21.1,"mediana":21.0},{"k":"01/26","ate5":16.9,"mediana":34.0},{"k":"02/26","ate5":42.4,"mediana":9.0},{"k":"03/26","ate5":68.8,"mediana":1.0},{"k":"04/26","ate5":65.5,"mediana":1.0},{"k":"05/26","ate5":74.3,"mediana":0.0},{"k":"06/26","ate5":72.4,"mediana":0.0},{"k":"07/26","ate5":80.7,"mediana":0.0},{"k":"08/26","ate5":81.9,"mediana":0.0},{"k":"09/26","ate5":67.8,"mediana":1.0},{"k":"10/26","ate5":79.2,"mediana":0.0}],"carga":[{"k":"até 10","n":4944,"p":4.3},{"k":"11–20","n":9064,"p":5.2},{"k":"21–30","n":10712,"p":5.8},{"k":"31–40","n":8240,"p":4.3},{"k":"41–50","n":4944,"p":3.1},{"k":"mais de 50","n":3296,"p":2.2}],"carga_ideal":2,"prop":[{"k":"Corretor livre","n":23896,"p":5.6},{"k":"Com 1 proposta em andamento","n":12360,"p":3.5},{"k":"Com 2 ou mais propostas","n":4944,"p":2.0}]},"estoque":{"n_estoque":3150,"n_neg":4410,"faixa":[{"k":"até R$ 2.500","estoque":12.4,"negocios":29.6},{"k":"R$ 2.500–3.500","estoque":18.1,"negocios":33.5},{"k":"R$ 3.500–5.000","estoque":22.6,"negocios":21.0},{"k":"R$ 5.000–7.000","estoque":17.3,"negocios":8.9},{"k":"R$ 7.000–12.000","estoque":15.8,"negocios":4.8},{"k":"acima de R$ 12.000","estoque":13.8,"negocios":2.2}],"tipo":[{"k":"Apartamento","estoque":46.1,"negocios":63.0},{"k":"Casa / sobrado","estoque":11.8,"negocios":14.5},{"k":"Sala comercial","estoque":18.6,"negocios":8.3},{"k":"Loja / salão","estoque":11.4,"negocios":5.8},{"k":"Galpão","estoque":7.9,"negocios":2.7},{"k":"Kitnet / studio","estoque":4.2,"negocios":5.7}],"falta":[{"k":"Pinheiros","negocios_ano":142,"estoque":21},{"k":"Perdizes","negocios_ano":118,"estoque":18},{"k":"Vila Mariana","negocios_ano":131,"estoque":24},{"k":"Moema","negocios_ano":104,"estoque":19},{"k":"Saúde","negocios_ano":92,"estoque":17},{"k":"Tatuapé","negocios_ano":96,"estoque":19},{"k":"Brooklin","negocios_ano":81,"estoque":17},{"k":"Santana","negocios_ano":70,"estoque":15},{"k":"Butantã","negocios_ano":168,"estoque":38},{"k":"Lapa","negocios_ano":64,"estoque":15}],"parado_mediana":84,"parado_1ano":212,"valor_estoque_mediana":3900.0,"valor_neg_mediana":3100.0}},"venda":{"por_ano":[{"ano":2021,"negocios":310,"valor":193440000,"comissao":9672000,"mediana":480000},{"ano":2022,"negocios":352,"valor":237952000,"comissao":11897600,"mediana":520000},{"ano":2023,"negocios":389,"valor":283192000,"comissao":14159600,"mediana":560000},{"ano":2024,"negocios":431,"valor":336180000,"comissao":16809000,"mediana":600000},{"ano":2025,"negocios":478,"valor":400803000,"comissao":20040150,"mediana":645000},{"ano":2026,"negocios":412,"valor":369564000,"comissao":18478200,"mediana":690000}],"n_perfil":1850,"sazonalidade":[16.8,20.2,25.2,20.2,26.3,24.1,39.8,35.3,30.2,28.0,25.8,34.7],"idade":{"faixas":[{"k":"até 24","n":15,"p":2.1},{"k":"25–34","n":175,"p":24.6},{"k":"35–44","n":240,"p":33.8},{"k":"45–54","n":159,"p":22.4},{"k":"55–64","n":80,"p":11.2},{"k":"65+","n":42,"p":5.9}],"mediana":42.4,"cobertura":38.4},"origem_ddd":[{"k":"Grande SP (11)","n":1593,"p":86.1},{"k":"Interior de SP","n":96,"p":5.2},{"k":"Nordeste","n":48,"p":2.6},{"k":"Baixada Santista (13)","n":39,"p":2.1},{"k":"Minas Gerais","n":28,"p":1.5},{"k":"Sul","n":22,"p":1.2},{"k":"RJ / ES","n":15,"p":0.8},{"k":"Outros estados","n":9,"p":0.5}],"fora_por_ano":[{"ano":2021,"p":8.1},{"ano":2022,"p":8.9},{"ano":2023,"p":9.6},{"ano":2024,"p":10.8},{"ano":2025,"p":11.9},{"ano":2026,"p":12.7}],"renda_mediana":21000,"renda_cobertura":22.6,"perfil_faixa":[{"k":"até R$ 450 mil","n":590,"idade":34.6,"renda":12500,"tipo":"Apartamento","dorm":"2 dorm. (71%)","bairros":"Ipiranga, Mooca, Santana"},{"k":"R$ 450–800 mil","n":720,"idade":40.8,"renda":19000,"tipo":"Apartamento","dorm":"2 dorm. (52%)","bairros":"Tatuapé, Saúde, Vila Mariana"},{"k":"R$ 800 mil–1,3 mi","n":380,"idade":46.2,"renda":31000,"tipo":"Apartamento","dorm":"3 dorm. (63%)","bairros":"Perdizes, Pinheiros, Brooklin"},{"k":"acima de R$ 1,3 mi","n":160,"idade":50.4,"renda":52000,"tipo":"Apartamento","dorm":"3 dorm. (58%)","bairros":"Moema, Itaim Bibi, Vila Olímpia"}],"profissoes":[{"k":"Engenheiro","p":11.2},{"k":"Empresário / proprietário","p":10.4},{"k":"Indústria / metalúrgico","p":6.1},{"k":"Profissional de TI","p":5.2},{"k":"Administrativo","p":4.8},{"k":"Médico / saúde","p":4.4},{"k":"Professor","p":3.1},{"k":"Advogado","p":2.6},{"k":"Aposentado","p":2.2}],"prof_cobertura":26.8,"tipo":[{"k":"Apartamento","p":66.2},{"k":"Sobrado","p":15.4},{"k":"Casa térrea","p":7.1},{"k":"Cobertura","p":4.4},{"k":"Terreno","p":3.6},{"k":"Sala comercial","p":2.1},{"k":"Galpão","p":1.2}],"quartos":[{"k":"Sem quartos (terreno/sala)","p":6.9},{"k":"1 quarto","p":4.2},{"k":"2 quartos","p":44.8},{"k":"3 quartos","p":36.7},{"k":"4+ quartos","p":7.4}],"faixa_valor":[{"k":"até R$ 300 mil","p":7.4},{"k":"R$ 300 mil – R$ 450 mil","p":15.8},{"k":"R$ 450 mil – R$ 600 mil","p":21.3},{"k":"R$ 600 mil – R$ 800 mil","p":19.6},{"k":"R$ 800 mil – R$ 1 mi","p":13.2},{"k":"R$ 1 mi – R$ 1,3 mi","p":9.4},{"k":"R$ 1,3 mi – R$ 2 mi","p":7.6},{"k":"R$ 2 mi – R$ 3 mi","p":3.9},{"k":"acima de R$ 3 mi","p":1.8}],"bairros":[{"k":"Moema","n":128,"p":6.9},{"k":"Vila Mariana","n":117,"p":6.3},{"k":"Perdizes","n":109,"p":5.9},{"k":"Pinheiros","n":96,"p":5.2},{"k":"Tatuapé","n":92,"p":5.0},{"k":"Brooklin","n":85,"p":4.6},{"k":"Saúde","n":79,"p":4.3},{"k":"Santana","n":74,"p":4.0},{"k":"Campo Belo","n":71,"p":3.8},{"k":"Mooca","n":66,"p":3.6},{"k":"Ipiranga","n":58,"p":3.1},{"k":"Vila Olímpia","n":52,"p":2.8}],"cidade":{"ZS":41.2,"ZO":28.9,"ZL":13.1,"ZN":10.4,"CE":6.4},"area_mediana":null,"ciclo":{"mediana":31.0,"p75":62,"registro_mesmo_dia":12.8},"ciclo_faixas":[{"k":"1–7 dias","p":12.4},{"k":"8–15 dias","p":16.8},{"k":"16–30 dias","p":24.1},{"k":"31–60 dias","p":25.3},{"k":"mais de 60 dias","p":21.4}],"visita":{"uma_visita":31.4,"visitou_o_fechado":92.6},"aderencia":{"uso_teto":88,"acima_teto":11.6,"bairro":78.9,"tipo":89.7},"midia_ano":{"anos":[2021,2022,2023,2024,2025,2026],"series":[{"k":"Portais Grupo ZAP","v":[38.6,37.2,35.1,32.4,28.7,26.1]},{"k":"Contato pessoal do corretor","v":[10.2,12.6,15.9,19.4,23.1,25.3]},{"k":"Google Ads","v":[24.3,23.8,22.6,21.4,19.6,18.8]},{"k":"Lançamentos / plantão","v":[9.1,9.8,10.4,11.2,12.6,13.4]}]},"corretores_neg":[{"k":"Sérgio Lombardi","n":68,"soma":53040000,"mediana":650000},{"k":"Cláudia Nakamura","n":61,"soma":47580000,"mediana":650000},{"k":"Fábio Tavares","n":55,"soma":42900000,"mediana":650000},{"k":"Simone Bianchi","n":50,"soma":39000000,"mediana":650000},{"k":"Leandro Prado","n":46,"soma":35880000,"mediana":650000},{"k":"Vanessa Ito","n":42,"soma":32760000,"mediana":650000},{"k":"Roberto Ferrante","n":38,"soma":29640000,"mediana":650000},{"k":"Juliana Campos","n":34,"soma":26520000,"mediana":650000},{"k":"Marcos Yamada","n":30,"soma":23400000,"mediana":650000},{"k":"Elaine Rossetto","n":27,"soma":21060000,"mediana":650000}],"base":{"n":36800,"funil":[{"k":"Atendimentos","n":36800},{"k":"Receberam imóvel","n":27100},{"k":"Visitaram","n":6250},{"k":"Fizeram proposta","n":1420},{"k":"Fecharam negócio","n":478}],"conv":1.3,"sem_carrinho":21.4,"em_aberto":3380,"descarte":[{"k":"Nunca respondeu","p":15.9},{"k":"Parou de responder","p":14.2},{"k":"Sem interesse de compra","p":3.8},{"k":"Sem condições de compra","p":3.4},{"k":"Desistiu de comprar","p":3.2},{"k":"Fora do momento de compra","p":2.6},{"k":"Comprou com particular / terceiros","p":2.4},{"k":"Setor errado (era locação)","p":2.4},{"k":"Corretor parceiro encerrou","p":2.0}],"por_midia":[{"k":"Contato pessoal do corretor","n":1130,"p":17.8},{"k":"Indicação","n":780,"p":9.5},{"k":"Site da imobiliária","n":3120,"p":2.4},{"k":"Google Ads","n":7460,"p":1.5},{"k":"Portais Grupo ZAP","n":9320,"p":1.2},{"k":"WhatsApp orgânico","n":4340,"p":1.1},{"k":"OLX / Imovelweb","n":5930,"p":0.9},{"k":"Placas no imóvel","n":640,"p":0.8},{"k":"Meta Ads – site","n":3390,"p":0.7},{"k":"WhatsApp (Rafa)","n":850,"p":0.6},{"k":"Meta Ads – WhatsApp","n":1110,"p":0.0}],"por_resposta":[{"k":"até 5 min","n":15938,"p":1.7},{"k":"5–30 min","n":6248,"p":1.4},{"k":"30 min–2 h","n":3654,"p":1.1},{"k":"2–24 h","n":5454,"p":0.9},{"k":"mais de 24 h","n":5507,"p":0.7}],"por_quando":[{"k":"Dia útil, horário comercial","n":22874,"p":1.5},{"k":"Dia útil, fora do horário","n":6248,"p":1.0},{"k":"Fim de semana, de dia","n":4977,"p":1.2},{"k":"Fim de semana, à noite","n":2700,"p":0.7}],"por_carrinho":[{"k":"Nenhum","n":7889,"p":0.0},{"k":"1 imóvel","n":20703,"p":1.0},{"k":"2 imóveis","n":3230,"p":3.8},{"k":"3 imóveis","n":2012,"p":4.6},{"k":"4 ou mais","n":2965,"p":4.1}],"por_teto":[{"k":"até R$ 450 mil","n":8680,"p":1.6},{"k":"R$ 450–800 mil","n":7840,"p":1.5},{"k":"R$ 800 mil–1,3 mi","n":4020,"p":1.1},{"k":"acima de R$ 1,3 mi","n":1640,"p":0.9},{"k":"Sem orçamento","n":14620,"p":1.2}],"por_origem":[{"k":"Grande SP (11)","n":31600,"p":1.3},{"k":"Interior de SP","n":2100,"p":1.5},{"k":"Outros estados","n":3100,"p":1.2}],"por_corretor":[{"k":"Sérgio Lombardi","n":4400,"p":1.8},{"k":"Cláudia Nakamura","n":4100,"p":1.6},{"k":"Fábio Tavares","n":3900,"p":1.5},{"k":"Simone Bianchi","n":3700,"p":1.2},{"k":"Leandro Prado","n":3600,"p":1.0},{"k":"Vanessa Ito","n":3400,"p":1.4},{"k":"Roberto Ferrante","n":3300,"p":0.9},{"k":"Juliana Campos","n":3200,"p":1.3},{"k":"Marcos Yamada","n":3100,"p":1.1},{"k":"Elaine Rossetto","n":3000,"p":0.8}],"resposta_mes":[{"k":"11/25","ate5":22.3,"mediana":28.0},{"k":"12/25","ate5":25.2,"mediana":30.5},{"k":"01/26","ate5":29.0,"mediana":19.0},{"k":"02/26","ate5":29.2,"mediana":23.5},{"k":"03/26","ate5":55.9,"mediana":3.0},{"k":"04/26","ate5":57.1,"mediana":3.0},{"k":"05/26","ate5":61.3,"mediana":2.0},{"k":"06/26","ate5":53.7,"mediana":4.0},{"k":"07/26","ate5":59.9,"mediana":2.0},{"k":"08/26","ate5":56.5,"mediana":2.0},{"k":"09/26","ate5":51.2,"mediana":5.0},{"k":"10/26","ate5":67.0,"mediana":0.0}],"carga":[{"k":"até 6","n":4416,"p":1.3},{"k":"7–12","n":8096,"p":1.6},{"k":"13–18","n":9568,"p":1.7},{"k":"19–24","n":7360,"p":1.2},{"k":"25–30","n":4416,"p":0.9},{"k":"mais de 30","n":2944,"p":0.6}],"carga_ideal":2,"prop":[{"k":"Corretor livre","n":21344,"p":1.6},{"k":"Com 1 proposta em andamento","n":11040,"p":1.0},{"k":"Com 2 ou mais propostas","n":4416,"p":0.6}]},"estoque":{"n_estoque":6840,"n_neg":890,"faixa":[{"k":"até R$ 450 mil","estoque":11.2,"negocios":23.2},{"k":"R$ 450–600 mil","estoque":14.6,"negocios":21.3},{"k":"R$ 600–800 mil","estoque":18.9,"negocios":19.6},{"k":"R$ 800 mil–1,3 mi","estoque":24.1,"negocios":22.6},{"k":"R$ 1,3–2 mi","estoque":17.4,"negocios":9.4},{"k":"acima de R$ 2 mi","estoque":13.8,"negocios":3.9}],"tipo":[{"k":"Apartamento","estoque":52.4,"negocios":66.8},{"k":"Sobrado","estoque":21.6,"negocios":15.2},{"k":"Casa térrea","estoque":9.8,"negocios":7.0},{"k":"Terreno","estoque":7.1,"negocios":3.6},{"k":"Cobertura","estoque":5.2,"negocios":4.4},{"k":"Sala comercial","estoque":3.9,"negocios":2.0}],"falta":[{"k":"Perdizes","negocios_ano":36,"estoque":41},{"k":"Moema","negocios_ano":43,"estoque":52},{"k":"Vila Mariana","negocios_ano":39,"estoque":51},{"k":"Pinheiros","negocios_ano":31,"estoque":44},{"k":"Tatuapé","negocios_ano":28,"estoque":41},{"k":"Saúde","negocios_ano":26,"estoque":43},{"k":"Brooklin","negocios_ano":24,"estoque":41},{"k":"Santana","negocios_ano":25,"estoque":46},{"k":"Mooca","negocios_ano":32,"estoque":71},{"k":"Campo Belo","negocios_ano":17,"estoque":46}],"parado_mediana":164,"parado_1ano":1180,"valor_estoque_mediana":790000.0,"valor_neg_mediana":640000.0}},"contratos":{"ativos":8420,"aluguel_mes":26944000,"taxa_adm":8.0,"atrasados":5.6,"aviso_desocupacao":210,"residencial":78.4,"pj":15.1,"aluguel_mediano":3200.0,"garantia_mix":[{"k":"Seguro fiança","p":31.4},{"k":"Fiador","p":22.8},{"k":"Caução","p":18.6},{"k":"Título de capitalização","p":14.1},{"k":"CredPago","p":8.2},{"k":"Loft","p":3.9},{"k":"Sem garantia","p":1.0}],"permanencia":{"mediana":26.4,"faixas":[{"k":"até 6 meses","p":6.8},{"k":"6–12 meses","p":11.2},{"k":"12–24 meses","p":29.4},{"k":"24–36 meses","p":24.1},{"k":"36–60 meses","p":17.3},{"k":"mais de 5 anos","p":11.2}]},"motivos_saida":[{"k":"Mudou de cidade","n":4134,"p":22.7},{"k":"Comprou com outra imobiliária","n":2912,"p":16.0},{"k":"Outros","n":2548,"p":14.0},{"k":"Alugou com outra imobiliária","n":2184,"p":12.0},{"k":"Motivos pessoais","n":1456,"p":8.0},{"k":"Proprietário pediu o imóvel","n":1274,"p":7.0},{"k":"Valor do aluguel","n":1092,"p":6.0},{"k":"Insatisfeito com o imóvel","n":910,"p":5.0},{"k":"Empresa encerrou o contrato","n":819,"p":4.5},{"k":"Dificuldade financeira","n":455,"p":2.5},{"k":"Comprou com a Imobiliária Modelo","n":273,"p":1.5},{"k":"Alugou outro com a Imobiliária Modelo","n":143,"p":0.8}],"coorte":{"n":6800,"saiu12":15.9,"saiu24":38.6},"garantia_risco":[{"k":"Seguro Fiança","n":8160,"atraso":2.9,"saiu24":36.1},{"k":"Fiador","n":6240,"atraso":3.6,"saiu24":34.8},{"k":"Caução","n":4920,"atraso":4.4,"saiu24":41.2},{"k":"Título de capitalização","n":3600,"atraso":3.8,"saiu24":39.5},{"k":"CredPago","n":2280,"atraso":6.8,"saiu24":47.3},{"k":"Loft","n":1020,"atraso":5.9,"saiu24":null}],"saida_origem":[{"k":"Clientes da Grande SP","saiu24":36.4,"n":4980},{"k":"Clientes de fora","saiu24":47.9,"n":1380}],"vacancia":{"mediana":36,"ate30":44.1,"mais90":18.4,"por_tipo":[{"k":"Kitnet / studio","d":27},{"k":"Apartamento","d":31},{"k":"Casa / sobrado","d":38},{"k":"Loja / salão","d":66},{"k":"Sala comercial","d":79},{"k":"Galpão","d":94}],"reajuste_troca":11.8,"subiu":78.4},"aluguel_novo_ano":[{"ano":2019,"mediana":2100},{"ano":2020,"mediana":2050},{"ano":2021,"mediana":2250},{"ano":2022,"mediana":2450},{"ano":2023,"mediana":2700},{"ano":2024,"mediana":2950},{"ano":2025,"mediana":3200},{"ano":2026,"mediana":3450}]},"atendimento":{"loc":{"n_negocios":2050,"com_contato":92.1,"n_conversas":1640,"cobertura":80.0,"msgs_cliente":86,"dias_conversa":18.4,"resp_qualquer":1.2,"resp_humana":41.0,"resp_humana_p75":640.0,"humana_mais_1h":43.6,"atendentes":3,"fafa":64.8,"audio":58.1,"assuntos":[{"k":"Documentos, renda e análise de cadastro","p":72.4},{"k":"Contrato e prazo","p":70.8},{"k":"Condomínio, lazer e segurança","p":61.3},{"k":"Garantia (seguro fiança, caução, fiador)","p":56.2},{"k":"Quartos, suíte e vagas","p":54.9},{"k":"Localização, metrô e acesso","p":51.6},{"k":"Agendar visita","p":49.8},{"k":"Condomínio e IPTU (valores)","p":46.1},{"k":"Mobiliado / móveis","p":33.7},{"k":"Negociar valor","p":31.9},{"k":"Se ainda está disponível","p":30.4},{"k":"Transferência de trabalho / mudança","p":28.6},{"k":"Escola dos filhos","p":24.3},{"k":"Animal de estimação","p":18.7},{"k":"Contrato em nome de empresa","p":15.2}],"primeira":[{"k":"Pergunta direta / saudação","p":48.6},{"k":"Link ou imóvel do site da imobiliária","p":38.2},{"k":"Anúncio em portal","p":9.8},{"k":"Anúncio em rede social","p":3.4}],"horas":[133,14,14,21,28,49,287,1316,8169,21567,20377,18914,10451,11403,16639,16051,15897,15386,5236,1827,1267,721,357,294],"roteiro":{"mult":3.1,"nao":["Mandar mais de 5 opções de uma vez","Responder só \"tem disponível, sim\" sem fazer pergunta","Pedir documentos antes de entender o perfil","Sumir depois da visita"],"steps":[{"t":"Até 5 min","h":"Responder com nome, se apresentar e fazer uma pergunta de qualificação (bairro, valor, quando quer mudar)","com":5.9,"sem":3.1},{"t":"Na 1ª hora","h":"Enviar de 2 a 3 opções dentro do perfil, com fotos e valor total (aluguel + condomínio + IPTU)","com":7.2,"sem":2.5},{"t":"Até 24 h","h":"Propor a visita com dois horários fechados","com":6.8,"sem":2.5},{"t":"Antes da visita","h":"Explicar documentos e garantias aceitas, o assunto que mais aparece nas conversas de quem fecha","com":6.3,"sem":3.4},{"t":"No dia da visita","h":"Confirmar de manhã e mandar a localização","com":5.4,"sem":3.8},{"t":"Até 24 h após a visita","h":"Retornar com a ficha de cadastro e o checklist de documentos","com":7.6,"sem":2.2},{"t":"Dias 2, 5 e 10","h":"Follow-up se esfriar, sempre com uma novidade: nova opção, condição ou prazo","com":6.1,"sem":3.1}]}},"venda":{"n_negocios":412,"com_contato":94.2,"n_conversas":346,"cobertura":84.0,"msgs_cliente":38,"dias_conversa":21.6,"resp_qualquer":1.1,"resp_humana":52.0,"resp_humana_p75":610.0,"humana_mais_1h":47.2,"atendentes":2,"fafa":68.4,"audio":41.3,"assuntos":[{"k":"Financiamento, FGTS e entrada","p":71.6},{"k":"Agendar visita","p":66.2},{"k":"Localização e bairro","p":58.4},{"k":"Quartos, suíte e vagas","p":55.1},{"k":"Documentos, renda e aprovação de crédito","p":48.7},{"k":"Condomínio e IPTU","p":44.9},{"k":"Negociar valor","p":42.3},{"k":"Matrícula e documentação do imóvel","p":33.8},{"k":"Permuta / dar imóvel na negociação","p":24.6},{"k":"Se ainda está disponível","p":22.1},{"k":"Lazer do condomínio","p":19.4},{"k":"Prazo de entrega (lançamento)","p":15.2},{"k":"Escola dos filhos","p":12.8},{"k":"Animal de estimação","p":8.1}],"primeira":[{"k":"Link ou imóvel do site da imobiliária","p":46.3},{"k":"Pergunta direta / saudação","p":30.9},{"k":"Anúncio em portal","p":16.8},{"k":"Anúncio em rede social","p":6.0}],"horas":[43,4,4,7,9,16,92,421,2614,6901,6521,6052,3344,3649,5324,5136,5087,4924,1676,585,405,231,114,94],"roteiro":{"mult":3.6,"nao":["Mandar opções fora do orçamento informado","Pressionar com \"vai vender rápido\"","Deixar a proposta \"para segunda-feira\" sem data","Sumir depois da visita"],"steps":[{"t":"Até 5 min","h":"Responder com nome e uma pergunta de qualificação (objetivo, região, faixa de valor)","com":1.8,"sem":0.9},{"t":"No mesmo dia","h":"Enviar de 2 a 3 opções no perfil, não 10","com":2.0,"sem":0.8},{"t":"Antes da visita","h":"Perguntar sobre financiamento, FGTS e imóvel para dar na negociação","com":2.3,"sem":0.7},{"t":"Até 48 h","h":"Propor a visita com dois horários e levar quem decide junto","com":1.9,"sem":0.9},{"t":"Dia seguinte à visita","h":"Retornar com simulação de parcela e comparação com o aluguel atual","com":2.3,"sem":0.6},{"t":"Até 72 h","h":"Formalizar a proposta por escrito, com prazo de resposta","com":2.1,"sem":0.7},{"t":"Dias 3, 7 e 14","h":"Follow-up com novidade se esfriar","com":1.7,"sem":1.0}]}}},"fafa":{"inicio":"fevereiro de 2026","primeiro_registro":"05/02/2026","operacao_plena":"abril de 2026","loc":{"antes":{"leads_mes":3600,"corretores_mes":46.0,"leads_por_corretor":78.3,"resp_mediana":18.0,"resp_ate5":18.2,"resp_mais24h":4.7,"resp_fora_mediana":627.0,"resp_fora_ate5":8.3,"resp_comercial_mediana":13.0,"pct_fora":30.3,"perfil_completo":61.6,"com_carrinho":66.2,"nunca_respondeu":2.8,"parou_responder":15.1,"fafa_tocou":0.5,"conv_n":18000,"conv_visita":20.5,"conv_negocio":4.6,"conv_fora":4.0,"conv_comercial":4.7,"visita_fora":16.1,"visita_comercial":22.6},"depois":{"leads_mes":4780,"corretores_mes":47.0,"leads_por_corretor":101.7,"resp_mediana":0.0,"resp_ate5":74.8,"resp_mais24h":7.1,"resp_fora_mediana":0.0,"resp_fora_ate5":73.3,"resp_comercial_mediana":0.0,"pct_fora":41.8,"perfil_completo":77.3,"com_carrinho":55.2,"nunca_respondeu":7.6,"parou_responder":44.7,"fafa_tocou":89.8,"conv_n":23900,"conv_visita":18.7,"conv_negocio":4.4,"conv_fora":2.7,"conv_comercial":4.6,"visita_fora":15.8,"visita_comercial":20.7},"mensal":[{"k":"01/25","leads":5465,"ate5":8.2,"fafa":0.0,"conv":5.3,"resp_med":115.5},{"k":"02/25","leads":4057,"ate5":8.7,"fafa":0.1,"conv":4.9,"resp_med":79.0},{"k":"03/25","leads":4395,"ate5":5.2,"fafa":0.0,"conv":3.4,"resp_med":157.0},{"k":"04/25","leads":3933,"ate5":6.7,"fafa":0.1,"conv":3.1,"resp_med":92.0},{"k":"05/25","leads":3305,"ate5":12.2,"fafa":1.5,"conv":5.2,"resp_med":21.0},{"k":"06/25","leads":2726,"ate5":13.0,"fafa":1.6,"conv":4.6,"resp_med":18.0},{"k":"07/25","leads":3271,"ate5":16.2,"fafa":0.2,"conv":4.5,"resp_med":18.0},{"k":"08/25","leads":3588,"ate5":21.5,"fafa":0.1,"conv":5.1,"resp_med":13.0},{"k":"09/25","leads":3291,"ate5":27.4,"fafa":0.1,"conv":5.6,"resp_med":12.0},{"k":"10/25","leads":3871,"ate5":29.7,"fafa":0.1,"conv":4.5,"resp_med":11.0},{"k":"11/25","leads":3940,"ate5":25.9,"fafa":0.1,"conv":4.7,"resp_med":12.0},{"k":"12/25","leads":3650,"ate5":21.1,"fafa":0.1,"conv":4.0,"resp_med":21.0},{"k":"01/26","leads":5948,"ate5":16.9,"fafa":0.3,"conv":3.8,"resp_med":34.0},{"k":"02/26","leads":4423,"ate5":42.4,"fafa":10.6,"conv":3.2,"resp_med":9.0},{"k":"03/26","leads":4851,"ate5":68.8,"fafa":40.7,"conv":4.5,"resp_med":1.0},{"k":"04/26","leads":3940,"ate5":65.5,"fafa":86.6,"conv":4.0,"resp_med":1.0},{"k":"05/26","leads":4692,"ate5":74.3,"fafa":86.6,"conv":3.7,"resp_med":0.0},{"k":"06/26","leads":4292,"ate5":72.4,"fafa":87.9,"conv":3.6,"resp_med":0.0},{"k":"07/26","leads":5044,"ate5":80.7,"fafa":88.9,"conv":3.5,"resp_med":0.0},{"k":"08/26","leads":4423,"ate5":81.9,"fafa":90.6,"conv":4.1,"resp_med":0.0},{"k":"09/26","leads":4292,"ate5":67.8,"fafa":92.9,"conv":null,"resp_med":1.0},{"k":"10/26","leads":4174,"ate5":79.2,"fafa":95.3,"conv":null,"resp_med":0.0}],"resp_por_hora":[{"k":"Madrugada (0–7h)","antes":343.5,"depois":0.0},{"k":"Manhã (7–12h)","antes":13.0,"depois":0.0},{"k":"Tarde (12–18h)","antes":14.0,"depois":0.0},{"k":"Noite (18–24h)","antes":682.0,"depois":0.0},{"k":"Fim de semana","antes":654.5,"depois":0.0}],"tocou_vs_nao":{"tocou_n":3040,"tocou_conv":2.1,"nao_n":410,"nao_conv":19.2},"absolutos":{"antes":{"leads":18000,"negocios":830,"fora_leads":5800,"fora_negocios":228},"depois":{"leads":23900,"negocios":1050,"fora_leads":9960,"fora_negocios":352}},"por_origem":[{"k":"Google Ads","antes_n":5700,"antes":5.2,"depois_n":8200,"depois":5.0},{"k":"Portais Grupo ZAP","antes_n":6800,"antes":4.6,"depois_n":7900,"depois":4.4},{"k":"WhatsApp orgânico","antes_n":2500,"antes":4.1,"depois_n":6300,"depois":3.9}],"artefato_resp_zero":{"antes":1.0,"depois":54.7},"trabalho":{"atendimentos":29800,"por_mes":4260,"fora_horario":13080,"pct_fora":43.9,"fim_semana":5740,"transferidos":28200,"tempo_ate_corretor":0.0,"perfil_fafa":1180,"sem_resposta_transferido":3900,"carrinho_ia":3120},"negocios":{"total":1380,"fafa":990,"pct":71.7,"valor":3586000,"comissao":340000},"negocios_abr_out":{"2025":1240,"2026":1380}},"venda":{"antes":{"leads_mes":3060,"corretores_mes":61.0,"leads_por_corretor":50.2,"resp_mediana":32.0,"resp_ate5":24.4,"resp_mais24h":11.6,"resp_fora_mediana":667.0,"resp_fora_ate5":12.4,"resp_comercial_mediana":17.0,"pct_fora":31.1,"perfil_completo":72.3,"com_carrinho":78.1,"nunca_respondeu":6.9,"parou_responder":7.6,"fafa_tocou":0.0,"conv_n":15300,"conv_visita":11.3,"conv_negocio":1.3,"conv_fora":2.2,"conv_comercial":3.0,"visita_fora":10.2,"visita_comercial":11.9},"depois":{"leads_mes":3290,"corretores_mes":58.0,"leads_por_corretor":56.7,"resp_mediana":2.0,"resp_ate5":57.8,"resp_mais24h":12.6,"resp_fora_mediana":1.0,"resp_fora_ate5":65.3,"resp_comercial_mediana":4.0,"pct_fora":38.8,"perfil_completo":42.0,"com_carrinho":74.6,"nunca_respondeu":22.8,"parou_responder":18.0,"fafa_tocou":62.3,"conv_n":16450,"conv_visita":11.7,"conv_negocio":1.3,"conv_fora":2.4,"conv_comercial":2.6,"visita_fora":9.6,"visita_comercial":13.1},"mensal":[{"k":"01/25","leads":2602,"ate5":10.2,"fafa":0.0,"conv":2.3,"resp_med":94.5},{"k":"02/25","leads":1823,"ate5":12.5,"fafa":0.0,"conv":3.5,"resp_med":80.5},{"k":"03/25","leads":2920,"ate5":11.8,"fafa":0.0,"conv":2.6,"resp_med":101.0},{"k":"04/25","leads":3510,"ate5":13.7,"fafa":0.1,"conv":1.6,"resp_med":172.5},{"k":"05/25","leads":3434,"ate5":19.8,"fafa":0.0,"conv":2.2,"resp_med":48.0},{"k":"06/25","leads":3593,"ate5":30.5,"fafa":0.0,"conv":1.9,"resp_med":16.0},{"k":"07/25","leads":3481,"ate5":28.3,"fafa":0.0,"conv":4.6,"resp_med":24.0},{"k":"08/25","leads":3086,"ate5":24.5,"fafa":0.0,"conv":3.3,"resp_med":30.5},{"k":"09/25","leads":2932,"ate5":24.9,"fafa":0.0,"conv":3.0,"resp_med":27.0},{"k":"10/25","leads":2649,"ate5":29.0,"fafa":0.0,"conv":3.4,"resp_med":24.0},{"k":"11/25","leads":2785,"ate5":22.3,"fafa":0.2,"conv":2.7,"resp_med":28.0},{"k":"12/25","leads":2578,"ate5":25.2,"fafa":0.0,"conv":1.8,"resp_med":30.5},{"k":"01/26","leads":4602,"ate5":29.0,"fafa":0.5,"conv":1.5,"resp_med":19.0},{"k":"02/26","leads":3210,"ate5":29.2,"fafa":6.9,"conv":3.0,"resp_med":23.5},{"k":"03/26","leads":3752,"ate5":55.9,"fafa":38.2,"conv":2.2,"resp_med":3.0},{"k":"04/26","leads":3115,"ate5":57.1,"fafa":61.4,"conv":1.6,"resp_med":3.0},{"k":"05/26","leads":3121,"ate5":61.3,"fafa":56.7,"conv":2.6,"resp_med":2.0},{"k":"06/26","leads":2814,"ate5":53.7,"fafa":55.9,"conv":2.3,"resp_med":4.0},{"k":"07/26","leads":3204,"ate5":59.9,"fafa":61.0,"conv":3.6,"resp_med":2.0},{"k":"08/26","leads":4160,"ate5":56.5,"fafa":66.2,"conv":2.6,"resp_med":2.0},{"k":"09/26","leads":3392,"ate5":51.2,"fafa":64.2,"conv":null,"resp_med":5.0},{"k":"10/26","leads":2631,"ate5":67.0,"fafa":69.5,"conv":null,"resp_med":0.0}],"resp_por_hora":[{"k":"Madrugada (0–7h)","antes":426.0,"depois":0.0},{"k":"Manhã (7–12h)","antes":16.0,"depois":8.0},{"k":"Tarde (12–18h)","antes":20.0,"depois":2.0},{"k":"Noite (18–24h)","antes":721.0,"depois":0.0},{"k":"Fim de semana","antes":600.5,"depois":2.0}],"tocou_vs_nao":{"tocou_n":1700,"tocou_conv":0.7,"nao_n":1100,"nao_conv":2.2},"absolutos":{"antes":{"leads":15300,"negocios":199,"fora_leads":4800,"fora_negocios":46},"depois":{"leads":16450,"negocios":214,"fora_leads":6400,"fora_negocios":76}},"por_origem":[{"k":"Google Ads","antes_n":3600,"antes":1.6,"depois_n":3800,"depois":1.5},{"k":"Portais Grupo ZAP","antes_n":4200,"antes":1.2,"depois_n":4100,"depois":1.1},{"k":"Meta Ads – site","antes_n":3200,"antes":0.7,"depois_n":2850,"depois":0.8},{"k":"WhatsApp orgânico","antes_n":1100,"antes":1.1,"depois_n":1950,"depois":0.9}],"artefato_resp_zero":{"antes":1.9,"depois":36.3},"trabalho":{"atendimentos":16800,"por_mes":2400,"fora_horario":8400,"pct_fora":50.0,"fim_semana":3750,"transferidos":16000,"tempo_ate_corretor":0.0,"perfil_fafa":420,"sem_resposta_transferido":3500,"carrinho_ia":3040},"negocios":{"total":290,"fafa":106,"pct":36.6,"valor":95082000,"comissao":4754100},"negocios_abr_out":{"2025":262,"2026":290}},"reaquecimento":{"receberam":5800,"responderam":2090,"ja_alugou":310,"negocios":38},"rm":{"antes":{"n":1260,"mediana":24.0,"ate5":11.8,"fora_mediana":690.9,"comercial_mediana":15.4,"sem_resposta":12.2},"depois":{"n":2860,"mediana":7.8,"ate5":35.5,"fora_mediana":13.0,"comercial_mediana":6.9,"sem_resposta":8.8},"n_antes":1400,"n_depois":3100,"por_hora":[{"k":"Madrugada (0–7h)","antes":221.6,"depois":11.6},{"k":"Manhã (7–12h)","antes":17.9,"depois":7.4},{"k":"Tarde (12–18h)","antes":15.1,"depois":6.9},{"k":"Noite (18–24h)","antes":780.4,"depois":15.3},{"k":"Fim de semana","antes":476.8,"depois":12.1}]}}};
+const $ = (s, el = document) => el.querySelector(s);
+const nf = (v, d = 0) => v == null ? '–' : Number(v).toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+const pc = (v, d = 0) => v == null ? '–' : nf(v, d) + '%';
+const brl = v => v == null ? '–' : 'R$ ' + nf(v);
+const mi = v => 'R$ ' + nf(v / 1e6, 1) + ' mi';
+const mil = v => v >= 1e6 ? 'R$ ' + nf(v / 1e6, 2) + ' mi' : 'R$ ' + nf(v / 1e3) + ' mil';
+const dur = m => m == null ? '–' : m < 60 ? nf(m) + ' min' : m < 1440 ? nf(m / 60, 1).replace(',0', '') + ' h' : nf(m / 1440, 1).replace(',0', '') + ' dias';
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const ICON = {
+  crit: '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 1 15 14H1z"/><path fill="#fff" d="M7.2 5.5h1.6v4.2H7.2zM7.2 10.8h1.6v1.6H7.2z"/></svg>',
+  warn: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path fill="#fff" d="M7.2 3.8h1.6v5H7.2zM7.2 10h1.6v1.6H7.2z"/></svg>',
+  info: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path fill="#fff" d="M7.2 7h1.6v5H7.2zM7.2 4h1.6v1.6H7.2z"/></svg>'
+};
+
+let FIN = 'loc';
+try { FIN = localStorage.getItem('modelo-fin') || 'loc'; } catch (e) {}
+const TABS = [
+  ['visao', 'Visão geral', false], ['fafa', 'Rafa (IA)', true], ['clientes', 'Quem fecha', true], ['imoveis', 'Imóveis que giram', true], ['funil', 'Funil e conversão', true],
+  ['atendimento', 'Atendimento', true], ['carteira', 'Carteira de locação', false], ['oferta', 'Oferta × demanda', true], ['acoes', 'Atenção e melhorias', false]
+];
+let TAB = (location.hash || '').slice(1);
+if (!TABS.some(t => t[0] === TAB)) TAB = 'visao';
+const charts = [];
+
+/* ---------- gráficos ---------- */
+const endLabels = {
+  id: 'endLabels',
+  afterDatasetsDraw(c, _a, o) {
+    if (!o || !o.on) return;
+    const { ctx } = c; ctx.save();
+    ctx.font = '500 12px ' + css('--f-body'); ctx.fillStyle = css('--ink-2');
+    c.data.datasets.forEach((ds, di) => {
+      const meta = c.getDatasetMeta(di); if (meta.hidden) return;
+      meta.data.forEach((el, i) => {
+        const v = ds.data[i]; if (v == null) return;
+        const t = o.fmt ? o.fmt(v) : nf(v);
+        if (c.options.indexAxis === 'y') { ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(t, el.x + 6, el.y); }
+        else { ctx.textAlign = 'center'; ctx.textBaseline = 'bottom'; ctx.fillText(t, el.x, el.y - 4); }
+      });
+    });
+    ctx.restore();
+  }
+};
+Chart.register(endLabels);
+
+function baseOpts(o) {
+  const ink = css('--ink-2'), grid = css('--grid');
+  Chart.defaults.font.family = css('--f-body'); Chart.defaults.color = ink;
+  const horiz = o.horizontal;
+  const valAxis = { beginAtZero: true, grid: { color: grid, drawTicks: false }, border: { display: false }, ticks: { padding: 6, callback: v => o.fmt ? o.fmt(v) : nf(v) } };
+  const catAxis = { grid: { display: false }, border: { color: css('--line') }, ticks: { padding: 4, autoSkip: false } };
+  if (o.max) valAxis.max = o.max;
+  if (horiz) { valAxis.grace = '20%'; valAxis.display = false; }
+  else if (o.labels) valAxis.grace = '10%';
+  return {
+    responsive: true, maintainAspectRatio: false, indexAxis: horiz ? 'y' : 'x', animation: false,
+    interaction: { mode: o.line ? 'index' : 'nearest', intersect: !o.line, axis: horiz ? 'y' : 'x' },
+    layout: { padding: { right: horiz ? 8 : 0, top: 4 } },
+    plugins: {
+      legend: { display: !!o.legend, position: 'top', align: 'start', labels: { boxWidth: 12, boxHeight: 12, useBorderRadius: true, borderRadius: 3, color: ink, padding: 14 } },
+      tooltip: { backgroundColor: css('--ink'), titleColor: css('--surface'), bodyColor: css('--surface'), padding: 10, cornerRadius: 6, displayColors: !!o.legend,
+        titleFont: { family: css('--f-display'), weight: '600' }, callbacks: { label: c => (o.legend ? c.dataset.label + ': ' : '') + (o.tip ? o.tip(c) : (o.fmt ? o.fmt(c.parsed[horiz ? 'x' : 'y']) : nf(c.parsed[horiz ? 'x' : 'y']))) } },
+      endLabels: { on: o.labels !== false && !o.line, fmt: o.fmt }
+    },
+    scales: horiz ? { x: valAxis, y: catAxis } : { x: catAxis, y: valAxis }
+  };
+}
+
+/* spec: {id, type:'bar'|'line', labels, series:[{label, data, color, hl}], horizontal, fmt, height, cols(table headers), rows(table rows)} */
+function card(spec) {
+  const h = spec.height || (spec.horizontal ? Math.max(160, spec.labels.length * 34 + 20) : 260);
+  return `<section class="card ${spec.span || 'c6'}" aria-labelledby="h-${spec.id}">
+    <div class="card-head"><div><h3 id="h-${spec.id}">${spec.title}</h3>${spec.sub ? `<p class="sub">${spec.sub}</p>` : ''}</div>
+    <button class="tbtn" type="button" data-tbl="${spec.id}" aria-pressed="false">Ver tabela</button></div>
+    ${spec.take ? `<p class="takeaway top">${spec.take}</p>` : ''}
+    <div class="chart" id="ch-${spec.id}" style="height:${h}px"><canvas role="img" aria-label="${spec.title}"></canvas></div>
+    <div class="tbl-wrap" id="tb-${spec.id}" hidden>${table(spec)}</div>
+    ${spec.note ? `<p class="note">${spec.note}</p>` : ''}
+  </section>`;
+}
+function table(spec) {
+  const fmt = spec.fmt || nf;
+  const head = spec.cols || ['', ...spec.series.map(s => s.label)];
+  const rows = spec.rows || spec.labels.map((l, i) => [l, ...spec.series.map(s => fmt(s.data[i]))]);
+  return `<table><thead><tr>${head.map((c, i) => `<th class="${i ? 'n' : ''}">${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td class="${i ? 'n' : ''}">${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+function draw(spec) {
+  const host = document.getElementById('ch-' + spec.id); if (!host) return;
+  const cv = host.querySelector('canvas');
+  const col = n => css(n);
+  const datasets = spec.series.map(s => {
+    const c = col(s.color || '--s2');
+    const bg = spec.type === 'line' ? c : (s.hl ? s.data.map((_, i) => s.hl(i) ? c : col('--rest')) : c);
+    return spec.type === 'line'
+      ? { label: s.label, data: s.data, borderColor: c, backgroundColor: c, borderWidth: 2, pointRadius: 4, pointHoverRadius: 6, pointBackgroundColor: c, pointBorderColor: col('--surface'), pointBorderWidth: 2, tension: 0, spanGaps: true }
+      : { label: s.label, data: s.data, backgroundColor: bg, borderRadius: 4, borderSkipped: 'start', borderWidth: 0, maxBarThickness: spec.horizontal ? 22 : 44, categoryPercentage: spec.series.length > 1 ? 0.72 : 0.8, barPercentage: spec.series.length > 1 ? 0.92 : 0.9 };
+  });
+  const o = baseOpts({ horizontal: spec.horizontal, fmt: spec.fmt, legend: spec.series.length > 1, line: spec.type === 'line', labels: spec.labels !== false && spec.valueLabels !== false, max: spec.max, tip: spec.tip });
+  if (spec.valueLabels === false) o.plugins.endLabels.on = false;
+  charts.push(new Chart(cv, { type: spec.type || 'bar', data: { labels: spec.labels, datasets }, options: o }));
+}
+
+/* ---------- helpers de conteúdo ---------- */
+const kpi = (lbl, num, ctx) => `<div class="kpi"><span class="lbl">${lbl}</span><span class="num">${num}</span>${ctx ? `<span class="ctx">${ctx}</span>` : ''}</div>`;
+const mini = (num, lbl, hl) => `<div class="mini${hl ? ' hl' : ''}"><span class="num">${num}</span><span class="lbl">${lbl}</span></div>`;
+const lead = (eb, h, p) => `<div class="lead"><span class="eyebrow">${eb}</span><h2>${h.replace(/(locação|venda)(?![^<]*>)/, '<span class="fin">$1</span>')}</h2>${p ? `<p>${p}</p>` : ''}</div>`;
+const hero = (num, txt) => `<div class="hero"><span class="hero-num">${num}</span><p>${txt}</p></div>`;
+const finName = () => FIN === 'loc' ? 'locação' : 'venda';
+const pick = (arr, k) => arr.map(x => x[k]);
+const maxIdx = arr => arr.indexOf(Math.max(...arr));
+
+/* ---------- abas ---------- */
+const VIEWS = {};
+
+function specsVisao() {
+  const L = DATA.loc, V = DATA.venda, C = DATA.contratos;
+  const l25 = L.por_ano.find(x => x.ano === 2025), v25 = V.por_ano.find(x => x.ano === 2025);
+  const l26 = L.por_ano.find(x => x.ano === 2026), v26 = V.por_ano.find(x => x.ano === 2026);
+  const anos = pick(L.por_ano, 'ano').map(a => a === 2026 ? '2026*' : String(a));
+  return [
+    { id: 'v-loc', span: 'c6', title: 'Locações fechadas por ano', sub: '2026 vai até 28/10', labels: anos, series: [{ label: 'Locações', data: pick(L.por_ano, 'negocios'), color: '--s2' }],
+      take: `O volume cresceu 28% desde 2021 e o valor acompanhou: o aluguel mediano foi de <b>${brl(L.por_ano[0].mediana)}</b> em 2021 para <b>${brl(l26.mediana)}</b> em 2026.` },
+    { id: 'v-ven', span: 'c6', title: 'Vendas fechadas por ano', sub: '2026 vai até 28/10', labels: anos, series: [{ label: 'Vendas', data: pick(V.por_ano, 'negocios'), color: '--s2' }],
+      take: `Vendas cresceram mais de 50% desde 2021. Em 2025 foram <b>${nf(v25.negocios)}</b> negócios e <b>${mi(v25.valor)}</b> em valor vendido.` },
+    { id: 'v-alug', span: 'c6', type: 'line', title: 'Aluguel mediano dos negócios fechados', labels: anos, series: [{ label: 'Aluguel mediano', data: pick(L.por_ano, 'mediana'), color: '--s2' }], fmt: brl,
+      take: `O aluguel típico <b>subiu 50% em 5 anos</b>. O mesmo imóvel volta ao mercado, em média, ${pc(C.vacancia.reajuste_troca)} mais caro na troca de inquilino.` },
+    { id: 'v-tick', span: 'c6', type: 'line', title: 'Valor mediano das vendas', labels: anos, series: [{ label: 'Venda mediana', data: pick(V.por_ano, 'mediana'), color: '--s1' }], fmt: mil,
+      take: `O ticket de venda sobe todo ano e chegou a <b>${mil(v26.mediana)}</b> em 2026: médio e médio-alto padrão nas zonas Sul e Oeste.` }
+  ];
+}
+VIEWS.visao = () => {
+  const L = DATA.loc, V = DATA.venda, C = DATA.contratos;
+  const l25 = L.por_ano.find(x => x.ano === 2025), v25 = V.por_ano.find(x => x.ano === 2025);
+  const l26 = L.por_ano.find(x => x.ano === 2026), v26 = V.por_ano.find(x => x.ano === 2026);
+  const specs = specsVisao();
+  const hl = [
+    [pc(L.fora_por_ano.at(-1).p), `dos clientes que alugaram em 2026 têm <b>DDD de fora da Grande SP</b> (eram ${pc(L.fora_por_ano[0].p)} em 2021). A imobiliária é a porta de entrada de quem chega transferido para trabalhar na capital.`],
+    [pc(C.coorte.saiu24), `dos inquilinos <b>saem em até 24 meses</b>. ${pc(C.motivos_saida.find(m => m.k === 'Comprou com outra imobiliária').p)} saem porque compraram um imóvel com outra imobiliária.`],
+    [pc(DATA.loc.estoque.faixa[0].negocios + DATA.loc.estoque.faixa[1].negocios), `das locações estão <b>até R$ 3.500</b>, mas só ${pc(DATA.loc.estoque.faixa[0].estoque + DATA.loc.estoque.faixa[1].estoque)} dos imóveis disponíveis estão nessa faixa. Na venda, ${pc(DATA.venda.estoque.faixa[0].negocios)} dos negócios são até R$ 450 mil e só ${pc(DATA.venda.estoque.faixa[0].estoque)} do estoque.`],
+    [pc(L.base.sem_carrinho), `dos atendimentos de locação dos últimos 12 meses <b>nunca receberam um imóvel</b> para avaliar. Nenhum deles fechou.`],
+    [dur(DATA.atendimento.loc ? DATA.atendimento.loc.resp_humana : null), `é o tempo típico até o <b>primeiro corretor responder</b> no WhatsApp, depois que a Rafa já respondeu em poucos minutos.`]
+  ];
+  return `${lead('Visão geral', 'A Imobiliária Modelo em números', 'Resumo dos últimos anos de locação e venda, da carteira administrada e do que mais chama atenção nos dados.')}
+  ${hero(mi(v25.valor), `vendidos em 2025 e <b>${nf(l25.negocios)} locações</b> fechadas: o melhor ano da série.`)}
+  <div class="kpis">
+    ${kpi('Locações em 2025', nf(l25.negocios), `2026 até out: <b>${nf(l26.negocios)}</b>`)}
+    ${kpi('Vendas em 2025', nf(v25.negocios), `valor vendido: <b>${mi(v25.valor)}</b>`)}
+    ${kpi('Comissão de vendas 2025', mi(v25.comissao), `2026 até out: <b>${mi(v26.comissao)}</b>`)}
+    ${kpi('Contratos administrados', nf(C.ativos), `aluguéis: <b>${mi(C.aluguel_mes)}/mês</b>`)}
+    ${kpi('Contratos em atraso', pc(C.atrasados, 1), `${nf(C.aviso_desocupacao)} com aviso de desocupação`)}
+    ${kpi('Conversão em 12 meses', pc(L.base.conv, 1) + ' · ' + pc(V.base.conv, 1), 'locação · venda (atendimento → negócio)')}
+  </div>
+  <div class="grid">
+    <section class="card c12" aria-labelledby="h-hl"><h3 id="h-hl">Cinco destaques para a diretoria</h3><div class="highlights">${hl.map(h => `<div class="hl-row"><span class="num">${h[0]}</span><p>${h[1]}</p></div>`).join('')}</div></section>
+    ${specs.map(card).join('')}
+  </div>`;
+};
+VIEWS.visao.specs = specsVisao;
+
+function specsClientes() {
+  const D = DATA[FIN], loc = FIN === 'loc';
+  const idade = D.idade.faixas, ori = D.origem_ddd;
+  const im = maxIdx(pick(idade, 'p'));
+  return [
+    { id: 'c-idade', span: 'c6', title: `Idade de quem fecha ${loc ? 'locação' : 'compra'}`, sub: `idade no dia do negócio · ${pc(D.idade.cobertura)} dos cadastros têm data de nascimento`,
+      labels: pick(idade, 'k'), series: [{ label: '% dos clientes', data: pick(idade, 'p'), hl: i => i === im }], fmt: v => pc(v),
+      take: `Idade mediana <b>${nf(D.idade.mediana)} anos</b>. ${loc ? 'Público jovem adulto: 6 em cada 10 têm entre 25 e 44 anos.' : 'Comprador concentrado entre 25 e 54 anos, muitas vezes na primeira ou segunda compra.'}` },
+    { id: 'c-origem', span: 'c6', horizontal: true, title: 'De onde vem o cliente (DDD do telefone)', sub: 'negócios de 2024 a 2026', labels: pick(ori, 'k'),
+      series: [{ label: '% dos clientes', data: pick(ori, 'p'), hl: i => ori[i].k !== 'Grande SP (11)' }], fmt: v => pc(v),
+      take: `<b>${pc(100 - ori.find(o => o.k === 'Grande SP (11)').p)}</b> dos clientes têm telefone de fora da Grande SP (em destaque).` },
+    { id: 'c-fora', span: 'c6', type: 'line', title: 'Clientes com DDD de fora, por ano', labels: pick(D.fora_por_ano, 'ano').map(String),
+      series: [{ label: '% de fora', data: pick(D.fora_por_ano, 'p'), color: '--s2' }], fmt: v => pc(v), max: loc ? 50 : 35,
+      take: loc ? 'A participação de quem vem de fora cresce todo ano. É gente chegando a trabalho (sedes de empresas, hospitais e universidades da capital), que precisa decidir à distância e rápido.' : 'Compradores de fora também crescem: de 8% em 2021 para quase 13%.' },
+    { id: 'c-prof', span: 'c6', horizontal: true, title: 'Profissões mais comuns', sub: `${pc(D.prof_cobertura)} dos cadastros têm profissão preenchida`, labels: pick(D.profissoes, 'k'),
+      series: [{ label: '% dos cadastros com profissão', data: pick(D.profissoes, 'p'), hl: i => i === 0 }], fmt: v => pc(v, 1),
+      note: loc ? null : 'Em venda, poucos cadastros têm profissão e renda. Os números desta aba para venda são indicativos.' }
+  ];
+}
+VIEWS.clientes = () => {
+  const D = DATA[FIN], loc = FIN === 'loc';
+  const pf = D.perfil_faixa;
+  const tbl = `<section class="card c12" aria-labelledby="h-pf"><div class="card-head"><div><h3 id="h-pf">Perfil por faixa de ${loc ? 'aluguel' : 'valor'}</h3><p class="sub">negócios de 2024 a 2026 · idade e renda são medianas</p></div></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Faixa</th><th class="n">Negócios</th><th class="n">Idade</th><th class="n">Renda declarada</th><th>Imóvel mais comum</th><th>Dormitórios</th><th>Bairros que mais aparecem</th></tr></thead>
+    <tbody>${pf.map(r => `<tr><td>${r.k}</td><td class="n">${nf(r.n)}</td><td class="n">${r.idade ? nf(r.idade) + ' anos' : '–'}</td><td class="n">${brl(r.renda)}</td><td>${r.tipo || '–'}</td><td>${r.dorm || '–'}</td><td>${r.bairros}</td></tr>`).join('')}</tbody></table></div>
+    <p class="takeaway">${loc ? 'Quanto maior o aluguel, mais velho e com mais renda é o cliente. O aluguel fica perto de <b>30% da renda declarada</b> em todas as faixas. Até R$ 3.500 o cliente busca <b>2 dormitórios</b>; acima disso, <b>3</b> vira o padrão.' : 'Até R$ 450 mil o comprador tem perto de 35 anos e busca o primeiro apartamento de <b>2 dormitórios</b>; acima de R$ 800 mil a idade passa dos 45 e <b>3 dormitórios</b> vira o padrão.'}</p></section>`;
+  return `${lead('Quem fecha', `O perfil de quem fecha ${finName()}`, `Base: ${nf(D.n_perfil)} negócios de ${finName()} fechados entre 2024 e outubro de 2026.`)}
+  ${hero(nf(D.idade.mediana) + ' anos', `é a idade típica de quem ${loc ? 'aluga' : 'compra'} com a Imobiliária Modelo, com renda declarada de <b>${brl(D.renda_mediana)}</b>. ${loc ? 'O apartamento de <b>2 dormitórios</b> até R$ 3.500 é o que mais fecha.' : 'A maioria busca <b>2 ou 3 dormitórios</b> entre R$ 450 e 800 mil.'}`)}
+  <div class="kpis">
+    ${kpi('Idade mediana', nf(D.idade.mediana) + ' anos', `${pc(D.idade.cobertura)} com data de nascimento`)}
+    ${kpi('Renda declarada (mediana)', brl(D.renda_mediana), `${pc(D.renda_cobertura)} com renda preenchida`)}
+    ${kpi('DDD de fora da Grande SP', pc(D.fora_por_ano.at(-1).p), 'negócios de 2026')}
+    ${kpi('Região do imóvel', pc(D.cidade.ZS) + ' Zona Sul', `Oeste ${pc(D.cidade.ZO)} · Leste ${pc(D.cidade.ZL)} · Norte ${pc(D.cidade.ZN)} · Centro ${pc(D.cidade.CE)}`)}
+  </div>
+  <div class="grid">${specsClientes().map(card).join('')}${tbl}</div>`;
+};
+VIEWS.clientes.specs = specsClientes;
+
+function specsImoveis() {
+  const D = DATA[FIN], loc = FIN === 'loc';
+  const fv = D.faixa_valor, im = maxIdx(pick(fv, 'p'));
+  const mes = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  const sz = D.sazonalidade, top = [...sz].sort((a, b) => b - a).slice(0, 3);
+  return [
+    { id: 'i-tipo', span: 'c6', horizontal: true, title: 'Tipo de imóvel', labels: pick(D.tipo, 'k'), series: [{ label: '% dos negócios', data: pick(D.tipo, 'p'), hl: i => i === 0 }], fmt: v => pc(v) },
+    { id: 'i-quartos', span: 'c6', title: 'Número de quartos', labels: pick(D.quartos, 'k'), series: [{ label: '% dos negócios', data: pick(D.quartos, 'p'), hl: i => [2, 3].includes(i) }], fmt: v => pc(v),
+      take: loc ? '<b>2 e 3 quartos</b> somam mais de 70% das locações; 2 dormitórios sozinho é quase metade.' : '<b>2 dormitórios</b> lidera, com 3 logo atrás: juntos passam de 80% das vendas.' },
+    { id: 'i-faixa', span: 'c12', title: `Faixa de ${loc ? 'aluguel' : 'valor'} dos negócios`, labels: pick(fv, 'k'), series: [{ label: '% dos negócios', data: pick(fv, 'p'), hl: i => Math.abs(i - im) <= 1 }], fmt: v => pc(v), height: 280,
+      take: loc ? 'O miolo do mercado está entre <b>R$ 2.000 e R$ 3.500</b>: são as faixas com mais giro.' : 'Mais da metade das vendas fica entre <b>R$ 450 mil e R$ 1 milhão</b>.' },
+    { id: 'i-bairros', span: 'c6', horizontal: true, title: 'Bairros com mais negócios', sub: 'negócios de 2024 a 2026', labels: pick(D.bairros, 'k'), series: [{ label: 'Negócios', data: pick(D.bairros, 'n'), hl: i => i === 0 }],
+      take: `<b>${D.bairros[0].k}</b> lidera com ${pc(D.bairros[0].p)}, mas nenhum bairro concentra o negócio: os 5 maiores somam <b>${pc(D.bairros.slice(0, 5).reduce((s, b) => s + b.p, 0))}</b>, espalhados pelas zonas da cidade.` },
+    { id: 'i-saz', span: 'c6', type: 'line', title: 'Sazonalidade: média de negócios por mês', sub: 'média de 2021 a 2025', labels: mes, series: [{ label: 'Negócios no mês (média)', data: sz, color: '--s2' }], fmt: v => nf(v, 0),
+      take: `Meses mais fortes: <b>${top.map(t => mes[sz.indexOf(t)]).join(', ')}</b>. ${loc ? 'Janeiro e setembro–outubro concentram mudanças (início de ano letivo e transferências de trabalho).' : 'Julho e agosto são o pico de vendas.'}` },
+    { id: 'i-ciclo', span: 'c6', title: 'Tempo da entrada do lead até o negócio', sub: `exclui ${pc(D.ciclo.registro_mesmo_dia)} de negócios registrados no próprio dia`, labels: pick(D.ciclo_faixas, 'k'),
+      series: [{ label: '% dos negócios', data: pick(D.ciclo_faixas, 'p'), hl: i => i === 0 }], fmt: v => pc(v),
+      take: `Mediana de <b>${nf(D.ciclo.mediana)} dias</b>; 75% fecham em até ${nf(D.ciclo.p75)} dias. ${loc ? 'Locação é decisão rápida: quem não fecha em um mês raramente fecha.' : 'Na venda, o financiamento alonga o ciclo: a aprovação de crédito pesa no prazo.'}` }
+  ];
+}
+VIEWS.imoveis = () => {
+  const D = DATA[FIN], loc = FIN === 'loc', a = D.aderencia;
+  return `${lead('Imóveis que giram', `O imóvel típico de ${finName()}`, 'O que de fato foi negociado entre 2024 e 2026: tipo, tamanho, faixa de valor, bairro e época do ano.')}
+  ${loc ? hero('2 dorm.', 'entre <b>R$ 2.000 e R$ 3.500</b>, nas <b>zonas Sul e Oeste</b>, é o imóvel que mais gira na locação.') : hero('54%', 'das vendas ficam entre <b>R$ 450 mil e R$ 1 milhão</b>, quase sempre apartamento de 2 ou 3 dormitórios.')}
+  <div class="grid">${specsImoveis().slice(0, 4).map(card).join('')}
+    <section class="card c6" aria-labelledby="h-ad"><h3 id="h-ad">O cliente fecha o que pediu?</h3><p class="sub">perfil cadastrado no atendimento × imóvel fechado</p>
+      <div class="duo">${mini(pc(a.tipo), 'fecharam no tipo de imóvel que pediram', true)}${mini(pc(a.bairro), 'fecharam em um dos bairros que pediram')}${mini(pc(a.uso_teto), 'do orçamento máximo informado é o valor típico do negócio')}${mini(pc(a.acima_teto), 'passaram do orçamento')}</div>
+      <p class="takeaway">O cliente fecha no tipo que pediu e gasta menos do que o teto informado. Mostrar opções dentro do perfil cadastrado funciona; ampliar o bairro é o que mais flexibiliza.</p>
+      <div class="duo">${mini(pc(D.visita.visitou_o_fechado), 'visitaram o imóvel que fecharam')}${mini(pc(D.visita.uma_visita), 'fecharam com uma única visita registrada')}</div>
+    </section>
+    ${specsImoveis().slice(4).map(card).join('')}</div>`;
+};
+VIEWS.imoveis.specs = specsImoveis;
+
+function specsFunil() {
+  const B = DATA[FIN].base, loc = FIN === 'loc';
+  const pm = B.por_midia, ds = B.descarte;
+  const avg = B.conv;
+  const ma = DATA[FIN].midia_ano;
+  const SER = ['--s2', '--s1', '--m3', '--m4'];
+  return [
+    { id: 'f-funil', span: 'c6', horizontal: true, title: 'Funil dos últimos 12 meses', sub: `${nf(B.n)} atendimentos criados de nov/2025 a out/2026`, labels: pick(B.funil, 'k'),
+      series: [{ label: 'Atendimentos', data: pick(B.funil, 'n'), hl: i => i === B.funil.length - 1 }],
+      tip: c => nf(c.parsed.x) + ' (' + pc(c.parsed.x * 100 / B.n, 1) + ')', rows: B.funil.map(f => [f.k, nf(f.n), pc(f.n * 100 / B.n, 1)]), cols: ['Etapa', 'Atendimentos', '% do total'],
+      take: `De cada 100 atendimentos, <b>${nf(avg, 1)}</b> viram negócio. ${loc ? `Quem visita fecha em ~20% dos casos; quem faz proposta, em quase metade.` : 'Quem faz proposta fecha em ~1 de cada 3 casos.'}` },
+    { id: 'f-desc', span: 'c6', horizontal: true, title: 'Por que os atendimentos são descartados', labels: pick(ds, 'k'), series: [{ label: '% dos descartes', data: pick(ds, 'p'), hl: i => i < 2 }], fmt: v => pc(v, 1),
+      take: loc ? '<b>Parou de responder</b> é o maior motivo, seguido de quem <b>alugou com particular ou outra imobiliária</b>.' : 'Na venda, o lead esfria: nunca respondeu e parou de responder somam quase 30%.' },
+    { id: 'f-midia', span: 'c12', horizontal: true, title: 'Conversão por origem do lead', sub: 'atendimentos dos últimos 12 meses com 100 ou mais leads · a linha de base é a média geral',
+      labels: pm.map(m => m.k), series: [{ label: '% que virou negócio', data: pick(pm, 'p'), hl: i => pm[i].p >= avg }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.x, 1) + ' de ' + nf(pm[c.dataIndex].n) + ' atendimentos', rows: pm.map(m => [m.k, nf(m.n), pc(m.p, 1)]), cols: ['Origem', 'Atendimentos', '% negócio'],
+      take: `Em destaque, as origens acima da média (${pc(avg, 1)}). ${loc ? 'Indicação, plantão e placas convertem de 3 a 5 vezes mais que o online. <b>Meta Ads ainda não gerou locação.</b>' : 'Contato pessoal e indicação lideram (relacionamento pesa na venda). Google Ads é a melhor fonte paga; Meta Ads converte menos da metade.'}` },
+    { id: 'f-resp', span: 'c6', title: 'Conversão pelo tempo até a 1ª resposta', labels: pick(B.por_resposta, 'k'), series: [{ label: '% que virou negócio', data: pick(B.por_resposta, 'p'), hl: i => i < 2 }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.y, 1) + ' de ' + nf(B.por_resposta[c.dataIndex].n), rows: B.por_resposta.map(m => [m.k, nf(m.n), pc(m.p, 1)]), cols: ['1ª resposta', 'Atendimentos', '% negócio'],
+      take: 'Responder em até 30 minutos converte mais que o dobro de responder depois de 24 horas.' },
+    { id: 'f-quando', span: 'c6', title: 'Conversão por quando o lead chegou', labels: pick(B.por_quando, 'k'), series: [{ label: '% que virou negócio', data: pick(B.por_quando, 'p'), hl: i => i === 0 }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.y, 1) + ' de ' + nf(B.por_quando[c.dataIndex].n), rows: B.por_quando.map(m => [m.k, nf(m.n), pc(m.p, 1)]), cols: ['Chegada', 'Atendimentos', '% negócio'],
+      take: 'Lead de fim de semana à noite converte menos da metade do lead de dia útil em horário comercial.' },
+    { id: 'f-carr', span: 'c6', title: 'Conversão por imóveis enviados ao cliente', sub: 'imóveis colocados no carrinho do atendimento', labels: pick(B.por_carrinho, 'k'),
+      series: [{ label: '% que virou negócio', data: pick(B.por_carrinho, 'p'), hl: i => i >= 2 }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.y, 1) + ' de ' + nf(B.por_carrinho[c.dataIndex].n), rows: B.por_carrinho.map(m => [m.k, nf(m.n), pc(m.p, 1)]), cols: ['Imóveis enviados', 'Atendimentos', '% negócio'],
+      take: `<b>${pc(B.sem_carrinho)}</b> dos atendimentos nunca receberam um imóvel e nenhum fechou. Quem recebe 2 ou mais opções (em destaque) converte bem mais; é relação, não prova de causa.` },
+    { id: 'f-teto', span: 'c6', title: 'Conversão pelo orçamento informado', labels: pick(B.por_teto, 'k'), series: [{ label: '% que virou negócio', data: pick(B.por_teto, 'p'), color: '--s1' }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.y, 1) + ' de ' + nf(B.por_teto[c.dataIndex].n), rows: B.por_teto.map(m => [m.k, nf(m.n), pc(m.p, 1)]), cols: ['Orçamento', 'Atendimentos', '% negócio'],
+      take: loc ? 'Quem pode pagar mais converte mais. Quem busca até R$ 2.500 encontra pouca opção na carteira (veja Oferta × demanda).' : 'Na venda, quem busca até R$ 800 mil converte melhor: é onde o mercado gira.' },
+    { id: 'f-ma', span: 'c6', type: 'line', title: 'Origem dos negócios fechados ao longo dos anos', sub: '% dos negócios do ano · 4 maiores origens', labels: ma.anos.map(a => a === 2026 ? '2026*' : String(a)),
+      series: ma.series.slice(0, 4).map((s, i) => ({ label: s.k, data: s.v, color: SER[i] })), fmt: v => pc(v),
+      take: loc ? 'Os portais do Grupo ZAP ainda lideram, mas o WhatsApp orgânico (site e Instagram) já encosta em 2026.' : 'Os portais do Grupo ZAP perdem força ano a ano; o relacionamento do corretor já quase empata com eles.' },
+    { id: 'f-rm', span: 'c6', type: 'line', title: '% de leads respondidos em até 5 minutos', sub: 'por mês de entrada', labels: pick(B.resposta_mes, 'k'), series: [{ label: 'Até 5 min', data: pick(B.resposta_mes, 'ate5'), color: '--s1' }], fmt: v => pc(v), max: 100,
+      take: 'A resposta imediata saltou a partir de março/2026, com a Rafa respondendo primeiro.' }
+  ];
+}
+VIEWS.funil = () => {
+  const B = DATA[FIN].base, pcar = B.por_carrinho, mult = Math.floor((pcar[2].p + pcar[3].p + pcar[4].p) / 3 / pcar[1].p);
+  const cr = B.por_corretor;
+  const corr = `<section class="card c12" aria-labelledby="h-cor"><div class="card-head"><div><h3 id="h-cor">Desempenho por corretor</h3><p class="sub">atendimentos criados nos últimos 12 meses · corretores com 150 ou mais atendimentos</p></div></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Corretor</th><th class="n">Atendimentos</th><th class="n">% que virou negócio</th></tr></thead><tbody>
+    ${cr.map(c => `<tr><td>${c.k}</td><td class="n">${nf(c.n)}</td><td class="n">${pc(c.p, 1)}</td></tr>`).join('')}</tbody></table></div>
+    <p class="note">A taxa depende também da origem e do tipo de lead que cada corretor recebe. Use como ponto de conversa, não como ranking.</p></section>`;
+  return `${lead('Funil e conversão', `Do primeiro contato ao negócio: ${finName()}`, 'Todos os atendimentos criados no CRM entre novembro de 2025 e outubro de 2026. Atendimentos ainda abertos podem virar negócio, então os meses mais recentes tendem a subir.')}
+  ${hero(mult + '×', `mais conversão quando o lead recebe <b>2 ou mais imóveis</b>. Mesmo assim, <b>${pc(B.sem_carrinho)}</b> dos atendimentos nunca recebem nenhum.`)}
+  <div class="grid">${specsFunilAll().map(card).join('')}${corr}</div>`;
+};
+function specsCarga() {
+  const B = DATA[FIN].base, cg = B.carga, ix = B.carga_ideal, pr = B.prop, loc = FIN === 'loc';
+  return [
+    { id: 'f-carga', span: 'c7', title: 'Carga ideal por corretor', sub: 'conversão pelo número de atendimentos abertos na carteira do corretor no dia em que o lead chegou · últimos 12 meses',
+      labels: cg.map(c => c.k), series: [{ label: '% que virou negócio', data: pick(cg, 'p'), hl: i => i === ix }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.y, 1) + ' de ' + nf(cg[c.dataIndex].n) + ' leads', rows: cg.map(c => [c.k, nf(c.n), pc(c.p, 1)]), cols: ['Atendimentos ativos', 'Leads recebidos', '% negócio'],
+      take: `A conversão é maior quando o corretor tem <b>${cg[ix].k} atendimentos ativos</b>. Acima de ${cg[ix + 1].k.split('–')[1]}, ela cai para menos da metade: ele não consegue dar atenção a todos.` },
+    { id: 'f-prop', span: 'c5', horizontal: true, title: 'Lead novo com corretor em proposta', sub: 'conversão do lead pela situação do corretor que o recebeu',
+      labels: pr.map(p => p.k), series: [{ label: '% que virou negócio', data: pick(pr, 'p'), hl: i => i === 0 }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.x, 1) + ' de ' + nf(pr[c.dataIndex].n) + ' leads', rows: pr.map(p => [p.k, nf(p.n), pc(p.p, 1)]), cols: ['Situação do corretor', 'Leads', '% negócio'],
+      take: `Lead que chega com o corretor em proposta converte <b>${pc(pr[1].p, 1)}</b>, contra ${pc(pr[0].p, 1)} com o corretor livre. A roleta deveria pular quem está em proposta até ele liberar.` }
+  ];
+}
+const specsFunilAll = () => [...specsFunil(), ...specsCarga()];
+VIEWS.funil.specs = specsFunilAll;
+
+function specsAtend() {
+  const A = DATA.atendimento[FIN]; if (!A) return [];
+  const hrs = A.horas.map((v, h) => ({ h, v })).filter(x => x.h >= 6);
+  const ix = maxIdx(pick(A.assuntos, 'p'));
+  return [
+    { id: 'a-assuntos', span: 'c7', horizontal: true, title: 'O que o cliente pergunta na conversa', sub: '% das conversas em que o assunto aparece (texto e áudio transcrito)',
+      labels: pick(A.assuntos, 'k'), series: [{ label: '% das conversas', data: pick(A.assuntos, 'p'), hl: i => i < 3 }], fmt: v => pc(v) },
+    { id: 'a-primeira', span: 'c5', horizontal: true, title: 'Como o cliente chega na conversa', sub: 'primeira mensagem', labels: pick(A.primeira, 'k'), series: [{ label: '% das conversas', data: pick(A.primeira, 'p'), hl: i => A.primeira[i].k.startsWith('Link') }], fmt: v => pc(v),
+      take: A.primeira[0].k.startsWith('Link') ? `O <b>site da Imobiliária Modelo</b> é a porta mais comum: ${pc(A.primeira[0].p)} chegam com o link do imóvel na mão.`
+        : `A maioria começa com uma pergunta direta ou saudação; <b>${pc((A.primeira.find(p => p.k.startsWith('Link')) || { p: 0 }).p)}</b> chegam com o link de um imóvel do site da imobiliária (em destaque).` },
+    { id: 'a-horas', span: 'c12', title: 'Horário das mensagens dos clientes', sub: 'horário de Brasília', labels: hrs.map(x => x.h + 'h'), series: [{ label: 'Mensagens', data: hrs.map(x => x.v), hl: i => i === maxIdx(hrs.map(x => x.v)) }], valueLabels: false, height: 220,
+      take: (() => { const tot = hrs.reduce((s, x) => s + x.v, 0), com = hrs.filter(x => x.h >= 8 && x.h < 18).reduce((s, x) => s + x.v, 0); return `Pico às <b>${hrs[maxIdx(hrs.map(x => x.v))].h}h</b>. ${pc(com * 100 / tot)} das mensagens chegam entre 8h e 18h.`; })() }
+  ];
+}
+VIEWS.atendimento = () => {
+  const A = DATA.atendimento[FIN];
+  if (!A) return `${lead('Atendimento', 'Conversas de WhatsApp de quem fechou venda', '')}<div class="card c12"><h3>Coleta em andamento</h3><p class="sub">As conversas dos negócios de venda de 2026 estão sendo coletadas no WhatsApp oficial e entram na próxima atualização deste painel.</p></div>`;
+  return `${lead('Atendimento', `Como é a conversa de quem fecha ${finName()}`, `Leitura das conversas no WhatsApp oficial de ${nf(A.n_conversas)} clientes que fecharam ${finName()} em 2026 (${pc(A.cobertura)} dos negócios analisados têm conversa no período do atendimento).`)}
+  ${hero(dur(A.resp_humana), 'é a espera pelo <b>primeiro corretor</b>, mesmo com a Rafa respondendo em poucos minutos.')}
+  ${A.roteiro ? `<section class="card roteiro" aria-labelledby="h-rot"><div class="card-head"><div><h3 id="h-rot">Roteiro que fecha: ${finName()}</h3><p class="sub">passos que mais aparecem nas conversas de quem fechou, comparadas às de quem não fechou</p></div></div>
+    <p class="takeaway top">Atendimentos que seguem 5 ou mais passos convertem <b>${nf(A.roteiro.mult, 1)} vezes mais</b> que os que seguem menos de 3.</p>
+    <ol class="steps">${A.roteiro.steps.map((s, i) => `<li class="step"><span class="st-n">${i + 1}</span><div class="st-b"><span class="st-t">${s.t}</span><p>${s.h}</p></div><div class="st-c"><span class="st-com">${pc(s.com, 1)}</span><span class="st-l">fez</span><span class="st-sem">${pc(s.sem, 1)}</span><span class="st-l">não fez</span></div></li>`).join('')}</ol>
+    <div class="nao"><span class="k">O que não fazer</span><ul>${A.roteiro.nao.map(x => `<li>${x}</li>`).join('')}</ul></div>
+    <p class="note">Conversão de quem cumpriu cada passo × quem não cumpriu, nas conversas do WhatsApp da imobiliária. Mostra associação, não causa; serve de base para treinar o time e para o roteiro da Rafa.</p></section>` : ''}
+  <div class="kpis">
+    ${kpi('Primeira resposta', dur(A.resp_qualquer), 'nas conversas de quem fechou, quase sempre da Rafa')}
+    ${kpi('Primeira resposta de uma pessoa', dur(A.resp_humana), `<b>${pc(A.humana_mais_1h)}</b> esperam mais de 1 hora`)}
+    ${kpi('Mensagens do cliente', nf(A.msgs_cliente), `em ${nf(A.dias_conversa)} dias de conversa (mediana)`)}
+    ${kpi('Atendentes na conversa', nf(A.atendentes), 'pessoas diferentes falando com o mesmo cliente')}
+    ${kpi('Mandaram áudio', pc(A.audio), `Rafa participou de ${pc(A.fafa)}`)}
+  </div>
+  <div class="grid">${specsAtend().map(card).join('')}
+    <section class="card c12" aria-labelledby="h-ai"><h3 id="h-ai">O que isso diz sobre o atendimento</h3>
+      <div class="highlights">
+        <div class="hl-row"><span class="num">${dur(A.resp_humana)}</span><p>é a espera típica pelo <b>primeiro humano</b>, mesmo com a Rafa respondendo em poucos minutos. ${FIN === 'loc' ? 'Para quem está decidindo rápido (locação fecha em ~2 semanas), essa espera pesa.' : 'Na venda, o cliente costuma falar com várias imobiliárias ao mesmo tempo: quem responde primeiro sai na frente.'}</p></div>
+        <div class="hl-row"><span class="num">${nf(A.atendentes)}</span><p>pessoas diferentes falam com o mesmo cliente ao longo da conversa (Rafa, corretor, cadastro, vistoria, síndico/portaria). Vale padronizar a passagem de bastão para o cliente não repetir informação.</p></div>
+        <div class="hl-row"><span class="num">${pc(A.assuntos.find(x => x.k.startsWith('Documentos')).p)}</span><p>das conversas giram em torno de <b>documentos, renda e análise</b>. Um checklist enviado logo após a visita encurta o caminho até o contrato.</p></div>
+      </div></section></div>`;
+};
+VIEWS.atendimento.specs = specsAtend;
+
+function specsCarteira() {
+  const C = DATA.contratos;
+  const ms = C.motivos_saida, gr = C.garantia_risco;
+  return [
+    { id: 'k-perm', span: 'c6', title: 'Quanto tempo o inquilino fica', sub: 'contratos já rescindidos', labels: pick(C.permanencia.faixas, 'k'), series: [{ label: '% dos contratos', data: pick(C.permanencia.faixas, 'p'), hl: i => i < 2 }], fmt: v => pc(v),
+      take: `Mediana de <b>${nf(C.permanencia.mediana)} meses</b>. Na turma que entrou em 2023–2024, ${pc(C.coorte.saiu12)} saíram no 1º ano e ${pc(C.coorte.saiu24)} em até 2 anos.` },
+    { id: 'k-motivo', span: 'c6', horizontal: true, title: 'Por que o inquilino sai', labels: pick(ms, 'k'), series: [{ label: '% das rescisões', data: pick(ms, 'p'), hl: i => ['Alugou com outra imobiliária', 'Comprou com outra imobiliária'].includes(ms[i].k) }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.x, 1) + ' (' + nf(ms[c.dataIndex].n) + ' contratos)',
+      take: `Em destaque, saídas para a concorrência: <b>${nf(ms.find(m => m.k === 'Alugou com outra imobiliária').n + ms.find(m => m.k === 'Comprou com outra imobiliária').n)} contratos</b>. Só ${nf(ms.find(m => m.k === 'Comprou com a Imobiliária Modelo').n)} compraram com a própria Imobiliária Modelo.` },
+    { id: 'k-gar-at', span: 'c6', horizontal: true, title: 'Atraso de pagamento por tipo de garantia', sub: 'todos os contratos, situação de hoje', labels: pick(gr, 'k'), series: [{ label: '% em atraso', data: pick(gr, 'atraso'), hl: i => gr[i].atraso >= 5 }], fmt: v => pc(v, 1),
+      tip: c => pc(c.parsed.x, 1) + ' de ' + nf(gr[c.dataIndex].n) + ' contratos' },
+    { id: 'k-gar-mix', span: 'c6', horizontal: true, title: 'Garantias na carteira ativa', labels: pick(C.garantia_mix, 'k'), series: [{ label: '% dos contratos ativos', data: pick(C.garantia_mix, 'p'), color: '--s1' }], fmt: v => pc(v, 1),
+      take: 'Seguro fiança já lidera a carteira. CredPago e Loft têm o dobro de atraso do seguro fiança.' },
+    { id: 'k-vac', span: 'c6', horizontal: true, title: 'Dias vago entre um inquilino e o próximo', sub: 'mediana por tipo de imóvel', labels: pick(C.vacancia.por_tipo, 'k'), series: [{ label: 'Dias vago (mediana)', data: pick(C.vacancia.por_tipo, 'd'), hl: i => C.vacancia.por_tipo[i].d >= 60 }], fmt: v => nf(v) + ' d',
+      take: `Mediana geral de <b>${nf(C.vacancia.mediana)} dias</b>; ${pc(C.vacancia.ate30)} realugam em até 30 dias. Sala comercial e galpão ficam vagos mais que o dobro do tempo.` },
+    { id: 'k-novo', span: 'c6', type: 'line', title: 'Aluguel mediano dos contratos novos', labels: pick(C.aluguel_novo_ano, 'ano').map(a => a === 2026 ? '2026*' : String(a)), series: [{ label: 'Aluguel mediano', data: pick(C.aluguel_novo_ano, 'mediana'), color: '--s2' }], fmt: brl,
+      take: `Na troca de inquilino, o aluguel sobe em ${pc(C.vacancia.subiu)} dos casos (mediana de <b>+${pc(C.vacancia.reajuste_troca)}</b>).` }
+  ];
+}
+VIEWS.carteira = () => {
+  const C = DATA.contratos, so = C.saida_origem;
+  return `${lead('Carteira de locação', 'Depois da assinatura: inquilino, garantia e permanência', `Leitura dos ${nf(31500)} contratos de aluguel registrados no CRM (ativos e encerrados).`)}
+  ${hero(nf(C.ativos), `contratos ativos e <b>${mil(C.aluguel_mes)}</b> em aluguéis por mês. <b>${pc(C.coorte.saiu24)}</b> dos inquilinos saem em até 2 anos.`)}
+  <div class="kpis">
+    ${kpi('Contratos ativos', nf(C.ativos), `${pc(C.residencial)} residenciais · ${pc(C.pj)} empresas`)}
+    ${kpi('Aluguéis sob gestão', mi(C.aluguel_mes) + '/mês', `taxa de administração média ${nf(C.taxa_adm, 1)}%`)}
+    ${kpi('Em atraso', pc(C.atrasados, 1), 'dos contratos ativos')}
+    ${kpi('Saem em até 2 anos', pc(C.coorte.saiu24), `contratos iniciados em 2023–2024`)}
+    ${kpi('Imóvel vago entre inquilinos', nf(C.vacancia.mediana) + ' dias', 'mediana')}
+  </div>
+  <div class="grid">${specsCarteira().slice(0, 2).map(card).join('')}
+    <section class="card c12" aria-labelledby="h-so"><h3 id="h-so">Quem vem de fora sai mais cedo</h3><p class="sub">contratos iniciados em 2023–2024 ligados ao atendimento de origem</p>
+      <div class="duo">${so.map((s, i) => mini(pc(s.saiu24), `${s.k}: saíram em até 2 anos (${nf(s.n)} contratos)`, i === 1)).join('')}</div>
+      <p class="takeaway">Mudou de cidade (quase sempre transferência de trabalho) é o 1º motivo de saída. O cliente que chega de fora entra rápido e também sai rápido; acompanhar esse grupo ajuda a planejar a vacância.</p></section>
+    ${specsCarteira().slice(2).map(card).join('')}</div>`;
+};
+VIEWS.carteira.specs = specsCarteira;
+
+function specsOferta() {
+  const E = DATA[FIN].estoque, loc = FIN === 'loc';
+  return [
+    { id: 'o-faixa', span: 'c12', title: `Faixa de ${loc ? 'aluguel' : 'valor'}: carteira disponível × negócios fechados`, sub: `% da carteira disponível hoje (${nf(E.n_estoque)} imóveis) e % dos negócios de 2025–2026 (${nf(E.n_neg)})`,
+      labels: pick(E.faixa, 'k'), series: [{ label: 'Carteira disponível', data: pick(E.faixa, 'estoque'), color: '--s1' }, { label: 'Negócios fechados', data: pick(E.faixa, 'negocios'), color: '--s2' }], fmt: v => pc(v), height: 300,
+      take: loc ? `Até R$ 3.500 estão <b>${pc(E.faixa[0].negocios + E.faixa[1].negocios)} dos negócios</b> e só ${pc(E.faixa[0].estoque + E.faixa[1].estoque)} da carteira. Acima de R$ 7.000 é o contrário: ${pc(E.faixa[4].estoque + E.faixa[5].estoque)} da carteira para ${pc(E.faixa[4].negocios + E.faixa[5].negocios)} dos negócios.`
+                : `Até R$ 450 mil estão <b>${pc(E.faixa[0].negocios)} das vendas</b> e só ${pc(E.faixa[0].estoque)} da carteira. Acima de R$ 2 milhões: ${pc(E.faixa[5].estoque)} da carteira para ${pc(E.faixa[5].negocios)} das vendas.` },
+    { id: 'o-tipo', span: 'c7', horizontal: true, title: 'Tipo de imóvel: carteira × negócios', labels: pick(E.tipo, 'k'),
+      series: [{ label: 'Carteira disponível', data: pick(E.tipo, 'estoque'), color: '--s1' }, { label: 'Negócios fechados', data: pick(E.tipo, 'negocios'), color: '--s2' }], fmt: v => pc(v),
+      take: loc ? '<b>Sala comercial, loja e galpão são 38% da carteira</b> e 17% dos negócios. Apartamento é 46% da carteira e 63% dos negócios.' : 'Sobrado e casa sobram na carteira; apartamento é dois terços das vendas e só metade do estoque.' }
+  ];
+}
+VIEWS.oferta = () => {
+  const E = DATA[FIN].estoque, loc = FIN === 'loc';
+  const f = E.falta;
+  const falta = `<section class="card c5" aria-labelledby="h-fa"><div class="card-head"><div><h3 id="h-fa">Bairros com muita procura e pouca oferta</h3><p class="sub">negócios por ano (média 2025–26) × imóveis disponíveis hoje</p></div></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Bairro</th><th class="n">Negócios/ano</th><th class="n">Disponíveis</th></tr></thead><tbody>
+    ${f.map(r => `<tr><td>${r.k}</td><td class="n">${nf(r.negocios_ano)}</td><td class="n">${nf(r.estoque)}</td></tr>`).join('')}</tbody></table></div>
+    <p class="takeaway">Prioridade de captação: bairros que fecham muito e quase não têm imóvel disponível.</p></section>`;
+  return `${lead('Oferta × demanda', `A carteira de ${finName()} está onde o cliente está?`, 'Compara os imóveis disponíveis hoje no CRM com o que foi negociado em 2025 e 2026.')}
+  ${loc ? hero(pc(E.faixa[0].negocios + E.faixa[1].negocios), `das locações ficam <b>até R$ 3.500</b>, faixa que tem só <b>${pc(E.faixa[0].estoque + E.faixa[1].estoque)}</b> da carteira.`) : hero(pc(E.faixa[0].negocios), `das vendas ficam <b>até R$ 450 mil</b>, faixa que tem só <b>${pc(E.faixa[0].estoque)}</b> da carteira.`)}
+  <div class="kpis">
+    ${kpi('Imóveis disponíveis', nf(E.n_estoque), loc ? 'para alugar' : 'à venda')}
+    ${kpi('Valor mediano da carteira', loc ? brl(E.valor_estoque_mediana) : mil(E.valor_estoque_mediana), `negócios: <b>${loc ? brl(E.valor_neg_mediana) : mil(E.valor_neg_mediana)}</b>`)}
+    ${kpi('Tempo parado (mediana)', nf(E.parado_mediana) + ' dias', 'desde que ficou disponível')}
+    ${kpi('Parados há mais de 1 ano', nf(E.parado_1ano), 'imóveis')}
+  </div>
+  <div class="grid">${card(specsOferta()[0])}${card(specsOferta()[1])}${falta}</div>`;
+};
+VIEWS.oferta.specs = specsOferta;
+
+const TAGC = { 'Captação': 't-cap', 'Vendas': 't-ven', 'Retenção': 't-ret', 'Administração': 't-adm', 'Atendimento': 't-ate', 'Marketing': 't-mkt', 'Dados': 't-dad', 'Alto impacto': 't-alto', 'Rápido de implantar': 't-rap' };
+VIEWS.acoes = () => {
+  const L = DATA.loc, V = DATA.venda, C = DATA.contratos, A = DATA.atendimento.loc || {};
+  const EL = L.estoque, EV = V.estoque;
+  const g = k => C.garantia_risco.find(x => x.k.toLowerCase().startsWith(k));
+  const meta = L.base.por_midia.filter(m => m.k.startsWith('Meta')).reduce((s, m) => s + m.n, 0);
+  const comp = C.motivos_saida.find(m => m.k === 'Comprou com outra imobiliária'), alug = C.motivos_saida.find(m => m.k === 'Alugou com outra imobiliária');
+  const AL = [
+    ['crit', 'Crítico', 'A carteira não acompanha a demanda', `Aluguel até R$ 3.500: <span class="ev">${pc(EL.faixa[0].negocios + EL.faixa[1].negocios)} dos negócios, ${pc(EL.faixa[0].estoque + EL.faixa[1].estoque)} da carteira</span>. Venda até R$ 450 mil: <span class="ev">${pc(EV.faixa[0].negocios)} das vendas, ${pc(EV.faixa[0].estoque)} da carteira</span>. ${nf(EV.parado_1ano + EL.parado_1ano)} imóveis parados há mais de 1 ano.`],
+    ['crit', 'Crítico', 'Inquilinos saem cedo, e muitos para a concorrência', `<span class="ev">${pc(C.coorte.saiu24)}</span> saem em até 2 anos. <span class="ev">${nf(comp.n + alug.n)} contratos</span> terminaram porque o cliente comprou ou alugou com outra imobiliária.`],
+    ['crit', 'Crítico', 'Espera longa pelo primeiro corretor', `A Rafa responde em poucos minutos, mas a primeira pessoa leva <span class="ev">${dur(A.resp_humana)}</span> (mediana) e <span class="ev">${pc(A.humana_mais_1h)}</span> esperam mais de 1 hora. Resposta depois de 24 h converte menos da metade.`],
+    ['warn', 'Atenção', 'Lead sem nenhuma opção de imóvel', `<span class="ev">${pc(L.base.sem_carrinho)}</span> dos atendimentos de locação nunca receberam um imóvel no carrinho. Nenhum fechou.`],
+    ['warn', 'Atenção', 'Meta Ads sem retorno em locação', `<span class="ev">${nf(meta)} leads</span> de Meta Ads em 12 meses e nenhuma locação. Em venda, o anúncio para o site converte ${pc(V.base.por_midia.find(m => m.k === 'Meta Ads – site').p, 1)}, menos da metade do Google Ads.`],
+    ['warn', 'Atenção', 'Garantias com mais atraso', `CredPago <span class="ev">${pc(g('credpago').atraso)}</span> e Loft <span class="ev">${pc(g('loft').atraso)}</span> em atraso, contra ${pc(g('seguro').atraso)} no seguro fiança.`],
+    ['warn', 'Atenção', 'Lead de fim de semana e da noite esfria', `Fim de semana à noite converte <span class="ev">${pc(L.base.por_quando[3].p, 1)}</span>, contra ${pc(L.base.por_quando[0].p, 1)} em dia útil no horário comercial.`],
+    ['warn', 'Atenção', 'Venda esfria entre a visita e a proposta', `Só <span class="ev">${pc(V.base.funil[3].n * 100 / V.base.funil[2].n)}</span> das visitas de venda viram proposta, e o ciclo mediano é de <span class="ev">${nf(V.ciclo.mediana)} dias</span>. Falta follow-up estruturado depois da visita.`],
+    ['info', 'Dado', 'Cadastro incompleto limita a análise', `Na venda, só <span class="ev">${pc(V.idade.cobertura)}</span> têm data de nascimento e <span class="ev">${pc(V.renda_cobertura)}</span> têm renda. O campo sexo tem erros visíveis.`]
+  ];
+  const AC = [
+    ['Captação dirigida pela demanda', `Meta de captação para aluguel residencial de R$ 2.000 a R$ 3.500 (apartamentos de 2 dormitórios) e venda de R$ 450 a 800 mil. Começar pelos bairros com muita procura e pouca oferta: ${EL.falta.slice(0, 5).map(f => f.k.split(' · ')[0]).join(', ')}.`, 'Locação até R$ 3.500 é quase dois terços dos negócios e menos de um terço da carteira.', '% da carteira na faixa de maior giro; dias parados', ['Captação', 'Alto impacto']],
+    ['Do aluguel à casa própria', 'Oferecer compra a inquilinos com 18 meses ou mais de contrato: simulação de parcela × aluguel atual, imóveis de entrada da carteira de venda e contato do corretor de vendas.', `${nf(comp.n)} inquilinos saíram porque compraram com outra imobiliária.`, 'Vendas para inquilinos da própria carteira', ['Vendas', 'Retenção', 'Alto impacto']],
+    ['Roleta inteligente por carga', 'Distribuir lead só para quem está dentro da faixa ideal de atendimentos ativos e sem proposta em andamento. A Rafa já faz a distribuição e passa a aplicar essa regra.', `Lead recebido com o corretor em proposta converte ${pc(L.base.prop[1].p, 1)}, contra ${pc(L.base.prop[0].p, 1)} com o corretor livre.`, 'Conversão por faixa de carga; leads por corretor por semana', ['Atendimento', 'Alto impacto', 'Rápido de implantar']],
+    ['Roteiro que fecha como padrão do time', 'Treinar o time no roteiro de 7 passos da aba Atendimento e usar o mesmo roteiro na Rafa e no follow-up automático.', `Atendimentos que seguem 5 ou mais passos convertem ${nf(DATA.atendimento.loc.roteiro.mult, 1)} vezes mais.`, '% de conversas que cumprem cada passo; conversão por passo', ['Atendimento', 'Vendas', 'Alto impacto']],
+    ['Retenção antes da saída', 'Contato 90 dias antes do fim do contrato e a cada aviso de desocupação, oferecendo renovação ou outro imóvel da carteira para quem quer trocar.', `${nf(alug.n)} saíram para alugar com outra imobiliária; ${nf(C.aviso_desocupacao)} contratos ativos já têm aviso de desocupação.`, '% que sai em 24 meses; "alugou outro com a Imobiliária Modelo"', ['Administração']],
+    ['Tempo máximo para o corretor assumir', 'Depois da Rafa transferir, o corretor tem 15 minutos em horário comercial. Se passar, o gerente recebe alerta e a conversa vai para outro corretor.', `Primeira resposta humana: ${dur(A.resp_humana)} (mediana).`, 'Tempo até a 1ª resposta humana; conversão por faixa de tempo', ['Atendimento', 'Rápido de implantar']],
+    ['Nenhum lead sem opção', 'Todo atendimento qualificado recebe pelo menos 3 imóveis no carrinho em até 24 horas, enviados pela Rafa ou pelo corretor.', `${pc(L.base.sem_carrinho)} nunca receberam imóvel; com 2+ opções a conversão sobe para 13–22%.`, '% de atendimentos sem carrinho', ['Atendimento', 'Rápido de implantar']],
+    ['Atendimento para quem chega de fora', 'Página e anúncios para quem está se mudando (bairros, metrô, distância do trabalho, hospitais e universidades), visita por vídeo, análise de documentos à distância e parceria com o RH de empresas da capital.', `${pc(L.fora_por_ano.at(-1).p)} dos inquilinos de 2026 são de fora da Grande SP.`, 'Conversão e permanência de clientes de outros DDDs', ['Marketing', 'Atendimento']],
+    ['Rever a verba de mídia', 'Reduzir ou reconfigurar Meta Ads em locação até gerar negócio; manter Google Ads e os portais do Grupo ZAP; reforçar placas e criar um programa de indicação com bonificação.', 'Indicação e placas convertem de 3 a 5 vezes mais que o online; Meta Ads ainda sem locação.', 'Custo por negócio por origem', ['Marketing']],
+    ['Revisar a política de garantias', 'Priorizar seguro fiança, caução e as garantias com melhor histórico; renegociar ou restringir CredPago e Loft.', `CredPago: ${pc(g('credpago').atraso)} em atraso e saída mais rápida.`, '% em atraso por garantia', ['Administração']],
+    ['Cadastro mínimo obrigatório', 'Data de nascimento, renda, profissão e cidade de origem obrigatórios ao avançar para visita. A Rafa já pode coletar parte na triagem.', 'Sem esses campos não dá para segmentar campanhas nem medir perfil de venda.', '% de cadastros completos', ['Dados', 'Rápido de implantar']]
+  ];
+  return `${lead('Atenção e melhorias', 'Pontos de atenção e próximos passos', 'Os pontos que mais pesam no resultado e as ações sugeridas, com o dado que sustenta cada uma e como medir.')}
+  ${hero(AL.filter(a => a[0] === 'crit').length + ' críticos', `pontos de atenção e <b>${AC.length} ações sugeridas</b>, em ordem de impacto no resultado.`)}
+  <div class="alerts">${AL.map(a => `<article class="alert"><span class="pill ${a[0]}">${ICON[a[0]]}${a[1]}</span><h3>${a[2]}</h3><p>${a[3]}</p></article>`).join('')}</div>
+  <div class="plan-head"><span class="eyebrow">Plano de ação · em ordem de prioridade</span><h2>O que fazer</h2><p>${AC.length} ações ordenadas por impacto esperado no resultado e facilidade de implantar. Cada uma traz o dado que a sustenta e como medir.</p></div>
+  <div class="actions">${AC.map((a, i) => `<article class="action${i < 3 ? ' top3' : ''}"><span class="idx" aria-label="Prioridade ${i + 1}">${i + 1}</span><div class="act-body"><div class="tags">${a[4].map(tg => `<span class="tag ${TAGC[tg] || 't-adm'}">${tg}</span>`).join('')}</div><h3>${a[0]}</h3><p class="act-desc">${a[1]}</p>
+    <div class="act-why"><div class="why"><span class="k">Por quê</span><p>${a[2]}</p></div><div class="how"><span class="k">Como medir</span><p>${a[3]}</p></div></div></div></article>`).join('')}</div>`;
+};
+
+/* ---------- Rafa ---------- */
+function cmpRow(lbl, a, d, fmtv, better, note) {
+  // better: 'up' | 'down' | null (sem julgamento)
+  let cls = 'info', txt = 'Contexto';
+  if (better && a != null && d != null) {
+    const delta = d - a, rel = a ? Math.abs(delta) / Math.abs(a) : 1;
+    if (rel < 0.05) { cls = 'neutral'; txt = 'Estável'; }
+    else if ((delta > 0) === (better === 'up')) { cls = 'good'; txt = 'Melhorou'; }
+    else { cls = 'warn'; txt = 'Piorou'; }
+  }
+  const ic = cls === 'good' ? '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.5 8.2 7 10.6l4.6-5" stroke="#fff" stroke-width="1.8" fill="none"/></svg>' : cls === 'warn' ? ICON.warn : ICON.info;
+  return `<tr><td>${lbl}${note ? `<span class="rownote">${note}</span>` : ''}</td><td class="n">${fmtv(a)}</td><td class="n strong">${fmtv(d)}</td><td><span class="pill ${cls}">${ic}${txt}</span></td></tr>`;
+}
+function specsRafa() {
+  const F = DATA.fafa, X = F[FIN], RM = F.rm;
+  const ms = X.mensal.filter(m => m.leads >= 200);
+  const out = [
+    { id: 'fa-adocao', span: 'c12', type: 'line', title: 'A entrada da Rafa no atendimento', sub: `% dos atendimentos de ${finName()} com registro da Rafa no CRM, por mês de entrada do lead`,
+      labels: ms.map(m => m.k), series: [{ label: 'Atendimentos com a Rafa', data: ms.map(m => m.fafa), color: '--s2' }], fmt: v => pc(v), max: 100, height: 240,
+      take: `Primeiro registro em ${F.primeiro_registro}; a partir de ${F.operacao_plena} a Rafa participa de ${FIN === 'loc' ? 'quase 9 em cada 10' : 'cerca de 6 em cada 10'} atendimentos de ${finName()}.` }
+  ];
+  const ph = RM && RM.por_hora ? RM.por_hora : X.resp_por_hora;
+  out.push({ id: 'fa-hora', span: 'c7', horizontal: true, title: 'Espera pela primeira resposta, por horário de chegada', sub: RM ? `tempo real no WhatsApp oficial · mediana · abr–out 2025 × abr–out 2026` : 'mediana, abr–out 2025 × abr–out 2026',
+    labels: pick(ph, 'k'), series: [{ label: 'Antes (2025)', data: ph.map(x => x.antes == null ? null : +(x.antes / 60).toFixed(2)), color: '--s1' }, { label: 'Com a Rafa (2026)', data: ph.map(x => x.depois == null ? null : +(x.depois / 60).toFixed(2)), color: '--s2' }],
+    fmt: v => v == null ? '–' : v < 1 ? nf(v * 60) + ' min' : nf(v, 1) + ' h', height: 340,
+    take: RM ? `Antes, quem chamava à noite ou no fim de semana esperava, em geral, a manhã seguinte (${dur(RM.antes.fora_mediana)} fora do horário). Com a Rafa, a primeira resposta chega em cerca de ${dur(RM.depois.fora_mediana)}, em qualquer horário.` : 'Antes, quem chamava à noite ou no fim de semana esperava a manhã seguinte.' });
+  const po = X.por_origem;
+  out.push({ id: 'fa-origem', span: 'c5', horizontal: true, title: 'Conversão por origem: antes × com a Rafa', sub: 'leads que entraram de abril a agosto · % que virou negócio',
+    labels: po.map(o => o.k.replace('GoogleAds', 'Google Ads').replace('WhatsApp / Orgânico', 'WhatsApp orgânico').replace('Meta Ads - Site (ainda não mapeado)', 'Meta Ads – site')),
+    series: [{ label: 'Antes (2025)', data: pick(po, 'antes'), color: '--s1' }, { label: 'Com a Rafa (2026)', data: pick(po, 'depois'), color: '--s2' }], fmt: v => pc(v, 1),
+    rows: po.map(o => [o.k, nf(o.antes_n), pc(o.antes, 1), nf(o.depois_n), pc(o.depois, 1)]), cols: ['Origem', 'Leads 2025', '% 2025', 'Leads 2026', '% 2026'],
+    take: 'Dentro de cada origem, a taxa de conversão ficou parecida. A Rafa não aumentou a chance de cada lead fechar; o ganho está em velocidade, horário e volume atendido.' });
+  return out;
+}
+VIEWS.fafa = () => {
+  const F = DATA.fafa, X = F[FIN], A = X.antes, D = X.depois, T = X.trabalho, AB = X.absolutos, NG = X.negocios, RQ = F.reaquecimento, RM = F.rm;
+  const loc = FIN === 'loc';
+  const tl = F.loc.trabalho, tv = F.venda.trabalho;
+  const minf = v => v == null ? '–' : dur(v);
+  const rA = RM ? RM.antes : null, rD = RM ? RM.depois : null;
+  const rows = [
+    RM ? cmpRow('Espera pela 1ª resposta no WhatsApp (mediana)', rA.mediana, rD.mediana, minf, 'down', 'tempo real medido no WhatsApp oficial') : cmpRow('Tempo até a 1ª resposta (mediana)', A.resp_mediana, D.resp_mediana, minf, 'down', 'registro do CRM'),
+    RM ? cmpRow('Respondidos em até 5 minutos', rA.ate5, rD.ate5, v => pc(v), 'up', 'WhatsApp oficial') : cmpRow('Respondidos em até 5 minutos', A.resp_ate5, D.resp_ate5, v => pc(v), 'up'),
+    RM ? cmpRow('Espera fora do horário comercial (mediana)', rA.fora_mediana, rD.fora_mediana, minf, 'down', 'noites, madrugadas e fins de semana') : cmpRow('Espera fora do horário comercial (mediana)', A.resp_fora_mediana, D.resp_fora_mediana, minf, 'down'),
+    cmpRow('Leads atendidos por mês', A.leads_mes, D.leads_mes, v => nf(v), 'up'),
+    cmpRow('Leads por corretor por mês', A.leads_por_corretor, D.leads_por_corretor, v => nf(v), null, `${nf(A.corretores_mes, 0)} → ${nf(D.corretores_mes, 0)} corretores recebendo leads`),
+    cmpRow('Negócios gerados pelos leads de abr–ago', AB.antes.negocios, AB.depois.negocios, v => nf(v), 'up', 'número absoluto'),
+    cmpRow('Negócios de leads que chegaram fora do horário', AB.antes.fora_negocios, AB.depois.fora_negocios, v => nf(v), 'up', 'abr–ago, número absoluto'),
+    cmpRow('Taxa de conversão (lead → negócio)', A.conv_negocio, D.conv_negocio, v => pc(v, 1), 'up', 'a base cresceu: a Rafa registra todo contato, inclusive curiosos'),
+    cmpRow('Atendimentos com perfil completo', A.perfil_completo, D.perfil_completo, v => pc(v), 'up', 'tipo + bairro ou orçamento'),
+    cmpRow('Atendimentos que receberam imóvel', A.com_carrinho, D.com_carrinho, v => pc(v), 'up', 'a Rafa faz só triagem; o envio de opções é do corretor')
+  ];
+  const horas = `<section class="card c5" aria-labelledby="h-calc"><h3 id="h-calc">O time que a Rafa substitui</h3>
+    <p class="sub">quantos SDRs seriam necessários para atender como a Rafa atende hoje</p>
+    <p class="takeaway top" id="calc-take">–</p>
+    <label class="calc-l" for="calc-min">Minutos de triagem por lead: <b id="calc-v">12</b></label>
+    <input type="range" id="calc-min" min="5" max="30" step="1" value="12">
+    <label class="calc-l" for="calc-sal">Custo mensal de um SDR (salário + encargos): <b id="calc-sv">–</b></label>
+    <input type="range" id="calc-sal" min="2500" max="9000" step="250" value="4500">
+    <div class="duo"><div class="mini"><span class="num">720 h</span><span class="lbl">por mês no ar (24/7), contra 176 h de um SDR</span></div><div class="mini"><span class="num" id="calc-c">–</span><span class="lbl">SDRs só para o volume de triagem (<span id="calc-h">–</span> h/mês)</span></div></div>
+    <div class="duo"><div class="mini hl"><span class="num">4,5</span><span class="lbl">SDRs para cobrir 24/7 com o mesmo tempo de resposta</span></div><div class="mini hl"><span class="num" id="calc-m">–</span><span class="lbl">por mês em SDRs (o maior entre volume e cobertura) · <b id="calc-a">–</b> por ano</span></div></div>
+    <p class="note">Base: ${nf(tl.por_mes + tv.por_mes)} atendimentos por mês iniciados pela Rafa (locação + venda, abr–out/2026), dos quais ${pc((tl.fora_horario + tv.fora_horario) * 100 / (tl.atendimentos + tv.atendimentos))} fora do horário comercial. Cobertura 24/7: 168 h por semana ÷ 37,4 h efetivas de um SDR CLT (44 h menos férias, folgas e faltas) = 4,5 pessoas, sem contar picos, adicional noturno e domingos. Minutos e custo são premissas; ajuste para a realidade da Imobiliária Modelo.</p></section>`;
+  const sim = [
+    ['good', 'Onde a Rafa já faz diferença', [
+      `<b>Responde em minutos, 24 horas.</b> ${RM ? `A espera mediana no WhatsApp caiu de ${minf(rA.mediana)} para ${minf(rD.mediana)}; fora do horário, de ${minf(rA.fora_mediana)} para ${minf(rD.fora_mediana)}.` : `A 1ª resposta fora do horário caiu de ${minf(A.resp_fora_mediana)} para ${minf(D.resp_fora_mediana)}.`}`,
+      `<b>Mais leads atendidos com a mesma equipe.</b> ${loc ? `Locação foi de ${nf(A.leads_mes)} para ${nf(D.leads_mes)} leads/mês (+${pc((D.leads_mes / A.leads_mes - 1) * 100)}), com o mesmo número de corretores.` : `Em venda o volume ficou estável (${nf(A.leads_mes)} → ${nf(D.leads_mes)} leads/mês) com menos corretores recebendo leads.`}`,
+      `<b>Noite e fim de semana viraram negócio.</b> Leads de abr–ago que chegaram fora do horário geraram ${nf(AB.antes.fora_negocios)} negócios em 2025 e <b>${nf(AB.depois.fora_negocios)}</b> em 2026.`,
+      `<b>Faz o trabalho repetitivo.</b> Em abr–out/2026 a Rafa iniciou ${nf(tl.atendimentos + tv.atendimentos)} atendimentos, registrou o atendimento no CRM, colocou o imóvel do anúncio no carrinho em ${nf(tl.carrinho_ia + tv.carrinho_ia)} casos e distribuiu ${nf(tl.transferidos + tv.transferidos)} leads aos corretores.`,
+      `<b>Reaquecimento de leads parados (out/2026).</b> ${nf(RQ.receberam)} clientes de locação receberam a retomada; <b>${pc(RQ.responderam * 100 / RQ.receberam)}</b> responderam, ${nf(RQ.ja_alugou)} avisaram que já alugaram (base mais limpa) e ${nf(RQ.negocios)} já fecharam depois da mensagem.`
+    ]],
+    ['warn', 'Onde o resultado ainda não aparece', [
+      `<b>Taxa de conversão por lead não subiu.</b> ${pc(A.conv_negocio, 1)} → ${pc(D.conv_negocio, 1)}. Parte é efeito de base (a Rafa registra todo contato), mas nas mesmas origens a taxa ficou igual ou um pouco abaixo.`,
+      `<b>A espera passou para depois da transferência.</b> O cliente é atendido pela Rafa em minutos, mas o primeiro corretor demora ${DATA.atendimento.loc ? dur(DATA.atendimento.loc.resp_humana) : '–'} (mediana nas conversas de quem fechou).`,
+      `<b>Menos leads recebem opções de imóvel</b> (${pc(A.com_carrinho)} → ${pc(D.com_carrinho)}). Pela regra atual a Rafa não apresenta imóveis, e enviar opções é o que mais acompanha o fechamento.`,
+      loc ? `<b>${pc(X.depois.parou_responder)} dos descartes são "parou de responder"</b> (eram ${pc(X.antes.parou_responder)}). A Rafa abre a conversa com mais gente; o desafio agora é manter o lead engajado até a visita.` : `<b>Perfil incompleto em venda</b> (${pc(A.perfil_completo)} → ${pc(D.perfil_completo)}) e o atendimento de lançamentos ainda não passa pela Rafa.`
+    ]],
+    ['info', 'O que destrava mais resultado', [
+      '<b>Tempo máximo para o corretor assumir</b> depois da transferência (ex.: 15 min no horário comercial), com alerta ao gerente.',
+      '<b>Deixar a Rafa enviar 2 a 3 opções</b> de imóvel da carteira junto com a triagem. Leads com 2+ imóveis convertem 3 vezes mais.',
+      '<b>Rafa pré-agendar a visita</b> nos horários livres do corretor, principalmente para leads de noite e fim de semana.',
+      `<b>Completar o perfil em venda</b> (orçamento, bairro, financiamento/FGTS) e <b>levar a Rafa ao atendimento de lançamentos</b>.`,
+      '<b>Manter o reaquecimento rodando</b> e medir em 60 dias quantos negócios saem dos leads reativados.'
+    ]]
+  ];
+  return `${lead('Rafa · atendimento com IA', 'O que mudou com a Rafa', `A Rafa entrou no atendimento em ${F.inicio} e está em operação plena desde ${F.operacao_plena}. Para não confundir com a sazonalidade, comparamos os mesmos meses: abril a outubro de 2025 (sem Rafa) e de 2026 (com Rafa). Visão de ${finName()}.`)}
+  ${hero(loc ? '9 em 10' : '6 em 10', `leads de ${loc ? 'locação' : 'venda'} passam pela Rafa, que responde em <b>${RM ? dur(rD.mediana) : dur(D.resp_mediana)}</b> a qualquer hora (antes: ${RM ? dur(rA.mediana) : dur(A.resp_mediana)}).`)}
+  <div class="kpis">
+    ${kpi('Atendimentos iniciados pela Rafa', nf(T.por_mes) + '/mês', `${finName()}, abr–out/2026`)}
+    ${kpi('Chegaram fora do horário', pc(T.pct_fora), `${nf(T.fim_semana)} em fins de semana`)}
+    ${kpi('Primeira resposta', RM ? dur(rD.mediana) : dur(D.resp_mediana), RM ? `antes: <b>${dur(rA.mediana)}</b>` : `antes: <b>${dur(A.resp_mediana)}</b>`)}
+    ${kpi(`${loc ? 'Locações' : 'Vendas'} que passaram pela Rafa`, nf(NG.fafa), `${pc(NG.pct)} dos negócios de abr–out/2026`)}
+    ${loc ? kpi('Responderam ao reaquecimento', pc(RQ.responderam * 100 / RQ.receberam), `${nf(RQ.responderam)} de ${nf(RQ.receberam)} leads parados`) : kpi('Negócios de leads fora do horário', nf(AB.depois.fora_negocios), `antes: <b>${nf(AB.antes.fora_negocios)}</b> (abr–ago)`)}
+  </div>
+  <div class="grid">
+    ${card(specsRafa()[0])}
+    <section class="card c12" aria-labelledby="h-cmp"><div class="card-head"><div><h3 id="h-cmp">Antes × com a Rafa</h3><p class="sub">${finName()} · abr–out 2025 × abr–out 2026 (conversão: leads de abr–ago, que já tiveram tempo de fechar)</p></div></div>
+      <div class="tbl-wrap"><table class="cmp"><thead><tr><th>Indicador</th><th class="n">2025, sem Rafa</th><th class="n">2026, com Rafa</th><th>Leitura</th></tr></thead><tbody>${rows.join('')}</tbody></table></div></section>
+    ${card(specsRafa()[1])}${horas}
+    ${card(specsRafa()[2])}
+    <section class="card c7" aria-labelledby="h-fn"><h3 id="h-fn">${loc ? 'Negócios que passaram pela Rafa' : 'Vendas que passaram pela Rafa'}</h3><p class="sub">negócios fechados de abril a outubro de 2026 com registro da Rafa no atendimento</p>
+      <div class="duo">${mini(nf(NG.fafa), `de ${nf(NG.total)} ${loc ? 'locações' : 'vendas'} (${pc(NG.pct)})`, true)}${loc ? mini(mil(NG.valor), 'no 1º aluguel (taxa de intermediação)') + mini(mil(NG.valor * DATA.contratos.taxa_adm / 100 * 24), `em administração em 24 meses (${nf(DATA.contratos.taxa_adm)}% ao mês, estimativa)`) : mini(mi(NG.valor), 'em valor vendido') + mini(mil(NG.comissao), 'em comissão desses negócios')}</div>
+      ${loc ? `<p class="takeaway top">≈ <b>${mil(NG.valor * (1 + DATA.contratos.taxa_adm / 100 * 24))}</b> de receita prevista nos contratos que passaram pela Rafa: intermediação (1º aluguel) + administração por 24 meses, em linha com a permanência mediana de ${nf(DATA.contratos.permanencia.mediana)} meses.</p>` : ''}
+      <p class="note">"Passou pela Rafa" quer dizer que ela atendeu o cliente em algum momento; o fechamento é trabalho do corretor. Não é receita atribuída só à IA.</p></section>
+    <section class="card c12" aria-labelledby="h-ver"><h3 id="h-ver">Leitura honesta para a diretoria</h3>
+      <div class="verdict">${sim.map(s => `<div class="vcol"><span class="pill ${s[0]}">${s[0] === 'good' ? '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.5 8.2 7 10.6l4.6-5" stroke="#fff" stroke-width="1.8" fill="none"/></svg>' : ICON[s[0]]}${s[1]}</span><ul>${s[2].map(x => `<li>${x}</li>`).join('')}</ul></div>`).join('')}</div></section>
+    <section class="card c12" aria-labelledby="h-met"><h3 id="h-met">Como medimos</h3>
+      <p class="note">Antes = atendimentos que entraram de abril a outubro de 2025; depois = mesmo período de 2026. Taxas de conversão usam só abril a agosto, porque leads mais recentes ainda estão abertos. ${RM ? `Tempo de espera vem de uma amostra de ${nf(RM.n_antes + RM.n_depois)} conversas iniciadas pelo cliente no WhatsApp oficial (hora de chegada × primeira mensagem enviada pela empresa).` : ''} O CRM marca a 1ª resposta no momento em que a Rafa cria o atendimento (${pc(X.artefato_resp_zero.depois)} com exatamente 0 minuto em 2026, contra ${pc(X.artefato_resp_zero.antes)} em 2025), por isso o tempo de resposta usa o WhatsApp. No mesmo período também mudaram o investimento em mídia e o mercado; a comparação mostra associação, não prova que cada diferença veio só da Rafa.</p></section>
+  </div>`;
+};
+VIEWS.fafa.specs = () => { const s = specsRafa(); return s; };
+function wireCalc() {
+  const r = $('#calc-min'), s = $('#calc-sal'); if (!r || !s) return;
+  const tl = DATA.fafa.loc.trabalho, tv = DATA.fafa.venda.trabalho, n = tl.por_mes + tv.por_mes, cobertura = 4.5;
+  let equiv = cobertura;
+  const up = () => {
+    const m = +r.value, sal = +s.value, h = n * m / 60; equiv = Math.max(cobertura, h / 176); const custo = equiv * sal;
+    $('#calc-v').textContent = m; $('#calc-sv').textContent = brl(sal);
+    $('#calc-h').textContent = nf(h); $('#calc-c').textContent = nf(h / 176, 1);
+    $('#calc-m').textContent = mil(custo); $('#calc-a').textContent = mil(custo * 12);
+    $('#calc-take').innerHTML = `A Rafa faz o trabalho de <b>${nf(Math.round(equiv))} SDRs</b>: equivale a <b>${mil(custo)} por mês</b> em equipe para dar conta do volume, 24 horas por dia.`;
+  };
+  r.addEventListener('input', up); s.addEventListener('input', up); up();
+}
+
+/* ---------- render ---------- */
+function footer() {
+  return `<footer class="foot"><p><b>Demonstração:</b> todos os números, nomes de corretores e resultados deste painel são <b>fictícios</b>, criados para ilustrar o que a Imobiliária Modelo pode acompanhar com os próprios dados. Os bairros são reais; a imobiliária é fictícia.</p><p><b>Fontes na versão real:</b> CRM da imobiliária (negócios realizados, ${nf(DATA.loc.base.n + DATA.venda.base.n)} atendimentos dos últimos 12 meses, contratos de aluguel e carteira disponível) e WhatsApp oficial (conversas de clientes que fecharam). Nenhum dado pessoal de cliente aparece no painel.</p>
+  <p><b>Leitura:</b> se o CRM guarda só o preço atual do imóvel, não, é possível medir desconto negociado. "Contato pessoal" e parte do "presencial" incluem negócios registrados pelo corretor no próprio dia do fechamento. Relações de conversão mostram associação, não causa.</p></footer>`;
+}
+function render() {
+  charts.splice(0).forEach(c => c.destroy());
+  const t = TABS.find(x => x[0] === TAB);
+  $('#finbar').hidden = !t[2];
+  $('#main').innerHTML = `<div class="panel" role="tabpanel" aria-labelledby="tab-${TAB}">${VIEWS[TAB]()}${footer()}</div>`;
+  const specs = VIEWS[TAB].specs ? VIEWS[TAB].specs() : [];
+  specs.forEach(draw);
+  if (TAB === 'fafa') wireCalc();
+  document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === TAB)));
+  document.querySelectorAll('#seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.fin === FIN)));
+  const at = document.getElementById('tab-' + TAB), tb = $('#tabs');
+  if (at && tb) tb.scrollLeft = Math.max(0, at.offsetLeft - tb.offsetLeft - 16);
+}
+$('#m-data').textContent = DATA.gerado;
+$('#tabs').innerHTML = TABS.map(t => `<button class="tab" role="tab" type="button" id="tab-${t[0]}" data-tab="${t[0]}" aria-selected="false">${t[1]}</button>`).join('');
+$('#tabs').addEventListener('click', e => { const b = e.target.closest('.tab'); if (!b) return; TAB = b.dataset.tab; try { history.replaceState(null, '', '#' + TAB); } catch (x) {} render(); window.scrollTo({ top: 0 }); });
+$('#seg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; FIN = b.dataset.fin; try { localStorage.setItem('modelo-fin', FIN); } catch (x) {} render(); });
+$('#main').addEventListener('click', e => {
+  const b = e.target.closest('.tbtn'); if (!b) return;
+  const id = b.dataset.tbl, on = b.getAttribute('aria-pressed') !== 'true';
+  b.setAttribute('aria-pressed', String(on)); b.textContent = on ? 'Ver gráfico' : 'Ver tabela';
+  $('#ch-' + id).hidden = on; $('#tb-' + id).hidden = !on;
+});
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (TABS.some(t => t[0] === h) && h !== TAB) { TAB = h; render(); } });
+const mq = window.matchMedia('(prefers-color-scheme: dark)');
+const rerender = () => render();
+mq.addEventListener ? mq.addEventListener('change', rerender) : mq.addListener(rerender);
+new MutationObserver(rerender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(rerender);
+render();
+</script>
+
+</body>
+</html>
