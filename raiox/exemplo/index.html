@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Relatório de exemplo do Raio-X da Negociação, com dados fictícios.">
+<title>Raio-X · Relatório de exemplo</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://gptimob.com.br/raiox/exemplo/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Raio-X da Negociação · relatório de exemplo">
+<meta property="og:description" content="Veja um Raio-X completo, com dados fictícios: temperatura, quem decide, objeções e a próxima mensagem pronta.">
+<meta property="og:url" content="https://gptimob.com.br/raiox/exemplo/">
+<meta property="og:image" content="https://gptimob.com.br/raiox/og-raiox.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Archivo+Black&family=Caveat:wght@700&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: coluna única de leitura (relatório em modo história), índice fixo no topo, cliente = rosa, corretor = cobalto */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --sunk:#EEF2F7; --line:#DFE5EE;
+  --fg:#0B1220; --muted:#5B6475; --faint:#8D96A8;
+  --cli:#A8582B; --cli-soft:#F6EBE3; --cor:#2433E8; --cor-soft:#E6E9FD;
+  --accent:#2433E8; --accent-soft:#E6E9FD;
+  --good:#047857; --warn:#B7791F; --bad:#C81E4A;
+  --good-soft:#DDF5EA; --warn-soft:#FBF1E1; --bad-soft:#FFE3EA;
+  --bubble-in:#FFFFFF; --bubble-out:#DDF5EA;
+  --g-cli:linear-gradient(90deg,#D49A6A,#8C4F2A);
+  --g-cor:linear-gradient(90deg,#7D8CFF,#1F2FD6);
+  --g-brand:linear-gradient(100deg,#0A1A8F 0%,#2433E8 35%,#8E9BFF 50%,#2433E8 65%,#0A1A8F 100%);
+  --glow-a:rgba(36,51,232,.07); --glow-b:rgba(120,140,170,.10);
+  --shadow:0 10px 30px rgba(15,30,60,.07), 0 1px 2px rgba(15,30,60,.05);
+  --bar-glow:none;
+  --f-display:"Inter Tight","Helvetica Neue",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Helvetica Neue",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#070B16; --surface:#0F1626; --sunk:#172033; --line:#243049;
+  --fg:#EEF2F8; --muted:#A3AEC2; --faint:#6B7690;
+  --cli:#E0A47A; --cli-soft:#3A2618; --cor:#8E9BFF; --cor-soft:#1A2150;
+  --accent:#8E9BFF; --accent-soft:#1E2660;
+  --good:#34D399; --warn:#FBBF24; --bad:#FB7185;
+  --good-soft:#0E3328; --warn-soft:#3A2C10; --bad-soft:#3E1422;
+  --bubble-in:#172033; --bubble-out:#123A2E;
+  --g-brand:linear-gradient(100deg,#8E9BFF 0%,#C9D0FF 35%,#FFFFFF 50%,#AEB8FF 65%,#6F86FF 100%);
+  --glow-a:rgba(111,134,255,.14); --glow-b:rgba(140,170,215,.08);
+  --shadow:0 0 0 1px rgba(140,160,255,.05), 0 14px 40px rgba(0,0,0,.4);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#070B16; --surface:#0F1626; --sunk:#172033; --line:#243049;
+  --fg:#EEF2F8; --muted:#A3AEC2; --faint:#6B7690;
+  --cli:#E0A47A; --cli-soft:#3A2618; --cor:#8E9BFF; --cor-soft:#1A2150;
+  --accent:#8E9BFF; --accent-soft:#1E2660;
+  --good:#34D399; --warn:#FBBF24; --bad:#FB7185;
+  --good-soft:#0E3328; --warn-soft:#3A2C10; --bad-soft:#3E1422;
+  --bubble-in:#172033; --bubble-out:#123A2E;
+  --g-brand:linear-gradient(100deg,#8E9BFF 0%,#C9D0FF 35%,#FFFFFF 50%,#AEB8FF 65%,#6F86FF 100%);
+  --glow-a:rgba(111,134,255,.14); --glow-b:rgba(140,170,215,.08);
+  --shadow:0 0 0 1px rgba(140,160,255,.05), 0 14px 40px rgba(0,0,0,.4);
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:780px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,4vw,1.9rem);font-weight:800;line-height:1.15}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font:600 .72rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.cli{color:var(--cli)} .cor{color:var(--cor)}
+
+/* sample banner */
+.banner{margin-top:16px;padding:10px 14px;border:1px dashed var(--line);border-radius:10px;font-size:.85rem;color:var(--muted);display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.banner b{color:var(--fg)}
+
+/* hero */
+.hero{padding-block:40px 28px;display:grid;gap:20px}
+.parties{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.who{display:flex;align-items:center;gap:10px}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:700 1rem var(--f-display);color:#fff;flex:none}
+.av.cli-bg{background:var(--cli)} .av.cor-bg{background:var(--cor)}
+.who small{display:block;font-size:.78rem;color:var(--muted);line-height:1.2}
+.who strong{font-family:var(--f-display);font-size:1.15rem;line-height:1.2}
+.x{font:600 1rem var(--f-mono);color:var(--faint)}
+.hero h1{font-size:clamp(2rem,6.4vw,3.1rem);font-weight:800;line-height:1.05}
+.hero h1 em{font-style:normal;color:var(--cli)}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 .8rem/1 var(--f-mono);padding:7px 10px;border-radius:999px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+
+/* nav */
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:10px max(16px,env(safe-area-inset-left,0px))}
+.toc-in{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.toc-in::-webkit-scrollbar{display:none}
+.toc a{flex:none;font:500 .8rem/1 var(--f-body);color:var(--muted);text-decoration:none;padding:8px 11px;border-radius:8px;border:1px solid var(--line);background:var(--surface)}
+.toc a:hover,.toc a:focus-visible{color:var(--fg);border-color:var(--fg);outline:none}
+.toc a span{font-family:var(--f-mono);color:var(--faint);margin-right:5px}
+
+section{padding-top:56px;scroll-margin-top:64px;display:grid;gap:20px}
+.sec-head{display:grid;gap:8px}
+.sec-head p{color:var(--muted);max-width:62ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+
+/* verdict */
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+@media(max-width:560px){.verdict{grid-template-columns:1fr}}
+.gauge{position:relative;width:150px;height:150px}
+.gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge .n{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+.gauge .n b{font:800 2.8rem/1 var(--f-display)}
+.gauge .n small{display:block;font:500 .7rem var(--f-mono);color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.oneword{font:800 clamp(1.6rem,5vw,2.2rem)/1.1 var(--f-display)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font:600 .78rem/1 var(--f-body);padding:7px 10px;border-radius:999px}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.neutral{background:var(--sunk);color:var(--fg)}
+.guess{display:grid;gap:10px}
+.guess-row{display:flex;flex-wrap:wrap;gap:8px}
+.guess button{font:500 .85rem var(--f-body);padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.guess button:hover{border-color:var(--fg)}
+.guess button:focus-visible{outline:2px solid var(--cor);outline-offset:2px}
+.guess button.picked{border-color:var(--cor);background:var(--cor-soft)}
+.guess button.hit{border-color:var(--good);background:var(--good-soft)}
+#guessOut{font-size:.9rem;color:var(--muted);min-height:1.4em}
+
+/* journey bars */
+.bars{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;align-items:end;height:190px;padding-top:24px;position:relative}
+.bar{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+.bar i{display:block;width:100%;border-radius:5px 5px 2px 2px;background:linear-gradient(to top,var(--cor) 0 var(--c),var(--cli) var(--c) 100%);min-height:3px}
+.bar b{position:absolute;font:600 .7rem var(--f-mono);color:var(--muted);transform:translateY(-100%);top:calc(100% - var(--h) - 4px)}
+.bar.mark i{outline:2px solid var(--fg);outline-offset:2px}
+.xlab{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:8px}
+.xlab span{font:500 .66rem var(--f-mono);color:var(--faint);text-align:center}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--k)}
+.why{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.why{grid-template-columns:1fr}}
+.why ol,.why ul{margin:8px 0 0;padding-left:1.2em;display:grid;gap:6px;font-size:.93rem}
+.why li span{font:600 .78rem var(--f-mono);color:var(--muted);margin-right:6px}
+
+/* split bars */
+.split{display:grid;gap:12px}
+.srow{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;font-size:.9rem}
+@media(max-width:520px){.srow{grid-template-columns:1fr;gap:4px}}
+.sbar{display:flex;height:26px;border-radius:7px;overflow:hidden;font:600 .74rem/26px var(--f-mono);color:#fff}
+.sbar .a{background:var(--cli);padding-left:8px;white-space:nowrap}
+.sbar .b{background:var(--cor);text-align:right;padding-right:8px;white-space:nowrap}
+.effort{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;text-align:center}
+.effort .big{font:800 2.6rem/1 var(--f-display)}
+.effort small{display:block;font-size:.8rem;color:var(--muted)}
+.effort .vs{font:600 .8rem var(--f-mono);color:var(--faint)}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(min-width:640px){.nums{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.num{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:8px;align-content:start}
+.num .lbl{font-size:.8rem;color:var(--muted);line-height:1.3}
+.num .pair{display:flex;justify-content:space-between;gap:8px;font:700 1.25rem/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.num .note{font-size:.76rem;color:var(--faint);line-height:1.35}
+table.rt{width:100%;border-collapse:collapse;font-size:.88rem}
+.rt th,.rt td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right}
+.rt th:first-child,.rt td:first-child{text-align:left}
+.rt th{font:600 .72rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rt td{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+.hours{display:grid;grid-template-columns:90px repeat(4,1fr);gap:4px;font-size:.8rem;align-items:center}
+.hours .h{font:500 .7rem var(--f-mono);color:var(--muted);text-align:center}
+.cell{height:40px;border-radius:6px;display:grid;place-items:center;font:600 .78rem var(--f-mono)}
+
+/* meters */
+.meters{display:grid;gap:14px}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:6px 12px;align-items:center}
+.meter .t{font-size:.92rem;font-weight:600}
+.meter .v{font:700 .95rem var(--f-mono);text-align:right}
+.meter .track{grid-column:1/-1;height:8px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.meter .track i{display:block;height:100%;border-radius:99px;background:var(--k)}
+.meter .why2{grid-column:1/-1;font-size:.82rem;color:var(--muted);line-height:1.4}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.two > *{min-width:0}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.score-s{font:800 1.6rem/1 var(--f-display)}
+
+/* truth */
+.truth{background:var(--fg);color:var(--bg);border-radius:16px;padding:26px 22px;display:grid;gap:14px}
+.truth p{font:600 clamp(1.1rem,3.4vw,1.35rem)/1.4 var(--f-display);max-width:58ch}
+.truth p + p{font:400 1rem/1.55 var(--f-body);opacity:.85}
+.truth .eyebrow{color:inherit;opacity:.7}
+
+/* flags */
+.flags h3{display:flex;align-items:center;gap:10px}
+.flags ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.flags li{font-size:.9rem;padding:9px 12px;border-radius:9px;line-height:1.4}
+.flags li.g{background:var(--good-soft)} .flags li.w{background:var(--warn-soft)}
+.flags li b{font-weight:600}
+.flags .sub{font:600 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:14px;display:block}
+
+/* receipts */
+.receipts{display:grid;gap:18px}
+.rc{display:grid;grid-template-columns:96px 1fr;gap:14px}
+@media(max-width:520px){.rc{grid-template-columns:1fr;gap:6px}}
+.rc .tag{font:600 .7rem/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:6px}
+.rc .tag b{display:block;color:var(--fg)}
+.bub{position:relative;max-width:440px;padding:9px 12px 20px;border-radius:10px;font-size:.95rem;line-height:1.45;box-shadow:0 1px 0 var(--line)}
+.bub.in{background:var(--bubble-in);border:1px solid var(--line);border-top-left-radius:2px}
+.bub.out{background:var(--bubble-out);border-top-right-radius:2px;margin-left:auto;margin-right:0}
+.bub .ts{position:absolute;right:10px;bottom:4px;font:500 .66rem var(--f-mono);color:var(--muted)}
+.bub .nm{display:block;font:700 .75rem var(--f-body);margin-bottom:2px}
+.rc .read{font-size:.86rem;color:var(--muted);margin-top:6px}
+.rc .body{min-width:0}
+.rc.r .body{display:grid;justify-items:end;text-align:right}
+
+/* phases */
+.phases{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.phase{display:grid;grid-template-columns:22px 1fr;gap:14px;padding-bottom:22px;position:relative}
+.phase::before{content:"";position:absolute;left:10px;top:22px;bottom:0;width:2px;background:var(--line)}
+.phase:last-child::before{display:none}
+.dot{width:22px;height:22px;border-radius:50%;border:3px solid var(--surface);box-shadow:0 0 0 2px var(--k);background:var(--k);margin-top:2px}
+.phase .d{font:600 .74rem var(--f-mono);color:var(--muted)}
+.phase h3{margin:2px 0 6px}
+.phase .what{font-size:.92rem;margin-bottom:10px}
+.pp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.pp{grid-template-columns:1fr}}
+.pp div{font-size:.85rem;line-height:1.4;padding:10px;border-radius:9px;background:var(--sunk)}
+.pp b{display:block;font:700 .74rem var(--f-mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.stage{display:inline-block;font:600 .7rem/1 var(--f-mono);padding:5px 8px;border-radius:6px;background:var(--sunk);color:var(--fg);margin-left:6px;vertical-align:2px}
+
+/* side by side */
+table.sbs{width:100%;border-collapse:collapse;font-size:.9rem;min-width:520px}
+.sbs th,.sbs td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.sbs th{font:600 .72rem var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
+.sbs td:first-child{color:var(--muted);font-weight:600;width:22%}
+.sbs .miss{color:var(--bad);font-weight:600}
+.sbs .ok{color:var(--good);font-weight:600}
+.sum{font:600 1.05rem/1.45 var(--f-display);border-left:3px solid var(--cli);padding-left:14px}
+
+/* qualification */
+.qual{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.qual li{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.qual li:last-child{border-bottom:0}
+.ic{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font:700 .8rem var(--f-mono)}
+.ic.y{background:var(--good-soft);color:var(--good)}
+.ic.p{background:var(--warn-soft);color:var(--warn)}
+.ic.n{background:var(--bad-soft);color:var(--bad)}
+.qual b{display:block;font-size:.92rem}
+.qual span.d2{font-size:.85rem;color:var(--muted)}
+.qual .src{font:500 .7rem var(--f-mono);color:var(--faint);white-space:nowrap;padding-top:3px}
+
+/* next action */
+.action{border:2px solid var(--cor);border-radius:16px;padding:22px;display:grid;gap:16px;background:var(--surface)}
+.action .goal{font:800 1.35rem/1.25 var(--f-display)}
+.phone{background:var(--sunk);border-radius:14px;padding:16px;display:grid;gap:8px}
+.phone .bub{max-width:100%}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font:600 .88rem var(--f-body);padding:10px 14px;border-radius:10px;border:0;background:var(--cor);color:#fff;cursor:pointer}
+.btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+#copyMsg{font-size:.85rem;color:var(--good)}
+.tip{font-size:.88rem;padding:12px 14px;border-radius:10px;background:var(--cli-soft);line-height:1.45}
+.fu{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.fu li{display:grid;grid-template-columns:120px 1fr;gap:12px;font-size:.88rem;padding:10px 12px;background:var(--sunk);border-radius:9px}
+@media(max-width:480px){.fu li{grid-template-columns:1fr;gap:2px}}
+.fu li b{font:600 .8rem var(--f-mono)}
+
+.unk{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.unk li{font-size:.92rem;padding-left:22px;position:relative}
+.unk li::before{content:"?";position:absolute;left:0;top:1px;font:700 .8rem var(--f-mono);color:var(--warn)}
+
+/* share card */
+.cardwrap{display:grid;place-items:center}
+.scard{width:100%;max-width:380px;border-radius:20px;padding:24px;background:linear-gradient(150deg,var(--cor) 0%,#1B2E6E 60%,var(--cli) 140%);color:#fff;display:grid;gap:14px}
+.scard .top{display:flex;justify-content:space-between;align-items:center;font:600 .72rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.scard .big{font:800 4rem/1 var(--f-display)}
+.scard .big small{font-size:1rem;font-weight:600;opacity:.8;margin-left:6px}
+.scard .l1{font:700 1.2rem/1.25 var(--f-display)}
+.scard .l2{font-size:.9rem;opacity:.9}
+.scard .sel{display:flex;gap:6px;flex-wrap:wrap}
+.scard .sel span{font:600 .72rem var(--f-body);padding:6px 9px;border-radius:99px;background:rgba(255,255,255,.16)}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{font:600 .82rem var(--f-body);padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:flex;gap:8px;align-items:center}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--k)}
+
+/* perfil da busca */
+.ficha-top{border:2px solid var(--cli);border-radius:18px;background:var(--cli-soft);padding:20px 22px;display:grid;gap:10px}
+.ficha-top .lead{font:700 clamp(1.15rem,3.4vw,1.4rem)/1.3 var(--f-display);max-width:60ch}
+.legend2{display:flex;flex-wrap:wrap;gap:8px;font-size:.78rem;color:var(--muted);align-items:center}
+.tg{display:inline-block;font:600 .66rem/1 var(--f-mono);padding:4px 6px;border-radius:5px;white-space:nowrap;letter-spacing:.02em;vertical-align:1px}
+.tg.f{background:var(--good-soft);color:var(--good)}
+.tg.i{background:var(--warn-soft);color:var(--warn)}
+.tg.q{background:var(--bad-soft);color:var(--bad)}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pgrid > *{min-width:0}
+.pgrid .full{grid-column:1/-1}
+@media(max-width:700px){.pgrid{grid-template-columns:1fr}}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:16px;align-content:start}
+.phead{display:flex;align-items:center;gap:12px}
+.phead .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none;background:var(--soft);color:var(--k)}
+.phead h3{font-size:1.15rem}
+.phead small{display:block;font-size:.8rem;color:var(--muted);font-weight:400;font-family:var(--f-body)}
+.phead .tg{margin-left:auto}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ico svg.i{width:22px;height:22px}
+.k-cli{--k:var(--cli);--soft:var(--cli-soft)}
+.k-cor{--k:var(--cor);--soft:var(--cor-soft)}
+.k-good{--k:var(--good);--soft:var(--good-soft)}
+.k-warn{--k:var(--warn);--soft:var(--warn-soft)}
+
+.motiv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media(max-width:560px){.motiv{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.motiv div{display:grid;justify-items:center;gap:8px;text-align:center;padding:14px 8px;border-radius:12px;border:1px dashed var(--line);color:var(--faint);font:600 .82rem/1.25 var(--f-body)}
+.motiv div svg.i{width:26px;height:26px}
+.motiv div.on{border:2px solid var(--cli);color:var(--fg);background:var(--cli-soft)}
+.motiv div.on svg{color:var(--cli)}
+.quote{font-size:.9rem;color:var(--fg);padding-left:12px;border-left:3px solid var(--cli)}
+.quote small{display:block;color:var(--muted);font:500 .72rem var(--f-mono);margin-top:4px}
+.implic{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.implic{grid-template-columns:1fr}}
+.implic div{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;line-height:1.4;padding:12px;border-radius:10px;background:var(--sunk)}
+.implic svg{color:var(--cli);margin-top:1px}
+
+.specs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media(max-width:560px){.specs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.specs div{display:grid;gap:6px;padding:12px;border-radius:12px;background:var(--cor-soft)}
+.specs svg{color:var(--cor)}
+.specs b{font:700 1.05rem/1.15 var(--f-display)}
+.specs small{font-size:.74rem;color:var(--muted);line-height:1.2}
+.imov{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:18px;align-items:start}
+@media(max-width:620px){.imov{grid-template-columns:1fr}}
+.wants{display:grid;gap:12px}
+.wants .g{display:grid;gap:6px}
+.wants .gl{display:flex;align-items:center;gap:6px;font:600 .72rem var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.wants .gl svg{width:16px;height:16px}
+.wants ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.wants li{font-size:.84rem;padding:6px 10px;border-radius:8px;line-height:1.3}
+.g.ess li{background:var(--good-soft)} .g.ess .gl{color:var(--good)}
+.g.des li{background:var(--cor-soft)} .g.des .gl{color:var(--cor)}
+.g.evi li{background:var(--bad-soft)} .g.evi .gl{color:var(--bad)}
+.g.nao li{background:var(--sunk);color:var(--muted)}
+.map{background:var(--sunk);border-radius:14px;padding:10px;display:grid;gap:6px}
+.map svg{width:100%;height:auto;display:block}
+.map .cap{font-size:.72rem;color:var(--muted);text-align:center;line-height:1.3}
+.candc{border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:12px}
+.candc .row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;font-size:.88rem}
+.candc .row b{font:700 1rem var(--f-display)}
+.pricebar{position:relative;height:30px;border-radius:8px;background:var(--sunk);overflow:visible;margin-top:18px}
+.pricebar .fill{position:absolute;inset:0 auto 0 0;border-radius:8px;background:var(--cor);display:flex;align-items:center;padding-left:10px;font:600 .74rem var(--f-mono);color:#fff;white-space:nowrap}
+.pricebar .cap{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--fg)}
+.pricebar .cap span{position:absolute;bottom:100%;right:0;transform:translateX(50%);font:600 .68rem var(--f-mono);white-space:nowrap;color:var(--fg);padding-bottom:2px}
+.pricenote{font-size:.8rem;color:var(--muted)}
+
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{display:grid;grid-template-columns:52px 36px minmax(0,1fr);gap:10px;position:relative;padding-bottom:16px}
+.tl li::before{content:"";position:absolute;left:79px;top:36px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl .hr{font:600 .76rem var(--f-mono);color:var(--muted);padding-top:9px;text-align:right}
+.tl .node{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--good-soft);color:var(--good);position:relative;z-index:1}
+.tl .node.w{background:var(--warn-soft);color:var(--warn)}
+.tl .node svg{width:18px;height:18px}
+.tl .txt{font-size:.88rem;line-height:1.4;padding-top:6px;display:grid;gap:6px}
+.fitp{display:inline-flex;align-items:center;gap:6px;font:600 .76rem/1.3 var(--f-body);padding:5px 9px;border-radius:7px;justify-self:start}
+.fitp.y{background:var(--good-soft);color:var(--good)}
+.fitp.w{background:var(--warn-soft);color:var(--warn)}
+.fitp svg{width:14px;height:14px}
+
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;position:relative}
+@media(max-width:480px){.flow{grid-template-columns:1fr}}
+.src2{border-radius:12px;padding:12px;display:grid;gap:6px;align-content:start;font-size:.84rem;line-height:1.3;background:var(--sunk)}
+.src2 svg{color:var(--warn)}
+.src2 b{font:700 .95rem/1.2 var(--f-display)}
+.src2.dash{background:transparent;border:1.5px dashed var(--warn)}
+.arrowdown{display:flex;justify-content:center;color:var(--faint)}
+.arrowdown svg{width:22px;height:22px}
+.goalbox{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 14px;border-radius:12px;background:var(--warn-soft)}
+.goalbox b{font:700 1rem var(--f-display)}
+.goalbox .mono{font-weight:700}
+.monthly{display:grid;gap:8px}
+.mbar{display:flex;height:34px;border-radius:9px;overflow:hidden;font:600 .74rem var(--f-mono)}
+.mbar .c{background:var(--warn);color:#fff;display:flex;align-items:center;padding:0 10px;white-space:nowrap;flex:0 0 34%}
+.mbar .p{flex:1;border:2px dashed var(--warn);border-left:0;border-radius:0 9px 9px 0;display:flex;align-items:center;justify-content:center;color:var(--warn)}
+.mlab{display:flex;justify-content:space-between;font-size:.76rem;color:var(--muted);gap:10px;flex-wrap:wrap}
+.callout{font:600 .98rem/1.45 var(--f-display);padding:14px 16px;border-radius:12px;background:var(--cor-soft);display:flex;gap:10px;align-items:flex-start}
+.callout svg{margin-top:2px}
+.callout.cli-c{background:var(--cli-soft)}
+.callout.warn-c{background:var(--warn-soft)}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);display:grid;gap:6px}
+@media (prefers-reduced-motion:no-preference){.meter .track i,.bar i{transition:width .6s ease,height .6s ease}}
+/* ===== camada moderna: gradientes, brilho e profundidade ===== */
+body{background:radial-gradient(900px 600px at 100% -10%,var(--glow-a),transparent 60%),radial-gradient(800px 600px at -10% 30%,var(--glow-b),transparent 60%),var(--bg);background-attachment:fixed}
+nav.toc{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.toc a{border-radius:999px}
+.toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.panel,.pcard,.num,.receipts,.action{box-shadow:var(--shadow)}
+.panel,.pcard,.num{border-color:var(--line)}
+.eyebrow{color:var(--accent)}
+.hero h1 em{background:var(--g-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+.av.cli-bg{background:var(--g-cli)} .av.cor-bg{background:var(--g-cor)}
+.chip{background:var(--surface);border:1px solid var(--line)}
+.banner{background:var(--surface)}
+.bar i{background:linear-gradient(to top,#1F2FD6 0,#7D8CFF calc(var(--c) - 1%),#8C4F2A var(--c),#D49A6A 100%);box-shadow:var(--bar-glow)}
+.sbar{background:var(--sunk)}
+.sbar .a{background:var(--g-cli)} .sbar .b{background:var(--g-cor)}
+.meter .track i{background:linear-gradient(90deg,color-mix(in srgb,var(--k) 45%,var(--accent)),var(--k))}
+.effort .big.cli,.score-s.cli{background:var(--g-cli);-webkit-background-clip:text;background-clip:text;color:transparent}
+.effort .big.cor,.score-s.cor{background:var(--g-cor);-webkit-background-clip:text;background-clip:text;color:transparent}
+.truth{background:linear-gradient(135deg,#060C24 0%,#0E1A6B 60%,#2433E8 140%);color:#F6F2FF;box-shadow:0 18px 50px rgba(20,40,160,.28)}
+.scard{background:radial-gradient(260px 200px at 100% 0%,rgba(125,140,255,.5),transparent 70%),linear-gradient(150deg,#2433E8 0%,#0E1A6B 55%,#060C24 100%);box-shadow:0 18px 50px rgba(20,40,160,.35)}
+.action{border:2px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,var(--g-brand) border-box}
+.btn{background:var(--g-brand);border-radius:999px;padding-inline:18px;box-shadow:0 6px 18px rgba(124,58,237,.3)}
+.ficha-top{border:2px solid transparent;background:linear-gradient(var(--cli-soft),var(--cli-soft)) padding-box,var(--g-cli) border-box}
+.phead .ico{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--k) 25%,transparent)}
+.specs div{background:var(--cor-soft)}
+.motiv div.on{border-color:transparent;background:linear-gradient(var(--cli-soft),var(--cli-soft)) padding-box,var(--g-cli) border-box}
+.pricebar .fill{background:var(--g-cor)}
+.mbar .c{background:linear-gradient(90deg,#F59E0B,#F43F5E)}
+.guess button.picked{border-color:var(--accent);background:var(--accent-soft)}
+.badge{border-radius:999px}
+.tl .node{box-shadow:0 0 0 4px var(--surface)}
+.sum{border-left-color:var(--accent)}
+
+/* ajustes de alinhamento */
+.src2{min-width:0}
+.src2 .tg{justify-self:start;white-space:normal}
+.flow{gap:12px}
+.pay{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start}
+.pay > div{display:grid;gap:14px;min-width:0}
+@media(max-width:700px){.pay{grid-template-columns:1fr}}
+.tl .txt .tg{white-space:normal}
+/* como decide */
+.scales{display:grid;gap:20px}
+.scale{display:grid;gap:6px}
+.scale .ends{display:flex;justify-content:space-between;gap:10px;font:600 .82rem var(--f-body);color:var(--faint)}
+.scale .ends .on{color:var(--fg)}
+.strack{position:relative;height:8px;border-radius:99px;background:var(--sunk);margin:6px 0}
+.strack::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--line)}
+.strack i{position:absolute;top:50%;left:var(--x);width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%);background:var(--g-cli);box-shadow:0 0 0 3px var(--surface);z-index:1}
+.scale .ev{display:flex;gap:8px 12px;justify-content:space-between;align-items:baseline;font-size:.84rem;color:var(--muted);line-height:1.4}
+.conf{flex:none;font:600 .64rem/1 var(--f-mono);color:var(--muted);background:var(--sunk);padding:5px 7px;border-radius:5px;white-space:nowrap;letter-spacing:.03em}
+.lang{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:680px){.lang{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.lang{grid-template-columns:1fr}}
+.lang > div{padding:14px;border-radius:12px;background:var(--sunk);display:grid;gap:6px;align-content:start;min-width:0}
+.lang .lb{font:600 .68rem var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:flex;gap:6px;align-items:center}
+.lang .lb svg{width:16px;height:16px;color:var(--cor)}
+.lang b{font:700 1rem/1.25 var(--f-display)}
+.lang small{font-size:.8rem;color:var(--muted);line-height:1.35}
+.lang .avoid{background:var(--bad-soft)}
+.lang .avoid .lb,.lang .avoid .lb svg{color:var(--bad)}
+.marcos{display:grid;gap:10px;padding:16px;border-radius:12px;border:1.5px dashed var(--line)}
+.marcos ul{margin:0;padding-left:1.2em;display:grid;gap:4px;font-size:.88rem}
+
+/* objeções */
+.objs{display:grid;gap:14px}
+.obj{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);display:grid;gap:16px;padding:20px}
+.obj-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.obj-h .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;background:var(--soft);color:var(--k)}
+.obj-h h3{flex:1;min-width:180px}
+.obj-h h3 small{display:block;font:400 .8rem var(--f-body);color:var(--muted);margin-top:2px}
+.prob{font:600 .7rem/1 var(--f-mono);padding:6px 9px;border-radius:999px;white-space:nowrap}
+.prob.a{background:var(--bad-soft);color:var(--bad)}
+.prob.m{background:var(--warn-soft);color:var(--warn)}
+.prob.b{background:var(--sunk);color:var(--muted)}
+.obj-b{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1fr);gap:18px}
+@media(max-width:820px){.obj-b{grid-template-columns:1fr}}
+.obj-b .col{display:grid;gap:8px;align-content:start;min-width:0}
+.obj-b .ev2{font-size:.88rem;line-height:1.45}
+.steps{margin:0;padding-left:1.25em;display:grid;gap:6px;font-size:.88rem;line-height:1.4}
+.obj-b .bub{max-width:100%}
+.trig{display:grid}
+.trow{display:grid;grid-template-columns:190px minmax(0,1fr) 40px;gap:6px 14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.trow:last-child{border-bottom:0}
+.trow .nm2{font-weight:600;font-size:.92rem;display:flex;gap:8px;align-items:center}
+.trow .nm2 svg{width:18px;height:18px;color:var(--accent);flex:none}
+.trow .n{font:700 1rem var(--f-mono);text-align:right}
+.trow .use{grid-column:2/-1;font-size:.84rem;color:var(--muted);line-height:1.4}
+.tbar{height:10px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.tbar i{display:block;height:100%;width:var(--w);background:var(--g-cli);border-radius:99px}
+.trow.off .n,.trow.off .nm2 svg{color:var(--bad)}
+.trow.off .tbar{background:repeating-linear-gradient(45deg,var(--bad-soft) 0 6px,transparent 6px 12px)}
+.trow.off .use b{color:var(--bad)}
+@media(max-width:560px){.trow{grid-template-columns:minmax(0,1fr) 40px}.trow .tbar,.trow .use{grid-column:1/-1}}
+.say{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.say{grid-template-columns:1fr}}
+.say > div{min-width:0}
+.say h3{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.say ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.say li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;padding:11px 12px;border-radius:10px;font-size:.88rem;line-height:1.4}
+.say li b{display:block;font-weight:600}
+.say li small{color:var(--muted);font-size:.8rem}
+.say .yes li{background:var(--good-soft)} .say .yes svg{color:var(--good)}
+.say .no li{background:var(--bad-soft)} .say .no svg{color:var(--bad)}
+.prio{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.prio li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;align-items:baseline;font-size:.88rem;padding:10px 12px;border-radius:9px;background:var(--sunk)}
+.prio li .prob{justify-self:start}
+.confl{font-size:.86rem;color:var(--muted)}
+.confl b{color:var(--fg)}
+
+/* seletor de tema */
+.topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:16px}
+.topbar .banner{margin-top:0;flex:1 1 320px}
+.themes{display:inline-flex;gap:2px;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.themes button{font:600 .82rem var(--f-body);padding:8px 14px;border-radius:999px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.themes button:hover{color:var(--fg)}
+.themes button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.themes button[aria-pressed="true"]{background:var(--g-brand);color:#fff}
+section > *{min-width:0}
+
+h1,h2,h3{letter-spacing:-.03em}
+.hero h1 em{background-size:200% 100%;animation:sheen 9s ease-in-out infinite}
+@keyframes sheen{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+@media (prefers-reduced-motion:reduce){.hero h1 em{animation:none}}
+.btn,.themes button[aria-pressed="true"]{background:#2433E8}
+.truth{box-shadow:0 18px 50px rgba(20,40,160,.25)}
+
+/* termômetro gelado → quente, metalizado */
+.thermo-w{position:relative;display:grid;place-items:center}
+.thermo{position:absolute;inset:0;border-radius:50%;--p:0;--t:12px;
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 62%,rgba(0,0,0,.18) 100%),
+    conic-gradient(transparent 0 calc(var(--p)*1%),var(--track,#E9EDF3) calc(var(--p)*1%) 100%),
+    conic-gradient(#1F2FD6 0%,#2F7FE8 18%,#5FC3E8 31%,#D6DCE6 43%,#F2B640 53%,#F0732E 74%,#D21F2E 100%);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - var(--t)),#000 calc(100% - var(--t) + 1px));
+          mask:radial-gradient(farthest-side,transparent calc(100% - var(--t)),#000 calc(100% - var(--t) + 1px))}
+.thermo-scale{display:grid;gap:4px;width:100%;max-width:240px}
+.thermo-scale .bar{position:relative;height:6px;border-radius:99px;background:linear-gradient(90deg,#1F2FD6,#2F7FE8 18%,#5FC3E8 31%,#D6DCE6 43%,#F2B640 53%,#F0732E 74%,#D21F2E)}
+.thermo-scale .bar i{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #0B1220;transform:translate(-50%,-50%)}
+.thermo-scale .ends{display:flex;justify-content:space-between;font:600 .62rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* barra fixa para pedir o próprio Raio-X */
+body{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+.getbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-top:1px solid var(--line);box-shadow:0 -10px 30px rgba(15,30,60,.08);padding-bottom:env(safe-area-inset-bottom,0px)}
+.gb-in{max-width:780px;margin:0 auto;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:10px 18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.gb-txt{display:grid;gap:2px;min-width:0;flex:1 1 260px}
+.gb-txt > b{font:700 1rem/1.25 var(--f-display);letter-spacing:-.01em}
+.gb-txt > span{font-size:.84rem;color:var(--muted)}
+.gb-txt s{color:var(--faint)}
+.gb-now{color:var(--cor)}
+.gb-btn{flex:none;background:#2433E8;color:#fff;text-decoration:none;font:600 .95rem var(--f-body);padding:12px 22px;border-radius:999px;box-shadow:0 8px 20px rgba(36,51,232,.3)}
+.gb-btn:hover{background:#3343F2}
+.gb-btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+@media(max-width:520px){.gb-in{flex-wrap:nowrap;gap:10px}.gb-txt{flex:1 1 auto}.gb-txt > b{font-size:.9rem}.gb-txt > span{font-size:.76rem}.gb-promo{display:none}.gb-btn{padding:11px 16px;font-size:.88rem}}
+
+/* nuvem de palavras */
+.cloud{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:6px 18px;padding:18px 8px 10px;text-align:center}
+.cloud span{font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;line-height:1.05;color:var(--k,#2433E8);font-size:calc(.8rem + var(--n) * .16rem)}
+.cloud span sup{font:600 .62rem var(--f-mono,monospace);color:var(--muted);margin-left:3px;letter-spacing:0;vertical-align:super}
+.cloud .w1{--k:#2433E8}.cloud .w2{--k:#3B5BFF}.cloud .w3{--k:#6E7FFF}
+.avoid{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.avoid span{font-size:.86rem;padding:5px 11px;border-radius:999px;background:var(--bad-soft);color:var(--muted);text-decoration:line-through;text-decoration-color:var(--bad)}
+.model{margin-top:14px;padding:14px 16px;border-radius:12px;border-left:3px solid #2433E8;background:color-mix(in srgb,#2433E8 7%,var(--surface));font-size:1rem;line-height:1.45}
+.model mark{background:none;color:#2433E8;font-weight:700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cloud .w1{--k:#8E9BFF}:root:not([data-theme="light"]) .cloud .w2{--k:#A9B3FF}:root:not([data-theme="light"]) .cloud .w3{--k:#C3CAFF}:root:not([data-theme="light"]) .model mark{color:#8E9BFF}}
+:root[data-theme="dark"] .cloud .w1{--k:#8E9BFF}:root[data-theme="dark"] .cloud .w2{--k:#A9B3FF}:root[data-theme="dark"] .cloud .w3{--k:#C3CAFF}:root[data-theme="dark"] .model mark{color:#8E9BFF}
+/* Followup Matador (design da página do produto, sempre escuro) */
+.fm{position:relative;overflow:hidden;border-radius:22px;padding:30px 26px 26px;color:#E8EAEE;font-family:Manrope,system-ui,sans-serif;
+ background:radial-gradient(circle at 15% 5%,rgba(47,139,255,.22),transparent 45%),radial-gradient(circle at 90% 100%,rgba(245,166,91,.16),transparent 45%),#0A0A0C;
+ border:1px solid rgba(245,166,91,.28);box-shadow:0 20px 50px rgba(5,10,30,.35)}
+.fm .logo{font:400 1.05rem "Archivo Black",sans-serif;letter-spacing:.02em}
+.fm .logo i{font:700 1.45rem Caveat,cursive;color:#2F8BFF;margin-left:4px;text-shadow:0 0 18px rgba(47,139,255,.55);font-style:normal}
+.fm .kick{display:flex;align-items:center;gap:7px;margin:14px 0 8px;font:800 .66rem Manrope,sans-serif;letter-spacing:.14em;color:#2F8BFF}
+.fm .kick:before{content:"";width:6px;height:6px;border-radius:50%;background:#2F8BFF;box-shadow:0 0 8px #2F8BFF}
+.fm h3{font:400 clamp(1.6rem,4.6vw,2.3rem)/1.05 "Archivo Black",sans-serif;color:#E8EAEE;margin:0;letter-spacing:-.01em;display:block}
+.fm h3 em{display:block;font:700 clamp(2rem,6vw,2.9rem)/1.05 Caveat,cursive;color:#2F8BFF;text-shadow:0 0 22px rgba(47,139,255,.5);font-style:normal;margin-top:4px}
+.fm .hot{margin:14px 0 8px;color:#F5A65B;font-weight:800;font-size:1rem;line-height:1.35}
+.fm p{margin:0;color:#C9CDD6;font-size:.95rem;line-height:1.5;max-width:52ch}
+.fm p b{color:#fff}.fm p .g{color:#F5A65B;font-weight:800}
+.fm .go{white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding:15px 20px;border-radius:14px;text-decoration:none;color:#fff;font:800 1rem Manrope,sans-serif;
+ background:linear-gradient(#3D97FF,#0A6BFF);box-shadow:0 10px 30px rgba(10,107,255,.45),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .15s}
+.fm .go:hover{transform:translateY(-1px)}
+.fm .fine{margin-top:9px;text-align:center;font-size:.74rem;color:#8A90A0}
+@media(min-width:760px){.fm{display:grid;grid-template-columns:1.2fr 1fr;gap:10px 34px;align-items:end;padding:34px}.fm .cta{grid-column:2;grid-row:1/span 2;align-self:center}}
+</style>
+
+<style>[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="banner"><b>Relatório de exemplo.</b> Conversa, pessoas, imóveis e valores fictícios, criados para demonstrar o formato com áudios transcritos.</div>
+    <div class="themes" role="group" aria-label="Tema">
+      <button type="button" id="th-system" data-t="system">Sistema</button>
+      <button type="button" id="th-light" data-t="light">Claro</button>
+      <button type="button" id="th-dark" data-t="dark">Escuro</button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Raio-X da Negociação · WhatsApp</div>
+    <div class="parties">
+      <div class="who"><div class="av cli-bg">GL</div><div><small>Cliente investidor</small><strong>Gustavo Lemos</strong></div></div>
+      <span class="x">×</span>
+      <div class="who"><div class="av cor-bg">DS</div><div><small>Corretor · Horizonte Imóveis</small><strong>Diego Saraiva</strong></div></div>
+    </div>
+    <h1>Três anos, 22 imóveis, nenhuma visita. <em>Ele não quer mais opções. Quer a conta fechando.</em></h1>
+    <div class="meta">
+      <span class="chip">08/11/2023 → 29/10/2026</span>
+      <span class="chip">698 mensagens</span>
+      <span class="chip">64 áudios · 34 min</span>
+      <span class="chip">~22 imóveis enviados</span>
+      <span class="chip">0 visitas confirmadas</span>
+      <span class="chip">Origem: indicação de um colega</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Seções do relatório">
+    <div class="toc-in">
+      <a href="#veredito"><span>01</span>Veredito</a>
+      <a href="#perfil"><span>02</span>Perfil da busca</a>
+      <a href="#decide"><span>03</span>Como decide</a>
+      <a href="#jornada"><span>04</span>Jornada</a>
+      <a href="#esforco"><span>05</span>Quem puxa</a>
+      <a href="#numeros"><span>06</span>Números</a>
+      <a href="#termometro"><span>07</span>Termômetro</a>
+      <a href="#verdade"><span>08</span>O que trava</a>
+      <a href="#sinais"><span>09</span>Sinais</a>
+      <a href="#momentos"><span>10</span>Momentos</a>
+      <a href="#fases"><span>11</span>Fases</a>
+      <a href="#lado"><span>12</span>Lado a lado</a>
+      <a href="#qualificacao"><span>13</span>Qualificação</a>
+      <a href="#objecoes"><span>14</span>Objeções</a>
+      <a href="#acao"><span>15</span>Próxima ação</a>
+      <a href="#incertezas"><span>16</span>Não sabemos</a>
+      <a href="#card"><span>17</span>Card</a>
+    </div>
+  </nav>
+
+  <!-- 01 -->
+  <section id="veredito">
+    <div class="sec-head"><div class="eyebrow">01 · Veredito</div><h2>Em uma frase</h2></div>
+    <div class="panel guess">
+      <h3>Antes de ver: qual o seu palpite?</h3>
+      <p class="muted" style="font-size:.9rem">Três anos de conversa, nenhuma compra. Como você classificaria esse cliente hoje?</p>
+      <div class="guess-row" role="group" aria-label="Palpite">
+        <button type="button" data-g="frio" id="g1">Esfriou de vez</button>
+        <button type="button" data-g="pesquisa" id="g2">Só curioso</button>
+        <button type="button" data-g="decidir" id="g3">Quer comprar, mas está travado</button>
+        <button type="button" data-g="fechado" id="g4">Praticamente fechado</button>
+      </div>
+      <p id="guessOut" aria-live="polite"></p>
+    </div>
+    <div class="panel verdict">
+      <div style="display:grid;gap:12px;justify-items:center">
+        <div class="gauge thermo-w" aria-label="Temperatura 58 de 100, escala de frio a quente">
+          <div class="thermo" style="--p:58;--t:13px;--track:var(--sunk)"></div>
+          <div class="n"><div><b class="mono">58</b><small>temperatura</small></div></div>
+        </div>
+        <div class="thermo-scale" aria-hidden="true"><div class="bar"><i style="left:58%"></i></div><div class="ends"><span>Frio</span><span>Morno</span><span>Quente</span></div></div>
+      </div>
+      <div style="display:grid;gap:12px;min-width:0">
+        <div class="oneword">Interesse real, travado pela troca</div>
+        <div class="pills">
+          <span class="pill warn">Necessita nutrição · 40–59</span>
+          <span class="pill neutral">Estágio: retomou a busca em 20/10</span>
+          <span class="pill bad">Trava: matrícula do Studio Prime</span>
+        </div>
+        <p class="muted" style="font-size:.93rem">Gustavo voltou sozinho depois de 14 meses, com tipologia, faixa e forma de pagamento definidas, e cobrou de novo em 29/10. Nunca faltou interesse. O que segura a nota é a troca: o apartamento que ele quer dar no negócio não tem matrícula individual, e em três anos nenhuma conversa chegou a visita ou proposta.</p>
+        <p class="confl"><b>Confiança da análise: média-alta.</b> Três anos de histórico e todos os áudios transcritos. Fraca no que foi dito em ligações e encontros, e na opinião da esposa. A transcrição automática erra alguns nomes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- perfil -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 20V11M11 20V5M17 20v-7M2 20h20"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16M15 9h4a1 1 0 0 1 1 1v11M2 21h20M8 8h3M8 12h3M8 16h3"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M2 18V7M2 14h20M22 18v-6a2 2 0 0 0-2-2h-9v4"/><circle cx="6.5" cy="10.5" r="1.5"/></symbol>
+    <symbol id="i-sofa" viewBox="0 0 24 24"><path d="M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v5H2zM5 18v2M19 18v2"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2"/></symbol>
+    <symbol id="i-hosp" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M12 8v8M8 12h8"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10h18M12 3l9 5H3zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h13v4M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2zM16 14h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9L2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-4.8-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15.2 12 20 12 20z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-q" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6M12 17h.01"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0M12 16l4-5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h14l-3-3M20 16H6l3 3"/></symbol>
+  </svg>
+
+  <section id="perfil">
+    <div class="sec-head"><div class="eyebrow">02 · Perfil da busca</div><h2>O que ele procura, para quê e como vai pagar</h2><p>Tudo o que a conversa revela sobre o imóvel, o objetivo e o dinheiro. Cada informação mostra de onde veio.</p></div>
+
+    <div class="ficha-top">
+      <div class="eyebrow cli">Em resumo</div>
+      <p class="lead">Apartamento de 2 dormitórios, pronto e mobiliado, no centro perto dos hospitais, em prédio que aceite Airbnb, entre R$ 450 e 550 mil. Pagamento: o Studio Prime dele na troca mais R$ 150 a 200 mil.</p>
+      <div class="legend2"><span class="tg f">Fato · data</span>dito na conversa <span class="tg i">Indício</span>deduzido de mais de uma mensagem <span class="tg q">A confirmar</span>ninguém perguntou</div>
+    </div>
+
+    <div class="pgrid">
+      <div class="pcard full k-cli">
+        <div class="phead"><span class="ico"><svg class="i"><use href="#i-heart"/></svg></span><h3>Motivação da compra<small>Por que ele compra</small></h3><span class="tg f">Fato · 05/12/23</span></div>
+        <div class="motiv" role="list">
+          <div role="listitem"><svg class="i"><use href="#i-key"/></svg>Primeiro imóvel</div>
+          <div role="listitem"><svg class="i"><use href="#i-up"/></svg>Upgrade de moradia</div>
+          <div role="listitem" class="on" aria-current="true"><svg class="i"><use href="#i-chart"/></svg>Investimento para renda</div>
+          <div role="listitem"><svg class="i"><use href="#i-map"/></svg>Mudança de cidade</div>
+        </div>
+        <p class="quote">"Consigo pegar um valor mais agregado numa locação anual. Esse imóvel aí, eu estou locando por R$ 3 mil por mês, tá dando uma boa rentabilidade."<small>Gustavo · 05/12/23 · áudio</small></p>
+        <div class="implic">
+          <div><svg class="i"><use href="#i-chart"/></svg><span><b>A conta decide.</b> Preço de entrada e renda líquida pesam mais que acabamento ou valorização.</span></div>
+          <div><svg class="i"><use href="#i-swap"/></svg><span><b>Agora é troca de ativo.</b> Quer transformar um 1 dormitório em um 2 dormitórios que renda mais.</span></div>
+        </div>
+      </div>
+
+      <div class="pcard full k-cor">
+        <div class="phead"><span class="ico"><svg class="i"><use href="#i-building"/></svg></span><h3>O imóvel que ele busca<small>Critérios atuais, de 20 e 29/10/26</small></h3></div>
+        <div class="specs">
+          <div><svg class="i"><use href="#i-building"/></svg><b>Apartamento</b><small>Pronto, não na planta</small></div>
+          <div><svg class="i"><use href="#i-bed"/></svg><b>2 dorms</b><small>Até 2024 buscava 1</small></div>
+          <div><svg class="i"><use href="#i-sofa"/></svg><b>Mobiliado</b><small>Para alugar sem obra</small></div>
+          <div><svg class="i"><use href="#i-money"/></svg><b>R$ 450–550 mil</b><small>Faixa declarada</small></div>
+        </div>
+        <div class="imov">
+        <div class="wants">
+          <div class="g ess"><span class="gl"><svg class="i"><use href="#i-check"/></svg>Essencial <span class="tg f">Fato · 10/06/24 e 29/10/26</span></span><ul><li>Centro, perto dos hospitais</li><li>Condomínio que aceite Airbnb</li><li>Elevador, salão de festas e academia</li><li>Vendedor que precise vender</li></ul></div>
+          <div class="g des"><span class="gl"><svg class="i"><use href="#i-heart"/></svg>Desejável <span class="tg i">Indício</span></span><ul><li>Garagem (perguntou 3 vezes)</li><li>Desconto para pagamento à vista</li></ul></div>
+          <div class="g evi"><span class="gl"><svg class="i"><use href="#i-x"/></svg>Evita <span class="tg f">Fato · 2023–2024</span></span><ul><li>Lançamento na planta</li><li>Estúdio e kitnet</li><li>Prédio antigo</li><li>Jardim Europa, longe dos hospitais</li><li>Prédio já cheio de Airbnb</li></ul></div>
+          <div class="g nao"><span class="gl"><svg class="i"><use href="#i-q"/></svg>Nunca citado <span class="tg q">A confirmar</span></span><ul><li>Metragem mínima</li><li>Andar e posição solar</li></ul></div>
+        </div>
+          <div class="map">
+            <svg viewBox="0 0 240 230" role="img" aria-label="Esquema ilustrativo: zona-alvo de cerca de 1 km em volta de três hospitais no centro, com o Studio Prime atual dentro da zona e o Jardim Europa, recusado, fora dela.">
+              <g style="stroke:var(--line)" stroke-width="1"><path d="M0 40H240M0 90H240M0 140H240M0 190H240M40 0V230M95 0V230M150 0V230M205 0V230"/></g>
+              <circle cx="122" cy="110" r="80" style="fill:var(--cor-soft);stroke:var(--cor)" fill-opacity=".6" stroke-dasharray="4 4"/>
+              <text x="122" y="22" text-anchor="middle" font-size="9" font-family="IBM Plex Mono, monospace" style="fill:var(--cor)">zona-alvo · até ~1 km</text>
+              <path d="M70 160 L14 214" style="stroke:var(--bad)" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+              <path d="M14 214l3-10 7 7z" style="fill:var(--bad)"/>
+              <text x="36" y="214" font-size="8.5" font-family="Instrument Sans, sans-serif" font-weight="600" style="fill:var(--bad)">Jardim Europa · recusado</text>
+              <g><circle cx="98" cy="104" r="8" style="fill:var(--fg)"/><path d="M98 100v8M94 104h8" stroke="#fff" stroke-width="2"/><text x="98" y="124" text-anchor="middle" font-size="8.5" font-family="Instrument Sans, sans-serif" font-weight="700" style="fill:var(--fg)">Hosp. Central</text></g>
+              <g><circle cx="156" cy="84" r="8" style="fill:var(--fg)"/><path d="M156 80v8M152 84h8" stroke="#fff" stroke-width="2"/><text x="156" y="104" text-anchor="middle" font-size="8.5" font-family="Instrument Sans, sans-serif" font-weight="700" style="fill:var(--fg)">Santa Casa</text></g>
+              <g><circle cx="150" cy="148" r="8" style="fill:var(--fg)"/><path d="M150 144v8M146 148h8" stroke="#fff" stroke-width="2"/><text x="150" y="168" text-anchor="middle" font-size="8.5" font-family="Instrument Sans, sans-serif" font-weight="700" style="fill:var(--fg)">H. Universitário</text></g>
+              <rect x="104" y="52" width="13" height="13" rx="3" style="fill:var(--cli)"/>
+              <text x="121" y="58" font-size="8.5" font-family="Instrument Sans, sans-serif" font-weight="700" style="fill:var(--fg)">Studio Prime</text>
+              <text x="121" y="69" font-size="7.5" font-family="Instrument Sans, sans-serif" style="fill:var(--muted)">atual, vai na troca</text>
+            </svg>
+            <span class="cap">Esquema ilustrativo, sem escala. Os hospitais e o raio vêm do que ele pediu na conversa.</span>
+          </div>
+        </div>
+        <div class="candc">
+          <div class="row"><span class="eyebrow">Candidato atual</span><b>Nenhum ainda</b><span>O pedido é de 20/10 e nenhuma opção foi enviada até 29/10.</span></div>
+          <div class="pricebar" role="img" aria-label="Studio Prime de 320 a 350 mil mais aporte de 150 a 200 mil alcançam de 470 a 550 mil">
+            <div class="fill" style="width:42%">Studio Prime</div>
+            <div class="fill" style="left:42%;width:23%;border-radius:0 8px 8px 0;background:var(--g-cli)">+ aporte</div>
+            <div class="cap" style="left:56.25%"><span>450</span></div>
+            <div class="cap" style="left:68.75%"><span>550</span></div>
+          </div>
+          <p class="pricenote">Studio Prime de R$ 320–350 mil mais aporte de R$ 150–200 mil: alcança de R$ 470 a 550 mil. Escala de R$ 0 a 800 mil.</p>
+        </div>
+      </div>
+
+      <div class="pcard full k-good">
+        <div class="phead"><span class="ico"><svg class="i"><use href="#i-pin"/></svg></span><h3>Rotina de quem vai ocupar × o imóvel<small>O dia do público que ele quer atender, conferido com o que ele pede</small></h3></div>
+        <ol class="tl">
+          <li><span class="hr">06h30</span><span class="node"><svg class="i"><use href="#i-hosp"/></svg></span><div class="txt"><span>O residente sai para um plantão de 12 horas e precisa chegar a pé ao hospital. <span class="tg f">Fato · 12/12/23</span></span><span class="fitp y"><svg class="i"><use href="#i-check"/></svg>Por isso o centro é inegociável</span></div></li>
+          <li><span class="hr">19h30</span><span class="node"><svg class="i"><use href="#i-building"/></svg></span><div class="txt"><span>Volta cansado: quer elevador, academia no prédio e apartamento pronto. <span class="tg f">Fato · 10/06/24</span></span><span class="fitp y"><svg class="i"><use href="#i-check"/></svg>Bate com a lista de exigências do prédio</span></div></li>
+          <li><span class="hr">Sáb/Dom</span><span class="node"><svg class="i"><use href="#i-cal"/></svg></span><div class="txt"><span>No Airbnb, acompanhantes de pacientes e médicos de fora. Referência do Residencial Atlântico: diária de R$ 149 a 199, 21 a 22 dias ocupados por mês. <span class="tg f">Fato · 08/11/23</span></span><span class="fitp y"><svg class="i"><use href="#i-check"/></svg>Base para comparar opções</span></div></li>
+          <li><span class="hr">Mensal</span><span class="node"><svg class="i"><use href="#i-home"/></svg></span><div class="txt"><span>Plano B: locação anual. Ele já aluga um imóvel parecido por R$ 3 mil por mês. <span class="tg f">Fato · 05/12/23</span></span><span class="fitp y"><svg class="i"><use href="#i-check"/></svg>Se o Airbnb não for permitido</span></div></li>
+          <li><span class="hr">Regra</span><span class="node w"><svg class="i"><use href="#i-doc"/></svg></span><div class="txt"><span>Exigência nova: o condomínio precisa aceitar Airbnb. <span class="tg f">Fato · 29/10/26</span></span><span class="fitp w"><svg class="i"><use href="#i-alert"/></svg>Checar a convenção antes de enviar</span></div></li>
+          <li><span class="hr">Risco</span><span class="node w"><svg class="i"><use href="#i-users"/></svg></span><div class="txt"><span>Desistiu do Loft 21 porque o prédio já tinha muitos Airbnb concorrendo. <span class="tg f">Fato · 05/12/23</span></span><span class="fitp w"><svg class="i"><use href="#i-alert"/></svg>Ver quantas unidades já são Airbnb</span></div></li>
+        </ol>
+        <p class="callout cli-c"><svg class="i"><use href="#i-bulb"/></svg><span>Cada imóvel apresentado deveria vir com a conta pronta nos dois cenários, Airbnb e locação anual. É a pergunta que ele faz a si mesmo antes de responder.</span></p>
+      </div>
+
+      <div class="pcard full k-warn">
+        <div class="phead"><span class="ico"><svg class="i"><use href="#i-wallet"/></svg></span><h3>Como pretende pagar<small>De onde vem o dinheiro</small></h3></div>
+        <div class="flow">
+          <div class="src2 dash"><svg class="i"><use href="#i-swap"/></svg><b>Studio Prime na troca</b><span>1 dorm mobiliado no centro, sem garagem. Vale R$ 320–350 mil, segundo ele.</span><span class="tg f">Fato · 20/10/26</span></div>
+          <div class="src2"><svg class="i"><use href="#i-coins"/></svg><b>Recursos próprios</b><span>De R$ 150 a 200 mil de complemento.</span><span class="tg f">Fato · 20/10/26</span></div>
+          <div class="src2"><svg class="i"><use href="#i-bank"/></svg><b>À vista para negociar</b><span>"Se for no cash, dá para fazer um bom desconto."</span><span class="tg i">Indício · 05/12/23</span></div>
+        </div>
+        <div class="arrowdown"><svg class="i"><use href="#i-down"/></svg></div>
+        <div class="goalbox"><b>2 dorm mobiliado no centro</b><span class="mono">R$ 450–550 mil</span></div>
+        <div class="pay"><div>
+          <p class="quote" style="border-color:var(--warn)">"Olha, de 150k a 200k, para encontrar algo entre 450k a 550k."<small>Gustavo · 20/10/26 · 20:09</small></p>
+          <p class="quote" style="border-color:var(--warn)">"Foi feito um contrato social entre todos os proprietários, parece que está em processo de matrícula."<small>Gustavo · 21/10/26 · áudio</small></p>
+        </div><div>
+          <span class="eyebrow">Histórico de trocas</span>
+          <ul class="prio" style="margin-top:8px">
+            <li><span class="prob b">2023</span><span>Ofereceu a SUV na troca. Dois vendedores aceitavam.</span></li>
+            <li><span class="prob b">2024</span><span>Tentou trocar a sala comercial do pai. Não fechou.</span></li>
+            <li><span class="prob m">2026</span><span>Agora quer trocar o Studio Prime, que não tem matrícula individual.</span></li>
+          </ul>
+          <div class="wants" style="margin-top:12px"><div class="g nao"><span class="gl"><svg class="i"><use href="#i-q"/></svg>A confirmar</span><ul><li>Prazo da matrícula</li><li>Venderia o Studio Prime separado?</li><li>Usaria financiamento?</li><li>Garagem é obrigatória?</li></ul></div></div>
+        </div></div>
+        <p class="callout warn-c"><svg class="i"><use href="#i-bulb"/></svg><span>Ele sempre tenta pagar com um ativo. Se a troca depender da matrícula, a próxima boa oportunidade pode escapar de novo. Vale ter pronto um plano de venda separada do Studio Prime.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- como decide -->
+  <section id="decide">
+    <div class="sec-head"><div class="eyebrow">03 · Como ele decide</div><h2>Perfil de compra e linguagem ideal</h2><p>Padrões observados no jeito dele comprar nesta conversa. Não é classificação de personalidade.</p></div>
+    <div class="pgrid">
+      <div class="pcard full k-cli">
+        <div class="phead"><span class="ico"><svg class="i"><use href="#i-gauge"/></svg></span><h3>Perfil de compra<small>Onde ele fica em cada eixo, com a evidência</small></h3></div>
+        <div class="scales">
+          <div class="scale"><div class="ends"><span class="on">Racional</span><span>Emocional</span></div><div class="strack" style="--x:18%"><i></i></div><div class="ev"><span>Pergunta condomínio, garagem e condições de pagamento antes de qualquer elogio ao imóvel.</span><span class="conf">Confiança alta</span></div></div>
+          <div class="scale"><div class="ends"><span class="on">Analítico</span><span>Impulsivo</span></div><div class="strack" style="--x:25%"><i></i></div><div class="ev"><span>"Vou dar uma analisada" aparece 7 vezes. Gosta de comparativo de tabela.</span><span class="conf">Confiança alta</span></div></div>
+          <div class="scale"><div class="ends"><span>Conservador</span><span>Arrojado</span></div><div class="strack" style="--x:50%"><i></i></div><div class="ev"><span>Topa trocar carro, sala e apartamento, mas recusa lançamento na planta.</span><span class="conf">Confiança média</span></div></div>
+          <div class="scale"><div class="ends"><span>Dominante</span><span>Colaborativo</span></div><div class="strack" style="--x:55%"><i></i></div><div class="ev"><span>Conduz a negociação, mas decide com a esposa e, na sala, com o pai.</span><span class="conf">Confiança média</span></div></div>
+          <div class="scale"><div class="ends"><span class="on">Objetivo</span><span>Comunicativo</span></div><div class="strack" style="--x:35%"><i></i></div><div class="ev"><span>Texto curto ("Blz", "Vou ver"). Usa áudio quando precisa explicar o que busca.</span><span class="conf">Confiança alta</span></div></div>
+          <div class="scale"><div class="ends"><span>Decide rápido</span><span class="on">Decide devagar</span></div><div class="strack" style="--x:78%"><i></i></div><div class="ev"><span>Três anos sem proposta formal de compra. Responde rápido, decide devagar.</span><span class="conf">Confiança alta</span></div></div>
+          <div class="scale"><div class="ends"><span>Busca segurança</span><span class="on">Busca oportunidade</span></div><div class="strack" style="--x:86%"><i></i></div><div class="ev"><span>"Que a pessoa precise vender, que queira se mudar, ou se separou e precisa torrar."</span><span class="conf">Confiança alta</span></div></div>
+        </div>
+        <p class="callout cli-c"><svg class="i"><use href="#i-bulb"/></svg><span>Investidor que compra oportunidade com a calculadora na mão. Só se move quando preço, renda e forma de pagamento fecham ao mesmo tempo.</span></p>
+      </div>
+
+      <div class="pcard full k-cor">
+        <div class="phead"><span class="ico"><svg class="i"><use href="#i-chat"/></svg></span><h3>Linguagem ideal<small>Como falar para ser ouvido</small></h3></div>
+        <div class="lang">
+          <div><span class="lb"><svg class="i"><use href="#i-users"/></svg>Tom</span><b>De investidor para parceiro</b><small>Direto, sem empolgação. Ele mesmo trata o Diego como parceiro ("tamo junto").</small></div>
+          <div><span class="lb"><svg class="i"><use href="#i-list"/></svg>Detalhe</span><b>Alto em números</b><small>Preço, aluguel, condomínio, ocupação. Descrição de lazer só como dado.</small></div>
+          <div><span class="lb"><svg class="i"><use href="#i-gauge"/></svg>Ritmo</span><b>Poucas opções, bem filtradas</b><small>Recebeu cerca de 22 imóveis e não visitou nenhum.</small></div>
+          <div><span class="lb"><svg class="i"><use href="#i-mic"/></svg>Formato</span><b>Áudio para contexto, texto para números</b><small>Ele mandou 31 áudios, mas pede os valores por escrito.</small></div>
+          <div><span class="lb"><svg class="i"><use href="#i-clock"/></svg>Horário</span><b>Tarde e noite</b><small>67% das mensagens dele são depois do meio-dia.</small></div>
+          <div class="avoid"><span class="lb"><svg class="i"><use href="#i-ban"/></svg>Evitar</span><b>Pressão e escassez</b><small>"Vai derreter" e "tá dado" foram ignorados em todas as vezes.</small></div>
+        </div>
+        <div class="marcos">
+          <span class="eyebrow">Se a esposa entrar na decisão <span class="tg q">Hipótese</span></span>
+          <ul>
+            <li>Ela foi citada nas recusas de 11/03/24 e 07/06/24. Leve um resumo de uma página com renda prevista e riscos.</li>
+            <li>Proponha a visita para os dois, não só para ele.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="jornada">
+    <div class="sec-head"><div class="eyebrow">04 · Jornada</div><h2>Mensagens por mês</h2><p>Picos sempre que surge um imóvel ou a sala comercial do pai, longos silêncios entre eles e uma retomada puxada pelo próprio Gustavo em outubro de 2026.</p></div>
+    <div class="panel">
+      <div class="legend"><span style="--k:var(--cli)">Gustavo · 233 (33%)</span><span style="--k:var(--cor)">Diego · 465 (67%)</span></div>
+      <div class="scroll"><div style="min-width:560px">
+      <div class="bars" style="grid-template-columns:repeat(13,minmax(0,1fr))" role="img" aria-label="Mensagens por mês, de 4 a 214, com pico de 214 em março de 2024">
+        <div class="bar" style="--h:23%;--c:56%"><b>50</b><i style="height:23%"></i></div>
+        <div class="bar" style="--h:60%;--c:71%"><b>129</b><i style="height:60%"></i></div>
+        <div class="bar" style="--h:20%;--c:74%"><b>43</b><i style="height:20%"></i></div>
+        <div class="bar mark" style="--h:100%;--c:62%"><b>214</b><i style="height:100%"></i></div>
+        <div class="bar" style="--h:21%;--c:74%"><b>46</b><i style="height:21%"></i></div>
+        <div class="bar" style="--h:43%;--c:77%"><b>91</b><i style="height:43%"></i></div>
+        <div class="bar" style="--h:22%;--c:60%"><b>48</b><i style="height:22%"></i></div>
+        <div class="bar" style="--h:3%;--c:67%"><b>6</b><i style="height:3%"></i></div>
+        <div class="bar" style="--h:5%;--c:82%"><b>11</b><i style="height:5%"></i></div>
+        <div class="bar" style="--h:10%;--c:81%"><b>21</b><i style="height:10%"></i></div>
+        <div class="bar" style="--h:2%;--c:75%"><b>4</b><i style="height:2%"></i></div>
+        <div class="bar" style="--h:3%;--c:67%"><b>6</b><i style="height:3%"></i></div>
+        <div class="bar mark" style="--h:14%;--c:38%"><b>29</b><i style="height:14%"></i></div>
+      </div>
+      <div class="xlab" style="grid-template-columns:repeat(13,minmax(0,1fr))"><span>nov/23</span><span>dez</span><span>jan/24</span><span>mar</span><span>abr</span><span>jun</span><span>jul</span><span>set</span><span>nov</span><span>dez</span><span>jan/25</span><span>ago</span><span>out/26</span></div></div></div>
+      <p class="muted" style="font-size:.8rem;margin-top:8px">Só aparecem os meses com conversa. Entre agosto de 2025 e outubro de 2026 foram 440 dias sem mensagens.</p>
+    </div>
+    <div class="why">
+      <div class="panel"><h3>Por que subiu</h3><ol>
+        <li><span>dez/23</span>Loft 21, Solar e a troca da SUV. Visita marcada e adiada.</li>
+        <li><span>mar/24</span>Proposta para a sala comercial do pai e o Torre Boulevard.</li>
+        <li><span>jun/24</span>Lançamento perto do Hospital Universitário, com simulações de pagamento.</li>
+        <li><span>out/26</span>Gustavo volta sozinho querendo trocar o Studio Prime.</li>
+      </ol></div>
+      <div class="panel"><h3>Por que esfriou</h3><ul>
+        <li><span>abr/24</span>Sala do pai perde o comprador para outra, em 60x.</li>
+        <li><span>set/24</span>O pai decide comprar em o litoral.</li>
+        <li><span>jan/25</span>"Até julho não consigo fazer novos investimentos."</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section id="esforco">
+    <div class="sec-head"><div class="eyebrow">05 · Quem puxa</div><h2>Índice de esforço</h2><p>Quanto cada lado trabalha para a conversa andar. Calculado direto do arquivo exportado.</p></div>
+    <div class="panel effort">
+      <div><div class="big cli mono">36</div><small>Gustavo</small></div>
+      <div class="vs">×</div>
+      <div><div class="big cor mono">64</div><small>Diego</small></div>
+    </div>
+    <div class="panel split">
+      <div class="srow"><span>Inicia conversas</span><div class="sbar"><div class="a" style="width:29%">29%</div><div class="b" style="width:71%">71%</div></div></div>
+      <div class="srow"><span>Faz perguntas</span><div class="sbar"><div class="a" style="width:38%">38%</div><div class="b" style="width:62%">62%</div></div></div>
+      <div class="srow"><span>Tamanho da mensagem</span><div class="sbar"><div class="a" style="width:49%">49%</div><div class="b" style="width:51%">51%</div></div></div>
+      <div class="srow"><span>Responde em até 5 min</span><div class="sbar"><div class="a" style="width:45%">45%</div><div class="b" style="width:55%">55%</div></div></div>
+      <div class="srow"><span>Quebra silêncios</span><div class="sbar"><div class="a" style="width:20%">20%</div><div class="b" style="width:80%">80%</div></div></div>
+      <div class="srow"><span>Minutos de áudio</span><div class="sbar"><div class="a" style="width:48%">48%</div><div class="b" style="width:52%">52%</div></div></div>
+      <p class="muted" style="font-size:.88rem">O Diego carrega a conversa há três anos. Mas os três silêncios que o Gustavo quebrou foram os que importavam: para perguntar do Residencial Atlântico, para pedir a troca e para cobrar opções.</p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section id="numeros">
+    <div class="sec-head"><div class="eyebrow">06 · Números</div><h2>O que o arquivo mostra</h2><p>Contagens exatas, sem interpretação. <span class="cli">Rosa</span> é o cliente, <span class="cor">azul</span> é o corretor.</p></div>
+    <div class="nums">
+      <div class="num"><div class="lbl">Resposta típica</div><div class="pair"><span class="cli">3m</span><span class="cor">1m</span></div><div class="note">Mediana de tempo até responder</div></div>
+      <div class="num"><div class="lbl">Áudios</div><div class="pair"><span class="cli">31</span><span class="cor">33</span></div><div class="note">16 e 18 minutos, todos transcritos</div></div>
+      <div class="num"><div class="lbl">Silêncios &gt; 7 dias</div><div class="pair"><span class="cli">3</span><span class="cor">12</span></div><div class="note">Quem quebrou. Mais longo: 440 dias</div></div>
+      <div class="num"><div class="lbl">Imóveis enviados</div><div class="pair"><span class="cli">—</span><span class="cor">~22</span></div><div class="note">65 fotos, 4 tabelas e 15 links</div></div>
+    </div>
+    <div class="two">
+      <div class="panel">
+        <h3 style="margin-bottom:10px">Respostas dentro de…</h3>
+        <div class="scroll"><table class="rt">
+          <thead><tr><th>Prazo</th><th class="cli">Gustavo</th><th class="cor">Diego</th></tr></thead>
+          <tbody>
+            <tr><td>1 min</td><td>38%</td><td>61%</td></tr>
+            <tr><td>5 min</td><td>61%</td><td>76%</td></tr>
+            <tr><td>30 min</td><td>90%</td><td>92%</td></tr>
+            <tr><td>1 h</td><td>93%</td><td>94%</td></tr>
+            <tr><td>6 h</td><td>100%</td><td>100%</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-bottom:10px">Quando cada um escreve</h3>
+        <div class="hours" style="grid-template-columns:90px repeat(3,1fr)">
+          <span></span><span class="h">Manhã</span><span class="h">Tarde</span><span class="h">Noite</span>
+          <span class="cli" style="font-weight:600">Gustavo</span>
+          <span class="cell" style="background:color-mix(in srgb,var(--cli) 34%,var(--sunk))">33%</span>
+          <span class="cell" style="background:color-mix(in srgb,var(--cli) 42%,var(--sunk))">39%</span>
+          <span class="cell" style="background:color-mix(in srgb,var(--cli) 30%,var(--sunk))">28%</span>
+          <span class="cor" style="font-weight:600">Diego</span>
+          <span class="cell" style="background:color-mix(in srgb,var(--cor) 46%,var(--sunk))">45%</span>
+          <span class="cell" style="background:color-mix(in srgb,var(--cor) 32%,var(--sunk))">31%</span>
+          <span class="cell" style="background:color-mix(in srgb,var(--cor) 26%,var(--sunk))">24%</span>
+        </div>
+        <p class="muted" style="font-size:.84rem;margin-top:12px">Os dois respondem rápido. O problema desta negociação nunca foi velocidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section id="termometro">
+    <div class="sec-head"><div class="eyebrow">07 · Termômetro</div><h2>Compra e condução</h2><p>Leitura da IA a partir do texto e dos áudios. Cada nota vem com o motivo.</p></div>
+    <div class="two">
+      <div class="panel">
+        <div class="ph"><h3 class="cli">Gustavo · intenção de compra</h3><span class="score-s mono cli">58</span></div>
+        <div class="meters">
+          <div class="meter" style="--k:var(--cli)"><span class="t">Clareza do critério</span><span class="v">85</span><span class="track"><i style="width:85%"></i></span><span class="why2">Tipologia, região, prédio, regra de Airbnb e faixa de preço ditos com todas as letras</span></div>
+          <div class="meter" style="--k:var(--cli)"><span class="t">Confiança no corretor</span><span class="v">80</span><span class="track"><i style="width:80%"></i></span><span class="why2">"A prioridade é com você". Voltou ao Diego depois de 14 meses</span></div>
+          <div class="meter" style="--k:var(--cli)"><span class="t">Interesse</span><span class="v">70</span><span class="track"><i style="width:70%"></i></span><span class="why2">Pedido ativo em 20/10 e cobrança em 29/10, com números</span></div>
+          <div class="meter" style="--k:var(--cli)"><span class="t">Capacidade financeira</span><span class="v">65</span><span class="track"><i style="width:65%"></i></span><span class="why2">Estimativa. Aporte declarado, mas metade do valor depende da troca</span></div>
+          <div class="meter" style="--k:var(--cli)"><span class="t">Urgência</span><span class="v">35</span><span class="track"><i style="width:35%"></i></span><span class="why2">Sem prazo. Compra quando aparece a oportunidade</span></div>
+          <div class="meter" style="--k:var(--bad)"><span class="t">Viabilidade da troca</span><span class="v">30</span><span class="track"><i style="width:30%"></i></span><span class="why2">Studio Prime sem matrícula individual. "Dificulta bastante", segundo o Diego</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ph"><h3 class="cor">Diego · qualidade da condução</h3><span class="score-s mono cor">62</span></div>
+        <div class="meters">
+          <div class="meter" style="--k:var(--cor)"><span class="t">Persistência</span><span class="v">92</span><span class="track"><i style="width:92%"></i></span><span class="why2">Três anos de contato e 12 de 15 silêncios quebrados por ele</span></div>
+          <div class="meter" style="--k:var(--cor)"><span class="t">Velocidade</span><span class="v">90</span><span class="track"><i style="width:90%"></i></span><span class="why2">Mediana de 1 minuto para responder</span></div>
+          <div class="meter" style="--k:var(--cor)"><span class="t">Aderência ao critério</span><span class="v">50</span><span class="track"><i style="width:50%"></i></span><span class="why2">Cerca de 9 de 22 imóveis eram na planta, estúdio ou longe dos hospitais</span></div>
+          <div class="meter" style="--k:var(--warn)"><span class="t">Qualificação</span><span class="v">45</span><span class="track"><i style="width:45%"></i></span><span class="why2">Só perguntou o que o prédio precisa ter em 10/06/24, sete meses depois do início</span></div>
+          <div class="meter" style="--k:var(--warn)"><span class="t">Tom</span><span class="v">45</span><span class="track"><i style="width:45%"></i></span><span class="why2">"Vai derreter", "tá dado", "desesperados pra vender". Urgência sem efeito</span></div>
+          <div class="meter" style="--k:var(--bad)"><span class="t">Fechar o próximo passo</span><span class="v">35</span><span class="track"><i style="width:35%"></i></span><span class="why2">Nenhuma visita confirmada. A proposta prometida em 16/11/23 nunca foi cobrada</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section id="verdade">
+    <div class="sec-head"><div class="eyebrow">08 · O que trava</div><h2>A verdade nua</h2></div>
+    <div class="truth">
+      <div class="eyebrow">Dito com respeito, mas sem rodeio</div>
+      <p>A única oportunidade que o Gustavo quis de verdade, o Residencial Atlântico em novembro de 2023, foi perdida por falta de follow-up. Ele prometeu uma proposta para segunda-feira, ninguém cobrou, e 18 dias depois o imóvel estava vendido.</p>
+      <p>Depois disso vieram cerca de 22 imóveis, muitos fora do que ele tinha pedido, quase sempre com pressão de "vai vender rápido". Nenhum chegou a visita. Hoje a trava é outra: a troca que ele quer depende de um apartamento sem matrícula individual. Mandar opções antes de resolver como essa troca vai funcionar repete o mesmo padrão.</p>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section id="sinais">
+    <div class="sec-head"><div class="eyebrow">09 · Sinais</div><h2>Verdes e de atenção, dos dois lados</h2></div>
+    <div class="two flags">
+      <div class="panel">
+        <h3><span class="av cli-bg" style="width:30px;height:30px;font-size:.75rem">GL</span>Gustavo</h3>
+        <span class="sub">Sinais de compra</span>
+        <ul>
+          <li class="g">Deu <b>faixa, aporte e valor do imóvel</b> em menos de 25 minutos (20/10/26)</li>
+          <li class="g">Voltou sozinho depois de 14 meses e cobrou de novo em 29/10</li>
+          <li class="g">Lista exata do que o prédio precisa ter (10/06/24)</li>
+          <li class="g">Responde em 3 minutos na mediana</li>
+        </ul>
+        <span class="sub">Atenção</span>
+        <ul>
+          <li class="w">"Vou dar uma analisada" 7 vezes, quase sempre sem retorno</li>
+          <li class="w">Decide com a esposa: citada nas recusas de mar/24 e jun/24</li>
+          <li class="w">Metade do pagamento depende de um imóvel sem matrícula</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3><span class="av cor-bg" style="width:30px;height:30px;font-size:.75rem">DS</span>Diego</h3>
+        <span class="sub">Pontos fortes</span>
+        <ul>
+          <li class="g">Persistente: três anos e 12 silêncios quebrados</li>
+          <li class="g">Lembrou do Atlântico quando voltou à venda (19/12/24)</li>
+          <li class="g">Comparativo de tabela no Torre Boulevard, com o porquê da vaga</li>
+          <li class="g">Em 20/10/26 já perguntou valor do imóvel e quanto investir</li>
+        </ul>
+        <span class="sub">Atenção</span>
+        <ul>
+          <li class="w">Não cobrou a proposta do Atlântico em nov/23</li>
+          <li class="w">Seguiu mandando lançamentos depois de 10/06/24</li>
+          <li class="w">"Posso bater o contrato já?" antes de o cliente escolher</li>
+          <li class="w">Sem opções enviadas entre 21 e 29/10/26</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section id="momentos">
+    <div class="sec-head"><div class="eyebrow">10 · Momentos-chave</div><h2>Os recibos</h2><p>Cada leitura do relatório se apoia em mensagens reais. Estas são as que mais pesam.</p></div>
+    <div class="panel receipts">
+      <div class="rc r"><div class="tag"><b>Início</b>08/11/23</div><div class="body"><div class="bub out"><span class="nm cor">Diego</span>Aqui quem fala é Diego, corretor de vendas da Horizonte Imóveis. Quem me passou seu contato foi o um colega da imobiliária.<span class="ts">13:54</span></div><p class="read">Lead de indicação interna, já com o pedido: imóvel para Airbnb.</p></div></div>
+      <div class="rc"><div class="tag"><b>Promessa</b>16/11/23</div><div class="body"><div class="bub in"><span class="nm cli">Gustavo · áudio</span>Sobre o Atlântico, vou dar mais uma pensada aqui, acredito que na segunda-feira eu te dê um retorno. Vou ter uma proposta pra passar pra ele.<span class="ts">17:38</span></div><p class="read">O sinal de compra mais forte dos três anos. Não houve cobrança depois.</p></div></div>
+      <div class="rc"><div class="tag"><b>Perdido</b>04/12/23</div><div class="body"><div class="bub in"><span class="nm cli">Gustavo</span>Putz. Agora foi. E tava bom aquele.<span class="ts">21:32</span></div><p class="read">Minutos antes, o Diego avisou: "Vendido. Assinei o contrato hoje".</p></div></div>
+      <div class="rc"><div class="tag"><b>Critério</b>05/12/23</div><div class="body"><div class="bub in"><span class="nm cli">Gustavo · áudio</span>É imóvel na faixa dos 300 a 450, que já tem a mobília, que a pessoa precisa se desfazer e precisa de dinheiro rápido.<span class="ts">19:28</span></div><p class="read">O perfil de oportunidade que ele repete até hoje.</p></div></div>
+      <div class="rc r"><div class="tag"><b>Pressão</b>04/06/24</div><div class="body"><div class="bub out"><span class="nm cor">Diego · áudio</span>Vai derreter. Se vai deixar para semana que vem comprar, nem dá. Vai estar tudo vendido.<span class="ts">19:25</span></div><p class="read">Seis dias depois, o Gustavo recusou o lançamento.</p></div></div>
+      <div class="rc"><div class="tag"><b>Recusa</b>10/06/24</div><div class="body"><div class="bub in"><span class="nm cli">Gustavo · áudio</span>O que a gente tá querendo é mais esses mobiliados que já estão prontos, nem que a gente pague um pouquinho mais caro, mas pelo menos já vai rentabilizando.<span class="ts">09:28</span></div><p class="read">Regra clara: pronto e rendendo, nada na planta.</p></div></div>
+      <div class="rc"><div class="tag"><b>Retomada</b>20/10/26</div><div class="body"><div class="bub in"><span class="nm cli">Gustavo</span>Queria trocar por um apto de 02 dorm, mobiliado, que consiga locar no airbnb. Teria que ser na região central.<span class="ts">19:48</span></div><p class="read">Ele volta com o pedido pronto, depois de 440 dias de silêncio.</p></div></div>
+      <div class="rc r"><div class="tag"><b>Trava</b>21/10/26</div><div class="body"><div class="bub out"><span class="nm cor">Diego</span>Sim, dificulta bastante. É mais difícil os vendedores aceitarem no negócio.<span class="ts">09:46</span></div><p class="read">Sobre o Studio Prime não ter matrícula. É o problema a resolver primeiro.</p></div></div>
+      <div class="rc"><div class="tag"><b>Agora</b>29/10/26</div><div class="body"><div class="bub in"><span class="nm cli">Gustavo · áudio</span>Se você tiver alguma oportunidade numa região central, mobiliado ou não, e o condomínio aceita Airbnb, aí tu me avisa.<span class="ts">12:33</span></div><p class="read">Pedido aberto, à espera de resposta.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section id="fases">
+    <div class="sec-head"><div class="eyebrow">11 · Fases</div><h2>Como a negociação andou</h2></div>
+    <ol class="phases">
+      <li class="phase" style="--k:var(--good)"><span class="dot"></span><div><div class="d">nov/23</div><h3>Indicação e o Residencial Atlântico <span class="stage">Quase proposta</span></h3><p class="what">Pedido de imóvel para Airbnb. O Diego manda uma opção certeira. A sala do pai entra à venda.</p><div class="pp"><div><b class="cli">Gustavo</b>Interessado, promete proposta para segunda-feira.</div><div><b class="cor">Diego</b>Acerta a opção, mas não cobra a proposta. O imóvel é vendido.</div></div></div></li>
+      <li class="phase" style="--k:var(--cor)"><span class="dot"></span><div><div class="d">dez/23 – jan/24</div><h3>Enxurrada e troca da SUV <span class="stage">Comparando</span></h3><p class="what">Cerca de 10 imóveis em seis semanas. Dois vendedores aceitam o carro. Visitas propostas e adiadas.</p><div class="pp"><div><b class="cli">Gustavo</b>Explica o critério em áudio e recusa estúdio e prédio antigo.</div><div><b class="cor">Diego</b>Rápido na troca, mas muito volume e muita pressão.</div></div></div></li>
+      <li class="phase" style="--k:var(--warn)"><span class="dot"></span><div><div class="d">mar – abr/24</div><h3>A sala do pai e a Jardim Europa <span class="stage">Negociação paralela</span></h3><p class="what">Um comprador para a sala aparece e fecha outra em 60x. Boulevard, Jardins e Parque recusados.</p><div class="pp"><div><b class="cli">Gustavo</b>"Gostaríamos mais no centro, próximo a algum hospital."</div><div><b class="cor">Diego</b>Bom comparativo de tabela, mas fora da região pedida.</div></div></div></li>
+      <li class="phase" style="--k:var(--bad)"><span class="dot"></span><div><div class="d">jun – jul/24</div><h3>Lançamento recusado <span class="stage">Critério fechado</span></h3><p class="what">Pré-lançamento perto do Hospital Universitário com muita pressão. Gustavo recusa e lista o que quer.</p><div class="pp"><div><b class="cli">Gustavo</b>Pronto, mobiliado, central, com elevador, salão e academia.</div><div><b class="cor">Diego</b>Pergunta o critério do prédio, pela primeira vez.</div></div></div></li>
+      <li class="phase" style="--k:var(--faint)"><span class="dot"></span><div><div class="d">set/24 – ago/25</div><h3>Esfriamento <span class="stage">Pausa</span></h3><p class="what">O pai vai para o litoral. Novo lançamento e o Atlântico de volta. "Até julho não consigo."</p><div class="pp"><div><b class="cli">Gustavo</b>Interesse no Atlântico, mas sem caixa no momento.</div><div><b class="cor">Diego</b>Mantém contato e lembra do imóvel certo.</div></div></div></li>
+      <li class="phase" style="--k:var(--cli)"><span class="dot"></span><div><div class="d">out/26</div><h3>Retomada com troca <span class="stage">Retomou a busca</span></h3><p class="what">Gustavo quer trocar o Studio Prime por um 2 dormitórios de R$ 450 a 550 mil. A matrícula trava.</p><div class="pp"><div><b class="cli">Gustavo</b>Pedido completo, com números. Cobra opções em 29/10.</div><div><b class="cor">Diego</b>Qualifica rápido e aponta a matrícula. Ainda não mandou opções.</div></div></div></li>
+    </ol>
+  </section>
+
+  <!-- 10 -->
+  <section id="lado">
+    <div class="sec-head"><div class="eyebrow">12 · Lado a lado</div><h2>O que ele pediu e o que recebeu</h2></div>
+    <div class="panel scroll">
+      <table class="sbs">
+        <thead><tr><th></th><th class="cli">Gustavo pediu</th><th class="cor">Diego entregou</th></tr></thead>
+        <tbody>
+          <tr><td>Região</td><td>Centro, perto dos hospitais</td><td class="miss">5 imóveis na Jardim Europa, na Estação ou perto do shopping</td></tr>
+          <tr><td>Estágio</td><td>Pronto, já rendendo</td><td class="miss">4 lançamentos na planta</td></tr>
+          <tr><td>Tipologia</td><td>1 dormitório (agora 2)</td><td class="miss">2 estúdios ou kitnets</td></tr>
+          <tr><td>Oportunidade</td><td>Vendedor que precise vender</td><td class="ok">Entendido: trouxe vários com preço reduzido</td></tr>
+          <tr><td>Argumento</td><td>Renda e preço de entrada</td><td class="miss">Números de aluguel em parte dos envios, mas muita valorização e urgência</td></tr>
+          <tr><td>Próximo passo</td><td>Proposta no imóvel certo</td><td class="miss">Proposta de nov/23 não cobrada. Nenhuma visita confirmada</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sum">O Diego entendeu o que o Gustavo busca. O que faltou foi filtrar antes de mandar e fechar o passo seguinte quando o imóvel certo apareceu.</p>
+  </section>
+
+  <!-- 11 -->
+  <section id="qualificacao">
+    <div class="sec-head"><div class="eyebrow">13 · Qualificação</div><h2>O que já se sabe e o que falta</h2><p>Use para não repetir pergunta já respondida.</p></div>
+    <div class="panel">
+      <ul class="qual">
+        <li><span class="ic y">✓</span><div><b>Objetivo</b><span class="d2">Renda: Airbnb ou locação anual para público médico</span></div><span class="src">05/12/23</span></li>
+        <li><span class="ic y">✓</span><div><b>Imóvel</b><span class="d2">2 dormitórios, mobiliado, região central</span></div><span class="src">20/10/26</span></li>
+        <li><span class="ic y">✓</span><div><b>Prédio</b><span class="d2">Elevador, salão de festas, academia e condomínio que aceite Airbnb</span></div><span class="src">10/06/24 · 29/10/26</span></li>
+        <li><span class="ic y">✓</span><div><b>Orçamento</b><span class="d2">R$ 450 a 550 mil, com aporte de R$ 150 a 200 mil</span></div><span class="src">20/10/26</span></li>
+        <li><span class="ic p">~</span><div><b>Forma de pagamento</b><span class="d2">Troca do Studio Prime. Matrícula em processo, via contrato social entre proprietários</span></div><span class="src">21/10/26</span></li>
+        <li><span class="ic p">~</span><div><b>Decisores</b><span class="d2">Gustavo e esposa. Ela aparece nas recusas, nunca na conversa</span></div><span class="src">indício</span></li>
+        <li><span class="ic n">✕</span><div><b>Garagem</b><span class="d2">Perguntou 3 vezes, nunca disse se é obrigatória</span></div><span class="src">—</span></li>
+        <li><span class="ic n">✕</span><div><b>Plano B da troca</b><span class="d2">Venderia o Studio Prime separado, se a troca travar?</span></div><span class="src">—</span></li>
+        <li><span class="ic n">✕</span><div><b>Prazo</b><span class="d2">Quando precisa ter o novo imóvel rendendo</span></div><span class="src">—</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- objeções -->
+  <section id="objecoes">
+    <div class="sec-head"><div class="eyebrow">14 · Objeções e argumentos</div><h2>O que vai aparecer e como responder</h2><p>Ordenadas pela chance de surgir agora. Sempre entenda a causa antes de argumentar.</p></div>
+    <div class="objs">
+      <div class="obj k-warn">
+        <div class="obj-h"><span class="ico"><svg class="i"><use href="#i-doc"/></svg></span><h3>"O vendedor não aceita meu apartamento"<small>Ativa · Studio Prime sem matrícula</small></h3><span class="prob a">Probabilidade alta</span></div>
+        <div class="obj-b">
+          <div class="col"><span class="eyebrow">Evidência</span><p class="ev2">O Diego já avisou que dificulta. O Gustavo diz que a matrícula está em processo, sem prazo.</p><span class="tg f" style="justify-self:start">Fato · 21/10/26</span></div>
+          <div class="col"><span class="eyebrow">Como contornar</span><ol class="steps"><li>Pedir o contrato social e a situação do processo de matrícula.</li><li>Perguntar ao vendedor se aceita a cota antes de apresentar o imóvel.</li><li>Ter a conta pronta de vender o Studio Prime separado.</li></ol></div>
+          <div class="col"><span class="eyebrow">O que dizer</span><div class="bub out"><span class="nm cor">Diego</span>Gus, me manda o contrato social e onde está o processo da matrícula? Com isso eu já pergunto aos vendedores antes de te apresentar, pra não perdermos tempo.<span class="ts">sugestão</span></div></div>
+        </div>
+      </div>
+      <div class="obj k-cli">
+        <div class="obj-h"><span class="ico"><svg class="i"><use href="#i-money"/></svg></span><h3>"Não é oportunidade, está no preço"<small>Ele compra vendedor motivado</small></h3><span class="prob a">Probabilidade alta</span></div>
+        <div class="obj-b">
+          <div class="col"><span class="eyebrow">Evidência</span><p class="ev2">Repetido em 2023, 2024 e 2026: quer quem "precise vender". Recusou vários sem desconto.</p><span class="tg f" style="justify-self:start">Fato · 10/06/24</span></div>
+          <div class="col"><span class="eyebrow">Como contornar</span><ol class="steps"><li>Explicar por que o dono precisa vender, se for verdade.</li><li>Mostrar o comparativo de preço com o prédio e a região, como na Torre Boulevard.</li><li>Levar a conta de renda nos dois cenários.</li></ol></div>
+          <div class="col"><span class="eyebrow">O que dizer</span><div class="bub out"><span class="nm cor">Diego</span>Esse está R$ X abaixo dos outros do prédio porque o dono [motivo real]. No Airbnb dá uns R$ Y por mês, na locação anual uns R$ Z.<span class="ts">sugestão</span></div></div>
+        </div>
+      </div>
+      <div class="obj k-cor">
+        <div class="obj-h"><span class="ico"><svg class="i"><use href="#i-shield"/></svg></span><h3>"Esse condomínio não aceita Airbnb"<small>Regra nova, de 29/10/26</small></h3><span class="prob a">Probabilidade alta</span></div>
+        <div class="obj-b">
+          <div class="col"><span class="eyebrow">Evidência</span><p class="ev2">Ele pôs como condição no último áudio. Também evita prédio saturado de Airbnb.</p><span class="tg f" style="justify-self:start">Fato · 29/10/26</span></div>
+          <div class="col"><span class="eyebrow">Como contornar</span><ol class="steps"><li>Confirmar a convenção ou a ata com o síndico antes de enviar.</li><li>Dizer quantas unidades já operam como Airbnb.</li></ol></div>
+          <div class="col"><span class="eyebrow">O que dizer</span><div class="bub out"><span class="nm cor">Diego</span>Já confirmei com o síndico: o condomínio libera Airbnb, e hoje são umas 3 unidades operando.<span class="ts">sugestão</span></div></div>
+        </div>
+      </div>
+      <div class="obj k-warn">
+        <div class="obj-h"><span class="ico"><svg class="i"><use href="#i-clock"/></svg></span><h3>"Vou dar uma analisada"<small>A forma mais comum de ele adiar</small></h3><span class="prob m">Probabilidade média</span></div>
+        <div class="obj-b">
+          <div class="col"><span class="eyebrow">Evidência</span><p class="ev2">7 vezes na conversa. Quase sempre seguido de silêncio.</p><span class="tg f" style="justify-self:start">Fato · 2023–2024</span></div>
+          <div class="col"><span class="eyebrow">Como contornar</span><ol class="steps"><li>Perguntar o que falta para decidir.</li><li>Combinar uma data para a resposta.</li><li>Cobrar na data combinada, sem pressão.</li></ol></div>
+          <div class="col"><span class="eyebrow">O que dizer</span><div class="bub out"><span class="nm cor">Diego</span>Fechado. O que tu precisa ver pra decidir? Te chamo na quinta pra gente fechar se vale proposta ou não.<span class="ts">sugestão</span></div></div>
+        </div>
+      </div>
+      <div class="obj k-good">
+        <div class="obj-h"><span class="ico"><svg class="i"><use href="#i-users"/></svg></span><h3>"Vou ver com a minha esposa"<small>Decisora que não aparece na conversa</small></h3><span class="prob m">Probabilidade média</span></div>
+        <div class="obj-b">
+          <div class="col"><span class="eyebrow">Evidência</span><p class="ev2">Citada em quatro momentos de decisão, inclusive nas duas recusas mais claras.</p><span class="tg f" style="justify-self:start">Fato · 11/03/24</span></div>
+          <div class="col"><span class="eyebrow">Como contornar</span><ol class="steps"><li>Mandar um resumo de uma página para os dois.</li><li>Propor a visita com o casal.</li></ol></div>
+          <div class="col"><span class="eyebrow">O que dizer</span><div class="bub out"><span class="nm cor">Diego</span>Quer que eu monte um resumo com valores e renda prevista pra tu mostrar em casa? Se fizer sentido, a gente visita os três juntos.<span class="ts">sugestão</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="phead" style="margin-bottom:6px"><span class="ico" style="--k:var(--accent);--soft:var(--accent-soft)"><svg class="i"><use href="#i-star"/></svg></span><h3>Gatilhos que funcionam com ele<small>Nota de 0 a 10, só com base em fatos da conversa</small></h3></div>
+      <div class="trig">
+        <div class="trow"><span class="nm2"><svg class="i"><use href="#i-money"/></svg>Oportunidade real</span><span class="tbar"><i style="--w:90%"></i></span><span class="n">9</span><span class="use">Vendedor motivado e preço abaixo do prédio, com o motivo verdadeiro.</span></div>
+        <div class="trow"><span class="nm2"><svg class="i"><use href="#i-chart"/></svg>Rentabilidade</span><span class="tbar"><i style="--w:90%"></i></span><span class="n">9</span><span class="use">Diária, ocupação e aluguel anual. Ele sempre responde quando vê números de renda.</span></div>
+        <div class="trow"><span class="nm2"><svg class="i"><use href="#i-sofa"/></svg>Pronto e mobiliado</span><span class="tbar"><i style="--w:80%"></i></span><span class="n">8</span><span class="use">"Nem que a gente pague um pouquinho mais caro, mas já vai rentabilizando."</span></div>
+        <div class="trow"><span class="nm2"><svg class="i"><use href="#i-hosp"/></svg>Perto dos hospitais</span><span class="tbar"><i style="--w:80%"></i></span><span class="n">8</span><span class="use">Diga a distância real até o Santa Casa, o Hospital Central ou o Universitário.</span></div>
+        <div class="trow"><span class="nm2"><svg class="i"><use href="#i-building"/></svg>Estrutura do prédio</span><span class="tbar"><i style="--w:60%"></i></span><span class="n">6</span><span class="use">Elevador, salão e academia como dado, porque atraem hóspede.</span></div>
+        <div class="trow"><span class="nm2"><svg class="i"><use href="#i-up"/></svg>Valorização</span><span class="tbar"><i style="--w:30%"></i></span><span class="n">3</span><span class="use">Não decide por isso. Recusou Jardim Europa e lançamentos.</span></div>
+        <div class="trow off"><span class="nm2"><svg class="i"><use href="#i-ban"/></svg>Urgência e escassez</span><span class="tbar"><i style="--w:20%"></i></span><span class="n">2</span><span class="use"><b>Só com fato.</b> Foi real uma vez, no Atlântico. Ali faltou cobrar a proposta, não pressionar.</span></div>
+      </div>
+    </div>
+
+    <div class="say">
+      <div class="panel yes">
+        <h3><svg class="i" style="color:var(--good)"><use href="#i-check"/></svg>O que falar</h3>
+        <ul>
+          <li><svg class="i"><use href="#i-check"/></svg><span><b>"O dono precisa vender porque…"</b><small>O motivo real é o argumento que ele mais valoriza.</small></span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span><b>A conta de renda nos dois cenários</b><small>Airbnb e locação anual, com números.</small></span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span><b>"Já confirmei que o condomínio aceita Airbnb"</b><small>Responde a regra nova antes que ele pergunte.</small></span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span><b>Uma data para a resposta</b><small>Transforma "vou analisar" em próximo passo.</small></span></li>
+        </ul>
+      </div>
+      <div class="panel no">
+        <h3><svg class="i" style="color:var(--bad)"><use href="#i-x"/></svg>O que não falar</h3>
+        <ul>
+          <li><svg class="i"><use href="#i-x"/></svg><span><b>"Vai derreter", "tá dado", "desesperados"</b><small>Usado várias vezes, sem nenhum efeito.</small></span></li>
+          <li><svg class="i"><use href="#i-x"/></svg><span><b>Lançamento na planta</b><small>Recusado com todas as letras em 10/06/24.</small></span></li>
+          <li><svg class="i"><use href="#i-x"/></svg><span><b>"Posso bater o contrato já?"</b><small>Antes de ele escolher, soa como pressa do corretor.</small></span></li>
+          <li><svg class="i"><use href="#i-x"/></svg><span><b>Perguntar de novo faixa ou tipologia</b><small>Ele respondeu tudo em 20/10/26.</small></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="phead" style="margin-bottom:2px"><span class="ico" style="--k:var(--accent);--soft:var(--accent-soft)"><svg class="i"><use href="#i-star"/></svg></span><h3>Fale a língua dele<small>O que ele mais diz nas mensagens e áudios. Tamanho = vezes que disse.</small></h3></div>
+      <div class="cloud" aria-label="Palavras mais usadas pelo cliente"><span class="w3" style="--n:3">academia<sup>3×</sup></span><span class="w1" style="--n:11">mobiliado<sup>11×</sup></span><span class="w3" style="--n:5">troca<sup>5×</sup></span><span class="w3" style="--n:3">esposa<sup>3×</sup></span><span class="w2" style="--n:7">oportunidade<sup>7×</sup></span><span class="w1" style="--n:14">rentabilizando<sup>14×</sup></span><span class="w3" style="--n:4">elevador<sup>4×</sup></span><span class="w3" style="--n:5">à vista<sup>5×</sup></span><span class="w2" style="--n:7">Airbnb<sup>7×</sup></span><span class="w1" style="--n:12">pronto<sup>12×</sup></span><span class="w2" style="--n:8">hospitais<sup>8×</sup></span><span class="w2" style="--n:9">centro<sup>9×</sup></span></div>
+      <h3 style="font-size:.9rem;margin-top:10px">Evite (são do vendedor, não dele)</h3>
+      <div class="avoid"><span>derreter</span><span>imperdível</span><span>lançamento</span><span>valorização</span><span>última unidade</span><span>tá dado</span></div>
+      <div class="model"><b style="display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Frase modelo</b>"Gus, achei um <mark>pronto</mark>, <mark>mobiliado</mark>, no <mark>centro</mark> perto dos <mark>hospitais</mark>, que já sai <mark>rentabilizando</mark>."</div>
+      <p style="margin:12px 0 0;font-size:.8rem;color:var(--muted)">Por que funciona: quando você descreve o imóvel com as palavras que o cliente usa para o próprio desejo, ele se reconhece na oferta. Palavras de pressão que ele nunca usou soam como interesse do corretor.</p>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section id="acao">
+    <div class="sec-head"><div class="eyebrow">15 · Próxima ação</div><h2>Uma coisa só</h2></div>
+    <div class="action">
+      <div class="eyebrow cor">Objetivo</div>
+      <div class="goal">Responder ao áudio de 29/10 resolvendo primeiro como a troca vai funcionar, e só então mandar no máximo duas opções que passem no filtro completo.</div>
+      <div class="phone" id="msgBox">
+        <div class="bub out"><span class="nm cor">Diego</span>Gus, ouvi teu áudio. Vou te mandar só o que passar em tudo: 2 dorm, mobiliado, centro perto dos hospitais, com elevador e academia, e condomínio que libere Airbnb.<span class="ts">14:30</span></div>
+        <div class="bub out"><span class="nm cor">Diego</span>Pra eu já perguntar aos vendedores sobre a troca: me manda o contrato social do Studio Prime e onde está o processo da matrícula?<span class="ts">14:30</span></div>
+        <div class="bub out"><span class="nm cor">Diego</span>E se a troca travar, tu toparia vender o teu separado e comprar com o valor? Te mostro as duas contas.<span class="ts">14:31</span></div>
+      </div>
+      <div class="btnrow"><button class="btn" type="button" id="copyBtn">Copiar mensagem</button><span id="copyMsg" aria-live="polite"></span></div>
+      <div class="tip"><b>Formato:</b> ele responde bem a áudio para contexto e quer números por escrito. Mande isto em texto, à tarde, que é quando ele mais escreve.</div>
+      <div>
+        <h3 style="margin-bottom:10px">Se não houver resposta</h3>
+        <ul class="fu">
+          <li><b>31/10 · tarde</b><span>Reenviar só a pergunta da matrícula, em uma linha.</span></li>
+          <li><b>03/11 · tarde</b><span>Mandar a primeira oportunidade filtrada, com a conta de renda pronta.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-bottom:10px">Depois disso, por prioridade</h3>
+        <ul class="prio">
+          <li><span class="prob a">Alta</span><span>Checar a convenção de cada prédio sobre Airbnb antes de enviar.</span></li>
+          <li><span class="prob a">Alta</span><span>Descobrir prazo e situação da matrícula do Studio Prime.</span></li>
+          <li><span class="prob m">Média</span><span>Montar uma planilha simples de renda: Airbnb e locação anual.</span></li>
+          <li><span class="prob m">Média</span><span>Perguntar se garagem é obrigatória.</span></li>
+          <li><span class="prob b">Baixa</span><span>Preparar um resumo de uma página para ele levar à esposa.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="fm" aria-label="Followup Matador">
+      <div>
+        <div class="logo">FOLLOWUP<i>Matador</i></div>
+        <div class="kick">KIT ESSENCIAL DO CORRETOR</div>
+        <h3>O Raio-X mostra o que falar.<em>O Matador lembra quando.</em></h3>
+      </div>
+      <div>
+        <div class="hot">Cada retorno esquecido é comissão que você já perdeu sem saber.</div>
+        <p>Quer esse follow-up organizado? Assista à <b>aula completa</b> e baixe o assistente que lê suas conversas e coloca cada retorno <b>direto na sua agenda</b>, com a mensagem pronta. <span class="g" style="white-space:nowrap">De graça.</span></p>
+      </div>
+      <div class="cta">
+        <a class="go" href="https://gptimob.com.br/followup/?utm_source=raiox&amp;utm_medium=relatorio&amp;utm_campaign=proxima_acao" target="_blank" rel="noopener">Organizar meus follow-ups <span aria-hidden="true">→</span></a>
+        <div class="fine">Grátis · Seu número não é compartilhado.</div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 13 -->
+  <section id="incertezas">
+    <div class="sec-head"><div class="eyebrow">16 · Não sabemos</div><h2>O que a conversa não mostra</h2></div>
+    <div class="panel">
+      <ul class="unk">
+        <li>O que foi dito na ligação de 11/07/24 e em encontros na imobiliária.</li>
+        <li>O que a esposa pensa. Tudo sobre ela chega pelo Gustavo.</li>
+        <li>Quando sai a matrícula do Studio Prime, e se sai.</li>
+        <li>Se o Gustavo está olhando imóveis com outras imobiliárias.</li>
+        <li>A transcrição automática troca alguns nomes, como "Diego" e nomes de empreendimentos. O sentido dos áudios foi conferido com o texto ao redor.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section id="card">
+    <div class="sec-head"><div class="eyebrow">17 · Card</div><h2>Resumo para o grupo do time</h2><p>Sem mensagens do cliente. Só o essencial para o gestor acompanhar.</p></div>
+    <div class="cardwrap">
+      <div class="scard">
+        <div class="top"><span>Raio-X</span><span>29/10/2026</span></div>
+        <div class="big mono">58<small>/100</small></div>
+        <div class="l1">Gustavo × Diego · troca do Studio Prime</div>
+        <div class="l2">Busca retomada com números. Falta resolver a matrícula antes de mandar opções.</div>
+        <div class="sel"><span>Quebra-silêncio</span><span>Resposta-relâmpago</span><span>Filtrar antes de enviar</span></div>
+      </div>
+    </div>
+    <div class="badges" aria-label="Selos do corretor">
+      <span class="badge" style="--k:var(--good)"><i></i>Quebra-silêncio</span>
+      <span class="badge" style="--k:var(--good)"><i></i>Resposta-relâmpago</span>
+      <span class="badge" style="--k:var(--good)"><i></i>Três anos de relacionamento</span>
+      <span class="badge" style="--k:var(--warn)"><i></i>Pressão demais</span>
+      <span class="badge" style="--k:var(--warn)"><i></i>Fora do critério</span>
+      <span class="badge" style="--k:var(--warn)"><i></i>Proposta sem follow-up</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>Exemplo com conversa fictícia. Números contados a partir do arquivo exportado do WhatsApp; áudios transcritos automaticamente. Notas e leituras são estimativas da IA com base no texto, não fatos sobre as pessoas.</span>
+    <span>Não são feitas inferências sobre saúde, religião, política, origem ou outros dados sensíveis.</span>
+  </footer>
+</div>
+
+
+<div class="getbar" role="region" aria-label="Peça o seu Raio-X">
+  <div class="gb-in">
+    <div class="gb-txt"><b>Quer o Raio-X das suas conversas?</b><span><span class="gb-promo">Oferta de fundador: <s>R$ 47,90</s> </span><b class="gb-now">R$ 19,90</b> · entrega em até 24 horas</span></div>
+    <a class="gb-btn" href="../#enviar">Enviar minha conversa</a>
+  </div>
+</div>
+<script>
+(function(){
+  if(Date.now() > new Date("2026-11-10T23:59:59-03:00").getTime()){
+    document.querySelectorAll(".gb-promo").forEach(function(e){e.hidden=true;});
+    document.querySelectorAll(".gb-now").forEach(function(e){e.textContent="R$ 47,90";});
+  }
+})();
+</script>
+<script>
+(function(){
+  var out=document.getElementById('guessOut');
+  var btns=document.querySelectorAll('.guess button');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    btns.forEach(function(x){x.classList.remove('picked','hit')});
+    var right=document.querySelector('[data-g="decidir"]');
+    right.classList.add('hit');
+    if(b===right){out.textContent='Acertou. Ele quer comprar, mas a troca e a falta de filtro travam a negociação.';}
+    else{b.classList.add('picked');out.textContent='A conversa aponta para "quer comprar, mas está travado". Veja abaixo o que segura.';}
+  });});
+  var cb=document.getElementById('copyBtn'),cm=document.getElementById('copyMsg');
+  cb.addEventListener('click',function(){
+    var txt=Array.prototype.map.call(document.querySelectorAll('#msgBox .bub'),function(el){
+      return Array.prototype.filter.call(el.childNodes,function(n){return n.nodeType===3}).map(function(n){return n.textContent}).join('').trim();
+    }).join('\n\n');
+    function fallback(){var r=document.createRange();r.selectNodeContents(document.getElementById('msgBox'));var s=getSelection();s.removeAllRanges();s.addRange(r);cm.textContent='Texto selecionado. Use copiar do sistema.';}
+    try{navigator.clipboard.writeText(txt).then(function(){cm.textContent='Copiado.'},fallback);}catch(e){fallback();}
+  });
+})();
+</script>
+<script>
+(function(){
+  var root=document.documentElement, KEY='raiox-tema', btns=document.querySelectorAll('.themes button');
+  function mark(t){btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.t===t?'true':'false')});}
+  function apply(t){if(t==='light'||t==='dark'){root.setAttribute('data-theme',t)}else{root.removeAttribute('data-theme')}mark(t);}
+  var saved=null; try{saved=localStorage.getItem(KEY)}catch(e){}
+  if(saved){apply(saved)}else{mark(root.getAttribute('data-theme')||'system')}
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.t);try{localStorage.setItem(KEY,b.dataset.t)}catch(e){}});});
+})();
+</script>
+
+</body>
+</html>
