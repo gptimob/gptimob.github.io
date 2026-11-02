@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPTImob — inteligência artificial aplicada ao mercado imobiliário</title>
-<meta name="description" content="Agentes de IA que atendem os leads da sua imobiliária, imersão de implantação para o seu time, e soluções para o corretor autônomo. Tudo construído dentro do mercado imobiliário.">
+<meta name="description" content="Agentes de IA que atendem os leads da sua imobiliária, inteligência de negócios com os dados do seu CRM e WhatsApp, imersão de implantação para o seu time e soluções para o corretor. Tudo construído dentro do mercado imobiliário.">
 <meta name="theme-color" content="#FAFAF7">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
@@ -130,7 +130,8 @@ p:last-child{margin-bottom:0}
   transition:color .16s ease;
 }
 .nav-links a:hover{color:var(--blue)}
-@media (max-width:860px){.nav-links{display:none}}
+@media (max-width:1100px){.nav-links{gap:20px}.nav-links a{font-size:14.5px}.brand span{display:none}}
+@media (max-width:940px){.nav-links{display:none}}
 @media (max-width:560px){
   .nav-in{height:58px;gap:10px}
   .brand{font-size:17px;white-space:nowrap}
@@ -389,6 +390,56 @@ a.agent{text-decoration:none;color:inherit}
 .start-note strong{color:var(--ink);font-weight:600}
 
 /* ============================================================
+   Inteligência: DNA Imob + Raio-X
+   ============================================================ */
+.intel-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:860px){.intel-grid{grid-template-columns:1fr}}
+.intel{
+  --acc:var(--blue);--acc-soft:rgba(27,79,216,.08);--acc-metal:var(--grad);
+  display:flex;flex-direction:column;gap:22px;
+  background:#fff;border:1px solid var(--line);border-radius:20px;
+  padding:clamp(26px,3.2vw,38px);position:relative;overflow:hidden;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.intel::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--acc-metal)}
+.intel:hover{transform:translateY(-3px);box-shadow:0 20px 44px -26px rgba(12,26,43,.4)}
+.intel-dna{
+  --acc:#047857;--acc-soft:#EEF9F4;
+  --acc-metal:linear-gradient(100deg,#053B2C 0%,#0E8F68 30%,#7EE8C2 47%,#0E8F68 62%,#064A37 100%);
+}
+.intel-dna:hover{border-color:rgba(5,150,105,.4)}
+.intel-rx{
+  --acc:#2433E8;--acc-soft:#EEF0FE;
+  --acc-metal:linear-gradient(100deg,#0A1A8F 0%,#2433E8 30%,#8E9BFF 47%,#2433E8 62%,#0B1C9C 100%);
+}
+.intel-rx:hover{border-color:rgba(36,51,232,.4)}
+.intel-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.intel-kicker{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+.intel-tag{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;font-weight:500;
+  color:var(--acc);background:var(--acc-soft);padding:5px 11px;border-radius:100px;white-space:nowrap;
+}
+.intel h3{
+  font-size:clamp(28px,3.2vw,38px);letter-spacing:-.035em;margin-bottom:8px;
+  background:var(--acc-metal);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.intel-sub{font-weight:600;color:var(--ink);font-size:16px;margin-bottom:12px}
+.intel p.intel-txt{color:var(--ink-2);font-size:16px}
+.intel ul{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:grid;gap:10px}
+.intel li{position:relative;padding-left:20px;font-size:15px;color:var(--ink-2)}
+.intel li::before{
+  content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:2px;background:var(--acc);
+}
+.intel-cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:auto}
+.btn-acc{background:var(--acc);color:#fff;box-shadow:0 8px 22px -12px var(--acc)}
+.btn-acc:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.intel-link{font-size:15px;font-weight:600;color:var(--acc);text-decoration:none}
+.intel-link:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* ============================================================
    Faixa corretores
    ============================================================ */
 .strip{
@@ -549,6 +600,8 @@ a.agent{text-decoration:none;color:inherit}
     <div class="nav-links">
       <a href="#imobiliarias">Imobiliárias</a>
       <a href="#corretores">Corretores</a>
+      <a href="/dna/">DNA Imob</a>
+      <a href="/raiox/">Raio-X</a>
       <a href="#empresa">A GPTImob</a>
     </div>
     <a class="btn btn-primary btn-sm" href="/diagnostico/">Solicitar diagnóstico</a>
@@ -887,6 +940,61 @@ a.agent{text-decoration:none;color:inherit}
   </div>
 </section>
 
+<!-- ============ INTELIGÊNCIA: DNA IMOB + RAIO-X ============ -->
+<section class="sec" id="inteligencia">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Inteligência sobre a operação</p>
+      <h2>Os dados já estão no CRM e no WhatsApp. <span class="grad-txt">Agora eles viram decisão.</span></h2>
+      <p class="lede">Os agentes trabalham dentro da operação. Estas duas soluções leem o que ela já produziu: uma para a diretoria enxergar a empresa, outra para o corretor enxergar cada negociação.</p>
+    </div>
+
+    <div class="intel-grid">
+      <article class="intel intel-dna">
+        <div class="intel-top">
+          <span class="intel-kicker">Para a diretoria</span>
+          <span class="intel-tag">Demonstração gratuita</span>
+        </div>
+        <div>
+          <h3>DNA Imob</h3>
+          <p class="intel-sub">Inteligência de negócios para imobiliárias</p>
+          <p class="intel-txt">Cruzamos o CRM com as conversas de WhatsApp e entregamos um painel com quem fecha com vocês, os imóveis que giram, a carga ideal por corretor e um plano de ação em ordem de prioridade.</p>
+        </div>
+        <ul>
+          <li>CRM e WhatsApp cruzados, não só o relatório do sistema</li>
+          <li>Sem trocar de CRM nem mudar a rotina dos corretores</li>
+          <li>Painel atualizado todo mês, com reunião de leitura dos números</li>
+        </ul>
+        <div class="intel-cta">
+          <a class="btn btn-acc btn-sm" href="/dna/">Conhecer o DNA Imob <span aria-hidden="true">&rarr;</span></a>
+          <a class="intel-link" href="/dna/modelo/">Ver um painel de exemplo</a>
+        </div>
+      </article>
+
+      <article class="intel intel-rx">
+        <div class="intel-top">
+          <span class="intel-kicker">Para o corretor</span>
+          <span class="intel-tag">Uma conversa, um relatório</span>
+        </div>
+        <div>
+          <h3>Raio-X da Negociação</h3>
+          <p class="intel-sub">Análise de conversas de WhatsApp</p>
+          <p class="intel-txt">A IA lê a conversa com o cliente, inclusive os áudios, e devolve quem decide, o que está travando a venda e a próxima mensagem pronta para enviar.</p>
+        </div>
+        <ul>
+          <li>Os áudios do cliente também entram na análise</li>
+          <li>Próxima mensagem sugerida, pronta para copiar</li>
+          <li>A conversa é excluída assim que o relatório é entregue</li>
+        </ul>
+        <div class="intel-cta">
+          <a class="btn btn-acc btn-sm" href="/raiox/">Fazer o Raio-X <span aria-hidden="true">&rarr;</span></a>
+          <a class="intel-link" href="/raiox/exemplo/">Ver um relatório de exemplo</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FAIXA CORRETORES ============ -->
 <section class="sec strip" id="corretores">
   <div class="wrap strip-in">
@@ -1040,6 +1148,7 @@ a.agent{text-decoration:none;color:inherit}
         <h5>Imobili&aacute;rias</h5>
         <ul>
           <li><a href="/#imobiliarias">Agentes de IA</a></li>
+          <li><a href="/dna/">DNA Imob</a></li>
           <li><a href="/imersao/">Imers&atilde;o de implanta&ccedil;&atilde;o</a></li>
           <li><a href="/diagnostico/">Diagn&oacute;stico gratuito</a></li>
         </ul>
@@ -1049,6 +1158,7 @@ a.agent{text-decoration:none;color:inherit}
         <ul>
           <li><a href="https://guidoguia.com.br" target="_blank" rel="noopener">Guido</a></li>
           <li><a href="/kit-essencial/">Kit Essencial</a></li>
+          <li><a href="/raiox/">Raio-X da Negocia&ccedil;&atilde;o</a></li>
           <li><a href="/followup/">Followup Matador</a></li>
         </ul>
       </div>
