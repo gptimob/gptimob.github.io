@@ -250,7 +250,10 @@ a.agent{text-decoration:none;color:inherit}
 
 .crm-group{margin-bottom:22px}
 .crm-group:last-child{margin-bottom:0}
-.logos.logos-crm{grid-template-columns:repeat(4,1fr)}
+.logos.logos-crm{display:flex;flex-wrap:wrap;justify-content:center}
+.logos.logos-crm .logo-cell{flex:0 0 calc((100% - 40px)/5)}
+@media (max-width:900px){.logos.logos-crm .logo-cell{flex-basis:calc((100% - 20px)/3)}}
+@media (max-width:680px){.logos.logos-crm .logo-cell{flex-basis:calc((100% - 10px)/2)}}
 .logos.logos-omni{grid-template-columns:repeat(4,1fr)}
 @media (max-width:900px){.logos.logos-crm,.logos.logos-omni{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:600px){.logos.logos-crm,.logos.logos-omni{grid-template-columns:repeat(2,1fr)}}
@@ -1204,6 +1207,7 @@ a.agent{text-decoration:none;color:inherit}
         <div class="logo-cell"><img src="/logos/loft.jpeg" alt="Loft CRM" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/kurole.jpeg" alt="Kurole" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/cv.jpeg" alt="CV CRM" loading="lazy"></div>
+        <div class="logo-cell"><img src="/logos/sienge.jpeg" alt="Sienge" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/rdstation.jpeg" alt="RD Station" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/bitrix.jpeg" alt="Bitrix24" loading="lazy"></div>
         <div class="logo-cell"><img src="/logos/pipedrive.jpeg" alt="Pipedrive" loading="lazy"></div>
