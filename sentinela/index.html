@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sentinela · A sala de operações das conversas da sua imobiliária | GPTImob</title>
+<meta name="description" content="O Sentinela lê 100% das conversas de WhatsApp dos corretores, com áudios e mensagens apagadas, e avisa o gestor quando um lead fica sem resposta, esfria ou sai insatisfeito.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FCD34D'/%3E%3Cstop offset='.5' stop-color='%23D97706'/%3E%3Cstop offset='1' stop-color='%23431C03'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'%3E%3Ccircle cx='32' cy='32' r='17'/%3E%3Ccircle cx='32' cy='32' r='8'/%3E%3Cpath d='M32 32 46 18'/%3E%3C/g%3E%3C/svg%3E">
+<meta name="theme-color" content="#0A0E15">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="GPTImob">
+<meta property="og:title" content="Sentinela · A sala de operações das conversas da sua imobiliária">
+<meta property="og:description" content="Lê 100% das conversas de WhatsApp dos corretores e avisa o gestor antes de o lead esfriar.">
+<meta property="og:image" content="https://gptimob.com.br/og-cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Mesma família visual do Raio-X (azul) e do DNA (esmeralda): aqui o âmbar de sinal/radar sobre blocos noite */
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --tint:#F7F6F3; --line:#E7E4DD; --line-strong:#D6D1C6;
+  --ink:#12100C; --muted:#615B50; --faint:#958E81;
+  --night:#0A0E15; --night2:#121926; --night3:#1B2433; --nline:rgba(255,255,255,.09); --ntext:#C9D1DD; --nmuted:#8792A3;
+  --am:#D97706; --am-ink:#B45309; --am-light:#FBBF24; --am-soft:#FEF3C7; --am-soft2:#FFFAEB;
+  --red:#DC4A3A; --red-soft:#FDE8E5; --green:#16A34A; --green-soft:#DCFCE7; --blue:#2F6FB5; --blue-soft:#E6EEF8;
+  --metal-ink:linear-gradient(100deg,#5A2A02 0%,#C2640A 30%,#FCD34D 47%,#C2640A 62%,#6B3203 100%);
+  --metal-light:linear-gradient(100deg,#E9B866 0%,#FFF4D6 30%,#F4C870 52%,#FFF8E6 70%,#D9A04A 100%);
+  --am-grad:linear-gradient(145deg,#FCD34D 0%,#D97706 50%,#431C03 100%);
+  --f-display:"Inter Tight","Helvetica Neue",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Helvetica Neue",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--am-ink)}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.035em}
+p{margin:0}
+:focus-visible{outline:3px solid var(--am-light);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 .74rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--am-ink)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.metal{background:var(--metal-ink);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dark .metal{background:var(--metal-light);-webkit-background-clip:text;background-clip:text}
+
+/* topo */
+header.top{position:sticky;top:0;z-index:20;background:rgba(10,14,21,.82);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid var(--nline)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--am-grad);display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 4px 14px rgba(217,119,6,.35)}
+.brand b{font:800 1.08rem/1.1 var(--f-display);display:block;letter-spacing:-.02em}
+.brand small{font-size:.75rem;color:var(--nmuted)}
+.top nav{display:flex;gap:22px;font-size:.92rem;align-items:center}
+.top nav a{color:var(--ntext);text-decoration:none}
+.top nav a:hover{color:var(--am-light)}
+.top nav a.pill{background:var(--am);color:#fff;padding:8px 14px;border-radius:999px;font-weight:600;white-space:nowrap}
+.top nav a.pill:hover{background:var(--am-ink);color:#fff}
+.top nav .s{display:none}
+@media(max-width:820px){.top nav a:not(.pill){display:none}}
+@media(max-width:520px){.top nav .l{display:none}.top nav .s{display:inline}}
+
+.cta{border:0;border-radius:999px;background:var(--am);color:#fff;font:600 1.02rem var(--f-body);padding:10px 10px 10px 24px;display:inline-flex;align-items:center;gap:12px;text-decoration:none;transition:background .15s}
+.cta:hover{background:var(--am-ink)}
+.cta i{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-style:normal}
+.ghost{color:inherit;font-weight:600;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+.dark{background:var(--night);color:#fff}
+.dark p{color:var(--ntext)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:72px 0 88px}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 78% 40%,rgba(217,119,6,.16),transparent 70%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 44px),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 44px);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+.live{display:inline-flex;align-items:center;gap:10px;font:600 .74rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--am-light);border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.06);padding:8px 12px;border-radius:999px}
+.live b{width:8px;height:8px;border-radius:50%;background:var(--am-light);box-shadow:0 0 0 0 rgba(251,191,36,.6);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(251,191,36,.55)}70%{box-shadow:0 0 0 9px rgba(251,191,36,0)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
+.hero h1{font-size:clamp(2.3rem,5vw,3.9rem);line-height:1.02;margin:22px 0 20px;color:#fff}
+.hero .lead{font-size:1.14rem;max-width:520px}
+.hero .acts{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:32px}
+.hero .acts .ghost{color:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:30px}
+.chips span{font:500 .8rem var(--f-mono);color:var(--nmuted);border:1px solid var(--nline);border-radius:8px;padding:6px 10px}
+
+/* console do hero */
+.console{position:relative;background:linear-gradient(180deg,var(--night2),#0E141F);border:1px solid var(--nline);border-radius:20px;padding:16px;box-shadow:0 40px 90px rgba(0,0,0,.45)}
+.c-bar{display:flex;justify-content:space-between;align-items:center;font:600 .72rem var(--f-mono);color:var(--nmuted);letter-spacing:.08em;text-transform:uppercase;padding:2px 4px 12px;border-bottom:1px solid var(--nline);margin-bottom:14px}
+.c-bar em{font-style:normal;color:var(--am-light)}
+.c-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+.chat{background:#0B141A;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:7px;font-size:.82rem;line-height:1.4}
+.chat-h{display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:3px}
+.av{width:28px;height:28px;border-radius:50%;background:#2A3942;color:#D1D7DB;display:grid;place-items:center;font:700 .7rem var(--f-body);flex:none}
+.chat-h b{color:#E9EDEF;font-size:.84rem;display:block}
+.chat-h small{color:#8696A0;font-size:.7rem}
+.m{max-width:88%;padding:6px 9px 4px;border-radius:9px;color:#E9EDEF;position:relative}
+.m.in{background:#202C33;align-self:flex-start;border-top-left-radius:2px}
+.m.out{background:#005C4B;align-self:flex-end;border-top-right-radius:2px}
+.m small{display:block;text-align:right;font-size:.62rem;color:rgba(233,237,239,.55);margin-top:1px}
+.m.del{font-style:italic;color:rgba(233,237,239,.6)}
+.m.flag{outline:2px solid var(--am-light);outline-offset:2px}
+.m.flag.r{outline-color:#F87171}
+.gap{align-self:center;font:600 .66rem var(--f-mono);color:var(--am-light);background:rgba(251,191,36,.1);border-radius:6px;padding:3px 8px;letter-spacing:.04em}
+.tags{display:flex;flex-direction:column;gap:8px}
+.tg{background:var(--night3);border:1px solid var(--nline);border-radius:12px;padding:10px 12px}
+.tg span{display:block;font:600 .64rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--nmuted);margin-bottom:3px}
+.tg b{color:#fff;font:700 .92rem/1.25 var(--f-display);letter-spacing:-.01em}
+.tg small{display:block;color:var(--nmuted);font-size:.74rem;margin-top:2px}
+.tg.warn{border-color:rgba(251,191,36,.35)} .tg.warn span{color:var(--am-light)}
+.tg.bad{border-color:rgba(248,113,113,.35)} .tg.bad span{color:#F87171}
+.tg.ok span{color:#4ADE80}
+.ok-line{display:flex;align-items:center;gap:8px;font:600 .74rem var(--f-mono);color:#4ADE80;margin-top:12px;padding:0 4px}
+@media(max-width:960px){.hero .wrap{grid-template-columns:1fr;gap:44px}.hero{padding:52px 0 64px}}
+@media(max-width:520px){.c-grid{grid-template-columns:1fr}.console{padding:12px}}
+
+/* seções */
+section.sec{padding:96px 0}
+.tint{background:var(--tint)}
+.head{max-width:760px;margin-bottom:48px}
+.head h2{font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.08;margin:14px 0 14px}
+.head p{color:var(--muted);font-size:1.08rem}
+.dark .head p{color:var(--ntext)}
+.center{text-align:center;margin-left:auto;margin-right:auto}
+@media(max-width:680px){section.sec{padding:68px 0}}
+
+/* problema */
+.prob{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pb{border:1px solid var(--line);border-radius:18px;padding:26px;background:#fff}
+.pb .n{font:700 2.4rem/1 var(--f-display);letter-spacing:-.04em}
+.pb h3{font-size:1.14rem;margin:14px 0 8px;letter-spacing:-.02em}
+.pb p{color:var(--muted);font-size:.96rem}
+.blind{margin-top:22px;border-radius:18px;background:var(--night);color:#fff;padding:22px 26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.blind p{color:var(--ntext);max-width:640px}
+.blind b{color:#fff}
+@media(max-width:860px){.prob{grid-template-columns:1fr}}
+
+/* o que vigia */
+.vtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.vtabs button{font:600 .92rem var(--f-body);border:1px solid var(--line-strong);background:#fff;color:var(--ink);border-radius:999px;padding:9px 16px;cursor:pointer}
+.vtabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.vpanel{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+.vpanel[hidden]{display:none}
+.vlist{display:flex;flex-direction:column;gap:12px}
+.vi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.vi h3{font-size:1.06rem;letter-spacing:-.02em;display:flex;gap:10px;align-items:center}
+.vi h3 .ic{width:28px;height:28px;border-radius:8px;background:var(--am-soft);color:var(--am-ink);display:grid;place-items:center;flex:none}
+.vi p{color:var(--muted);font-size:.94rem;margin-top:6px}
+.vshot{background:var(--night);border-radius:20px;padding:22px;color:#fff;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.vshot .cap{font:600 .7rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--nmuted)}
+@media(max-width:860px){.vpanel{grid-template-columns:1fr}}
+
+/* alerta (mensagem que chega no gestor) */
+.alert{background:#0B141A;border-radius:14px;padding:12px;font-size:.86rem;line-height:1.45;color:#E9EDEF}
+.alert .bub{background:#202C33;border-radius:10px;border-top-left-radius:2px;padding:10px 12px}
+.alert .bub b{color:#fff}
+.alert .bub .k{display:inline-block;font:700 .66rem var(--f-mono);letter-spacing:.08em;border-radius:5px;padding:2px 6px;margin-bottom:6px}
+.k.red{background:rgba(248,113,113,.16);color:#FCA5A5}
+.k.amb{background:rgba(251,191,36,.15);color:#FCD34D}
+.k.grn{background:rgba(74,222,128,.14);color:#86EFAC}
+.alert .btns{display:flex;gap:6px;margin-top:8px}
+.alert .btns span{flex:1;text-align:center;font-size:.78rem;color:#53BDEB;background:#202C33;border-radius:8px;padding:7px 4px}
+.alert small{display:block;text-align:right;font-size:.64rem;color:#8696A0;margin-top:4px}
+
+/* tabela/relatório */
+.rep{background:var(--night2);border:1px solid var(--nline);border-radius:14px;padding:14px}
+.rep h4{margin:0 0 10px;font:700 .95rem var(--f-display);color:#fff;letter-spacing:-.01em;display:flex;justify-content:space-between}
+.rep h4 small{font:500 .7rem var(--f-mono);color:var(--nmuted)}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.kp div{background:var(--night3);border-radius:10px;padding:9px 10px}
+.kp b{display:block;font:700 1.2rem/1.1 var(--f-display);color:#fff}
+.kp span{font-size:.68rem;color:var(--nmuted)}
+.tb{width:100%;border-collapse:collapse;font-size:.78rem}
+.tb th{font:600 .62rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--nmuted);text-align:left;padding:6px 6px;border-bottom:1px solid var(--nline)}
+.tb td{padding:7px 6px;border-bottom:1px solid var(--nline);color:var(--ntext)}
+.tb td:first-child{color:#fff;font-weight:600}
+.tb .bad{color:#FCA5A5} .tb .good{color:#86EFAC} .tb .mid{color:#FCD34D}
+.bar{height:6px;border-radius:9px;background:var(--night3);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--am-light);border-radius:9px}
+
+/* como funciona */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:s}
+.st{border:1px solid var(--nline);background:var(--night2);border-radius:18px;padding:22px}
+.st .num{font:600 .74rem var(--f-mono);color:var(--am-light);letter-spacing:.1em}
+.st h3{color:#fff;font-size:1.12rem;margin:12px 0 8px;letter-spacing:-.02em}
+.st p{font-size:.92rem}
+@media(max-width:960px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.fcol{display:flex;flex-direction:column;gap:10px}
+.fcol .lbl{font:600 .72rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--am-light);display:flex;gap:8px;align-items:center}
+.fcol .lbl i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1px solid rgba(251,191,36,.4);display:grid;place-items:center;font-size:.7rem}
+.fcol .sub{font-size:.88rem;color:var(--nmuted)}
+@media(max-width:960px){.flow{grid-template-columns:1fr}}
+
+/* pergunte */
+.ask{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.ask ul{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:10px}
+.ask li{display:flex;gap:10px;color:var(--muted)}
+.ask li::before{content:"›";color:var(--am);font-weight:700}
+.askbox{background:var(--night);border-radius:22px;padding:18px}
+@media(max-width:900px){.ask{grid-template-columns:1fr;gap:30px}}
+
+/* zero setup */
+.zs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.zs div{border-top:2px solid var(--am);padding-top:18px}
+.zs h3{font-size:1.2rem;letter-spacing:-.02em;margin-bottom:8px}
+.zs p{color:var(--muted);font-size:.96rem}
+.lgpd{margin-top:36px;border:1px solid var(--line);border-radius:18px;padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;background:var(--am-soft2)}
+.lgpd .ic{width:42px;height:42px;border-radius:12px;background:var(--am-soft);color:var(--am-ink);display:grid;place-items:center}
+.lgpd p{color:var(--muted);font-size:.96rem}
+.lgpd b{color:var(--ink)}
+@media(max-width:760px){.zs{grid-template-columns:1fr}}
+
+/* família */
+.fam{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fm{border:1px solid var(--line);border-radius:18px;padding:24px;text-decoration:none;color:inherit;background:#fff;display:flex;flex-direction:column;gap:8px}
+.fm.on{border-color:var(--am);box-shadow:0 0 0 3px var(--am-soft)}
+.fm .t{font:600 .7rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.fm h3{font-size:1.25rem;letter-spacing:-.02em}
+.fm p{color:var(--muted);font-size:.94rem}
+.fm .go{margin-top:auto;font-weight:600;font-size:.92rem;color:var(--am-ink)}
+@media(max-width:860px){.fam{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:820px;margin:0 auto}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq summary{cursor:pointer;font:700 1.06rem var(--f-display);letter-spacing:-.015em;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--am);font-weight:600;font-size:1.3rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{color:var(--muted);margin-top:10px;font-size:.98rem}
+
+/* final */
+.final{text-align:center;padding:100px 0}
+.final h2{font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.05;color:#fff;max-width:780px;margin:16px auto 18px}
+.final p{max-width:560px;margin:0 auto 32px}
+footer{background:var(--night);border-top:1px solid var(--nline);color:var(--nmuted);font-size:.86rem;padding:26px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--ntext);text-decoration:none}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+
+@media(prefers-reduced-motion:reduce){.live b{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/sentinela/" aria-label="Sentinela, por GPTImob">
+      <span class="logo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 12l6.5-6.5"/></svg></span>
+      <span><b>Sentinela</b><small>por GPTImob</small></span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="#vigia">O que vigia</a>
+      <a href="#como">Como funciona</a>
+      <a href="#pergunte">Pergunte à sala</a>
+      <a href="#faq">Dúvidas</a>
+      <a class="pill wa" href="#"><span class="l">Quero ver na minha imobiliária</span><span class="s">Demonstração</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero dark">
+  <div class="wrap">
+    <div>
+      <span class="live"><b aria-hidden="true"></b>Sala de operações · ao vivo</span>
+      <h1>Toda conversa da sua equipe, <span class="metal">vigiada em tempo real.</span></h1>
+      <p class="lead">O Sentinela lê 100% das conversas de WhatsApp dos corretores (texto, áudio, foto e até mensagem apagada) e avisa o gestor na hora em que um lead fica sem resposta, esfria ou sai irritado.</p>
+      <div class="acts">
+        <a class="cta wa" href="#">Quero ver na minha imobiliária <i aria-hidden="true">→</i></a>
+        <a class="ghost" href="#como">Como funciona</a>
+      </div>
+      <div class="chips" aria-label="O que é analisado"><span>100% das conversas</span><span>áudios transcritos</span><span>alertas no WhatsApp</span><span>relatório diário</span></div>
+    </div>
+
+    <div class="console" role="img" aria-label="Exemplo: conversa de um lead com o corretor e as marcações que o Sentinela faz sobre ela">
+      <div class="c-bar"><span>Conversa · Corretor 03</span><em>● analisando</em></div>
+      <div class="c-grid">
+        <div class="chat">
+          <div class="chat-h"><span class="av">JM</span><div><b>Juliana M.</b><small>lead do portal · apto 2 dorm. Centro</small></div></div>
+          <div class="m in">Oi! Vi o apartamento de 2 dormitórios no Centro. Ainda está disponível? Aceita financiamento?<small>09:12</small></div>
+          <span class="gap">2h 41min sem resposta</span>
+          <div class="m out flag">Bom dia. Tá sim.<small>11:53</small></div>
+          <div class="m in">Consegue me mandar o valor do condomínio e marcar uma visita sábado?<small>11:58</small></div>
+          <div class="m out del">🚫 Esta mensagem foi apagada<small>12:20</small></div>
+          <div class="m out flag r">Sábado não dá, vê outro dia aí.<small>12:21</small></div>
+          <div class="m in">Ok, vou ver outras opções então.<small>12:40</small></div>
+        </div>
+        <div class="tags">
+          <div class="tg warn"><span>1ª resposta</span><b>2h 41min</b><small>média da equipe: 9 min</small></div>
+          <div class="tg"><span>Evento</span><b>Pedido de visita</b><small>não agendada</small></div>
+          <div class="tg bad"><span>Postura</span><b>Resposta seca, sem alternativa</b><small>+ mensagem apagada às 12:20</small></div>
+          <div class="tg bad"><span>Risco</span><b>Lead quente esfriando</b><small>"vou ver outras opções"</small></div>
+          <div class="tg ok"><span>Ação</span><b>Gestor avisado às 12:41</b><small>com sugestão de resposta</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="sec">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">O ponto cego</span>
+      <h2>O CRM mostra o lead. <span class="metal">A venda acontece na conversa.</span></h2>
+      <p>O lead entra pelo portal, pelo site ou pelo anúncio, e a negociação continua no WhatsApp de cada corretor. É ali que a imobiliária ganha ou perde o cliente, e é justamente ali que ninguém consegue acompanhar.</p>
+    </div>
+    <div class="prob">
+      <div class="pb"><div class="n metal">?</div><h3>Quem demorou para responder</h3><p>O CRM registra que o lead chegou. Não mostra se o corretor respondeu em 2 minutos ou só no dia seguinte.</p></div>
+      <div class="pb"><div class="n metal">?</div><h3>Quem deixou o cliente esfriar</h3><p>Visita pedida e não marcada, proposta sem retorno, áudio sem resposta. O gestor só fica sabendo quando o negócio já foi perdido.</p></div>
+      <div class="pb"><div class="n metal">?</div><h3>O que o cliente realmente disse</h3><p>Objeções de preço, de bairro e de financiamento se perdem em centenas de conversas e nunca chegam ao marketing nem à captação.</p></div>
+    </div>
+    <div class="blind">
+      <p><b>Ler as conversas por amostragem não funciona.</b> Uma equipe de 10 corretores troca milhares de mensagens por semana. O Sentinela lê todas, inclusive áudios, e mostra só o que pede atenção.</p>
+      <a class="cta wa" href="#">Quero acabar com o ponto cego <i aria-hidden="true">→</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE VIGIA -->
+<section class="sec tint" id="vigia">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">O que o Sentinela vigia</span>
+      <h2>Quatro frentes de vigilância em uma só sala.</h2>
+      <p>Cada conversa recebe marcações automáticas. Você escolhe o que vira alerta, o que vai para o relatório e o que pode esperar até segunda-feira.</p>
+    </div>
+
+    <div class="vtabs" role="tablist" aria-label="Frentes de vigilância">
+      <button role="tab" id="t-at" aria-controls="p-at" aria-selected="true">Atendimento</button>
+      <button role="tab" id="t-ql" aria-controls="p-ql" aria-selected="false" tabindex="-1">Qualidade e equipe</button>
+      <button role="tab" id="t-cl" aria-controls="p-cl" aria-selected="false" tabindex="-1">Clientes e vendas</button>
+      <button role="tab" id="t-rs" aria-controls="p-rs" aria-selected="false" tabindex="-1">Risco e compliance</button>
+    </div>
+
+    <div class="vpanel" role="tabpanel" id="p-at" aria-labelledby="t-at">
+      <div class="vlist">
+        <div class="vi"><h3><span class="ic">⏱</span>Tempo de resposta</h3><p>Primeira resposta e respostas seguintes, por corretor, por origem do lead e por horário. Com mapa de calor de quando os leads chegam e de quando a equipe responde.</p></div>
+        <div class="vi"><h3><span class="ic">✉</span>Leads sem resposta</h3><p>Conversas em que a última mensagem é do cliente e ninguém respondeu, incluindo áudios que ficaram sem retorno.</p></div>
+        <div class="vi"><h3><span class="ic">↻</span>Follow-up esquecido</h3><p>Cliente que pediu "me manda mais opções" ou "falo com meu marido e te retorno" e não teve retomada em 48 horas.</p></div>
+      </div>
+      <div class="vshot">
+        <span class="cap">Alerta que chega no WhatsApp do gestor</span>
+        <div class="alert"><div class="bub"><span class="k red">SEM RESPOSTA · 2H</span><br><b>3 leads do portal aguardando o Corretor 07</b><br>Mais antigo: Paulo R., casa 3 dorm. no Bairro Vila Nova, às 09:04. Ele mandou 2 áudios perguntando sobre permuta.<div class="btns"><span>Redistribuir</span><span>Avisar corretor</span><span>Ver conversa</span></div></div><small>11:06</small></div>
+        <div class="alert"><div class="bub"><span class="k amb">FOLLOW-UP · 48H</span><br><b>Fernanda S. ficou de "ver com o marido"</b><br>Interesse no apto 902 do Ed. Solar. Sem retomada desde segunda-feira.<div class="btns"><span>Sugerir mensagem</span><span>Ver conversa</span></div></div><small>08:30</small></div>
+      </div>
+    </div>
+
+    <div class="vpanel" role="tabpanel" id="p-ql" aria-labelledby="t-ql" hidden>
+      <div class="vlist">
+        <div class="vi"><h3><span class="ic">✓</span>Roteiro de atendimento</h3><p>Verifica se o corretor perguntou o que importa: finalidade, faixa de valor, forma de pagamento, prazo e quem decide. Usa os critérios e o tom de voz da sua imobiliária.</p></div>
+        <div class="vi"><h3><span class="ic">◐</span>Postura e tom</h3><p>Respostas secas, promessas indevidas, linguagem inadequada e mensagens apagadas, com o trecho exato destacado.</p></div>
+        <div class="vi"><h3><span class="ic">★</span>Ficha de cada corretor</h3><p>Pontos fortes, onde perde o cliente e o que treinar no mês, com exemplos das próprias conversas do corretor. É a pauta pronta para a reunião individual.</p></div>
+      </div>
+      <div class="vshot">
+        <span class="cap">Ficha do corretor · exemplo</span>
+        <div class="rep"><h4>Corretor 03 <small>últimos 30 dias</small></h4>
+          <div class="kp"><div><b>142</b><span>conversas</span></div><div><b class="mono">38 min</b><span>1ª resposta</span></div><div><b>6,1</b><span>nota de atendimento</span></div></div>
+          <table class="tb"><tr><th>Critério</th><th>Cumpre</th><th style="width:38%"></th></tr>
+            <tr><td>Pergunta a forma de pagamento</td><td class="good">81%</td><td><div class="bar"><i style="width:81%"></i></div></td></tr>
+            <tr><td>Propõe data de visita</td><td class="mid">44%</td><td><div class="bar"><i style="width:44%"></i></div></td></tr>
+            <tr><td>Retoma em até 48h</td><td class="bad">23%</td><td><div class="bar"><i style="width:23%"></i></div></td></tr>
+          </table>
+          <p style="font-size:.8rem;margin-top:10px;color:var(--nmuted)">Treinar no mês: <b style="color:#fff">fechar a visita na primeira conversa.</b></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vpanel" role="tabpanel" id="p-cl" aria-labelledby="t-cl" hidden>
+      <div class="vlist">
+        <div class="vi"><h3><span class="ic">⚑</span>Marcadores de evento</h3><p>Visita pedida, visita feita, proposta enviada, documento recebido e financiamento em análise. A linha do tempo da venda é montada sozinha a partir da conversa.</p></div>
+        <div class="vi"><h3><span class="ic">❝</span>Objeções e pedidos</h3><p>"Achei caro", "queria mais perto da escola", "só com 2 vagas". Os motivos são agrupados por tema e mostram o que a carteira não tem e o cliente está pedindo.</p></div>
+        <div class="vi"><h3><span class="ic">◎</span>Imóveis mais procurados</h3><p>Quais anúncios geram conversa, quais geram visita e quais só geram pergunta de preço. Serve de base para a captação e para o marketing.</p></div>
+      </div>
+      <div class="vshot">
+        <span class="cap">O que os clientes disseram esta semana</span>
+        <div class="rep"><h4>Objeções mais frequentes <small>214 conversas</small></h4>
+          <table class="tb"><tr><th>Tema</th><th>Conversas</th><th style="width:40%"></th></tr>
+            <tr><td>Valor acima do orçamento</td><td>61</td><td><div class="bar"><i style="width:100%"></i></div></td></tr>
+            <tr><td>Quer 2 vagas de garagem</td><td>34</td><td><div class="bar"><i style="width:56%"></i></div></td></tr>
+            <tr><td>Condomínio alto</td><td>27</td><td><div class="bar"><i style="width:44%"></i></div></td></tr>
+            <tr><td>Aceita permuta?</td><td>19</td><td><div class="bar"><i style="width:31%"></i></div></td></tr>
+            <tr><td>Precisa ser perto de escola</td><td>12</td><td><div class="bar"><i style="width:20%"></i></div></td></tr>
+          </table>
+          <p style="font-size:.8rem;margin-top:10px;color:var(--nmuted)">Sugestão: <b style="color:#fff">captar apartamentos de 2 dorm. com 2 vagas até R$ 450 mil.</b></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vpanel" role="tabpanel" id="p-rs" aria-labelledby="t-rs" hidden>
+      <div class="vlist">
+        <div class="vi"><h3><span class="ic">%</span>Desconto fora da política</h3><p>Corretor prometendo desconto, comissão reduzida ou condição que a imobiliária não autorizou.</p></div>
+        <div class="vi"><h3><span class="ic">⇄</span>Negociação por fora</h3><p>Sinais de que o cliente está sendo levado para outro número, para outra imobiliária ou para um negócio direto com o proprietário.</p></div>
+        <div class="vi"><h3><span class="ic">⛨</span>Dados e promessas sensíveis</h3><p>Documentos de clientes circulando sem cuidado, promessas sobre financiamento aprovado e informações que geram problema jurídico depois.</p></div>
+      </div>
+      <div class="vshot">
+        <span class="cap">Alerta de risco · exemplo</span>
+        <div class="alert"><div class="bub"><span class="k red">RISCO · POLÍTICA COMERCIAL</span><br><b>Corretor 05 ofereceu "baixar a comissão pra fechar"</b><br>Conversa com Ricardo T., casa no Cond. Jardins. O trecho aparece destacado na conversa.<div class="btns"><span>Ver trecho</span><span>Marcar como tratado</span></div></div><small>15:42</small></div>
+        <div class="alert"><div class="bub"><span class="k amb">ATENÇÃO · CONTATO EXTERNO</span><br><b>Cliente pediu para falar "no outro número"</b><br>Corretor 02 passou um número pessoal para Aline P. às 10:15.<div class="btns"><span>Ver conversa</span><span>Marcar como tratado</span></div></div><small>10:16</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="sec dark" id="como">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" style="color:var(--am-light)">Como funciona a sala</span>
+      <h2>Conecta, lê tudo, <span class="metal">avisa quem precisa saber.</span></h2>
+      <p>Sem aplicativo novo para o corretor e sem trocar de CRM. A sala trabalha em cima das conversas que já acontecem.</p>
+    </div>
+    <div class="steps">
+      <div class="st"><span class="num">01 · CONECTA</span><h3>Os WhatsApps da equipe</h3><p>Conectamos os números de atendimento da imobiliária. O corretor continua usando o WhatsApp no celular, como sempre.</p></div>
+      <div class="st"><span class="num">02 · LÊ</span><h3>100% das conversas</h3><p>Texto, áudio transcrito, foto, documento e mensagem apagada. Cada conversa ganha marcações de evento, postura e risco.</p></div>
+      <div class="st"><span class="num">03 · AVISA</span><h3>Alerta na hora certa</h3><p>Só o que importa vira alerta, direto no WhatsApp do gestor, com botão para agir: redistribuir, avisar ou abrir a conversa.</p></div>
+      <div class="st"><span class="num">04 · REPORTA</span><h3>Relatório que vira reunião</h3><p>Resumo do dia às 18h, ranking da semana na segunda e a ficha de cada corretor no fim do mês.</p></div>
+    </div>
+
+    <div class="flow" aria-label="Exemplo do processo de um lead do começo ao fim">
+      <div class="fcol">
+        <span class="lbl"><i>1</i>O lead chega</span>
+        <p class="sub">09:12, conversa com o Corretor 03</p>
+        <div class="chat">
+          <div class="chat-h"><span class="av">JM</span><div><b>Juliana M.</b><small>via portal</small></div></div>
+          <div class="m in">Oi! O apto de 2 dorm. no Centro ainda está disponível? Aceita financiamento?<small>09:12</small></div>
+          <span class="gap">sem resposta há 30 min</span>
+        </div>
+      </div>
+      <div class="fcol">
+        <span class="lbl"><i>2</i>O gestor é avisado</span>
+        <p class="sub">09:42, no WhatsApp da gerência</p>
+        <div class="alert"><div class="bub"><span class="k amb">LEAD AGUARDANDO · 30 MIN</span><br><b>Juliana M. pediu o apto 2 dorm. do Centro</b><br>Perguntou sobre financiamento. O Corretor 03 está com 4 conversas abertas.<div class="btns"><span>Redistribuir</span><span>Avisar corretor</span></div></div><small>09:42</small></div>
+        <div class="alert"><div class="bub"><span class="k grn">RESOLVIDO</span><br>Corretor 03 respondeu às 09:44 e marcou visita para sábado às 10h.</div><small>09:51</small></div>
+      </div>
+      <div class="fcol">
+        <span class="lbl"><i>3</i>O relatório fecha o dia</span>
+        <p class="sub">18:00, resumo da sala</p>
+        <div class="rep"><h4>Resumo do dia <small>terça, 18:00</small></h4>
+          <div class="kp"><div><b>87</b><span>conversas</span></div><div><b class="mono">11 min</b><span>1ª resposta</span></div><div><b>9</b><span>visitas marcadas</span></div></div>
+          <table class="tb"><tr><th>Corretor</th><th>1ª resp.</th><th>Sem resp.</th></tr>
+            <tr><td>Corretor 01</td><td class="good">4 min</td><td>0</td></tr>
+            <tr><td>Corretor 03</td><td class="mid">32 min</td><td>1</td></tr>
+            <tr><td>Corretor 07</td><td class="bad">2h 10</td><td class="bad">3</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERGUNTE -->
+<section class="sec" id="pergunte">
+  <div class="wrap ask">
+    <div>
+      <span class="eyebrow">Pergunte à sala</span>
+      <h2 style="font-size:clamp(1.9rem,3.6vw,2.6rem);line-height:1.08;margin:14px 0">Quer saber algo? <span class="metal">Pergunte no WhatsApp.</span></h2>
+      <p style="color:var(--muted);font-size:1.06rem">O gestor conversa com os dados da sala como conversa com um gerente de plantão. Sem painel para aprender e sem filtro para montar.</p>
+      <ul>
+        <li>Quais leads do portal ficaram sem resposta ontem?</li>
+        <li>Quem marcou mais visitas esta semana?</li>
+        <li>Por que os clientes do Ed. Solar estão desistindo?</li>
+        <li>Compare a primeira resposta de outubro com a de setembro.</li>
+      </ul>
+    </div>
+    <div class="askbox">
+      <div class="chat" style="font-size:.88rem">
+        <div class="chat-h"><span class="av" style="background:var(--am-grad);color:#fff">S</span><div><b>Sentinela</b><small>sala de operações</small></div></div>
+        <div class="m out">Por que os clientes do Ed. Solar estão desistindo?<small>16:02</small></div>
+        <div class="m in" style="max-width:94%">Analisei as 23 conversas sobre o Ed. Solar nos últimos 30 dias:<br><br>• <b>11</b> desistiram pelo condomínio (R$ 1.180), citado como "alto" logo depois de o valor ser informado.<br>• <b>6</b> pediram 2 vagas, e o 902 tem uma só.<br>• <b>4</b> ficaram sem retorno após pedir visita.<br><br>Sugestão: mostrar o valor do condomínio por m² em comparação aos vizinhos e retomar os 4 sem retorno. Quer que eu monte a mensagem?<small>16:02</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ZERO SETUP -->
+<section class="sec tint">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Implantação</span>
+      <h2>Valor na primeira semana, sem mudar a rotina da equipe.</h2>
+    </div>
+    <div class="zs">
+      <div><h3>Sem aparelho novo</h3><p>Nada de celular da empresa, de aplicativo novo ou de trocar de CRM. A conexão é feita nos números que a equipe já usa para atender.</p></div>
+      <div><h3>Sem mudar o corretor</h3><p>O corretor continua no WhatsApp do celular. Quem trabalha diferente é o gestor, que passa a ver tudo.</p></div>
+      <div><h3>Com a sua régua</h3><p>Antes de ligar, alinhamos com você o que é bom atendimento na sua imobiliária: prazos, roteiro, política de desconto e o que vira alerta.</p></div>
+    </div>
+    <div class="lgpd">
+      <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <p><b>Transparente para a equipe e de acordo com a LGPD.</b> O Sentinela acompanha os números de atendimento da imobiliária, nunca o WhatsApp pessoal do corretor. A equipe é informada da política de monitoramento, o acesso fica restrito à gestão e os dados não são usados para nada além dos relatórios da sua empresa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAMÍLIA -->
+<section class="sec">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Inteligência GPTImob</span>
+      <h2>Um olhar para cada momento.</h2>
+    </div>
+    <div class="fam">
+      <a class="fm" href="/raiox/"><span class="t">Uma conversa</span><h3>Raio-X da Negociação</h3><p>O corretor envia uma conversa e recebe a análise da negociação e a próxima mensagem a mandar.</p><span class="go">Conhecer o Raio-X →</span></a>
+      <a class="fm" href="/dna/"><span class="t">Um diagnóstico</span><h3>DNA Imob</h3><p>Uma fotografia da operação: CRM e conversas cruzados para mostrar quem fecha, o que gira e o plano de ação.</p><span class="go">Conhecer o DNA →</span></a>
+      <div class="fm on"><span class="t">Todos os dias</span><h3>Sentinela</h3><p>A sala de operações contínua: vigia todas as conversas e avisa o gestor enquanto ainda dá tempo de agir.</p><span class="go" style="color:var(--am)">Você está aqui</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec tint" id="faq">
+  <div class="wrap">
+    <div class="head center"><span class="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div>
+    <div class="faq">
+      <details><summary>E se o corretor atende pelo WhatsApp pessoal?</summary><p>O Sentinela acompanha os números de atendimento da imobiliária. Se hoje cada corretor atende pelo próprio número, ajudamos a organizar a mudança para números da empresa, que continuam no celular do corretor. Assim o cliente e o histórico ficam com a imobiliária, mesmo que o corretor saia.</p></details>
+      <details><summary>Monitorar as conversas da equipe é permitido?</summary><p>Sim, quando são números corporativos e a equipe é informada da política. Entregamos um modelo de comunicado e de termo para a equipe, e o acesso às conversas fica restrito a quem a imobiliária definir.</p></details>
+      <details><summary>Ele entende áudio?</summary><p>Sim. Os áudios são transcritos e entram na análise como qualquer mensagem. No mercado imobiliário, boa parte da negociação acontece por áudio.</p></details>
+      <details><summary>Preciso trocar de CRM?</summary><p>Não. O Sentinela funciona ao lado do CRM que você já usa e pode enviar marcações e resumos para ele quando houver integração disponível.</p></details>
+      <details><summary>Quanto tempo leva para começar?</summary><p>Depois que os números são conectados e a régua de atendimento é alinhada com você, os primeiros alertas e o primeiro relatório já começam a chegar.</p></details>
+      <details><summary>Qual a diferença para o Raio-X e o DNA Imob?</summary><p>O Raio-X analisa uma conversa enviada pelo corretor. O DNA é um diagnóstico pontual da operação. O Sentinela é contínuo: lê todas as conversas, todos os dias, e avisa o gestor em tempo real.</p></details>
+      <details><summary>Quanto custa?</summary><p>O valor depende de quantos números de WhatsApp serão conectados e de quais frentes você quer ligar. Chame no WhatsApp para montarmos a proposta da sua imobiliária.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="dark final">
+  <div class="wrap">
+    <span class="live"><b aria-hidden="true"></b>Sua sala de operações</span>
+    <h2>O lead não espera. <span class="metal">Agora você também não precisa esperar para saber.</span></h2>
+    <p>Mostramos o Sentinela com exemplos do mercado imobiliário e desenhamos com você a régua de alertas da sua equipe.</p>
+    <a class="cta wa" href="#">Quero ver na minha imobiliária <i aria-hidden="true">→</i></a>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>Sentinela · sala de operações das conversas · por <a href="/">GPTImob</a></span><nav aria-label="Outras soluções"><a href="/dna/">DNA Imob</a><a href="/raiox/">Raio-X</a><a href="https://wa.me/5554999166672" target="_blank" rel="noopener">WhatsApp (54) 99916-6672</a></nav></div></footer>
+
+<script>
+(function () {
+  var msg = 'Olá, Rafael! Quero ver o Sentinela (monitoramento das conversas) na minha imobiliária.\n\nImobiliária: \nCidade: \nQuantos corretores: \nCRM que usamos: ';
+  var url = 'https://wa.me/5554999166672?text=' + encodeURIComponent(msg);
+  document.querySelectorAll('a.wa').forEach(function (a) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; });
+
+  var tabs = [].slice.call(document.querySelectorAll('.vtabs [role=tab]'));
+  function sel(t) {
+    tabs.forEach(function (x) {
+      var on = x === t;
+      x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { sel(t); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { var n = tabs[(i + d + tabs.length) % tabs.length]; sel(n); n.focus(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
