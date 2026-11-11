@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sentinela · Agente de monitoramento das conversas da imobiliária | GPTImob</title>
 <meta name="description" content="O Sentinela lê as conversas de todos os setores da imobiliária (comercial, locação, manutenção, financeiro e proprietários) e avisa o gestor no WhatsApp antes de virar reclamação.">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="GPTImob">
+<link rel="canonical" href="https://gptimob.com.br/sentinela/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FCD34D'/%3E%3Cstop offset='.5' stop-color='%23D97706'/%3E%3Cstop offset='1' stop-color='%23431C03'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'%3E%3Ccircle cx='32' cy='32' r='17'/%3E%3Ccircle cx='32' cy='32' r='8'/%3E%3Cpath d='M32 32 46 18'/%3E%3C/g%3E%3C/svg%3E">
 <meta name="theme-color" content="#0A0E15">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="GPTImob">
+<meta property="og:url" content="https://gptimob.com.br/sentinela/">
 <meta property="og:title" content="Sentinela · Nenhum cliente desiste sem você saber">
 <meta property="og:description" content="O Sentinela lê as conversas de todos os setores da imobiliária (comercial, locação, manutenção, financeiro e proprietários) e avisa o gestor no WhatsApp antes de virar reclamação.">
 <meta property="og:image" content="https://gptimob.com.br/og-cover.jpg">
@@ -271,6 +274,24 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 .fine-note{font-size:.8rem;color:var(--faint);margin-top:14px}
 @media(max-width:900px){.intel{grid-template-columns:1fr}}
 @media(max-width:520px){.two{grid-template-columns:1fr}}
+
+/* ícones e cores por cartão, no padrão do DNA Imob */
+.c-em{--c:#34D399;--c2:#059669} .c-am{--c:#F5B547;--c2:#C77A12} .c-co{--c:#FF8A7A;--c2:#D23F3F} .c-bl{--c:#7DB4F0;--c2:#2F6FB5} .c-te{--c:#6EDCCB;--c2:#0E8577} .c-vi{--c:#B4A4F5;--c2:#6250D6}
+.gi{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;flex:none;background:linear-gradient(145deg,color-mix(in srgb,var(--c) 70%,#fff),var(--c2));box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 16px color-mix(in srgb,var(--c2) 35%,transparent)}
+.vi h3 .gi{width:34px;height:34px;border-radius:10px}
+.hero .lead b{color:#fff;font-weight:700}
+.pb{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:2px}
+.pb::before,.st::before,.zc::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,transparent,var(--c),transparent)}
+.pb::after,.st::after{content:"";position:absolute;width:220px;height:220px;right:-90px;top:-110px;background:radial-gradient(circle,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%);pointer-events:none}
+.pb .gi{width:46px;height:46px;margin-bottom:14px}
+.prob .pb .n{font:700 .78rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--c2)}
+.pb h3{margin-top:6px}
+.pb .quote{margin-top:auto;font:600 .78rem var(--f-mono);color:var(--ink);background:color-mix(in srgb,var(--c) 14%,#fff);border-radius:8px;padding:8px 10px;margin-top:14px}
+.st{position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.st .gi{margin-bottom:14px}
+.st .num{display:block}
+.zs .zc{position:relative;overflow:hidden;border-top:0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.zs .zc .gi{margin-bottom:6px}
 @media(prefers-reduced-motion:reduce){.live b{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -299,7 +320,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
     <div>
       <span class="live"><b aria-hidden="true"></b>Agente de monitoramento · ao vivo</span>
       <h1>Nenhum cliente desiste <span class="metal">sem você saber.</span></h1>
-      <p class="lead">O Sentinela lê as conversas de todos os setores da imobiliária: comercial, locação, manutenção, financeiro e proprietários. Quando alguém reclama, fica sem resposta ou ameaça ir embora, o gestor recebe o aviso no WhatsApp com o motivo e o responsável.</p>
+      <p class="lead">O Sentinela lê as conversas de todos os setores da imobiliária: comercial, locação, manutenção, financeiro e proprietários. <b>Quando alguém reclama, fica sem resposta ou ameaça ir embora</b>, o gestor recebe o aviso no WhatsApp com o motivo e o responsável.</p>
       <div class="acts">
         <a class="cta wa" href="#">Quero ver na minha imobiliária <i aria-hidden="true">→</i></a>
         <a class="ghost" href="#como">Como funciona</a>
@@ -327,9 +348,9 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
       <p>A reclamação começa numa conversa de WhatsApp, num chamado que ninguém respondeu ou num cliente que voltou a chamar e ficou sem retorno. Quando chega até a gestão, quase sempre já é tarde.</p>
     </div>
     <div class="prob">
-      <div class="pb"><div class="n metal">Rescisão</div><h3>O inquilino já decidiu sair</h3><p>A manutenção ficou sem resposta três vezes. O pedido de rescisão é só o último capítulo de uma conversa que ninguém leu.</p></div>
-      <div class="pb"><div class="n metal">Concorrente</div><h3>O cliente comprou com outra imobiliária</h3><p>Ele pediu visita, ninguém marcou e ele voltou a chamar. Do lado de dentro, o atendimento constava como "em andamento".</p></div>
-      <div class="pb"><div class="n metal">Reclame Aqui</div><h3>A reclamação virou pública</h3><p>Procon, advogado ou avaliação negativa. Daria para ter resolvido com uma ligação, se alguém tivesse sabido a tempo.</p></div>
+      <div class="pb c-co"><span class="gi c-co" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M17 6l3 3M14 9l2 2"/></svg></span><div class="n">Rescisão</div><h3>O inquilino já decidiu sair</h3><p>A manutenção ficou sem resposta três vezes. O pedido de rescisão é só o último capítulo de uma conversa que ninguém leu.</p><span class="quote">"Já é a terceira vez que eu mando."</span></div>
+      <div class="pb c-am"><span class="gi c-am" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 11a3 3 0 1 0 0-6M22 21c0-3-2-5-5-5.5"/></svg></span><div class="n">Concorrente</div><h3>O cliente comprou com outra imobiliária</h3><p>Ele pediu visita, ninguém marcou e ele voltou a chamar. Do lado de dentro, o atendimento constava como "em andamento".</p><span class="quote">"Vou ver com outra imobiliária."</span></div>
+      <div class="pb c-vi"><span class="gi c-vi" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 9a4 4 0 0 1 0 6M20 6a8 8 0 0 1 0 12"/></svg></span><div class="n">Reclame Aqui</div><h3>A reclamação virou pública</h3><p>Procon, advogado ou avaliação negativa. Daria para ter resolvido com uma ligação, se alguém tivesse sabido a tempo.</p><span class="quote">"Vou registrar no Reclame Aqui."</span></div>
     </div>
     <div class="blind">
       <p><b>Ninguém consegue ler tudo.</b> São centenas de conversas por dia entre comercial, locação, manutenção, financeiro e proprietários. O Sentinela lê todas e só chama a gestão quando precisa.</p>
@@ -356,9 +377,9 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 
     <div class="vpanel" role="tabpanel" id="p-co" aria-labelledby="t-co">
       <div class="vlist">
-        <div class="vi"><h3><span class="ic">⏱</span>Demora do corretor</h3><p>O lead foi entregue, o corretor confirmou e o cliente continua esperando a primeira mensagem ou a visita combinada.</p></div>
-        <div class="vi"><h3><span class="ic">↩</span>Cliente que volta a chamar</h3><p>O cliente que já estava com um corretor e volta a falar no WhatsApp da imobiliária é sinal de que algo travou no atendimento.</p></div>
-        <div class="vi"><h3><span class="ic">✕</span>Insatisfação e desistência</h3><p>"Ninguém me chamou", "não gostei do atendimento" e "vou procurar outra imobiliária" viram alerta com o nome do corretor.</p></div>
+        <div class="vi"><h3><span class="gi c-am" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Demora do corretor</h3><p>O lead foi entregue, o corretor confirmou e o cliente continua esperando a primeira mensagem ou a visita combinada.</p></div>
+        <div class="vi"><h3><span class="gi c-bl" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg></span>Cliente que volta a chamar</h3><p>O cliente que já estava com um corretor e volta a falar no WhatsApp da imobiliária é sinal de que algo travou no atendimento.</p></div>
+        <div class="vi"><h3><span class="gi c-co" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span>Insatisfação e desistência</h3><p>"Ninguém me chamou", "não gostei do atendimento" e "vou procurar outra imobiliária" viram alerta com o nome do corretor.</p></div>
         <div class="sig"><span>Demora do corretor</span><span>Não gostou do atendimento</span><span>"Ninguém me chamou"</span><span>Vai procurar outra imobiliária</span></div>
       </div>
       <div class="vshot">
@@ -369,9 +390,9 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 
     <div class="vpanel" role="tabpanel" id="p-lo" aria-labelledby="t-lo" hidden>
       <div class="vlist">
-        <div class="vi"><h3><span class="ic">🔧</span>Chamado vencido</h3><p>Manutenção aberta e sem retorno dentro do prazo, ou o inquilino mandando a terceira mensagem sobre o mesmo problema.</p></div>
-        <div class="vi"><h3><span class="ic">!</span>Irritação e ameaça de rescisão</h3><p>Mudança de tom, "quero sair", "vou entregar o imóvel". O alerta chega enquanto ainda dá para segurar o contrato.</p></div>
-        <div class="vi"><h3><span class="ic">⚖</span>Procon, advogado ou Reclame Aqui</h3><p>Qualquer menção a órgão de defesa, processo ou reclamação pública vai direto como urgente para a direção.</p></div>
+        <div class="vi"><h3><span class="gi c-am" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span>Chamado vencido</h3><p>Manutenção aberta e sem retorno dentro do prazo, ou o inquilino mandando a terceira mensagem sobre o mesmo problema.</p></div>
+        <div class="vi"><h3><span class="gi c-co" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9.5 17H2.5z"/><path d="M12 10v4M12 17h.01"/></svg></span>Irritação e ameaça de rescisão</h3><p>Mudança de tom, "quero sair", "vou entregar o imóvel". O alerta chega enquanto ainda dá para segurar o contrato.</p></div>
+        <div class="vi"><h3><span class="gi c-vi" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span>Procon, advogado ou Reclame Aqui</h3><p>Qualquer menção a órgão de defesa, processo ou reclamação pública vai direto como urgente para a direção.</p></div>
         <div class="sig"><span>Irritação</span><span>Chamado vencido</span><span>Manutenção sem resposta</span><span>Ameaça de rescisão</span><span>Procon, advogado ou Reclame Aqui</span></div>
       </div>
       <div class="vshot">
@@ -382,9 +403,9 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 
     <div class="vpanel" role="tabpanel" id="p-pr" aria-labelledby="t-pr" hidden>
       <div class="vlist">
-        <div class="vi"><h3><span class="ic">R$</span>Repasse e prestação de contas</h3><p>Proprietário cobrando repasse atrasado, extrato que não chegou ou desconto que ele não entendeu.</p></div>
-        <div class="vi"><h3><span class="ic">⇄</span>Quer trocar de imobiliária</h3><p>"Como faço para encerrar a administração?" Essa pergunta vira alerta para quem cuida da carteira, antes que o imóvel saia.</p></div>
-        <div class="vi"><h3><span class="ic">⌂</span>Imóvel parado</h3><p>Proprietário reclamando que o imóvel não aluga ou não vende e que ninguém dá retorno sobre visitas e propostas.</p></div>
+        <div class="vi"><h3><span class="gi c-em" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v2M12 16v2"/></svg></span>Repasse e prestação de contas</h3><p>Proprietário cobrando repasse atrasado, extrato que não chegou ou desconto que ele não entendeu.</p></div>
+        <div class="vi"><h3><span class="gi c-co" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4L3 8l4 4M3 8h14M17 12l4 4-4 4M21 16H7"/></svg></span>Quer trocar de imobiliária</h3><p>"Como faço para encerrar a administração?" Essa pergunta vira alerta para quem cuida da carteira, antes que o imóvel saia.</p></div>
+        <div class="vi"><h3><span class="gi c-bl" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-6h6v6"/></svg></span>Imóvel parado</h3><p>Proprietário reclamando que o imóvel não aluga ou não vende e que ninguém dá retorno sobre visitas e propostas.</p></div>
         <div class="sig"><span>Atraso no repasse</span><span>Quer encerrar a administração</span><span>Sem retorno de visitas</span><span>Reclamação recorrente</span></div>
       </div>
       <div class="vshot">
@@ -395,9 +416,9 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 
     <div class="vpanel" role="tabpanel" id="p-in" aria-labelledby="t-in" hidden>
       <div class="vlist">
-        <div class="vi"><h3><span class="ic">⇆</span>Bola que ninguém pegou</h3><p>O atendimento passou da locação para o financeiro ou da manutenção para o proprietário e ficou parado no meio do caminho.</p></div>
-        <div class="vi"><h3><span class="ic">⏱</span>Prazo de cada setor</h3><p>Tempo de resposta de financeiro, manutenção, rescisão e vistoria, com o mesmo critério para todos.</p></div>
-        <div class="vi"><h3><span class="ic">✓</span>Combinado e não cumprido</h3><p>"Te retorno amanhã" e "vou verificar com o financeiro" sem retorno. O Sentinela cobra o setor antes de o cliente cobrar.</p></div>
+        <div class="vi"><h3><span class="gi c-vi" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.6 10.5l6.8-3M8.6 13.5l6.8 3"/></svg></span>Bola que ninguém pegou</h3><p>O atendimento passou da locação para o financeiro ou da manutenção para o proprietário e ficou parado no meio do caminho.</p></div>
+        <div class="vi"><h3><span class="gi c-te" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Prazo de cada setor</h3><p>Tempo de resposta de financeiro, manutenção, rescisão e vistoria, com o mesmo critério para todos.</p></div>
+        <div class="vi"><h3><span class="gi c-am" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Combinado e não cumprido</h3><p>"Te retorno amanhã" e "vou verificar com o financeiro" sem retorno. O Sentinela cobra o setor antes de o cliente cobrar.</p></div>
         <div class="sig"><span>Financeiro</span><span>Manutenção</span><span>Rescisão</span><span>Vistoria</span><span>Atendimento da IA</span></div>
       </div>
       <div class="vshot">
@@ -417,10 +438,10 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
       <p>Funciona em cima do WhatsApp de atendimento da imobiliária, onde as conversas já estão centralizadas. A equipe não muda nada na rotina.</p>
     </div>
     <div class="steps">
-      <div class="st"><span class="num">01 · LÊ</span><h3>Todas as conversas</h3><p>A cada hora, o agente lê as conversas da IA, do comercial, da locação e dos setores, incluindo o cliente que volta a falar depois de entregue ao corretor.</p></div>
-      <div class="st"><span class="num">02 · ENTENDE</span><h3>Motivo e responsável</h3><p>Registra o que aconteceu, quem é o responsável e qual atendimento. Não é palavra-chave: ele entende o contexto da conversa.</p></div>
-      <div class="st"><span class="num">03 · AVISA</span><h3>Atenção ou urgente</h3><p><b style="color:#FCD34D">Atenção</b> vai para o grupo da equipe. <b style="color:#FCA5A5">Urgente</b> vai direto para a gerência ou a direção.</p></div>
-      <div class="st"><span class="num">04 · PRESTA CONTAS</span><h3>Relatório às 8h</h3><p>Todo dia de manhã, os gestores recebem no WhatsApp o resumo de ontem, com os alertas e o que ficou pendente.</p></div>
+      <div class="st c-bl"><span class="gi c-bl" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="num">01 · LÊ</span><h3>Todas as conversas</h3><p>A cada hora, o agente lê as conversas da IA, do comercial, da locação e dos setores, incluindo o cliente que volta a falar depois de entregue ao corretor.</p></div>
+      <div class="st c-vi"><span class="gi c-vi" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><span class="num">02 · ENTENDE</span><h3>Motivo e responsável</h3><p>Registra o que aconteceu, quem é o responsável e qual atendimento. Não é palavra-chave: ele entende o contexto da conversa.</p></div>
+      <div class="st c-co"><span class="gi c-co" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></span><span class="num">03 · AVISA</span><h3>Atenção ou urgente</h3><p><b style="color:#FCD34D">Atenção</b> vai para o grupo da equipe. <b style="color:#FCA5A5">Urgente</b> vai direto para a gerência ou a direção.</p></div>
+      <div class="st c-em"><span class="gi c-em" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="num">04 · PRESTA CONTAS</span><h3>Relatório às 8h</h3><p>Todo dia de manhã, os gestores recebem no WhatsApp o resumo de ontem, com os alertas e o que ficou pendente.</p></div>
     </div>
 
     <div class="flow" aria-label="Exemplo do processo, do problema ao relatório">
@@ -502,9 +523,9 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
       <h2>Sem mudar a rotina da equipe.</h2>
     </div>
     <div class="zs">
-      <div><h3>No WhatsApp que já existe</h3><p>O Sentinela trabalha sobre o WhatsApp de atendimento da imobiliária, com as conversas centralizadas. Nada de aplicativo novo para a equipe.</p></div>
-      <div><h3>Com a sua régua</h3><p>Você define o que é atenção e o que é urgente, o prazo de cada setor e quem recebe cada tipo de aviso: grupo da equipe, gerência ou direção.</p></div>
-      <div><h3>Alerta com contexto</h3><p>Cada aviso vem com o motivo, o responsável e o atendimento, e com o link para abrir a conversa. Não é preciso procurar nada.</p></div>
+      <div class="zc c-em"><span class="gi c-em" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/></svg></span><h3>No WhatsApp que já existe</h3><p>O Sentinela trabalha sobre o WhatsApp de atendimento da imobiliária, com as conversas centralizadas. Nada de aplicativo novo para a equipe.</p></div>
+      <div class="zc c-am"><span class="gi c-am" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg></span><h3>Com a sua régua</h3><p>Você define o que é atenção e o que é urgente, o prazo de cada setor e quem recebe cada tipo de aviso: grupo da equipe, gerência ou direção.</p></div>
+      <div class="zc c-bl"><span class="gi c-bl" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><h3>Alerta com contexto</h3><p>Cada aviso vem com o motivo, o responsável e o atendimento, e com o link para abrir a conversa. Não é preciso procurar nada.</p></div>
     </div>
     <div class="lgpd">
       <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
