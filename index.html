@@ -707,6 +707,32 @@ a.agent{text-decoration:none;color:inherit}
   .nav-links a:last-child{border-bottom:0}
 }
 @media (max-width:400px){.nav-in .btn-sm{padding:10px 13px;font-size:13px}.nav-tog{width:40px;height:40px}}
+
+/* menu Soluções */
+.nav-dd{position:relative}
+.nav-dd-b{appearance:none;border:0;background:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font:500 15px var(--body,inherit);color:var(--ink-2);transition:color .16s ease}
+.nav-dd-b:hover,.nav-dd.open .nav-dd-b{color:var(--blue)}
+.nav-dd-b svg{transition:transform .16s ease}
+.nav-dd.open .nav-dd-b svg{transform:rotate(180deg)}
+.nav-dd-m a{display:flex!important;gap:12px;align-items:flex-start}
+.nav-dd-m i{flex:none;width:10px;height:10px;border-radius:3px;background:var(--d);margin-top:6px;box-shadow:0 0 0 3px color-mix(in srgb,var(--d) 18%,transparent)}
+.nav-dd-m b{display:block;font-weight:600;color:var(--ink)}
+.nav-dd-m small{display:block;font-size:12.5px;font-weight:400;color:var(--ink-3)}
+@media (min-width:941px){
+  .nav-dd-m{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);min-width:290px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px;box-shadow:0 24px 48px -24px rgba(12,26,43,.35);display:none}
+  .nav-dd-m::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+  .nav-dd:hover .nav-dd-m,.nav-dd:focus-within .nav-dd-m,.nav-dd.open .nav-dd-m{display:block}
+  .nav-dd-m a{padding:10px 12px;border-radius:10px}
+  .nav-dd-m a:hover{background:var(--paper-2,#F3F4F1)}
+}
+@media (max-width:1100px) and (min-width:941px){.nav-dd-b{font-size:14.5px}}
+@media (max-width:940px){
+  .nav-dd{display:flex;flex-direction:column;border-bottom:1px solid var(--line);padding-bottom:6px}
+  .nav-dd-b{pointer-events:none;padding:16px 0 6px;font:600 11px var(--mono,monospace);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .nav-dd-b svg{display:none}
+  .nav-dd-m a{padding:10px 0!important;border-bottom:0!important}
+  .nav-dd-m b{font-size:16px}
+}
 </style>
 </head>
 <body>
@@ -717,9 +743,15 @@ a.agent{text-decoration:none;color:inherit}
     <div class="nav-links" id="nav-links">
       <a href="#imobiliarias">Imobiliárias</a>
       <a href="#corretores">Corretores</a>
-      <a href="/dna/">DNA Imob</a>
-      <a href="/raiox/">Raio-X</a>
-      <a href="/plantao-24h/">Plantão 24h</a>
+      <div class="nav-dd">
+        <button class="nav-dd-b" type="button" aria-expanded="false" aria-controls="nav-dd-m">Soluções <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dd-m" id="nav-dd-m">
+          <a href="/roleta/"><i style="--d:#6A4BE0"></i><span><b>Corretor da Vez</b><small>Roleta inteligente de leads</small></span></a>
+          <a href="/plantao-24h/"><i style="--d:#D97706"></i><span><b>Plantão 24h</b><small>Monitoramento das conversas</small></span></a>
+          <a href="/dna/"><i style="--d:#059669"></i><span><b>DNA Imob</b><small>Diagnóstico da operação</small></span></a>
+          <a href="/raiox/"><i style="--d:#2433E8"></i><span><b>Raio-X</b><small>Análise de uma negociação</small></span></a>
+        </div>
+      </div>
       <a href="#empresa">A GPTImob</a>
     </div>
     <div class="nav-cta">
@@ -799,11 +831,11 @@ a.agent{text-decoration:none;color:inherit}
           <span class="agent-role">Pré-atendimento</span>
           <p>Atende 24 horas por dia, qualifica o lead, recomenda imóveis do seu sistema, agenda a visita e entrega ao corretor um resumo pronto da conversa.</p>
         </div>
-        <div class="agent">
-          <span class="agent-name">Duda<span class="agent-new">Novo</span></span>
-          <span class="agent-role">Distribuição de leads</span>
-          <p>Convoca o corretor da vez no WhatsApp, aguarda o aceite dentro do prazo configurado e repassa ao próximo da fila se ninguém responder.</p>
-        </div>
+        <a class="agent" href="/roleta/">
+          <span class="agent-name">Corretor da Vez<span class="agent-new">Novo</span></span>
+          <span class="agent-role">Roleta inteligente de leads</span>
+          <p>Oferece o lead ao corretor da vez no WhatsApp, com prazo para confirmar e para atender. Quem não atende perde a vez, e a gestão acompanha no painel.</p>
+        </a>
         <div class="agent">
           <span class="agent-name">Luck</span>
           <span class="agent-role">Recuperação de descartados</span>
@@ -1392,6 +1424,7 @@ a.agent{text-decoration:none;color:inherit}
           <li><a href="/#imobiliarias">Agentes de IA</a></li>
           <li><a href="/dna/">DNA Imob</a></li>
           <li><a href="/plantao-24h/">Plantão 24h</a></li>
+          <li><a href="/roleta/">Corretor da Vez</a></li>
           <li><a href="/imersao/">Imers&atilde;o de implanta&ccedil;&atilde;o</a></li>
           <li><a href="/diagnostico/">Diagn&oacute;stico gratuito</a></li>
         </ul>
@@ -1491,6 +1524,16 @@ a.agent{text-decoration:none;color:inherit}
     }
     window.addEventListener('resize',sync);sync();
   });
+})();
+</script>
+<script>
+(function(){
+  var d=document.querySelector('.nav-dd'); if(!d) return;
+  var b=d.querySelector('.nav-dd-b');
+  function set(o){d.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');}
+  b.addEventListener('click',function(e){e.stopPropagation();set(!d.classList.contains('open'));});
+  document.addEventListener('click',function(e){if(!d.contains(e.target))set(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
 })();
 </script>
 </body>
