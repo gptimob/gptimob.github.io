@@ -1,0 +1,24 @@
+# GPTImob
+
+> GPTImob cria agentes de inteligência artificial e soluções de dados para imobiliárias, administradoras de locação, construtoras e corretores de imóveis no Brasil. Os agentes trabalham no WhatsApp e dentro do CRM que a empresa já usa (Imoview, CV CRM, Bloco, Sienge e outros). Sede em Passo Fundo (RS), atendimento em todo o Brasil. Contato: WhatsApp +55 54 99916-6672.
+
+## Soluções para imobiliárias e construtoras
+
+- [Corretor da Vez](https://gptimob.com.br/roleta/): roleta inteligente de leads. Cada lead é oferecido ao corretor da vez pelo WhatsApp, com prazo para confirmar (10 min) e para atender (1 h). Quem não atende perde a vez. A gestão acompanha a fila ao vivo na TV e por relatório. Caso real: de 55,7% dos leads nunca retirados da fila para 88% aceitos, com mediana de 1min24s até o aceite.
+- [Relatório modelo do Corretor da Vez](https://gptimob.com.br/roleta/modelo/): exemplo com dados fictícios de taxa de aceite, tempo até o aceite e até a primeira resposta, desempenho por corretor, caminho de cada lead e a fila ao vivo.
+- [Plantão 24h](https://gptimob.com.br/plantao-24h/): agente que lê as conversas de WhatsApp de todos os setores (comercial, locação, manutenção, financeiro e proprietários) e avisa a gestão quando um cliente reclama, fica sem resposta ou ameaça ir embora. Alertas de atenção e urgência e relatório diário.
+- [DNA Imob](https://gptimob.com.br/dna/): inteligência de negócios. Cruza o CRM e as conversas de WhatsApp e entrega um painel com quem fecha, os imóveis que giram, a carga ideal por corretor e um plano de ação.
+- [Raio-X da Negociação](https://gptimob.com.br/raiox/): análise de uma conversa de WhatsApp entre corretor e cliente, com temperatura do lead, objeções e a próxima mensagem a enviar.
+- [Agentes de IA](https://gptimob.com.br/#imobiliarias): pré-atendimento, distribuição, recuperação de descartados, ativação de base, assistente do corretor, locação, cobrança e agentes integrados ao Sienge para construtoras.
+- [Imersão de implantação](https://gptimob.com.br/imersao/): treinamento para o time interno implantar IA na operação.
+
+## Soluções para corretores
+
+- [Soluções para corretores](https://gptimob.com.br/corretores/)
+- [Kit Essencial do Corretor](https://gptimob.com.br/kit-essencial/): skills de IA para o dia a dia do corretor.
+- [Followup Matador](https://gptimob.com.br/followup/): assistente que organiza os follow-ups do corretor.
+
+## Contato
+
+- [Diagnóstico gratuito](https://gptimob.com.br/diagnostico/)
+- WhatsApp: https://wa.me/5554999166672
