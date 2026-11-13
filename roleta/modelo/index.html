@@ -88,6 +88,18 @@ select.sel{background:#fff;border:1px solid var(--line);border-radius:999px;padd
 .kpi .ki{width:28px;height:28px;border-radius:8px;background:var(--kb);color:var(--k);display:grid;place-items:center;flex:none}
 .kpi.c-bl{--k:#2F6FB5;--kb:#E6EEF8}.kpi.c-vi{--k:#6A4BE0;--kb:#F1EDFF}.kpi.c-gr{--k:#16A34A;--kb:#DCFCE7}.kpi.c-am{--k:#C77A12;--kb:#FEF3C7}.kpi.c-te{--k:#0E8577;--kb:#CCFBF1}.kpi.c-in{--k:#4F46E5;--kb:#E0E7FF}.kpi.c-or{--k:#E2620F;--kb:#FFEDD5}.kpi.c-re{--k:#DC2626;--kb:#FEE2E2}.kpi.c-pk{--k:#C026D3;--kb:#FAE8FF}.kpi.c-em{--k:#059669;--kb:#D1FAE5}
 .kpi.tint b{color:var(--k)}
+.kpi.hero{border:0;color:#fff;box-shadow:0 18px 40px -22px var(--hs)}
+.kpi.hero::before{display:none}
+.kpi.hero::after{content:"★ métrica principal";display:inline-block;margin-top:10px;font:600 9.5px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);background:rgba(255,255,255,.14);border-radius:999px;padding:3px 8px}
+.kpi.h-vi{background:radial-gradient(120% 120% at 100% 0%,rgba(185,168,255,.45),transparent 55%),linear-gradient(140deg,#3B2499 0%,#6A4BE0 100%);--hs:rgba(106,75,224,.75)}
+.kpi.h-te{background:radial-gradient(120% 120% at 100% 0%,rgba(110,231,210,.4),transparent 55%),linear-gradient(140deg,#0B4F49 0%,#0E8577 100%);--hs:rgba(14,133,119,.75)}
+.kpi.hero span{color:rgba(255,255,255,.82)}
+.kpi.hero .ki{background:rgba(255,255,255,.18);color:#fff}
+.kpi.hero b{color:#fff}
+.kpi.hero small{color:rgba(255,255,255,.8)}
+.kpi.hero::after{white-space:nowrap}
+@media(max-width:960px){.kpi.hero{order:-1}}
+
 .kpi span{display:block;font:600 11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .kpi b{display:block;font:800 30px/1.15 var(--f-d);letter-spacing:-.03em;margin:8px 0 4px;font-variant-numeric:tabular-nums}
 .kpi small{font-size:13px;color:var(--muted)}
@@ -576,8 +588,8 @@ function render(){
    ['c-bl','','lead','Leads',nf(L.length),'atendimentos'],
    ['c-in','','send','Encaminhamentos',nf(offers),nf(offAcc)+' aceitos · '+nf(offers-offAcc)+' não aceitos'],
    ['c-vi','tint','ok','Taxa de aceite',L.length?pct(accL/L.length):'—',nf(accL)+' aceitos'],
-   ['c-am','','clk','Tempo até o aceite',dur(md),'mediana · média '+dur(av)],
-   ['c-te','tint','msg','Tempo até a 1ª resposta',dur(r1m),'do aceite ao 1º contato · média '+dur(r1a)],
+   ['c-am','hero h-vi','clk','Tempo até o aceite',dur(md),'mediana · média '+dur(av)],
+   ['c-te','hero h-te','msg','Tempo até a 1ª resposta',dur(r1m),'do aceite ao 1º contato · média '+dur(r1a)],
    ['c-pk','','q','Fila média',queueLen.length?mean(queueLen).toFixed(1).replace('.',','):'—','corretores até aceitar'],
    ['c-em','tint','bolt','1ª resposta em até 5 min',r1s.length?pct(r5/r1s.length):'—',nf(r5)+' de '+nf(r1s.length)+' leads aceitos'],
    ['c-or','tint','hg','Em andamento',nf(andam),'recentes, podem ser aceitos'],
