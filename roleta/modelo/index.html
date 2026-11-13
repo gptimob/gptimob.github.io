@@ -261,6 +261,29 @@ footer a{color:var(--v-ink);font-weight:600;text-decoration:none}
 .att td b{color:#fff}
 .att .ok{color:#4ADE80}.att .wt{color:#FBBF24}
 .lv-note{color:var(--nm);font-size:12.5px;margin-top:16px}
+.lv-r{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap}
+.lv-act{display:flex;gap:8px;flex-wrap:wrap}
+.lb{border:1px solid var(--nl);background:var(--n1);color:#fff;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.lb:hover{border-color:rgba(255,255,255,.25)}
+.lb[aria-pressed=true]{border-color:rgba(182,243,74,.5);color:var(--lime);background:var(--lime-soft)}
+.qi .l2 .wt{color:#fff;font-weight:600}
+.qi .l2 .wt.hot{color:#FBBF24}
+.qi.sos{border-color:#F87171;background:rgba(127,29,29,.38);animation:sos 1.2s ease-in-out infinite}
+.qi.sos .cd b{color:#FCA5A5}
+.qi.sos .prog i{background:#F87171}
+@keyframes sos{0%,100%{box-shadow:0 0 0 0 rgba(248,113,113,0)}50%{box-shadow:0 0 0 5px rgba(248,113,113,.35)}}
+.sos-m{grid-column:1/-1;font:600 12px var(--f-m);color:#FCA5A5;letter-spacing:.04em}
+body.tv .demo-bar,body.tv header.top,body.tv .lv-note{display:none}
+body.tv #v-live{min-height:100vh}
+body.tv .wrap{max-width:none;padding-left:28px;padding-right:28px}
+body.tv .lv-h h1{font-size:34px}
+body.tv .clock{font-size:40px}
+body.tv .qi{padding:16px 18px}
+body.tv .qi .l1 b{font-size:18px}
+body.tv .qi .l2{font-size:15px}
+body.tv .qi .cd b{font-size:34px}
+body.tv .lv-k b{font-size:32px}
+@media(prefers-reduced-motion:reduce){.qi.sos{animation:none}}
 @media(prefers-reduced-motion:reduce){.tabs .dot,.lv-h h1 .on i{animation:none}.qi.new,.fe.new{animation:none}}
 </style>
 </head>
@@ -350,13 +373,13 @@ footer a{color:var(--v-ink);font-weight:600;text-decoration:none}
 <section id="v-live" role="tabpanel" aria-labelledby="t-live" hidden>
   <div class="wrap">
     <div class="lv-h">
-      <div><h1>Fila ao vivo <span class="on"><i aria-hidden="true"></i>AO VIVO</span></h1><p>Os leads esperando aceite agora, quem está sendo chamado e quem é o próximo de cada roleta.</p></div>
-      <div class="clock"><span id="clk">--:--:--</span><small id="clk-d"></small></div>
+      <div><h1>Fila ao vivo <span class="on"><i aria-hidden="true"></i>AO VIVO</span></h1><p>Os leads esperando aceite agora, quem está sendo chamado e quem é o próximo de cada roleta. Lead novo toca um aviso, e lead com mais de 30 minutos sem atendimento toca a sirene 🚨.</p></div>
+      <div class="lv-r"><div class="lv-act"><button type="button" id="snd" class="lb" aria-pressed="false">🔕 Ativar som</button><button type="button" id="tvm" class="lb">⛶ Modo TV</button></div><div class="clock"><span id="clk">--:--:--</span><small id="clk-d"></small></div></div>
     </div>
     <div class="lv-k" id="lv-k"></div>
     <div class="lv-g">
       <section class="col col-q" aria-labelledby="h-q">
-        <div class="col-h"><h2 id="h-q">Na fila agora</h2><small>10 min para confirmar</small></div>
+        <div class="col-h"><h2 id="h-q">Na fila agora</h2><small>quem espera há mais tempo primeiro</small></div>
         <div class="ql" id="lv-q" aria-live="polite"></div>
       </section>
       <section class="col" aria-labelledby="h-n">
@@ -638,6 +661,16 @@ var live=(function(){
   var LR=mulberry32(Date.now()%1e9);
   function lr(){return LR()}
   function lpick(a,w){var s=0;w.forEach(function(x){s+=x});var r=lr()*s;for(var i=0;i<a.length;i++){r-=w[i];if(r<=0)return a[i]}return a[a.length-1]}
+  var AC=null,soundOn=false,ready=false;
+  function ac(){if(!AC){var K=window.AudioContext||window.webkitAudioContext;if(!K)return null;AC=new K()}if(AC.state==='suspended')AC.resume();return AC}
+  function tone(a,f,t0,dur,type,vol){var o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.setValueAtTime(f,t0);g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+.02);g.gain.exponentialRampToValueAtTime(.001,t0+dur);o.connect(g);g.connect(a.destination);o.start(t0);o.stop(t0+dur+.05);return o}
+  function chime(){if(!soundOn||!ready)return;var a=ac();if(!a)return;var t=a.currentTime;tone(a,880,t,.45,'sine',.22);tone(a,1318.5,t+.16,.6,'sine',.2)}
+  function siren(){if(!soundOn||!ready)return;var a=ac();if(!a)return;var t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.type='sawtooth';
+    for(var i=0;i<4;i++){o.frequency.setValueAtTime(650,t+i*.7);o.frequency.linearRampToValueAtTime(1250,t+i*.7+.35);o.frequency.linearRampToValueAtTime(650,t+i*.7+.7)}
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.12,t+.05);g.gain.setValueAtTime(.12,t+2.65);g.gain.linearRampToValueAtTime(0,t+2.8);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+2.85)}
+  document.getElementById('snd').addEventListener('click',function(){soundOn=!soundOn;this.setAttribute('aria-pressed',soundOn);this.textContent=soundOn?'🔔 Som ligado':'🔕 Ativar som';if(soundOn){ac();chime()}});
+  document.getElementById('tvm').addEventListener('click',function(){var on=!document.body.classList.contains('tv');document.body.classList.toggle('tv',on);this.textContent=on?'⛶ Sair do modo TV':'⛶ Modo TV';try{if(on&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(function(){});else if(!on&&document.fullscreenElement)document.exitFullscreen()}catch(e){}});
+  document.addEventListener('fullscreenchange',function(){if(!document.fullscreenElement&&document.body.classList.contains('tv')){document.body.classList.remove('tv');document.getElementById('tvm').textContent='⛶ Modo TV'}});
   function nextC(f){var ro=ROSTER[f];var c=ro[lp[f]%ro.length];lp[f]++;return c}
   function peek(f,n){var ro=ROSTER[f],out=[];for(var i=0;i<n;i++)out.push(ro[(lp[f]+i)%ro.length]);return out}
   function now(){return Date.now()}
@@ -650,15 +683,16 @@ var live=(function(){
     Q.unshift(L);stats.leads++;
     log('v','Novo lead <b>#'+L.id+'</b> · '+esc(o)+' · roleta '+FX[f]);
     log('b','Oferta enviada para <b>'+esc(short(c.n))+'</b> · #'+L.id);
+    chime();
   }
   function plan(L){
     var rem=(L.end-now())/1000;
-    if(lr()<L.c.acc*0.9){var t=Math.min(rem-3,Math.max(5,lognorm(L.c.med*0.35,0.6)));L.acceptAt=t>4?now()+t*1000:null}else L.acceptAt=null;
+    if(lr()<L.c.acc*0.9){var t=Math.min(rem-3,Math.max(L.try>=4?90:5,lognorm(L.c.med*0.35,0.6)));L.acceptAt=t>4?now()+t*1000:null}else L.acceptAt=null;
   }
   function seed(){
     // 5 leads já na fila, com tempos diferentes
-    [540,410,260,150,70].forEach(function(r,i){newLead(r);Q[0].n=false;Q[0].born=now()-(600-r)*1000;if(i%2)Q[0].try=2});
-    Q.forEach(function(L){L.acceptAt=lr()<.55?now()+(8+lr()*40)*1000:null});
+    [[540,1],[410,2],[260,1],[150,2],[35,3]].forEach(function(x){newLead(x[0]);var L=Q[0];L.n=false;L.try=x[1];L.born=now()-((x[1]-1)*600+(600-x[0]))*1000});
+    Q.forEach(function(L){L.acceptAt=(L.try<3&&lr()<.55)?now()+(8+lr()*40)*1000:null});
     // atendendo agora
     for(var i=0;i<6;i++){var f=lpick([0,1,2,3],[60,18,7,15]);var c=ROSTER[f][Math.floor(lr()*ROSTER[f].length)];var ago=(3+i*9+Math.floor(lr()*6))*60;ATT.push({id:nextId-40+i*3,c:c,f:f,acc:new Date(now()-ago*1000),dl:now()+(3600-ago)*1000,ok:lr()<.5,t:20+Math.floor(lr()*90)})}
     stats.leads=31;stats.acc=27;stats.ts=[22,31,45,18,64,39,52,27,80,35,41];stats.tro=2;
@@ -676,12 +710,14 @@ var live=(function(){
         Q.splice(Q.indexOf(L),1);
         ATT.unshift({id:L.id,c:L.c,f:L.f,acc:new Date(),dl:t+3600e3,ok:false,t:secs,n:true});ATT=ATT.slice(0,8);
         stats.acc++;stats.ts.push(secs);
-        log('g','<b>'+esc(short(L.c.n))+'</b> aceitou #'+L.id+' em '+dur(secs));
+        log('g','<b>'+esc(short(L.c.n))+'</b> aceitou #'+L.id+' em '+dur(secs)+(t-L.born>=1800e3?' · cliente esperou '+Math.floor((t-L.born)/60e3)+' min':''));
       }else if(t>=L.end){
         var old=L.c;L.c=nextC(L.f);L.try++;L.end=t+600e3;plan(L);L.flash=true;
         log('y','<b>'+esc(short(old.n))+'</b> não confirmou em 10 min · #'+L.id+' passou para <b>'+esc(short(L.c.n))+'</b>');
       }
     });
+    // 30 min sem atendimento: sirene
+    Q.forEach(function(L){if(t-L.born>=1800e3&&(!L.sirLast||t-L.sirLast>=90e3)){if(!L.sirLast)log('r','🚨 <b>#'+L.id+'</b> está há 30 min sem atendimento · chamando <b>'+esc(short(L.c.n))+'</b>');L.sirLast=t;siren()}});
     // registros no CRM
     ATT.forEach(function(a){if(!a.ok&&lr()<0.012){a.ok=true;log('v','Contato registrado no CRM por <b>'+esc(short(a.c.n))+'</b> · #'+a.id)}});
     // novos leads
@@ -695,22 +731,23 @@ var live=(function(){
     document.getElementById('clk-d').textContent=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
     var md=median(stats.ts);
     document.getElementById('lv-k').innerHTML=[
-      ['Na fila agora','<b class="lime">'+Q.length+'</b>','aguardando aceite'],
+      ['Na fila agora','<b class="lime">'+Q.length+'</b>',(function(){var n=Q.filter(function(L){return t-L.born>=1800e3}).length;return n?'🚨 '+n+' com mais de 30 min':'aguardando aceite'})()],
       ['Leads hoje','<b>'+stats.leads+'</b>','recebidos desde as 0h'],
       ['Aceitos hoje','<b>'+stats.acc+'</b>',stats.leads?pct(stats.acc/stats.leads)+' de aceite':''],
       ['Tempo mediano hoje','<b>'+dur(md)+'</b>','da oferta ao aceite'],
       ['Atendendo agora','<b>'+ATT.length+'</b>','dentro do prazo do CRM']
     ].map(function(x){return'<div><span>'+x[0]+'</span>'+x[1]+'<small>'+x[2]+'</small></div>'}).join('');
-    var q=Q.slice().sort(function(a,b){return a.end-b.end}).slice(0,5);
+    var q=Q.slice().sort(function(a,b){return a.born-b.born}).slice(0,5);
     document.getElementById('lv-q').innerHTML=q.length?q.map(function(L){var rem=L.end-t,cls=rem<60e3?'crit':rem<180e3?'warn':'';var w=Math.max(0,Math.min(100,rem/600e3*100));
-      var h='<div class="qi '+cls+(L.n?' new':'')+'"><div class="l1"><b>#'+L.id+'</b><span>'+esc(L.o)+'</span><span>'+FX[L.f]+'</span></div><div class="l2">Chamando <b>'+esc(short(L.c.n))+'</b> <em>· '+L.try+'ª oferta · na fila há '+fmt(t-L.born)+'</em></div><div class="cd"><b>'+fmt(rem)+'</b><small>para confirmar</small></div><div class="prog"><i style="width:'+w.toFixed(1)+'%"></i></div></div>';L.n=false;return h}).join(''):'<p class="empty">Nenhum lead esperando. Todos foram aceitos.</p>';
+      var wait=t-L.born,sos=wait>=1800e3;if(sos)cls='sos';
+      var h='<div class="qi '+cls+(L.n?' new':'')+'"><div class="l1"><b>'+(sos?'🚨 ':'')+'#'+L.id+'</b><span>'+esc(L.o)+'</span><span>'+FX[L.f]+'</span></div><div class="l2">Chamando <b>'+esc(short(L.c.n))+'</b> <em>· '+L.try+'ª oferta · esperando há </em><span class="wt'+(wait>=1200e3?' hot':'')+'">'+fmt(wait)+'</span></div><div class="cd"><b>'+fmt(rem)+'</b><small>para confirmar</small></div>'+(sos?'<div class="sos-m">🚨 Mais de 30 min sem atendimento</div>':'')+'<div class="prog"><i style="width:'+w.toFixed(1)+'%"></i></div></div>';L.n=false;return h}).join(''):'<p class="empty">Nenhum lead esperando. Todos foram aceitos.</p>';
     var busy={};Q.forEach(function(L){busy[L.c.i]=L.id});
     document.getElementById('lv-n').innerHTML=[0,1,3,2].map(function(f){var nx=peek(f,4);return'<div class="rol"><h3>'+FX[f]+'</h3><div class="ord">'+nx.map(function(c,i){var b=busy[c.i];return'<div class="'+(i===0?'nx':'')+(b?' of':'')+'"><i>'+(i+1)+'º</i>'+esc(short(c.n))+(i===0?'<em>PRÓXIMO</em>':b?'<em>COM #'+b+'</em>':'')+'</div>'}).join('')+'</div></div>'}).join('');
     document.getElementById('lv-f').innerHTML=FEED.map(function(e){var h='<div class="fe'+(e.n?' new':'')+'"><time>'+hhmm(e.t)+'</time><i class="'+e.c+'"></i><span>'+e.h+'</span></div>';e.n=false;return h}).join('');
     document.getElementById('lv-a').innerHTML=ATT.map(function(a){var rem=a.dl-t;var h='<tr'+(a.n?' class="fe new" style="display:table-row;background:none"':'')+'><td><b>'+esc(a.c.n)+'</b></td><td>#'+a.id+'</td><td>'+FX[a.f]+'</td><td class="n">'+dur(a.t)+' · '+hhmm(a.acc)+'</td><td class="n mono">'+(a.ok?'—':fmt(rem))+'</td><td class="'+(a.ok?'ok':'wt')+'">'+(a.ok?'✓ Contato registrado':'Aguardando registro')+'</td></tr>';a.n=false;return h}).join('');
   }
   var iv=null;
-  function start(){if(!started){seed();started=true}if(!iv){draw();iv=setInterval(function(){step();draw()},1000)}}
+  function start(){if(!started){seed();started=true;ready=true}if(!iv){draw();iv=setInterval(function(){step();draw()},1000)}}
   document.addEventListener('visibilitychange',function(){if(document.hidden&&iv){clearInterval(iv);iv=null}else if(!document.hidden&&started&&!document.getElementById('v-live').hidden){start()}});
   return{start:start};
 })();
