@@ -501,6 +501,10 @@ a.agent{text-decoration:none;color:inherit}
 .car-dots button{width:8px;height:8px;border-radius:8px;border:0;padding:0;background:#C9CFCB;cursor:pointer;transition:width .25s,background .25s}
 .car-dots button[aria-selected="true"]{width:22px;background:var(--acc)}
 
+.show-cv{
+  --acc:#5135C4;--acc-soft:#F7F5FF;--acc-tint:#EEE9FF;
+  --acc-metal:linear-gradient(100deg,#2A1477 0%,#5B3FD9 30%,#B9A8FF 47%,#5B3FD9 62%,#2E1680 100%);
+}
 .show-sn{
   --acc:#B45309;--acc-soft:#FFFAEB;--acc-tint:#FEF3C7;
   --acc-metal:linear-gradient(100deg,#5A2A02 0%,#C2640A 30%,#FCD34D 47%,#C2640A 62%,#6B3203 100%);
@@ -1262,6 +1266,59 @@ a.agent{text-decoration:none;color:inherit}
         <ul class="chips"><li>Todos os setores</li><li>Alerta no WhatsApp</li><li>Relatório diário</li></ul>
         <div class="show-cta">
           <a class="btn btn-acc btn-sm" href="/plantao-24h/">Conhecer o Plantão 24h <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="show show-rx show-cv">
+      <div class="show-head">
+        <p class="show-kicker">Para a sala de vendas</p>
+        <h3>Corretor da Vez</h3>
+        <p class="show-line">A roleta que leva cada lead ao corretor da vez no WhatsApp, com a fila ao vivo na TV da imobiliária.</p>
+      </div>
+      <div class="show-vis">
+        <div class="car car-dna car-sn" data-car>
+          <div class="car-track" tabindex="0" aria-label="Telas do Corretor da Vez">
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Corretor da Vez · Imobiliária Modelo</span></div><div class="shot"><img src="/roleta/img/1.jpg" alt="Corretor da Vez: Fila ao vivo na TV" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">01</span><span><b>Fila ao vivo na TV</b> Quem está sendo chamado, a contagem de cada oferta e a 🚨 dos 30 minutos.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Corretor da Vez · Imobiliária Modelo</span></div><div class="shot"><img src="/roleta/img/2.jpg" alt="Corretor da Vez: Indicadores da fila" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">02</span><span><b>Indicadores da fila</b> Taxa de aceite, tempo até o aceite e até a 1ª resposta.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Corretor da Vez · Imobiliária Modelo</span></div><div class="shot"><img src="/roleta/img/3.jpg" alt="Corretor da Vez: Roletas e origens" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">03</span><span><b>Roletas e origens</b> Leads, taxa e tempo de cada faixa, e de onde vieram os leads.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Corretor da Vez · Imobiliária Modelo</span></div><div class="shot"><img src="/roleta/img/4.jpg" alt="Corretor da Vez: Volume no tempo" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">04</span><span><b>Volume no tempo</b> Leads recebidos e aceitos por dia.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Corretor da Vez · Imobiliária Modelo</span></div><div class="shot"><img src="/roleta/img/5.jpg" alt="Corretor da Vez: Tempos de resposta" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">05</span><span><b>Tempos de resposta</b> Aceites por dia e quanto cada etapa demora.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Corretor da Vez · Imobiliária Modelo</span></div><div class="shot"><img src="/roleta/img/6.jpg" alt="Corretor da Vez: Desempenho por corretor" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">06</span><span><b>Desempenho por corretor</b> Ofertas, aceites, trocas, taxa e tempos de cada um.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Corretor da Vez · Imobiliária Modelo</span></div><div class="shot"><img src="/roleta/img/7.jpg" alt="Corretor da Vez: Caminho de cada lead" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">07</span><span><b>Caminho de cada lead</b> Quem recebeu, quem perdeu a vez e por quê.</span></figcaption>
+            </figure>
+          </div>
+          <div class="car-nav">
+            <button class="car-btn car-prev" type="button" aria-label="Tela anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="car-dots" role="tablist" aria-label="Telas do Corretor da Vez"></div>
+            <button class="car-btn car-next" type="button" aria-label="Próxima tela"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="show-rest">
+        <ul class="chips"><li>Fila ao vivo na TV</li><li>Prazo para aceitar</li><li>Relatório por corretor</li></ul>
+        <div class="show-cta">
+          <a class="btn btn-acc btn-sm" href="/roleta/">Conhecer o Corretor da Vez <span aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn-ghost btn-sm" href="/roleta/modelo/">Ver o relatório de exemplo</a>
         </div>
       </div>
     </div>
