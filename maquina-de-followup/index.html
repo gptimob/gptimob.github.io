@@ -6,7 +6,7 @@
 <title>Máquina de Follow-up · Retomada automática de leads no WhatsApp | GPTImob</title>
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://gptimob.com.br/maquina-de-followup/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23A7F3E8'/%3E%3Cstop offset='.5' stop-color='%230E8C86'/%3E%3Cstop offset='1' stop-color='%2303302E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M44 30a13 13 0 1 1-4-9.4L44 24M44 15v9h-9' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FDA4AF'/%3E%3Cstop offset='.5' stop-color='%23BE123C'/%3E%3Cstop offset='1' stop-color='%233F0414'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M44 30a13 13 0 1 1-4-9.4L44 24M44 15v9h-9' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0A0E15">
 <meta name="description" content="Quando o cliente fica 24 horas sem responder, a IA retoma pelo WhatsApp oficial da imobiliária, com réguas de locação e de vendas. Respondeu, volta para o corretor. Não respondeu, é encerrado com motivo no CRM.">
 <meta name="keywords" content="follow-up imobiliária, follow-up automático WhatsApp, retomada de leads, régua de follow-up, reativação de leads, lead frio imobiliária, follow-up locação, follow-up vendas imóveis, WhatsApp oficial imobiliária, Imoview, CV CRM, GPTImob">
@@ -32,17 +32,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-/* Mesma família do Raio-X (azul), DNA (esmeralda) e Plantão 24h (âmbar): aqui o verde-água da máquina de follow-up sobre blocos noite */
+/* Mesma família do Raio-X (azul), DNA (esmeralda) e Plantão 24h (âmbar): aqui o rubi da máquina de follow-up sobre blocos noite */
 :root{
   color-scheme:light;
   --bg:#FFFFFF; --tint:#F7F6F3; --line:#E7E4DD; --line-strong:#D6D1C6;
   --ink:#12100C; --muted:#615B50; --faint:#958E81;
   --night:#0A0E15; --night2:#121926; --night3:#1B2433; --nline:rgba(255,255,255,.09); --ntext:#C9D1DD; --nmuted:#8792A3;
-  --am:#0E8C86; --am-ink:#0A6B67; --am-light:#7EE3D6; --am-soft:#DDF5F1; --am-soft2:#F1FBF9;
+  --am:#BE123C; --am-ink:#9F1239; --am-light:#FDA4AF; --am-soft:#FFE4E6; --am-soft2:#FFF5F7;
   --red:#DC4A3A; --red-soft:#FDE8E5; --green:#16A34A; --green-soft:#DCFCE7; --blue:#2F6FB5; --blue-soft:#E6EEF8;
-  --metal-ink:linear-gradient(100deg,#053B39 0%,#0E8C86 30%,#7EE3D6 47%,#0E8C86 62%,#064541 100%);
-  --metal-light:linear-gradient(100deg,#86D9CE 0%,#E9FFFB 30%,#A6EBE1 52%,#F2FFFC 70%,#6FCFC3 100%);
-  --am-grad:linear-gradient(145deg,#A7F3E8 0%,#0E8C86 50%,#03302E 100%);
+  --metal-ink:linear-gradient(100deg,#4C0519 0%,#BE123C 30%,#FB7185 47%,#BE123C 62%,#5B0620 100%);
+  --metal-light:linear-gradient(100deg,#F58CA3 0%,#FFF1F3 30%,#FBB4C2 52%,#FFF5F7 70%,#E8738E 100%);
+  --am-grad:linear-gradient(145deg,#FDA4AF 0%,#BE123C 50%,#3F0414 100%);
   --f-display:"Inter Tight","Helvetica Neue",system-ui,sans-serif;
   --f-body:"Instrument Sans","Helvetica Neue",system-ui,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -64,7 +64,7 @@ p{margin:0}
 header.top{position:sticky;top:0;z-index:20;background:rgba(10,14,21,.82);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid var(--nline)}
 header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:12px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
-.logo{width:38px;height:38px;border-radius:11px;background:var(--am-grad);display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 4px 14px rgba(14,140,134,.35)}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--am-grad);display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 4px 14px rgba(190,18,60,.35)}
 .brand b{font:800 1.08rem/1.1 var(--f-display);display:block;letter-spacing:-.02em}
 .brand small{font-size:.75rem;color:var(--nmuted)}
 .top nav{display:flex;gap:22px;font-size:.92rem;align-items:center}
@@ -86,13 +86,13 @@ header.top .wrap{display:flex;justify-content:space-between;align-items:center;g
 /* hero */
 .hero{position:relative;overflow:hidden;padding:72px 0 88px}
 .hero::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(60% 50% at 78% 40%,rgba(14,140,134,.16),transparent 70%),
+  radial-gradient(60% 50% at 78% 40%,rgba(190,18,60,.16),transparent 70%),
   repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 44px),
   repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 44px);pointer-events:none}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
-.live{display:inline-flex;align-items:center;gap:10px;font:600 .74rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--am-light);border:1px solid rgba(126,227,214,.28);background:rgba(126,227,214,.06);padding:8px 12px;border-radius:999px}
-.live b{width:8px;height:8px;border-radius:50%;background:var(--am-light);box-shadow:0 0 0 0 rgba(126,227,214,.6);animation:ping 2s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(126,227,214,.55)}70%{box-shadow:0 0 0 9px rgba(126,227,214,0)}100%{box-shadow:0 0 0 0 rgba(126,227,214,0)}}
+.live{display:inline-flex;align-items:center;gap:10px;font:600 .74rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--am-light);border:1px solid rgba(253,164,175,.28);background:rgba(253,164,175,.06);padding:8px 12px;border-radius:999px}
+.live b{width:8px;height:8px;border-radius:50%;background:var(--am-light);box-shadow:0 0 0 0 rgba(253,164,175,.6);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(253,164,175,.55)}70%{box-shadow:0 0 0 9px rgba(253,164,175,0)}100%{box-shadow:0 0 0 0 rgba(253,164,175,0)}}
 .hero h1{font-size:clamp(2.3rem,5vw,3.9rem);line-height:1.02;margin:22px 0 20px;color:#fff}
 .hero .lead{font-size:1.14rem;max-width:520px}
 .hero .acts{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:32px}
@@ -117,13 +117,13 @@ header.top .wrap{display:flex;justify-content:space-between;align-items:center;g
 .m.del{font-style:italic;color:rgba(233,237,239,.6)}
 .m.flag{outline:2px solid var(--am-light);outline-offset:2px}
 .m.flag.r{outline-color:#F87171}
-.gap{align-self:center;font:600 .66rem var(--f-mono);color:var(--am-light);background:rgba(126,227,214,.1);border-radius:6px;padding:3px 8px;letter-spacing:.04em}
+.gap{align-self:center;font:600 .66rem var(--f-mono);color:var(--am-light);background:rgba(253,164,175,.1);border-radius:6px;padding:3px 8px;letter-spacing:.04em}
 .tags{display:flex;flex-direction:column;gap:8px}
 .tg{background:var(--night3);border:1px solid var(--nline);border-radius:12px;padding:10px 12px}
 .tg span{display:block;font:600 .64rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--nmuted);margin-bottom:3px}
 .tg b{color:#fff;font:700 .92rem/1.25 var(--f-display);letter-spacing:-.01em}
 .tg small{display:block;color:var(--nmuted);font-size:.74rem;margin-top:2px}
-.tg.warn{border-color:rgba(126,227,214,.35)} .tg.warn span{color:var(--am-light)}
+.tg.warn{border-color:rgba(253,164,175,.35)} .tg.warn span{color:var(--am-light)}
 .tg.bad{border-color:rgba(248,113,113,.35)} .tg.bad span{color:#F87171}
 .tg.ok span{color:#4ADE80}
 .ok-line{display:flex;align-items:center;gap:8px;font:600 .74rem var(--f-mono);color:#4ADE80;margin-top:12px;padding:0 4px}
@@ -172,7 +172,7 @@ section.sec{padding:96px 0}
 .alert .bub b{color:#fff}
 .alert .bub .k{display:inline-block;font:700 .66rem var(--f-mono);letter-spacing:.08em;border-radius:5px;padding:2px 6px;margin-bottom:6px}
 .k.red{background:rgba(248,113,113,.16);color:#FCA5A5}
-.k.amb{background:rgba(126,227,214,.15);color:#FCD34D}
+.k.amb{background:rgba(253,164,175,.15);color:#FCD34D}
 .k.grn{background:rgba(74,222,128,.14);color:#86EFAC}
 .alert .btns{display:flex;gap:6px;margin-top:8px}
 .alert .btns span{flex:1;text-align:center;font-size:.78rem;color:#53BDEB;background:#202C33;border-radius:8px;padding:7px 4px}
@@ -205,7 +205,7 @@ section.sec{padding:96px 0}
 .flow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
 .fcol{display:flex;flex-direction:column;gap:10px}
 .fcol .lbl{font:600 .72rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--am-light);display:flex;gap:8px;align-items:center}
-.fcol .lbl i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1px solid rgba(126,227,214,.4);display:grid;place-items:center;font-size:.7rem}
+.fcol .lbl i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1px solid rgba(253,164,175,.4);display:grid;place-items:center;font-size:.7rem}
 .fcol .sub{font-size:.88rem;color:var(--nmuted)}
 @media(max-width:960px){.flow{grid-template-columns:1fr}}
 
@@ -311,7 +311,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 .ba-col{border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .ba-col.before{background:var(--tint);border:1px solid var(--line)}
 .ba-col.after{background:var(--night);color:#fff;position:relative;overflow:hidden}
-.ba-col.after::after{content:"";position:absolute;width:300px;height:300px;right:-120px;top:-150px;background:radial-gradient(circle,rgba(14,140,134,.35),transparent 70%)}
+.ba-col.after::after{content:"";position:absolute;width:300px;height:300px;right:-120px;top:-150px;background:radial-gradient(circle,rgba(190,18,60,.35),transparent 70%)}
 .ba-k{font:600 .72rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .after .ba-k{color:var(--am-light)}
 .ba-n{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:baseline;border-top:1px solid var(--line);padding-top:12px;position:relative}
@@ -333,7 +333,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 .nd b{font-weight:600}
 .nd small{display:block;color:var(--nmuted);font-size:.82rem;margin-top:3px}
 .nd.sy{border-color:rgba(125,180,240,.4)}.nd.sy .who{color:#7DB4F0}
-.nd.ia{border-color:rgba(126,227,214,.45);background:rgba(14,140,134,.14)}.nd.ia .who{color:var(--am-light)}
+.nd.ia{border-color:rgba(253,164,175,.45);background:rgba(190,18,60,.14)}.nd.ia .who{color:var(--am-light)}
 .nd.hu{border-color:rgba(74,222,128,.4)}.nd.hu .who{color:#4ADE80}
 .nd.no{border-color:rgba(248,113,113,.45)}.nd.no .who{color:#F87171}
 .nd.sm{font-size:.86rem;padding:10px 13px}
@@ -368,7 +368,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 @media(max-width:900px){.rules{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.rules{grid-template-columns:1fr}}
 /* painel */
-.pnl{border:1px solid var(--line);border-radius:22px;padding:24px;background:#fff;display:flex;flex-direction:column;gap:20px;box-shadow:0 30px 60px -40px rgba(3,48,46,.35)}
+.pnl{border:1px solid var(--line);border-radius:22px;padding:24px;background:#fff;display:flex;flex-direction:column;gap:20px;box-shadow:0 30px 60px -40px rgba(63,4,20,.35)}
 .pnl-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
 .pnl-top b{font:700 1.15rem var(--f-display);letter-spacing:-.02em}
 .flt{display:flex;gap:6px;flex-wrap:wrap}
@@ -412,6 +412,16 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 
 @media(prefers-reduced-motion:reduce){.live b{animation:none}html{scroll-behavior:auto}}
 
+.nc-strip{background:#05070B;color:#A9B3C2;font-size:.86rem}
+.nc-strip .wrap{display:flex;gap:6px 14px;align-items:center;justify-content:center;flex-wrap:wrap;padding-block:8px;text-align:center}
+.nc-strip a{color:#fff;font-weight:600;text-decoration:none;white-space:nowrap}
+.nc-strip a:hover{color:var(--am-light)}
+
+footer .ft-nav{display:flex;gap:8px 18px;flex-wrap:wrap}
+footer .ft-nav a{color:inherit;text-decoration:none}
+footer .ft-nav a:hover{color:#fff}
+footer .ft-nav a.ft-home{color:#fff;font-weight:600}
+
 /* réguas */
 .rg{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:22px}
 .rg[hidden]{display:none}
@@ -428,14 +438,14 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 .tl-ph{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
 .tl-ph span{font:600 .62rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--nmuted)}
 .tl-ph b{font:700 .95rem var(--f-display);color:#FCD34D}
-.tl-ph.end b{color:#F87171}
+.tl-ph.end b{color:#CBD5E1}
 .tl-col{display:flex;flex-direction:column;gap:10px;min-width:0}
 .tl-k{font:600 .62rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--am-light)}
 .tl-line{position:relative;height:46px;margin:0 16px}
 .tl-line i{position:absolute;left:0;right:0;top:12px;height:2px;background:linear-gradient(90deg,var(--am-light),var(--am))}
 .tl-line.b i{background:linear-gradient(90deg,var(--am),rgba(126,227,214,.35))}
 .tl-line span{position:absolute;top:5px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--am);border:3px solid var(--night);box-shadow:0 0 0 1.5px var(--am-light)}
-.tl-line span.end{background:#F87171;box-shadow:0 0 0 1.5px #F87171}
+.tl-line span.end{background:#64748B;box-shadow:0 0 0 1.5px #94A3B8}
 .tl-line em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font:600 .74rem var(--f-mono);font-style:normal;color:#fff;white-space:nowrap}
 .tw{overflow-x:auto;border:1px solid var(--line);border-radius:16px}
 .msgt{width:100%;border-collapse:collapse;font-size:.93rem}
@@ -444,7 +454,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 .msgt tr:last-child td{border-bottom:0}
 .msgt .d{font:700 .86rem var(--f-mono);color:var(--am-ink);white-space:nowrap}
 .msgt .o{font-weight:600;color:var(--ink);white-space:nowrap}
-.msgt tr.last .d{color:var(--red)}
+.msgt tr.last .d{color:var(--faint)}
 @media(max-width:900px){.rg-top{grid-template-columns:1fr}}
 @media(max-width:600px){.rg{padding:18px}.tl{grid-template-columns:1fr;padding:20px 16px;gap:12px}.tl-ph{flex-direction:row;gap:8px;justify-content:center}.msgt thead{display:none}.msgt,.msgt tbody,.msgt tr,.msgt td{display:block}.msgt tr{padding:12px 14px;border-bottom:1px solid var(--line)}.msgt tr:last-child{border-bottom:0}.msgt td{border:0;padding:0}.msgt td.d,.msgt td.o{display:inline;margin-right:8px}.msgt td:last-child{margin-top:4px}}
 .msgs.two{grid-template-columns:1fr 1fr}
@@ -461,6 +471,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 </head>
 <body>
 
+<div class="nc-strip"><div class="wrap"><span>Não é do mercado imobiliário? A máquina também retoma os clientes de empresas de outros setores.</span><a href="https://wa.me/5554999166672?text=Ol%C3%A1%2C%20Rafael%21%20N%C3%A3o%20sou%20do%20mercado%20imobili%C3%A1rio%20e%20quero%20conhecer%20a%20M%C3%A1quina%20de%20Follow-up%20para%20o%20meu%20neg%C3%B3cio.%0A%0AEmpresa%3A%20%0ASegmento%3A%20%0ACidade%3A%20" target="_blank" rel="noopener">Chame no WhatsApp →</a></div></div>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="https://gptimob.com.br/maquina-de-followup/" aria-label="Máquina de Follow-up da GPTImob">
@@ -770,7 +781,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 </section>
 </main>
 
-<footer><div class="wrap"><span>Máquina de Follow-up · retomada automática de leads · por <a href="https://gptimob.com.br/">GPTImob</a></span><nav aria-label="Outras soluções"><a href="https://gptimob.com.br/roleta/">Corretor da Vez</a><a href="https://gptimob.com.br/plantao-24h/">Plantão 24h</a><a href="https://gptimob.com.br/dna/">DNA Imob</a><a href="https://wa.me/5554999166672" target="_blank" rel="noopener">WhatsApp (54) 99916-6672</a></nav></div></footer>
+<footer><div class="wrap"><span>Máquina de Follow-up · retomada automática de leads · por <a href="https://gptimob.com.br/">GPTImob</a></span><nav aria-label="Links do rodapé" class="ft-nav"><a class="ft-home" href="https://gptimob.com.br/">← Página inicial da GPTImob</a><a href="https://gptimob.com.br/roleta/">Corretor da Vez</a><a href="https://gptimob.com.br/plantao-24h/">Plantão 24h</a><a href="https://gptimob.com.br/dna/">DNA Imob</a><a href="https://gptimob.com.br/raiox/">Raio-X</a><a href="https://wa.me/5554999166672" target="_blank" rel="noopener">WhatsApp (54) 99916-6672</a></nav></div></footer>
 
 <script>
 (function () {
