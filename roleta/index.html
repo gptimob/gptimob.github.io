@@ -397,6 +397,24 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
 .demo-links{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:22px}
 .demo-links .ghost{color:var(--ink)}
 .zs .zc a{color:var(--am-ink);font-weight:600}
+
+/* painel ao vivo na TV */
+.tvsec{background:radial-gradient(70% 60% at 50% 0%,rgba(106,75,224,.28),transparent 70%),var(--night)}
+.tv{max-width:1080px;margin:0 auto}
+.tv-screen{position:relative;overflow:hidden;border-radius:18px;border:10px solid #1a1a22;background:#0B0A14;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 50px 100px -40px rgba(0,0,0,.8),0 0 80px -20px rgba(182,243,74,.18)}
+.tv-screen iframe{display:block;border:0;transform-origin:0 0;background:#0B0A14}
+.tv-foot{display:flex;justify-content:center}
+.tv-foot i{display:block;width:180px;height:26px;background:linear-gradient(#26262f,#141419);clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
+.tv-feats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1080px;margin:28px auto 0}
+.tv-feats div{border:1px solid var(--nline);border-radius:14px;padding:14px 16px;background:rgba(255,255,255,.03)}
+.tv-feats b{display:block;color:#fff;font-size:.95rem}
+.tv-feats span{font-size:.86rem;color:var(--nmuted)}
+.tv-links{display:flex;gap:22px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:26px}
+.tv-links .ghost{color:#fff}
+.tv-note{text-align:center;font-size:.84rem;color:var(--nmuted);margin-top:16px}
+@media(max-width:900px){.tv-feats{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.tv-screen{border-width:6px;border-radius:14px}.tv-foot{display:none}}
+@media(max-width:480px){.tv-feats{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.live b{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -409,6 +427,7 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
       <span><b>Corretor da Vez</b><small>roleta de leads · GPTImob</small></span>
     </a>
     <nav aria-label="Seções">
+      <a href="#ao-vivo">Ao vivo</a>
       <a href="#como">Como funciona</a>
       <a href="#regras">Regras</a>
       <a href="#painel">Painel</a>
@@ -442,6 +461,29 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
         <div class="m in" style="max-width:92%">✅ <b>Lead seu, Rodrigo!</b> Confirmado em 3 minutos.<br>👤 Camila Rocha · (54) 9••••-4120<br>📝 <b>Resumo da IA:</b> casal, mora de aluguel, gostou da suíte e da sacada. Perguntou se aceita FGTS.<br>👉 Chamar no WhatsApp · abrir no CRM<br><br>⏱ Registre o primeiro contato no CRM em até 1 hora.<small>08:33</small></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- AO VIVO -->
+<section class="sec dark tvsec" id="ao-vivo">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" style="color:var(--am-light)">Painel ao vivo</span>
+      <h2>Monitore ao vivo, na TV da sua imobiliária, <span class="metal">a roleta dos corretores.</span></h2>
+      <p>Quem está sendo chamado agora, quanto tempo falta para confirmar, há quanto tempo o cliente espera e quem é o próximo da vez. Lead novo toca um aviso. Lead com mais de 30 minutos sem atendimento ganha a 🚨 e toca a sirene.</p>
+    </div>
+    <div class="tv" aria-label="Exemplo da fila ao vivo numa TV">
+      <div class="tv-screen"><iframe src="/roleta/modelo/?tv=1" title="Simulação da fila ao vivo do Corretor da Vez" loading="lazy"></iframe></div>
+      <div class="tv-foot" aria-hidden="true"><i></i></div>
+    </div>
+    <div class="tv-feats">
+      <div><b>⏱ Contagem regressiva</b><span>de cada oferta, em verde, amarelo e vermelho</span></div>
+      <div><b>🔔 Aviso sonoro</b><span>a cada lead novo que entra na fila</span></div>
+      <div><b>🚨 Sirene</b><span>quando o cliente passa de 30 min sem atendimento</span></div>
+      <div><b>👥 Próximo da vez</b><span>de cada roleta, e quem está com lead agora</span></div>
+    </div>
+    <div class="tv-links"><a class="cta" href="/roleta/modelo/#ao-vivo" target="_blank" rel="noopener">Abrir em tela cheia <i aria-hidden="true">↗</i></a><a class="ghost" href="/roleta/modelo/">Ver o relatório completo</a></div>
+    <p class="tv-note">Simulação com dados fictícios: os leads chegam e são aceitos sozinhos. Para ouvir o aviso e a sirene, clique em "Ativar som" dentro da tela.</p>
   </div>
 </section>
 
@@ -689,6 +731,11 @@ footer nav{display:flex;gap:18px;flex-wrap:wrap}
     });
   });
 })();
+</script>
+<script>
+(function(){var sc=document.querySelector('.tv-screen'),f=sc&&sc.querySelector('iframe');if(!f)return;
+function fit(){var w=sc.clientWidth;if(w>=700){var k=w/1600;f.style.width='1600px';f.style.height='900px';f.style.transform='scale('+k+')';sc.style.height=Math.round(900*k)+'px'}else{f.style.width='100%';f.style.height='760px';f.style.transform='none';sc.style.height='760px'}}
+fit();addEventListener('resize',fit);})();
 </script>
 </body>
 </html>

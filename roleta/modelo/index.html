@@ -293,6 +293,9 @@ footer a{color:var(--v-ink);font-weight:600;text-decoration:none}
 .sos-m{grid-column:1/-1;font:600 12px var(--f-m);color:#FCA5A5;letter-spacing:.04em}
 body.tv .demo-bar,body.tv header.top,body.tv .lv-note{display:none}
 body.tv #v-live{min-height:100vh}
+body.embed #tvm{display:none}
+body.embed .lv-h{padding-top:22px}
+@media(max-width:720px){body.tv.embed .lv-h p,body.tv.embed .clock,body.tv.embed .lv-k{display:none}body.tv.embed .lv-h{padding:14px 0 12px}body.tv.embed .lv-h h1{font-size:22px}body.tv.embed .wrap{padding-left:12px;padding-right:12px}body.tv.embed .qi{padding:12px}body.tv.embed .qi .l1 b{font-size:14px}body.tv.embed .qi .l2{font-size:13px}body.tv.embed .qi .cd b{font-size:22px}}
 body.tv .wrap{max-width:none;padding-left:28px;padding-right:28px}
 body.tv .lv-h h1{font-size:34px}
 body.tv .clock{font-size:40px}
@@ -681,7 +684,7 @@ render();
 var tabs=[document.getElementById('t-fila'),document.getElementById('t-live')];
 function showTab(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on});
   document.querySelector('meta[name=theme-color]').content=t.id==='t-live'?'#0B0A14':'#FFFFFF';
-  try{history.replaceState(null,'',t.id==='t-live'?'#ao-vivo':location.pathname)}catch(e){}
+  try{if(!/[?&]tv=1/.test(location.search))history.replaceState(null,'',t.id==='t-live'?'#ao-vivo':location.pathname)}catch(e){}
   if(t.id==='t-live')live.start();}
 tabs.forEach(function(t,i){t.addEventListener('click',function(){showTab(t)});t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){var n=tabs[(i+1)%2];showTab(n);n.focus()}})});
 
@@ -781,7 +784,9 @@ var live=(function(){
   document.addEventListener('visibilitychange',function(){if(document.hidden&&iv){clearInterval(iv);iv=null}else if(!document.hidden&&started&&!document.getElementById('v-live').hidden){start()}});
   return{start:start};
 })();
-if(location.hash==='#ao-vivo')showTab(tabs[1]);
+var EMB=/[?&]tv=1/.test(location.search);
+if(EMB){document.body.classList.add('tv','embed');showTab(tabs[1])}
+else if(location.hash==='#ao-vivo')showTab(tabs[1]);
 })();
 </script>
 </body>
