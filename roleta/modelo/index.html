@@ -81,8 +81,13 @@ select.sel{background:#fff;border:1px solid var(--line);border-radius:999px;padd
 
 /* cartões */
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 2px rgba(20,19,28,.04)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.kpi{padding:18px 20px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.kpi{padding:18px 20px 16px;position:relative;overflow:hidden;--k:#6A4BE0;--kb:#F1EDFF}
+.kpi::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--k)}
+.kpi .kh{display:flex;align-items:center;gap:9px}
+.kpi .ki{width:28px;height:28px;border-radius:8px;background:var(--kb);color:var(--k);display:grid;place-items:center;flex:none}
+.kpi.c-bl{--k:#2F6FB5;--kb:#E6EEF8}.kpi.c-vi{--k:#6A4BE0;--kb:#F1EDFF}.kpi.c-gr{--k:#16A34A;--kb:#DCFCE7}.kpi.c-am{--k:#C77A12;--kb:#FEF3C7}.kpi.c-te{--k:#0E8577;--kb:#CCFBF1}.kpi.c-in{--k:#4F46E5;--kb:#E0E7FF}.kpi.c-or{--k:#E2620F;--kb:#FFEDD5}.kpi.c-re{--k:#DC2626;--kb:#FEE2E2}.kpi.c-pk{--k:#C026D3;--kb:#FAE8FF}.kpi.c-em{--k:#059669;--kb:#D1FAE5}
+.kpi.tint b{color:var(--k)}
 .kpi span{display:block;font:600 11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .kpi b{display:block;font:800 30px/1.15 var(--f-d);letter-spacing:-.03em;margin:8px 0 4px;font-variant-numeric:tabular-nums}
 .kpi small{font-size:13px;color:var(--muted)}
@@ -93,6 +98,7 @@ select.sel{background:#fff;border:1px solid var(--line);border-radius:999px;padd
 .hl span{display:block;font:600 11px var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .hl b{display:block;font-size:15px;margin-top:2px}
 .hl small{color:var(--muted);font-size:13px}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:960px){.kpis{grid-template-columns:repeat(2,1fr)}.hl{grid-template-columns:1fr}}
 @media(max-width:380px){.kpi b{font-size:25px}}
 
@@ -125,7 +131,7 @@ td.muted{color:var(--faint)}
 th.sort{cursor:pointer;user-select:none}
 th.sort:hover{color:var(--ink)}
 td.ok{color:var(--green)} td.tr{color:var(--orange)} td.b{font-weight:700}
-#tbl-corr{min-width:640px}
+#tbl-corr{min-width:720px}
 #tbl-rol{min-width:520px}
 
 /* barras horizontais */
@@ -327,7 +333,7 @@ body.tv .lv-k b{font-size:32px}
 
     <div class="sec grid2">
       <section class="card pad ch"><h3>Visão por roleta (faixa de preço)</h3><p class="sub">Volume, desempenho e composição de cada roleta no período</p>
-        <div class="tw"><table id="tbl-rol"><thead><tr><th>Roleta / faixa</th><th class="n">Corretores</th><th class="n">Leads</th><th class="n">Taxa</th><th class="n">Tempo mediano</th></tr></thead><tbody></tbody></table></div>
+        <div class="tw"><table id="tbl-rol"><thead><tr><th>Roleta / faixa</th><th class="n">Corretores</th><th class="n">Leads</th><th class="n">Taxa</th><th class="n">Até o aceite</th></tr></thead><tbody></tbody></table></div>
         <p class="note">Cada lead conta em uma roleta só: a faixa de valor do imóvel ou do perfil informado ao atendimento.</p>
       </section>
       <section class="card pad ch"><h3>Origem dos leads (mídia)</h3><p class="sub">De onde vieram os leads, segundo o CRM</p><div class="hlist" id="orig"></div></section>
@@ -340,10 +346,12 @@ body.tv .lv-k b{font-size:32px}
       <section class="card pad ch"><div class="head"><div><h3>Tempo de resposta por corretor</h3><p class="sub">Do momento da oferta até o aceite (top 12 mais rápidos)</p></div><div class="mini-seg" id="f-tm"><button class="on" data-m="med">Mediana</button><button data-m="avg">Média</button></div></div><div id="ch-fast"></div></section>
     </div>
 
+    <section class="sec card pad ch"><h3>Aceites por hora</h3><p class="sub">Horário em que os corretores mais aceitam os leads</p><div class="svgw" id="ch-h"></div></section>
+
     <div class="sec grid3">
-      <section class="card pad ch"><h3>Aceites por hora</h3><p class="sub">Horário em que os corretores mais aceitam</p><div class="svgw" id="ch-h"></div></section>
       <section class="card pad ch"><h3>Aceites por dia da semana</h3><p class="sub">Dias com mais aceites</p><div class="svgw" id="ch-w"></div></section>
-      <section class="card pad ch"><h3>Distribuição do tempo de aceite</h3><p class="sub">Quão rápido os leads são aceitos</p><div class="svgw" id="ch-d"></div></section>
+      <section class="card pad ch"><h3>Tempo até o aceite</h3><p class="sub">Da oferta no WhatsApp até o corretor confirmar</p><div class="svgw" id="ch-d"></div></section>
+      <section class="card pad ch"><h3>Tempo até a 1ª resposta</h3><p class="sub">Do aceite até a primeira mensagem ou contato com o cliente</p><div class="svgw" id="ch-r"></div></section>
     </div>
 
     <div class="sec grid2b">
@@ -351,8 +359,8 @@ body.tv .lv-k b{font-size:32px}
       <section class="card pad ch"><h3>Situação</h3><p class="sub">Status dos leads aceitos no CRM</p><div class="hlist" id="sit"></div></section>
     </div>
 
-    <section class="sec card pad ch"><h3>Desempenho por corretor</h3><p class="sub">Clique nos títulos para ordenar</p>
-      <div class="tw"><table id="tbl-corr"><thead><tr><th class="sort" data-k="n">Corretor</th><th class="n sort" data-k="of">Ofertas</th><th class="n sort" data-k="ac">↓ Aceites</th><th class="n sort" data-k="tr">Trocas</th><th class="n sort" data-k="tx">Taxa</th><th class="n sort" data-k="md">Tempo mediano</th></tr></thead><tbody></tbody></table></div>
+    <section class="sec card pad ch"><h3>Desempenho por corretor</h3><p class="sub">Clique nos títulos para ordenar. Tempos em mediana: da oferta até o aceite, e do aceite até a primeira resposta ao cliente.</p>
+      <div class="tw"><table id="tbl-corr"><thead><tr><th class="sort" data-k="n">Corretor</th><th class="n sort" data-k="of">Ofertas</th><th class="n sort" data-k="ac">↓ Aceites</th><th class="n sort" data-k="tr">Trocas</th><th class="n sort" data-k="tx">Taxa</th><th class="n sort" data-k="md">Até o aceite</th><th class="n sort" data-k="r1">1ª resposta</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section class="sec card pad ch"><h3>Caminho de cada atendimento</h3><p class="sub">A ordem em que cada lead passou pela fila até alguém aceitar. Em laranja: aceitou, mas não registrou o contato no CRM em 1 hora, e o lead foi trocado.</p>
@@ -430,7 +438,7 @@ var C=[
  ['João Pedro Souza',66,.74,.22,[0]],['Karina Teixeira',29,.97,.04,[2,1]],['Leonardo Vieira Bastos',58,.78,.18,[0]],
  ['Marina Azevedo',85,.66,.28,[0,3]],['Nicolas Barros',48,.83,.14,[0]],['Olívia Campos Reis',36,.90,.10,[3]],
  ['Paulo Mendes',110,.55,.32,[3,0]],['Rafaela Dias Correia',44,.86,.12,[1]],['Tiago Freitas',70,.72,.20,[3,2]]
-].map(function(a,i){return{i:i,n:a[0],med:a[1],acc:a[2],tro:a[3],f:a[4]}});
+].map(function(a,i){return{i:i,n:a[0],med:a[1],acc:a[2],tro:a[3],f:a[4],r1:[180,420,240,600,150,360,210,780,200,330,140,270,480,260,170,540,230,390][i]}});
 var ROSTER=FX.map(function(_,f){return C.filter(function(c){return c.f.indexOf(f)>=0})});
 var INROT=[0,0,0,0];
 var FUN=['Lead qualificado','Seleção de imóveis','Agendamento','Visita feita','Proposta'], FUNW=[78,11,6,3,2];
@@ -461,7 +469,7 @@ var LEADS=[]; var ptr=[0,0,0,0]; var nid=18310;
           var when=new Date(tcur+t*1000);
           if(when>NOW)break;
           if(tro && tcur+t*1000+3600e3<NOW.getTime()){L.path.push({c:c,r:'t',t:t,w:when});tcur+=t*1000+3600e3}
-          else{L.path.push({c:c,r:'a',t:t,w:when});L.acc=c;L.t=t;fin=true}
+          else{L.path.push({c:c,r:'a',t:t,w:when});L.acc=c;L.t=t;L.r1=Math.min(3500,Math.max(25,lognorm(c.r1,0.8)));fin=true}
         }else{L.path.push({c:c,r:'x'});tcur+=600e3}
       }
       if(NOW-at<50*60e3&&R()<.7){L.path=L.path.filter(function(p){return p.r==='x'}).slice(0,1);fin=false;L.acc=null;L.t=null}
@@ -551,25 +559,33 @@ function render(){
   var perTxt=(S.de||S.ate)?('De '+(S.de?ddmm(new Date(S.de+'T00:00')):'início')+' a '+(S.ate?ddmm(new Date(S.ate+'T00:00')):'hoje')):('Últimos '+S.days+' dias');
   document.getElementById('per-lbl').textContent=perTxt;
   var offers=0,offAcc=0,trTot=0,acT=[],queueLen=[],andam=0,lost=0,trLeads=0,accL=0;
-  var cs={};C.forEach(function(c){cs[c.i]={c:c,of:0,ac:0,tr:0,ts:[],fin:0}});
+  var cs={};C.forEach(function(c){cs[c.i]={c:c,of:0,ac:0,tr:0,ts:[],fin:0,r1:[]}});
   L.forEach(function(l){
     l.path.forEach(function(p,k){offers++;cs[p.c.i].of++;if(p.r!=='x'){offAcc++;cs[p.c.i].ac++}if(p.r==='t'){trTot++;cs[p.c.i].tr++}if(p.r==='a'){cs[p.c.i].ts.push(p.t);cs[p.c.i].fin++}});
-    if(l.st==='aceito'){accL++;acT.push(l.t);queueLen.push(l.path.length)}
+    if(l.st==='aceito'){cs[l.acc.i].r1.push(l.r1);accL++;acT.push(l.t);queueLen.push(l.path.length)}
     if(l.st==='andamento')andam++; if(l.st==='perdido')lost++; if(l.trocas)trLeads++;
   });
   var md=median(acT),av=mean(acT);
+  var r1s=[];L.forEach(function(l){if(l.st==='aceito')r1s.push(l.r1)});
+  var r1m=median(r1s),r1a=mean(r1s),r5=r1s.filter(function(x){return x<=300}).length;
+  var K={
+   lead:'<path d="M4 6h16M4 12h16M4 18h10"/>',send:'<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/>',ok:'<path d="M20 6 9 17l-5-5"/>',clk:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+   msg:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/>',q:'<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 11a3 3 0 1 0 0-6"/>',
+   hg:'<path d="M6 2h12M6 22h12M7 2c0 6 10 6 10 10s-10 4-10 10M17 2c0 6-10 6-10 10"/>',x:'<circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>',sw:'<path d="M7 4 3 8l4 4M3 8h14M17 12l4 4-4 4M21 16H7"/>',bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>'};
   var k=[
-   ['','Leads',nf(L.length),'atendimentos'],
-   ['','Encaminhamentos',nf(offers),nf(offAcc)+' aceitos · '+nf(offers-offAcc)+' não aceitos'],
-   ['v','Taxa de aceite',L.length?pct(accL/L.length):'—',nf(accL)+' aceitos'],
-   ['','Tempo mediano',dur(md),'média '+dur(av)],
-   ['','Fila média',queueLen.length?mean(queueLen).toFixed(1).replace('.',','):'—','corretores até aceitar'],
-   ['o','Em andamento',nf(andam),'recentes, podem ser aceitos'],
-   ['r','Perdidos',nf(lost),'ninguém aceitou (+24h)'],
-   ['o','Trocados',nf(trLeads),nf(trTot)+' trocas · sem CRM em 1h']
+   ['c-bl','','lead','Leads',nf(L.length),'atendimentos'],
+   ['c-in','','send','Encaminhamentos',nf(offers),nf(offAcc)+' aceitos · '+nf(offers-offAcc)+' não aceitos'],
+   ['c-vi','tint','ok','Taxa de aceite',L.length?pct(accL/L.length):'—',nf(accL)+' aceitos'],
+   ['c-am','','clk','Tempo até o aceite',dur(md),'mediana · média '+dur(av)],
+   ['c-te','tint','msg','Tempo até a 1ª resposta',dur(r1m),'do aceite ao 1º contato · média '+dur(r1a)],
+   ['c-pk','','q','Fila média',queueLen.length?mean(queueLen).toFixed(1).replace('.',','):'—','corretores até aceitar'],
+   ['c-em','tint','bolt','1ª resposta em até 5 min',r1s.length?pct(r5/r1s.length):'—',nf(r5)+' de '+nf(r1s.length)+' leads aceitos'],
+   ['c-or','tint','hg','Em andamento',nf(andam),'recentes, podem ser aceitos'],
+   ['c-re','tint','x','Perdidos',nf(lost),'ninguém aceitou (+24h)'],
+   ['c-or','tint','sw','Trocados',nf(trLeads),nf(trTot)+' trocas · sem CRM em 1h']
   ];
-  document.getElementById('kpis').innerHTML=k.map(function(x){return'<div class="card kpi '+x[0]+'"><span>'+x[1]+'</span><b>'+x[2]+'</b><small>'+x[3]+'</small></div>'}).join('');
-  var arr=Object.keys(cs).map(function(i){var o=cs[i];o.md=median(o.ts);o.av=mean(o.ts);o.tx=o.of?o.ac/o.of:null;return o});
+  document.getElementById('kpis').innerHTML=k.map(function(x){return'<div class="card kpi '+x[0]+' '+x[1]+'"><div class="kh"><span class="ki"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+K[x[2]]+'</svg></span><span>'+x[3]+'</span></div><b>'+x[4]+'</b><small>'+x[5]+'</small></div>'}).join('');
+  var arr=Object.keys(cs).map(function(i){var o=cs[i];o.md=median(o.ts);o.av=mean(o.ts);o.r1m=median(o.r1);o.tx=o.of?o.ac/o.of:null;return o});
   var maisA=arr.slice().sort(function(a,b){return b.fin-a.fin})[0];
   var rap=arr.filter(function(o){return o.ts.length>=3}).sort(function(a,b){return a.md-b.md})[0];
   var men=arr.filter(function(o){return o.of>=2}).sort(function(a,b){return a.tx-b.tx})[0];
@@ -581,7 +597,7 @@ function render(){
 
   // roletas
   var mxL=1, rows=FX.map(function(fx,f){var ls=L.filter(function(l){return l.f===f}),ac=ls.filter(function(l){return l.st==='aceito'});mxL=Math.max(mxL,ls.length);return{fx:fx,f:f,n:ls.length,tx:ls.length?ac.length/ls.length:null,md:median(ac.map(function(l){return l.t}))}});
-  document.querySelector('#tbl-rol tbody').innerHTML=rows.map(function(o){return'<tr><td class="b">'+o.fx+'</td><td class="n muted">'+ROSTER[o.f].length+' · '+INROT[o.f]+' no rodízio</td><td class="n"><b>'+o.n+'</b><span class="inbar"><i style="width:'+(o.n/mxL*100).toFixed(0)+'%"></i></span></td><td class="n">'+(o.tx==null?'—':pct(o.tx))+'</td><td class="n muted">'+dur(o.md)+'</td></tr>'}).join('');
+  document.querySelector('#tbl-rol tbody').innerHTML=rows.map(function(o){return'<tr><td class="b">'+o.fx+'</td><td class="n muted">'+ROSTER[o.f].length+' · '+INROT[o.f]+' no rodízio</td><td class="n"><b>'+o.n+'</b><span class="inbar"><i style="width:'+(o.n/mxL*100).toFixed(0)+'%"></i></span></td><td class="n">'+(o.tx==null?'—':pct(o.tx))+'</td><td class="n muted">'+dur(o.md)+'</td><td class="n '+(o.r1!=null&&o.r1<=300?'ok':'muted')+'">'+dur(o.r1)+'</td></tr>'}).join('');
   // origens
   var oc={};L.forEach(function(l){oc[l.o]=(oc[l.o]||0)+1});
   document.getElementById('orig').innerHTML=hlist(Object.keys(oc).map(function(k){return[k,oc[k]]}).sort(function(a,b){return b[1]-a[1]}),L.length||1);
@@ -598,16 +614,18 @@ function render(){
   // hora / semana / distribuição
   var hrs=new Array(24).fill(0),wk=new Array(7).fill(0),dist=[0,0,0,0,0,0];
   L.forEach(function(l){if(l.st!=='aceito')return;var w=l.path[l.path.length-1].w;hrs[w.getHours()]++;wk[w.getDay()]++;var t=l.t;dist[t<60?0:t<300?1:t<900?2:t<3600?3:t<21600?4:5]++});
-  document.getElementById('ch-h').innerHTML=vbars(hrs.map(function(_,i){return p2(i)+'h'}),hrs,{every:3,lab:'Aceites por hora'});
+  document.getElementById('ch-h').innerHTML=vbars(hrs.map(function(_,i){return p2(i)+'h'}),hrs,{w:1100,h:230,lab:'Aceites por hora'});
+  var rd=[0,0,0,0,0];L.forEach(function(l){if(l.st!=='aceito')return;var t=l.r1;rd[t<60?0:t<300?1:t<900?2:t<1800?3:4]++});
+  document.getElementById('ch-r').innerHTML=vbars(['< 1 min','1–5 min','5–15 min','15–30 min','30–60 min'],rd,{lab:'Tempo até a primeira resposta'});
   document.getElementById('ch-w').innerHTML=vbars(['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],wk,{lab:'Aceites por dia da semana'});
-  document.getElementById('ch-d').innerHTML=vbars(['< 1 min','1–5 min','5–15 min','15–60 min','1–6 h','> 6 h'],dist,{lab:'Distribuição do tempo de aceite'});
+  document.getElementById('ch-d').innerHTML=vbars(['< 1 min','1–5 min','5–10 min'],[dist[0],dist[1],dist[2]],{lab:'Tempo até o aceite'});
   // funil e situação
   var A=L.filter(function(l){return l.st==='aceito'}),fc={},sc={};
   A.forEach(function(l){fc[l.fun]=(fc[l.fun]||0)+1;sc[l.sit]=(sc[l.sit]||0)+1});
   document.getElementById('funil').innerHTML=hlist(FUN.filter(function(f){return fc[f]}).map(function(f){return[f,fc[f]]}),A.length||1);
   document.getElementById('sit').innerHTML=hlist(Object.keys(sc).map(function(k){return[k,sc[k]]}).sort(function(a,b){return b[1]-a[1]}),A.length||1);
   // tabela corretores
-  var tb=arr.filter(function(o){return o.of}).map(function(o){return{n:o.c.n,of:o.of,ac:o.ac,tr:o.tr,tx:o.tx,md:o.md}});
+  var tb=arr.filter(function(o){return o.of}).map(function(o){return{n:o.c.n,of:o.of,ac:o.ac,tr:o.tr,tx:o.tx,md:o.md,r1:o.r1m}});
   tb.sort(function(a,b){var x=a[S.sort],y=b[S.sort];if(S.sort==='n')return -S.dir*x.localeCompare(y);if(x==null)return 1;if(y==null)return -1;return S.dir<0?(y-x):(x-y)});
   document.querySelector('#tbl-corr tbody').innerHTML=tb.map(function(o){return'<tr><td>'+esc(o.n)+'</td><td class="n muted">'+o.of+'</td><td class="n b">'+o.ac+'</td><td class="n tr">'+o.tr+'</td><td class="n '+(o.tx>=.6?'ok':'muted')+'">'+pct(o.tx)+'</td><td class="n muted">'+dur(o.md)+'</td></tr>'}).join('');
   document.querySelectorAll('#tbl-corr th').forEach(function(th){var k=th.dataset.k,base=th.textContent.replace(/^[↓↑] /,'');th.textContent=(k===S.sort?(S.dir<0?'↓ ':'↑ '):'')+base});
@@ -630,7 +648,7 @@ function paths(L){
     var trail=l.path.map(function(p){return'<span class="c '+(p.r==='x'?'x':p.r==='t'?'t':'w')+'">'+(p.r==='t'?'↻ ':p.r==='a'?'✓ ':'')+esc(p.c.n)+'</span>'}).join('<span class="ar">→</span>');
     if(l.st==='andamento')trail+=(trail?'<span class="ar">→</span>':'')+'<span class="c" style="border-style:dashed">aguardando aceite</span>';
     var lines=l.path.filter(function(p){return p.r==='t'}).map(function(p){return'<div class="lt">↻ '+esc(p.c.n)+' aceitou em '+ddmm(p.w)+' '+hhmm(p.w)+', mas não registrou o contato no CRM em 1h — o lead foi trocado para o próximo da fila.</div>'}).join('');
-    var ac=l.st==='aceito'?'<div class="mut">⏱ Aceito em '+dur(l.t)+' por '+esc(l.acc.n)+'</div>':(l.st==='perdido'?'<div class="mut" style="color:var(--red)">Ninguém aceitou em 24h. O lead voltou para a gestão redistribuir.</div>':'<div class="mut">Lead recente, ainda sendo oferecido na fila.</div>');
+    var ac=l.st==='aceito'?'<div class="mut">⏱ Aceito em '+dur(l.t)+' por '+esc(l.acc.n)+' · 1ª resposta ao cliente '+dur(l.r1)+' depois do aceite</div>':(l.st==='perdido'?'<div class="mut" style="color:var(--red)">Ninguém aceitou em 24h. O lead voltou para a gestão redistribuir.</div>':'<div class="mut">Lead recente, ainda sendo oferecido na fila.</div>');
     return'<details class="pi"'+(i===0?' open':'')+'><summary><span class="id">#'+l.id+'</span><span class="dt">'+ddmm(l.at)+' '+hhmm(l.at)+'</span><span class="tag org">'+esc(l.o)+'</span><span class="sp"></span>'+stTag(l)+(l.trocas?'<span class="tag tro">↻ '+l.trocas+' troca'+(l.trocas>1?'s':'')+'</span>':'')+(l.st==='aceito'?'<span class="tag win">✓ '+esc(l.acc.n)+'</span>':'')+'<span class="fq">'+l.path.length+' na fila</span><span class="chev" aria-hidden="true">⌄</span></summary><div class="pb"><div class="trail">'+trail+'</div>'+lines+ac+'<div><b>Origem:</b> '+esc(l.o)+' · <b>Roleta:</b> '+FX[l.f]+'</div>'+(l.st==='aceito'?'<div><b>CRM:</b> Funil de vendas · Etapa '+esc(l.fun)+' · Status '+esc(l.sit)+'</div>':'')+'</div></details>'}).join('')||'<p class="note">Nenhum atendimento com esses filtros.</p>';
   document.getElementById('p-more').hidden=ls.length<=S.lim;
 }
@@ -643,7 +661,7 @@ document.getElementById('f-tm').addEventListener('click',function(e){var b=e.tar
 document.getElementById('f-st').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;S.st=b.dataset.s;S.lim=40;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});render()});
 document.getElementById('f-q').addEventListener('input',function(){S.q=this.value;S.lim=40;paths(sel())});
 document.getElementById('p-more').onclick=function(){S.lim+=40;paths(sel())};
-document.querySelectorAll('#tbl-corr th.sort').forEach(function(th){th.addEventListener('click',function(){var k=th.dataset.k;if(S.sort===k)S.dir*=-1;else{S.sort=k;S.dir=(k==='n'||k==='md')?1:-1}render()})});
+document.querySelectorAll('#tbl-corr th.sort').forEach(function(th){th.addEventListener('click',function(){var k=th.dataset.k;if(S.sort===k)S.dir*=-1;else{S.sort=k;S.dir=(k==='n'||k==='md'||k==='r1')?1:-1}render()})});
 document.getElementById('f-ate').max=iso(NOW);document.getElementById('f-de').max=iso(NOW);
 render();
 
@@ -734,7 +752,7 @@ var live=(function(){
       ['Na fila agora','<b class="lime">'+Q.length+'</b>',(function(){var n=Q.filter(function(L){return t-L.born>=1800e3}).length;return n?'🚨 '+n+' com mais de 30 min':'aguardando aceite'})()],
       ['Leads hoje','<b>'+stats.leads+'</b>','recebidos desde as 0h'],
       ['Aceitos hoje','<b>'+stats.acc+'</b>',stats.leads?pct(stats.acc/stats.leads)+' de aceite':''],
-      ['Tempo mediano hoje','<b>'+dur(md)+'</b>','da oferta ao aceite'],
+      ['Tempo até o aceite','<b>'+dur(md)+'</b>','mediana de hoje'],
       ['Atendendo agora','<b>'+ATT.length+'</b>','dentro do prazo do CRM']
     ].map(function(x){return'<div><span>'+x[0]+'</span>'+x[1]+'<small>'+x[2]+'</small></div>'}).join('');
     var q=Q.slice().sort(function(a,b){return a.born-b.born}).slice(0,5);
