@@ -319,6 +319,23 @@ body.tv .qi .cd b{font-size:34px}
 body.tv .lv-k b{font-size:32px}
 @media(prefers-reduced-motion:reduce){.qi.sos{animation:none}}
 @media(prefers-reduced-motion:reduce){.tabs .dot,.lv-h h1 .on i{animation:none}.qi.new,.fe.new{animation:none}}
+
+/* barra fixa de CTA (mesmo padrão do Raio-X) */
+body{padding-bottom:84px}
+.getbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:color-mix(in srgb,var(--card) 84%,transparent);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-top:1px solid var(--line);box-shadow:0 -10px 30px rgba(15,30,60,.08);padding-bottom:env(safe-area-inset-bottom,0px)}
+.gb-in{max-width:780px;margin:0 auto;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:10px 18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.gb-txt{display:grid;gap:2px;min-width:0;flex:1 1 260px;text-align:left}
+.gb-txt > b{font-weight:700;font-size:1rem;line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
+.gb-txt > span{font-size:.84rem;color:var(--muted)}
+.gb-btn{flex:none;background:var(--v);color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;padding:12px 22px;border-radius:999px;box-shadow:0 8px 20px rgba(106,75,224,.3);white-space:nowrap}
+.gb-btn:hover{filter:brightness(1.08)}
+.gb-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(max-width:520px){.gb-in{flex-wrap:nowrap;gap:10px}.gb-txt{flex:1 1 auto}.gb-txt > b{font-size:.9rem}.gb-txt > span{display:none}.gb-btn{padding:11px 16px;font-size:.88rem}}
+@media print{.getbar{display:none}body{padding-bottom:0}}
+body.on-live .getbar{background:color-mix(in srgb,var(--n1) 86%,transparent);border-top-color:var(--nl);box-shadow:0 -10px 30px rgba(0,0,0,.35)}
+body.on-live .gb-txt > b{color:#fff}body.on-live .gb-txt > span{color:var(--nm)}
+body.on-live{background:var(--n0)}
+body.tv .getbar{display:none}body.tv{padding-bottom:0}
 </style>
 </head>
 <body>
@@ -695,7 +712,7 @@ render();
 
 /* ---------- abas ---------- */
 var tabs=[document.getElementById('t-fila'),document.getElementById('t-live')];
-function showTab(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on});
+function showTab(t){document.body.classList.toggle('on-live',t.id==='t-live');tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on});
   document.querySelector('meta[name=theme-color]').content=t.id==='t-live'?'#0B0A14':'#FFFFFF';
   try{if(!/[?&]tv=1/.test(location.search))history.replaceState(null,'',t.id==='t-live'?'#ao-vivo':location.pathname)}catch(e){}
   if(t.id==='t-live')live.start();}
@@ -802,5 +819,6 @@ if(EMB){document.body.classList.add('tv','embed');showTab(tabs[1])}
 else if(location.hash==='#ao-vivo')showTab(tabs[1]);
 })();
 </script>
+<div class="getbar" role="region" aria-label="Quero na minha imobiliária"><div class="gb-in"><div class="gb-txt"><b>Quer a roleta na sua imobiliária?</b><span>Roleta, relatório e painel ao vivo com os seus corretores · demonstração gratuita</span></div><a class="gb-btn" href="https://wa.me/5554999166672?text=Ol%C3%A1%2C%20Rafael%21%20Vi%20o%20relat%C3%B3rio%20modelo%20do%20Corretor%20da%20Vez%20e%20quero%20a%20roleta%20na%20minha%20imobili%C3%A1ria.%0A%0AImobili%C3%A1ria%3A%20%0ACidade%3A%20%0AQuantos%20corretores%3A%20%0ACRM%20que%20usamos%3A%20" target="_blank" rel="noopener">Quero na minha imobiliária</a></div></div>
 </body>
 </html>
