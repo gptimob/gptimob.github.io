@@ -482,6 +482,37 @@ footer .ft-one a:hover{text-decoration:underline}
 .hero .chips span{color:var(--ntext);border-color:rgba(255,255,255,.24);font-size:.84rem;background:rgba(255,255,255,.04)}
 .gest-h p,.gest-l span{color:#C9D1DD}
 .stops span{color:#C9D1DD}
+
+/* quadro de negócios (Vista) */
+.crm-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 18px;margin-bottom:6px}
+@media(max-width:900px){.crm-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.crm-row{grid-template-columns:1fr}}
+.kb{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#F4F6F8;min-width:0}
+.kb-bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:12px 16px;background:#fff;border-bottom:1px solid var(--line);font-size:.9rem}
+.kb-f{font-weight:700;font-size:1.05rem}
+.kb-leg{margin-left:auto;display:flex;gap:6px;align-items:center;font-size:.78rem;color:var(--muted)}
+.kb-leg i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-left:6px}
+.kb-leg i.g,.kc-age.g{background:#E5E7EB;color:#374151}
+.kb-leg i.w,.kc-age.w{background:#FCD34D;color:#78350F}
+.kb-leg i.r,.kc-age.r{background:#EF4444;color:#fff}
+.kb-scroll{overflow-x:auto}
+.kb-cols{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:14px;padding:16px;min-width:940px}
+.kb-col{display:grid;gap:10px;align-content:start}
+.kb-h{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--line);padding-bottom:6px}
+.kb-h b{font-size:1rem;color:#334155}
+.kb-h span{font-size:.78rem;color:var(--muted)}
+.kc{background:#fff;border:1px solid var(--line);border-top:3px solid #F5B942;border-radius:8px;padding:10px 12px;display:grid;gap:2px;font-size:.85rem}
+.kc-t{font-size:.92rem;color:#334155}
+.kc-n{color:#1E40AF;font-weight:600}
+.kc small{color:var(--muted);font-size:.74rem}
+.kc-f{display:flex;align-items:center;gap:8px;margin-top:6px}
+.kc-av{width:18px;height:18px;border-radius:50%;background:#CBD5E1}
+.kc-f em{font-style:normal;color:#16A34A;font-weight:600;margin-left:auto;font-size:.8rem}
+.kc-age{font:600 .72rem var(--f-mono);border-radius:4px;padding:2px 5px;white-space:nowrap}
+.kb-ia{justify-self:start;margin-top:6px;font:600 .7rem var(--f-mono);border-radius:6px;padding:3px 8px}
+.kb-ia.ia{background:var(--am-soft);color:var(--am-ink);border:1px solid var(--am-light)}
+.kb-ia.ok{background:#DCFCE7;color:#166534;border:1px solid #86EFAC}
+.kb-ia.rec{background:#F1F5F9;color:#334155;border:1px dashed #94A3B8}
 /* recuperação */
 .flowline{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:22px}
 .flowline span{font-weight:600;font-size:.92rem;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line)}
@@ -926,25 +957,17 @@ footer .ft-one a:hover{text-decoration:underline}
       </div>
     </div>
     <div class="rg" role="tabpanel" id="p-vis" aria-labelledby="t-vis" hidden>
-      <div class="crm-g">
-        <ol class="crm-s">
-          <li><b>Lê os atendimentos em aberto no Vista</b><span>Pela integração, a máquina vê a etapa de cada atendimento e há quanto tempo o cliente está sem responder.</span></li>
-          <li><b>Registra cada mensagem como interação</b><span>Toda mensagem enviada e toda resposta entram no histórico do atendimento, com data e hora.</span></li>
-          <li><b>Devolve quem respondeu ao corretor</b><span>O atendimento continua com o mesmo corretor, que recebe o aviso com a resposta do cliente.</span></li>
-          <li><b>Descarta com motivo quem não respondeu</b><span>No fim da cadência, o atendimento é encerrado no Vista com o motivo "Chegou no final do follow-up. Sem resposta (IA)".</span></li>
-        </ol>
-        <div class="crm-m" role="img" aria-label="Exemplo do histórico de um atendimento no Vista">
-          <div class="crm-bar"><b>Histórico do atendimento #4821</b><span>Vista · locação</span></div>
-          <ul class="crm-log">
-            <li class="hu"><time>14/11 10:02</time><b>Carla · corretora</b><span>Enviou 3 opções de casas no Centro</span></li>
-            <li class="ia"><time>15/11 13:15</time><b>IA · follow-up dia 1</b><span>Busca ativa · enviada e lida</span></li>
-            <li class="ia"><time>16/11 13:15</time><b>IA · follow-up dia 2</b><span>Garantias aceitas · enviada e lida</span></li>
-            <li class="cl"><time>16/11 13:32</time><b>Cliente respondeu</b><span>"Não tenho fiador aqui"</span></li>
-            <li class="ok"><time>16/11 13:32</time><b>Cadência encerrada</b><span>Atendimento devolvido para a Carla, com aviso</span></li>
-          </ul>
-          <div class="crm-alt"><b>Se o cliente não respondesse até o dia 5:</b> descartado no Vista com o motivo "Chegou no final do follow-up. Sem resposta (IA)".</div>
-        </div>
+      <ol class="crm-s crm-row">
+        <li><b>Negócio parado há mais de 24 horas</b><span>A máquina lê a "última atualização" de cada negócio no pipeline do Vista.</span></li>
+        <li><b>A IA começa o follow-up</b><span>O cartão ganha a marca da cadência, e cada mensagem vira uma atualização do negócio.</span></li>
+        <li><b>Respondeu, volta para o corretor</b><span>O negócio segue na mesma etapa, com o mesmo corretor, e ele recebe o aviso.</span></li>
+        <li><b>Perdido vai para a recuperação</b><span>O negócio marcado como perdido entra na cadência de recuperação.</span></li>
+      </ol>
+      <div class="kb" role="img" aria-label="Exemplo de pipeline de locação no Vista com a Máquina de Follow-up agindo nos negócios parados">
+        <div class="kb-bar"><b>Negócios · Pipeline</b><span class="kb-f">Locação ▾</span><span class="kb-leg"><i class="g"></i>até 24 h <i class="w"></i>2 a 5 dias <i class="r"></i>6 dias ou mais</span></div>
+        <div class="kb-scroll"><div class="kb-cols"><div class="kb-col"><div class="kb-h"><b>Em contato</b><span>5 negócios</span></div><div class="kc"><b class="kc-t">Quer visitar casa Centro</b><span class="kc-n">Patrícia S.</span><small>54 9xxxx-1021</small><span class="kb-ia ia">IA · follow-up dia 2</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age w" title="Última atualização">↻ 2 d</span></div></div><div class="kc"><b class="kc-t">Apto 2 dorm. Boqueirão</b><span class="kc-n">Marcos A.</span><small>54 9xxxx-4410</small><span class="kb-ia rec">Perdido → recuperação</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age r" title="Última atualização">↻ 6 d</span></div></div></div><div class="kb-col"><div class="kb-h"><b>Entrevista</b><span>12 negócios</span></div><div class="kc"><b class="kc-t">13/11 às 16h · Cód. 11282</b><span class="kc-n">Carla R.</span><small>54 9xxxx-3703</small><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age g" title="Última atualização">↻ 24 h</span></div></div><div class="kc"><b class="kc-t">09/11 às 11h · Cód. 11282</b><span class="kc-n">Lucas T.</span><small>53 9xxxx-6438</small><span class="kb-ia ia">IA · follow-up dia 3</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age w" title="Última atualização">↻ 3 d</span></div></div></div><div class="kb-col"><div class="kb-h"><b>Agendamento</b><span>32 negócios</span></div><div class="kc"><b class="kc-t">21/11 às 10h · Cód. 14839</b><span class="kc-n">Vítor M.</span><small>47 9xxxx-5026</small><span class="kb-ia ok">Respondeu · voltou ao corretor</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age g" title="Última atualização">↻ 1 d</span></div></div><div class="kc"><b class="kc-t">16/11 às 13h30 · Cód. 14937</b><span class="kc-n">Andressa L.</span><small>48 9xxxx-3520</small><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age g" title="Última atualização">↻ 24 h</span></div></div></div><div class="kb-col"><div class="kb-h"><b>Visitas</b><span>12 negócios</span></div><div class="kc"><b class="kc-t">Visita 14/11 às 11h</b><span class="kc-n">Tiago F.</span><small>55 9xxxx-6705</small><span class="kb-ia ia">IA · follow-up dia 2</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age w" title="Última atualização">↻ 2 d</span></div></div><div class="kc"><b class="kc-t">14/11 às 9h · Cód. 4547</b><span class="kc-n">Cristiano B.</span><small>54 9xxxx-5984</small><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age g" title="Última atualização">↻ 1 d</span></div></div></div></div></div>
       </div>
+      <p class="fine-note">Tela ilustrativa, montada a partir de um pipeline de locação real, com nomes e telefones fictícios. O selo de tempo mostra há quanto tempo o negócio não é atualizado.</p>
     </div>
 
     <div class="ba">
