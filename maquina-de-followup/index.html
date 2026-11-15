@@ -513,6 +513,16 @@ footer .ft-one a:hover{text-decoration:underline}
 .kb-ia.ia{background:var(--am-soft);color:var(--am-ink);border:1px solid var(--am-light)}
 .kb-ia.ok{background:#DCFCE7;color:#166534;border:1px solid #86EFAC}
 .kb-ia.rec{background:#F1F5F9;color:#334155;border:1px dashed #94A3B8}
+
+.cvt{width:100%;min-width:900px;border-collapse:collapse;background:#fff;font-size:.86rem}
+.cvt th{font:600 .66rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint);text-align:left;padding:10px 14px;background:#F8FAFC;border-bottom:1px solid var(--line)}
+.cvt td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.cvt tr:last-child td{border-bottom:0}
+.cvt td b{display:block;color:#1E3A8A}
+.cvt td small{color:var(--muted);font-size:.74rem}
+.cv-st{display:inline-block;font-size:.76rem;font-weight:600;padding:3px 8px;border-radius:999px;background:#EEF2FF;color:#3730A3;white-space:nowrap}
+.cv-wait{font-size:.76rem;color:var(--muted)}
+.kb-ia.out{background:#F8FAFC;color:var(--muted);border:1px solid var(--line)}
 /* recuperação */
 .flowline{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:22px}
 .flowline span{font-weight:600;font-size:.92rem;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line)}
@@ -934,6 +944,7 @@ footer .ft-one a:hover{text-decoration:underline}
     <div class="vtabs" role="tablist" aria-label="CRM">
       <button role="tab" id="t-imo" aria-controls="p-imo" aria-selected="true">Como funciona no Imoview</button>
       <button role="tab" id="t-vis" aria-controls="p-vis" aria-selected="false" tabindex="-1">Como funciona no Vista</button>
+      <button role="tab" id="t-cv" aria-controls="p-cv" aria-selected="false" tabindex="-1">Como funciona no CV CRM</button>
     </div>
     <div class="rg" role="tabpanel" id="p-imo" aria-labelledby="t-imo">
       <div class="crm-g">
@@ -968,6 +979,19 @@ footer .ft-one a:hover{text-decoration:underline}
         <div class="kb-scroll"><div class="kb-cols"><div class="kb-col"><div class="kb-h"><b>Em contato</b><span>5 negócios</span></div><div class="kc"><b class="kc-t">Quer visitar casa Centro</b><span class="kc-n">Patrícia S.</span><small>54 9xxxx-1021</small><span class="kb-ia ia">IA · follow-up dia 2</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age w" title="Última atualização">↻ 2 d</span></div></div><div class="kc"><b class="kc-t">Apto 2 dorm. Boqueirão</b><span class="kc-n">Marcos A.</span><small>54 9xxxx-4410</small><span class="kb-ia rec">Perdido → recuperação</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age r" title="Última atualização">↻ 6 d</span></div></div></div><div class="kb-col"><div class="kb-h"><b>Entrevista</b><span>12 negócios</span></div><div class="kc"><b class="kc-t">13/11 às 16h · Cód. 11282</b><span class="kc-n">Carla R.</span><small>54 9xxxx-3703</small><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age g" title="Última atualização">↻ 24 h</span></div></div><div class="kc"><b class="kc-t">09/11 às 11h · Cód. 11282</b><span class="kc-n">Lucas T.</span><small>53 9xxxx-6438</small><span class="kb-ia ia">IA · follow-up dia 3</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age w" title="Última atualização">↻ 3 d</span></div></div></div><div class="kb-col"><div class="kb-h"><b>Agendamento</b><span>32 negócios</span></div><div class="kc"><b class="kc-t">21/11 às 10h · Cód. 14839</b><span class="kc-n">Vítor M.</span><small>47 9xxxx-5026</small><span class="kb-ia ok">Respondeu · voltou ao corretor</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age g" title="Última atualização">↻ 1 d</span></div></div><div class="kc"><b class="kc-t">16/11 às 13h30 · Cód. 14937</b><span class="kc-n">Andressa L.</span><small>48 9xxxx-3520</small><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age g" title="Última atualização">↻ 24 h</span></div></div></div><div class="kb-col"><div class="kb-h"><b>Visitas</b><span>12 negócios</span></div><div class="kc"><b class="kc-t">Visita 14/11 às 11h</b><span class="kc-n">Tiago F.</span><small>55 9xxxx-6705</small><span class="kb-ia ia">IA · follow-up dia 2</span><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age w" title="Última atualização">↻ 2 d</span></div></div><div class="kc"><b class="kc-t">14/11 às 9h · Cód. 4547</b><span class="kc-n">Cristiano B.</span><small>54 9xxxx-5984</small><div class="kc-f"><span class="kc-av"></span><em>R$ 0,00</em><span class="kc-age g" title="Última atualização">↻ 1 d</span></div></div></div></div></div>
       </div>
       <p class="fine-note">Tela ilustrativa, montada a partir de um pipeline de locação real, com nomes e telefones fictícios. O selo de tempo mostra há quanto tempo o negócio não é atualizado.</p>
+    </div>
+    <div class="rg" role="tabpanel" id="p-cv" aria-labelledby="t-cv" hidden>
+      <ol class="crm-s crm-row">
+        <li><b>Lead sem interação há mais de 24 horas</b><span>A máquina lê a situação de cada lead do empreendimento no CV CRM e há quanto tempo o cliente não responde.</span></li>
+        <li><b>A IA conduz a cadência de lançamento</b><span>Cada mensagem enviada e cada resposta entram como interação no lead, até o dia 150.</span></li>
+        <li><b>Respondeu, volta para o corretor</b><span>O lead segue com o mesmo corretor, na mesma situação, e ele recebe o aviso com a resposta.</span></li>
+        <li><b>Reserva fica de fora, descarte vai para a recuperação</b><span>Lead com visita, proposta ou reserva não recebe mensagem automática. Descartado entra na recuperação.</span></li>
+      </ol>
+      <div class="kb" role="img" aria-label="Exemplo de lista de leads de lançamento no CV CRM com a Máquina de Follow-up agindo nos leads sem interação">
+        <div class="kb-bar"><b>Leads · Lançamentos</b><span class="kb-f">Todos os empreendimentos ▾</span><span class="kb-leg"><i class="g"></i>até 24 h <i class="w"></i>2 a 8 dias <i class="r"></i>9 dias ou mais</span></div>
+        <div class="kb-scroll"><table class="cvt"><thead><tr><th>Lead</th><th>Empreendimento</th><th>Situação</th><th>Corretor</th><th>Cliente sem responder</th><th>Máquina de Follow-up</th></tr></thead><tbody><tr><td><b>Juliana P.</b><small>54 9xxxx-2210</small></td><td>Residencial Alto da Serra</td><td><span class="cv-st">Em atendimento</span></td><td>Rafaela</td><td><span class="kc-age w">3 d</span></td><td><span class="kb-ia ia">IA · lançamento dia 3</span></td></tr><tr><td><b>Henrique S.</b><small>51 9xxxx-8812</small></td><td>Residencial Alto da Serra</td><td><span class="cv-st">Visita agendada</span></td><td>Bruno</td><td><span class="kc-age g">1 d</span></td><td><span class="kb-ia ok">Respondeu · voltou ao corretor</span></td></tr><tr><td><b>Camila e Diego</b><small>54 9xxxx-4307</small></td><td>Torre Jardins</td><td><span class="cv-st">Em atendimento</span></td><td>Rafaela</td><td><span class="kc-age w">8 d</span></td><td><span class="kb-ia ia">IA · lançamento dia 7</span></td></tr><tr><td><b>Paulo R.</b><small>54 9xxxx-9951</small></td><td>Torre Jardins</td><td><span class="cv-st">Reserva</span></td><td>Bruno</td><td><span class="kc-age w">2 d</span></td><td><span class="kb-ia out">Fora da cadência · reserva</span></td></tr><tr><td><b>Sandra M.</b><small>55 9xxxx-1186</small></td><td>Residencial Alto da Serra</td><td><span class="cv-st">Em atendimento</span></td><td>Leonardo</td><td><span class="kc-age r">16 d</span></td><td><span class="kb-ia ia">IA · lançamento dia 15</span></td></tr><tr><td><b>Felipe A.</b><small>54 9xxxx-6640</small></td><td>Torre Jardins</td><td><span class="cv-st">Descartado</span></td><td>Leonardo</td><td><span class="kc-age r">9 d</span></td><td><span class="kb-ia rec">Descartado → recuperação</span></td></tr><tr><td><b>Aline T.</b><small>54 9xxxx-3029</small></td><td>Residencial Alto da Serra</td><td><span class="cv-st">Novo</span></td><td>Bruno</td><td><span class="kc-age g">5 h</span></td><td><span class="cv-wait">corretor tem até 24 h</span></td></tr></tbody></table></div>
+      </div>
+      <p class="fine-note">Tela ilustrativa, com empreendimentos, nomes e telefones fictícios.</p>
     </div>
 
     <div class="ba">
