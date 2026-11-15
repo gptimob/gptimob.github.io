@@ -634,6 +634,97 @@ footer .ft-one a:hover{text-decoration:underline}
 @media(max-width:480px){.ba{padding:18px}.dn{grid-template-columns:1fr;justify-items:center}.dn-l{width:100%}}
 
 .sample{background:#FEF3C7;color:#78350F;font-size:.84rem;text-align:center;padding:8px 16px}
+/* TELAS CV CRM (reprodução ilustrativa) */
+:root{--cv-nav:#1B2440;--cv-nav2:#232E52;--cv-acc:#F26B2A;--cv-acc-bg:#FEF0E8;--cv-blue:#2F6FED;--cv-ground:#F2F4F8;--cv-line:#E0E4EC;--cv-ink:#1F2937;--cv-mute:#6B7280}
+.cv{display:grid;grid-template-columns:58px minmax(0,1fr);min-width:1000px;background:var(--cv-ground);color:var(--cv-ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:12.5px}
+.cv-side{background:var(--cv-nav);display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 0}
+.cv-side .lg{width:36px;height:36px;border-radius:9px;background:var(--cv-acc);color:#fff;font-weight:800;display:grid;place-items:center;font-size:13px;margin-bottom:8px}
+.cv-side span{width:52px;font-size:8.5px;overflow-wrap:anywhere;color:#AEB6CC;text-align:center;padding:6px 0;border-radius:8px;line-height:1.15}
+.cv-side span.on{background:var(--cv-nav2);color:#fff}
+.cv-main{display:flex;flex-direction:column;min-width:0}
+.cv-top{display:flex;align-items:center;gap:14px;padding:11px 18px;background:#fff;border-bottom:1px solid var(--cv-line)}
+.cv-top h5{margin:0;font-size:15px;font-weight:700}
+.cv-top .crumb{color:var(--cv-mute);font-size:12px}
+.cv-top .usr{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--cv-mute)}
+.cv-top .usr i{width:26px;height:26px;border-radius:50%;background:#CBD2E0;display:inline-block}
+.cv-bar{display:flex;gap:8px;padding:12px 18px 6px;flex-wrap:wrap}
+.cv-sel{background:#fff;border:1px solid var(--cv-line);border-radius:6px;padding:6px 10px;white-space:nowrap;color:var(--cv-ink)}
+.cv-sel.acc{background:var(--cv-acc);border-color:var(--cv-acc);color:#fff;font-weight:600;margin-left:auto}
+.cv-board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;padding:8px 14px 18px}
+.cv-col{background:#E7EAF1;border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cv-ch{display:flex;justify-content:space-between;align-items:center;padding:2px 4px;border-top:3px solid var(--c,#9AA3B5);padding-top:6px}
+.cv-ch b{font-size:12px;white-space:nowrap}
+.cv-ch span{font-size:11px;background:#fff;border-radius:999px;padding:1px 8px;color:var(--cv-mute)}
+.cv-card{background:#fff;border:1px solid var(--cv-line);border-radius:6px;padding:9px 10px;display:flex;flex-direction:column;gap:4px}
+.cv-card b{font-size:12.8px}
+.cv-card .emp{font-size:11px;color:var(--cv-mute)}
+.cv-card .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.cv-o{font-family:var(--f-mono);font-size:10px;font-weight:600;border-radius:4px;padding:1px 5px;background:#EEF1F6;color:#4B5568}
+.cv-o.wz{background:#DCF7E5;color:#11804A}
+.cv-tag{font-size:10.5px;border-radius:999px;padding:1px 7px;background:var(--cv-acc-bg);color:#B4501C}
+.cv-card .cor{font-size:11px}
+.cv-card .pv{font-size:10.5px;color:#C98A12;letter-spacing:1px}
+.cv-card .venc{font-size:10.5px;color:#B42318}
+.cv-card.new{border:1.5px solid var(--cv-acc);box-shadow:0 0 0 3px rgba(242,107,42,.18),0 8px 18px -10px rgba(242,107,42,.6)}
+.cv-card.new .badge-ia{align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--cv-acc);color:#fff;border-radius:3px;padding:2px 6px}
+.cv-lead{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.cv-lh{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cv-lh h5{margin:0;font-size:18px;font-weight:700}
+.cv-lh .id{font-family:var(--f-mono);font-size:11px;color:var(--cv-mute)}
+.cv-lh .acts{margin-left:auto;display:flex;gap:8px}
+.cv-lh .acts span{padding:6px 12px;border-radius:6px;border:1px solid var(--cv-line);background:#fff;font-weight:600}
+.cv-lh .acts span.p{background:var(--cv-acc);border-color:var(--cv-acc);color:#fff}
+.cv-steps{display:flex;gap:3px}
+.cv-steps span{flex:1;font-size:11px;font-weight:600;padding:7px 14px 7px 12px;background:#D9DEE8;color:var(--cv-mute);clip-path:polygon(0 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,0 100%,7px 50%);white-space:nowrap}
+.cv-steps span.on{background:var(--cv-acc);color:#fff}
+.cv-steps span.done{background:#F7B48F;color:#fff}
+.cv-dg{display:grid;grid-template-columns:300px minmax(0,1fr);gap:12px;align-items:start}
+.cv-box{background:#fff;border:1px solid var(--cv-line);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:7px}
+.cv-box .h{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--cv-mute)}
+.cv-f{display:flex;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px dashed var(--cv-line);padding-bottom:5px}
+.cv-f:last-child{border-bottom:0;padding-bottom:0}
+.cv-f span{color:var(--cv-mute);white-space:nowrap}
+.cv-f b{font-weight:600;text-align:right}
+.cv-f.ia{background:var(--cv-acc-bg);margin:0 -6px;padding:4px 6px;border-radius:4px;border-bottom:0}
+.cv-tabs{display:flex;gap:18px;border-bottom:1px solid var(--cv-line);font-size:12.5px;color:var(--cv-mute)}
+.cv-tabs span{padding:7px 0}
+.cv-tabs .on{color:var(--cv-acc);font-weight:700;border-bottom:2px solid var(--cv-acc)}
+.cv-ev{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start}
+.cv-ev .ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;color:#fff;font-weight:700}
+.cv-ev .bd{background:#fff;border:1px solid var(--cv-line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.cv-ev .bd.hl{border-color:#F7B48F;background:#FFFBF8}
+.cv-ev .t{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:var(--cv-mute)}
+.cv-ev .t b{color:var(--cv-ink);font-size:12.5px}
+.cv-ev .tr{display:flex;flex-direction:column;gap:3px;font-size:12px;border-left:3px solid #25D366;padding-left:9px}
+.cv-ev .tr i{font-style:normal;font-family:var(--f-mono);font-size:10.5px;color:var(--cv-mute);margin-right:6px}
+/* espelho */
+.cv-mapa{padding:12px 16px 18px;display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px}
+.cv-grid{display:grid;grid-template-columns:44px repeat(4,minmax(0,1fr));gap:5px;font-size:11.5px}
+.cv-grid .fl{font-family:var(--f-mono);font-size:10.5px;color:var(--cv-mute);display:grid;place-items:center}
+.cv-grid .hd{font-family:var(--f-mono);font-size:10.5px;color:var(--cv-mute);text-align:center}
+.u{border-radius:5px;padding:6px 4px;text-align:center;font-weight:600;color:#fff;line-height:1.15}
+.u small{display:block;font-weight:500;font-size:9.5px;opacity:.9}
+
+.cvw{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 18px 40px -24px rgba(12,26,43,.35);min-width:0}
+.cvw-bar{display:flex;align-items:center;gap:6px;height:32px;padding:0 12px;background:#F1F3F5;border-bottom:1px solid var(--line)}
+.cvw-bar i{width:9px;height:9px;border-radius:50%;background:#D5DAD6}
+.cvw-bar span{margin-left:10px;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);background:#fff;border-radius:6px;padding:3px 10px;flex:1;max-width:520px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cvw-sc{overflow-x:auto}
+.cvs{display:grid;gap:18px}
+.cvs-cap{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+.cvs-cap b{font-size:1rem}
+.cvs-cap span{font-size:.88rem;color:var(--muted)}
+.cv-fu{align-self:flex-start;font:600 10px var(--f-mono);border-radius:4px;padding:2px 6px;background:var(--am-soft);color:var(--am-ink);border:1px solid var(--am-light)}
+.cv-fu.ok{background:#DCFCE7;color:#166534;border-color:#86EFAC}
+.cv-fu.out{background:#F3F4F6;color:#6B7280;border-color:#E5E7EB}
+.cv-fu.rec{background:#EEF2FF;color:#3730A3;border-color:#C7D2FE}
+.cv-card.fu{border:1.5px solid var(--am-light)}
+.cv-card.okc{border:1.5px solid #86EFAC;box-shadow:0 0 0 3px rgba(34,197,94,.12)}
+.cv-f.mq{background:var(--am-soft2);margin:0 -6px;padding:4px 6px;border-radius:4px;border-bottom:0}
+.cv-ev .bd.mq{border-color:var(--am-light);background:var(--am-soft2)}
+.cvs > *{min-width:0}
+.cv-ev .tr > span{display:block;border:0!important;padding:0!important;background:none!important;border-radius:0!important;font:inherit;color:inherit}
+.cv-fu{white-space:normal;line-height:1.35}
 </style>
 </head>
 <body>
@@ -992,16 +1083,78 @@ footer .ft-one a:hover{text-decoration:underline}
     </div>
     <div class="rg" role="tabpanel" id="p-cv" aria-labelledby="t-cv" hidden>
       <ol class="crm-s crm-row">
-        <li><b>Lead sem interação há mais de 24 horas</b><span>A máquina lê a situação de cada lead do empreendimento no CV CRM e há quanto tempo o cliente não responde.</span></li>
-        <li><b>A IA conduz a cadência de lançamento</b><span>Cada mensagem enviada e cada resposta entram como interação no lead, até o dia 150.</span></li>
-        <li><b>Respondeu, volta para o corretor</b><span>O lead segue com o mesmo corretor, na mesma situação, e ele recebe o aviso com a resposta.</span></li>
-        <li><b>Reserva fica de fora, descarte vai para a recuperação</b><span>Lead com visita, proposta ou reserva não recebe mensagem automática. Descartado entra na recuperação.</span></li>
+        <li><b>Lead sem resposta há mais de 24 horas</b><span>A máquina lê a situação de cada lead do empreendimento no CV CRM e há quanto tempo o cliente não responde.</span></li>
+        <li><b>A IA conduz a cadência de lançamento</b><span>Cada mensagem e cada resposta entram como interação no lead, até o dia 150.</span></li>
+        <li><b>Respondeu, volta para o corretor</b><span>A IA registra o resumo, cria a tarefa para o corretor e o avisa no WhatsApp.</span></li>
+        <li><b>Reserva fica de fora, descarte vai para a recuperação</b><span>Lead com visita, proposta ou reserva não recebe mensagem automática. Quem volta da recuperação entra como lead novo.</span></li>
       </ol>
-      <div class="kb" role="img" aria-label="Exemplo de lista de leads de lançamento no CV CRM com a Máquina de Follow-up agindo nos leads sem interação">
-        <div class="kb-bar"><b>Leads · Lançamentos</b><span class="kb-f">Todos os empreendimentos ▾</span><span class="kb-leg"><i class="g"></i>até 24 h <i class="w"></i>2 a 8 dias <i class="r"></i>9 dias ou mais</span></div>
-        <div class="kb-scroll"><table class="cvt"><thead><tr><th>Lead</th><th>Empreendimento</th><th>Situação</th><th>Corretor</th><th>Cliente sem responder</th><th>Máquina de Follow-up</th></tr></thead><tbody><tr><td><b>Juliana P.</b><small>54 9xxxx-2210</small></td><td>Residencial Alto da Serra</td><td><span class="cv-st">Em atendimento</span></td><td>Rafaela</td><td><span class="kc-age w">3 d</span></td><td><span class="kb-ia ia">IA · lançamento dia 3</span></td></tr><tr><td><b>Henrique S.</b><small>51 9xxxx-8812</small></td><td>Residencial Alto da Serra</td><td><span class="cv-st">Visita agendada</span></td><td>Bruno</td><td><span class="kc-age g">1 d</span></td><td><span class="kb-ia ok">Respondeu · voltou ao corretor</span></td></tr><tr><td><b>Camila e Diego</b><small>54 9xxxx-4307</small></td><td>Torre Jardins</td><td><span class="cv-st">Em atendimento</span></td><td>Rafaela</td><td><span class="kc-age w">8 d</span></td><td><span class="kb-ia ia">IA · lançamento dia 7</span></td></tr><tr><td><b>Paulo R.</b><small>54 9xxxx-9951</small></td><td>Torre Jardins</td><td><span class="cv-st">Reserva</span></td><td>Bruno</td><td><span class="kc-age w">2 d</span></td><td><span class="kb-ia out">Fora da cadência · reserva</span></td></tr><tr><td><b>Sandra M.</b><small>55 9xxxx-1186</small></td><td>Residencial Alto da Serra</td><td><span class="cv-st">Em atendimento</span></td><td>Leonardo</td><td><span class="kc-age r">16 d</span></td><td><span class="kb-ia ia">IA · lançamento dia 15</span></td></tr><tr><td><b>Felipe A.</b><small>54 9xxxx-6640</small></td><td>Torre Jardins</td><td><span class="cv-st">Descartado</span></td><td>Leonardo</td><td><span class="kc-age r">9 d</span></td><td><span class="kb-ia rec">Descartado → recuperação</span></td></tr><tr><td><b>Aline T.</b><small>54 9xxxx-3029</small></td><td>Residencial Alto da Serra</td><td><span class="cv-st">Novo</span></td><td>Bruno</td><td><span class="kc-age g">5 h</span></td><td><span class="cv-wait">corretor tem até 24 h</span></td></tr></tbody></table></div>
+      <div class="cvs">
+        <div>
+          <div class="cvs-cap"><b>Gestão de leads</b><span>A máquina marca no quadro onde está agindo.</span></div>
+          <div class="cvw" role="img" aria-label="Quadro de leads de lançamento no CV CRM com a Máquina de Follow-up agindo nos leads sem resposta">
+            <div class="cvw-bar"><i></i><i></i><i></i><span>CV CRM · Comercial · Leads · Kanban</span></div>
+            <div class="cvw-sc"><div class="cv">
+              <div class="cv-side"><div class="lg">CRM</div><span>Painel</span><span class="on">Leads</span><span>Atendi-mentos</span><span>Espelho</span><span>Reservas</span><span>Repasses</span></div>
+              <div class="cv-main">
+                <div class="cv-top"><h5>Gestão de leads</h5><span class="crumb">Comercial › Leads › Kanban</span><span class="usr"><i></i>Gestão comercial · Construtora Modelo</span></div>
+                <div class="cv-bar"><span class="cv-sel">Empreendimento: Residencial Alto da Serra ▾</span><span class="cv-sel">Corretor: todos ▾</span><span class="cv-sel">Origem: todas ▾</span><span class="cv-sel">Somente ativos ▾</span><span class="cv-sel acc">+ Novo lead</span></div>
+                <div class="cv-board">
+                  <div class="cv-col"><div class="cv-ch" style="--c:#2F6FED"><b>Novo lead</b><span>3</span></div>
+                    <div class="cv-card new"><span class="badge-ia">Novo · voltou da recuperação</span><b>Rodrigo M.</b><span class="emp">Residencial Alto da Serra · 2 dorm.</span><div class="row"><span class="cv-o wz">WA</span><span class="cv-tag">recuperado pela IA</span></div><span class="cor">👤 Bruna · corretor da vez</span><span class="venc" style="color:#B4501C">✓ Tarefa WhatsApp · hoje 10h</span></div>
+                    <div class="cv-card"><b>Aline T.</b><span class="emp">Residencial Alto da Serra</span><div class="row"><span class="cv-o">SI</span></div><span class="cor">👤 Patrícia</span><span class="cv-fu out">corretor tem até 24 h</span></div>
+                  </div>
+                  <div class="cv-col"><div class="cv-ch" style="--c:#8B5CF6"><b>Em atendimento</b><span>4</span></div>
+                    <div class="cv-card fu"><b>Família Souza</b><span class="emp">Residencial Alto da Serra</span><div class="row"><span class="cv-o">RF</span></div><span class="cor">👤 Rodrigo</span><span class="cv-fu">⟳ IA · lançamento dia 7</span><span class="emp">sem resposta há 7 dias</span></div>
+                    <div class="cv-card okc"><b>Marcos T.</b><span class="emp">Torre Jardins</span><div class="row"><span class="cv-o wz">WA</span><span class="cv-tag">investidor</span></div><span class="cor">👤 Bruna</span><span class="cv-fu ok">✓ Respondeu à IA · voltou para a Bruna</span></div>
+                    <div class="cv-card fu"><b>Sandra M.</b><span class="emp">Residencial Alto da Serra</span><div class="row"><span class="cv-o">IG</span></div><span class="cor">👤 Leonardo</span><span class="cv-fu">⟳ IA · lançamento dia 15</span><span class="emp">convite para o decorado enviado</span></div>
+                  </div>
+                  <div class="cv-col"><div class="cv-ch" style="--c:#F59E0B"><b>Visita agendada</b><span>2</span></div>
+                    <div class="cv-card"><b>Ana P.</b><span class="emp">Residencial Alto da Serra</span><div class="row"><span class="cv-o">FB</span></div><span class="cor">👤 Patrícia</span><span class="emp">Visita · qui 10h</span><span class="cv-fu out">fora da cadência · visita</span></div>
+                  </div>
+                  <div class="cv-col"><div class="cv-ch" style="--c:#06B6D4"><b>Visita realizada</b><span>1</span></div>
+                    <div class="cv-card fu"><b>Fernanda R.</b><span class="emp">Torre Jardins</span><div class="row"><span class="cv-o">SI</span></div><span class="cor">👤 Rodrigo</span><span class="cv-fu">⟳ IA · lançamento dia 45</span><span class="emp">simulação do fluxo enviada</span></div>
+                  </div>
+                  <div class="cv-col"><div class="cv-ch" style="--c:#16A34A"><b>Com reserva</b><span>1</span></div>
+                    <div class="cv-card"><b>Paulo R.</b><span class="emp">Torre Jardins · ap 702</span><div class="row"><span class="cv-tag">corretor parceiro</span></div><span class="cor">👤 Patrícia</span><span class="cv-fu out">fora da cadência · reserva</span></div>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+        </div>
+        <div>
+          <div class="cvs-cap"><b>Lead que respondeu</b><span>Tudo fica no histórico do lead, e o corretor recebe a tarefa com o resumo.</span></div>
+          <div class="cvw" role="img" aria-label="Lead no CV CRM com as interações da Máquina de Follow-up e a resposta do cliente">
+            <div class="cvw-bar"><i></i><i></i><i></i><span>CV CRM · Comercial · Leads · #4821</span></div>
+            <div class="cvw-sc"><div class="cv">
+              <div class="cv-side"><div class="lg">CRM</div><span>Painel</span><span class="on">Leads</span><span>Atendi-mentos</span><span>Espelho</span><span>Reservas</span><span>Repasses</span></div>
+              <div class="cv-main"><div class="cv-lead">
+                <div class="cv-lh"><h5>Marcos T.</h5><span class="id">#4821 · Torre Jardins · cadastrado há 8 dias</span><span class="acts"><span>Simular</span><span>Agendar visita</span><span class="p">Criar reserva</span></span></div>
+                <div class="cv-steps"><span class="done">Novo lead</span><span class="on">Em atendimento</span><span>Visita agendada</span><span>Visita realizada</span><span>Com reserva</span><span>Venda realizada</span></div>
+                <div class="cv-dg">
+                  <div style="display:grid;gap:12px">
+                    <div class="cv-box"><span class="h">Dados do lead</span>
+                      <div class="cv-f"><span>Situação</span><b>Em atendimento</b></div><div class="cv-f"><span>Responsável</span><b>Bruna</b></div><div class="cv-f"><span>Origem</span><b>WhatsApp</b></div><div class="cv-f"><span>Empreendimento</span><b>Torre Jardins</b></div><div class="cv-f"><span>Telefone</span><b>(54) 9xxxx-4410</b></div>
+                    </div>
+                    <div class="cv-box"><span class="h">Máquina de Follow-up</span>
+                      <div class="cv-f mq"><span>Cadência</span><b>Lançamento</b></div><div class="cv-f mq"><span>Último contato</span><b>Dia 7 · planta</b></div><div class="cv-f mq"><span>Status</span><b>Respondeu · pausada</b></div><div class="cv-f mq"><span>Devolvido para</span><b>Bruna</b></div>
+                    </div>
+                  </div>
+                  <div style="display:grid;gap:10px;min-width:0">
+                    <div class="cv-tabs"><span class="on">Interações</span><span>Tarefas (1)</span><span>Visitas</span><span>Simulações</span><span>Reservas</span></div>
+                    <div class="cv-ev"><span class="ic" style="background:#2F6FED">✓</span><div class="bd"><div class="t"><b>Tarefa · WhatsApp · retomar com o Marcos</b><span>hoje, 10:42</span></div><span>Responsável: Bruna · prazo hoje, 11:42. O aviso com o resumo foi enviado no WhatsApp da Bruna.</span></div></div>
+                    <div class="cv-ev"><span class="ic" style="background:var(--am)">IA</span><div class="bd mq"><div class="t"><b>Anotação · resposta à retomada do dia 7</b><span>hoje, 10:41</span></div><span>Marcos respondeu à mensagem da planta. Quer a unidade de 2 dormitórios com sacada, de frente, e pediu a simulação com a entrada parcelada. <b>Próximo passo:</b> enviar a simulação e convidar para o decorado.</span></div></div>
+                    <div class="cv-ev"><span class="ic" style="background:#25D366">W</span><div class="bd"><div class="t"><b>Interação · WhatsApp</b><span>hoje, 10:30</span></div><div class="tr"><span><i>10:30 Lia (IA)</i>Marcos, separei a unidade que mais combina com você: 2 dormitórios com sacada, 6º andar, sol da manhã. Quer ver no espelho de vendas?</span><span><i>10:40 Marcos</i>Quero sim. E dá pra parcelar a entrada?</span></div></div></div>
+                    <div class="cv-ev"><span class="ic" style="background:#9CA3AF">3</span><div class="bd"><div class="t"><b>Follow-up · dia 3 · retomada</b><span>há 4 dias</span></div><span>"Ficou alguma dúvida sobre o Torre Jardins?" · enviada e lida, sem resposta.</span></div></div>
+                    <div class="cv-ev"><span class="ic" style="background:#9CA3AF">⏱</span><div class="bd"><div class="t"><b>Cadência de lançamento iniciada</b><span>há 7 dias</span></div><span>Lead sem resposta há 24 horas depois do primeiro contato da Bruna.</span></div></div>
+                  </div>
+                </div>
+              </div></div>
+            </div></div>
+          </div>
+        </div>
       </div>
-      <p class="fine-note">Tela ilustrativa, com empreendimentos, nomes e telefones fictícios.</p>
+      <p class="fine-note">Reprodução ilustrativa do CV CRM, com construtora, empreendimentos, clientes e corretores fictícios. No celular, arraste as telas para o lado.</p>
     </div>
 
     <div class="ba">
