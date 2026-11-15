@@ -326,6 +326,13 @@ footer .ft-one a:hover{text-decoration:underline}
 .nc-txt p{color:var(--nmuted);font-size:.98rem;max-width:44em}
 .nc-card .cta{flex:none;padding:14px 22px}
 @media(max-width:600px){.nc-card{padding:22px}.nc-txt h3{font-size:1.2rem}.nc-card .cta{width:100%;justify-content:center}}
+
+/* frase que alterna no topo */
+.rot{display:grid}
+.rot > span{grid-area:1/1;align-self:end;transition:opacity .45s ease,transform .45s ease;opacity:0;transform:translateY(.35em)}
+.rot > span.on{opacity:1;transform:none}
+.rot > span.out{opacity:0;transform:translateY(-.35em)}
+@media(prefers-reduced-motion:reduce){.rot > span{transition:none}}
 </style>
 </head>
 <body>
@@ -353,7 +360,7 @@ footer .ft-one a:hover{text-decoration:underline}
   <div class="wrap">
     <div>
       <span class="live"><b aria-hidden="true"></b>Agente de monitoramento · ao vivo</span>
-      <h1>Nenhum cliente desiste <span class="metal">sem você saber.</span></h1>
+      <h1><span class="rot" data-rot><span class="on">Nenhum cliente desiste</span><span aria-hidden="true">Nenhuma reclamação fica parada</span><span aria-hidden="true">Nenhum inquilino ameaça sair</span><span aria-hidden="true">Nenhuma conversa trava</span></span> <span class="metal">sem você saber.</span></h1>
       <p class="lead">O Plantão 24h lê as conversas de todos os setores da imobiliária: comercial, locação, manutenção, financeiro e proprietários. <b>Quando alguém reclama, fica sem resposta ou ameaça ir embora</b>, o gestor recebe o aviso no WhatsApp com o motivo e o responsável.</p>
       <div class="acts">
         <a class="cta wa" href="#">Quero ver na minha imobiliária <i aria-hidden="true">→</i></a>
@@ -636,6 +643,12 @@ footer .ft-one a:hover{text-decoration:underline}
     });
   });
 })();
+</script>
+<script>
+(function(){var r=document.querySelector('[data-rot]');if(!r)return;
+if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+var it=[].slice.call(r.children),k=0;setInterval(function(){if(document.hidden)return;var c=it[k];k=(k+1)%it.length;var n=it[k];
+c.classList.remove('on');c.classList.add('out');n.classList.remove('out');n.classList.add('on');setTimeout(function(){c.classList.remove('out')},500)},2800);})();
 </script>
 </body>
 </html>

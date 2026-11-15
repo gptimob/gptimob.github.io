@@ -505,6 +505,10 @@ a.agent{text-decoration:none;color:inherit}
   --acc:#5135C4;--acc-soft:#F7F5FF;--acc-tint:#EEE9FF;
   --acc-metal:linear-gradient(100deg,#2A1477 0%,#5B3FD9 30%,#B9A8FF 47%,#5B3FD9 62%,#2E1680 100%);
 }
+.show-mq{
+  --acc:#BE123C;--acc-soft:#FFF5F7;--acc-tint:#FFE4E6;
+  --acc-metal:linear-gradient(100deg,#4C0519 0%,#BE123C 30%,#FB7185 47%,#BE123C 62%,#5B0620 100%);
+}
 .show-sn{
   --acc:#B45309;--acc-soft:#FFFAEB;--acc-tint:#FEF3C7;
   --acc-metal:linear-gradient(100deg,#5A2A02 0%,#C2640A 30%,#FCD34D 47%,#C2640A 62%,#6B3203 100%);
@@ -751,6 +755,7 @@ a.agent{text-decoration:none;color:inherit}
         <button class="nav-dd-b" type="button" aria-expanded="false" aria-controls="nav-dd-m">Soluções <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="nav-dd-m" id="nav-dd-m">
           <a href="/roleta/"><i style="--d:#6A4BE0"></i><span><b>Corretor da Vez</b><small>Roleta inteligente de leads</small></span></a>
+          <a href="/maquina-de-followup/"><i style="--d:#BE123C"></i><span><b>Máquina de Follow-up</b><small>Follow-up e recuperação de leads</small></span></a>
           <a href="/plantao-24h/"><i style="--d:#D97706"></i><span><b>Plantão 24h</b><small>Monitoramento das conversas</small></span></a>
           <a href="/dna/"><i style="--d:#059669"></i><span><b>DNA Imob</b><small>Diagnóstico da operação</small></span></a>
           <a href="/raiox/"><i style="--d:#2433E8"></i><span><b>Raio-X</b><small>Análise de uma negociação</small></span></a>
@@ -840,11 +845,11 @@ a.agent{text-decoration:none;color:inherit}
           <span class="agent-role">Roleta inteligente de leads</span>
           <p>Oferece o lead ao corretor da vez no WhatsApp, com prazo para confirmar e para atender. Quem não atende perde a vez, e a gestão acompanha a fila ao vivo, na TV da imobiliária.</p>
         </a>
-        <div class="agent">
-          <span class="agent-name">Luck</span>
-          <span class="agent-role">Recuperação de descartados</span>
-          <p>Monitora os atendimentos marcados como perdidos, reabre a conversa depois do intervalo definido e devolve ao funil só quem voltou a ter interesse.</p>
-        </div>
+        <a class="agent" href="/maquina-de-followup/">
+          <span class="agent-name">Máquina de Follow-up<span class="agent-new">Novo</span></span>
+          <span class="agent-role">Follow-up e recuperação de leads</span>
+          <p>Quando o cliente fica 24 horas sem responder, a IA retoma pelo WhatsApp oficial e devolve ao corretor quem respondeu. O lead dado como perdido entra na recuperação.</p>
+        </a>
         <div class="agent">
           <span class="agent-name">Zeca<span class="agent-new">Novo</span></span>
           <span class="agent-role">Ativação de base</span>
@@ -881,6 +886,11 @@ a.agent{text-decoration:none;color:inherit}
           <span class="agent-role">Desocupação</span>
           <p>Conduz a saída do inquilino do aviso à entrega das chaves, coordenando notificações, reparos e vistoria sem etapa esquecida.</p>
         </div>
+        <a class="agent" href="/maquina-de-followup/">
+          <span class="agent-name">Máquina de Follow-up<span class="agent-new">Novo</span></span>
+          <span class="agent-role">Follow-up de locação</span>
+          <p>Uma mensagem por dia, por cinco dias, para o cliente que parou de responder. Respondeu, volta para o corretor; não respondeu, é encerrado com motivo no CRM.</p>
+        </a>
         <a class="agent agent-custom" href="/diagnostico/">
           <span class="agent-name">+</span>
           <span class="agent-role">Agente sob medida</span>
@@ -1322,6 +1332,54 @@ a.agent{text-decoration:none;color:inherit}
         </div>
       </div>
     </div>
+    <div class="show show-rx show-mq">
+      <div class="show-head">
+        <p class="show-kicker">Para a gestão comercial e de locação</p>
+        <h3>Máquina de Follow-up</h3>
+        <p class="show-line">Quando o cliente para de responder ou o lead é dado como perdido, a IA retoma pelo WhatsApp e devolve ao corretor.</p>
+      </div>
+      <div class="show-vis">
+        <div class="car car-dna car-sn" data-car>
+          <div class="car-track" tabindex="0" aria-label="Telas da Máquina de Follow-up">
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Máquina de Follow-up · Imobiliária Modelo</span></div><div class="shot"><img src="/maquina-de-followup/img/1.jpg" alt="Máquina de Follow-up: Retomada no WhatsApp" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">01</span><span><b>Retomada no WhatsApp</b> A IA retoma o cliente em silêncio e avisa o corretor quando ele responde.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Máquina de Follow-up · Imobiliária Modelo</span></div><div class="shot"><img src="/maquina-de-followup/img/2.jpg" alt="Máquina de Follow-up: Cadências por tipo de venda" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">02</span><span><b>Cadências por tipo de venda</b> Locação, vendas e lançamento, cada uma no seu ritmo, no horário de maior leitura.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Máquina de Follow-up · Imobiliária Modelo</span></div><div class="shot"><img src="/maquina-de-followup/img/3.jpg" alt="Máquina de Follow-up: Direto no CRM" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">03</span><span><b>Direto no CRM</b> No Vista, no Imoview ou no CV CRM: cada mensagem vira interação no atendimento.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Máquina de Follow-up · Imobiliária Modelo</span></div><div class="shot"><img src="/maquina-de-followup/img/4.jpg" alt="Máquina de Follow-up: Antes e depois" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">04</span><span><b>Antes e depois</b> Atendimentos com interação em até 3 dias: de 32% para 99,5%.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Máquina de Follow-up · Imobiliária Modelo</span></div><div class="shot"><img src="/maquina-de-followup/img/5.jpg" alt="Máquina de Follow-up: Recuperação de leads" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">05</span><span><b>Recuperação de leads</b> O lead dado como perdido volta como novo atendimento para o corretor da vez.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Máquina de Follow-up · Imobiliária Modelo</span></div><div class="shot"><img src="/maquina-de-followup/img/6.jpg" alt="Máquina de Follow-up: Relatório da máquina" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">06</span><span><b>Relatório da máquina</b> Quem está em retomada, quem respondeu, quem foi encerrado e quem voltou.</span></figcaption>
+            </figure>
+          </div>
+          <div class="car-nav">
+            <button class="car-btn car-prev" type="button" aria-label="Tela anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="car-dots" role="tablist" aria-label="Telas da Máquina de Follow-up"></div>
+            <button class="car-btn car-next" type="button" aria-label="Próxima tela"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="show-rest">
+        <ul class="chips"><li>Locação, vendas e lançamento</li><li>Recupera leads perdidos</li><li>Imoview, Vista e CV CRM</li></ul>
+        <div class="show-cta">
+          <a class="btn btn-acc btn-sm" href="/maquina-de-followup/">Conhecer a Máquina de Follow-up <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1482,6 +1540,7 @@ a.agent{text-decoration:none;color:inherit}
           <li><a href="/dna/">DNA Imob</a></li>
           <li><a href="/plantao-24h/">Plantão 24h</a></li>
           <li><a href="/roleta/">Corretor da Vez</a></li>
+          <li><a href="/maquina-de-followup/">Máquina de Follow-up</a></li>
           <li><a href="/imersao/">Imers&atilde;o de implanta&ccedil;&atilde;o</a></li>
           <li><a href="/diagnostico/">Diagn&oacute;stico gratuito</a></li>
         </ul>

@@ -449,6 +449,13 @@ footer .ft-one a:hover{text-decoration:underline}
 .nc-txt p{color:var(--nmuted);font-size:.98rem;max-width:44em}
 .nc-card .cta{flex:none;padding:14px 22px}
 @media(max-width:600px){.nc-card{padding:22px}.nc-txt h3{font-size:1.2rem}.nc-card .cta{width:100%;justify-content:center}}
+
+/* frase que alterna no topo */
+.rot{display:grid}
+.rot > span{grid-area:1/1;align-self:end;transition:opacity .45s ease,transform .45s ease;opacity:0;transform:translateY(.35em)}
+.rot > span.on{opacity:1;transform:none}
+.rot > span.out{opacity:0;transform:translateY(-.35em)}
+@media(prefers-reduced-motion:reduce){.rot > span{transition:none}}
 </style>
 </head>
 <body>
@@ -477,7 +484,7 @@ footer .ft-one a:hover{text-decoration:underline}
   <div class="wrap">
     <div>
       <span class="live"><b aria-hidden="true"></b>Roleta inteligente de leads</span>
-      <h1>O lead não espera na fila. <span class="metal">Ele chega ao corretor da vez.</span></h1>
+      <h1><span class="rot" data-rot><span class="on">O lead não espera na fila.</span><span aria-hidden="true">O lead chegou no sábado à noite?</span><span aria-hidden="true">Ninguém pegou o lead do portal?</span><span aria-hidden="true">O corretor não confirmou a tempo?</span></span> <span class="metal">Ele chega ao corretor da vez.</span></h1>
       <p class="lead">Cada lead é oferecido ao corretor da vez pelo WhatsApp, com um botão para confirmar. <b>Quem não confirma no prazo ou não chama o cliente perde a vez</b>, e o lead segue para o próximo. A gestão acompanha tudo num painel.</p>
       <div class="acts">
         <a class="cta wa" href="#">Quero a roleta na minha imobiliária <i aria-hidden="true">→</i></a>
@@ -772,6 +779,12 @@ footer .ft-one a:hover{text-decoration:underline}
 (function(){var sc=document.querySelector('.tv-screen'),f=sc&&sc.querySelector('iframe');if(!f)return;
 function fit(){var w=sc.clientWidth;if(w>=700){var k=w/1600;f.style.width='1600px';f.style.height='900px';f.style.transform='scale('+k+')';sc.style.height=Math.round(900*k)+'px'}else{f.style.width='100%';f.style.height='760px';f.style.transform='none';sc.style.height='760px'}}
 fit();addEventListener('resize',fit);})();
+</script>
+<script>
+(function(){var r=document.querySelector('[data-rot]');if(!r)return;
+if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+var it=[].slice.call(r.children),k=0;setInterval(function(){if(document.hidden)return;var c=it[k];k=(k+1)%it.length;var n=it[k];
+c.classList.remove('on');c.classList.add('out');n.classList.remove('out');n.classList.add('on');setTimeout(function(){c.classList.remove('out')},500)},2800);})();
 </script>
 </body>
 </html>
