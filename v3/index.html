@@ -724,6 +724,10 @@ a.agent{text-decoration:none;color:inherit}
   --acc:#BE123C;--acc-soft:#FFF5F7;--acc-tint:#FFE4E6;
   --acc-metal:linear-gradient(100deg,#4C0519 0%,#BE123C 30%,#FB7185 47%,#BE123C 62%,#5B0620 100%);
 }
+.show-rc{
+  --acc:#0B6E8E;--acc-soft:#F0F9FC;--acc-tint:#DCF1F7;
+  --acc-metal:linear-gradient(100deg,#04303F 0%,#0B6E8E 30%,#4FB8D6 47%,#0B6E8E 62%,#053A4A 100%);
+}
 .show-sn{
   --acc:#B45309;--acc-soft:#FFFAEB;--acc-tint:#FEF3C7;
   --acc-metal:linear-gradient(100deg,#5A2A02 0%,#C2640A 30%,#FCD34D 47%,#C2640A 62%,#6B3203 100%);
@@ -973,6 +977,7 @@ a.agent{text-decoration:none;color:inherit}
           <a href="#imobiliarias"><i style="--d:#1B4FD8"></i><span><b>Agentes de IA</b><small>Um agente em cada etapa da operação</small></span></a>
           <a href="/roleta/"><i style="--d:#6A4BE0"></i><span><b>Corretor da Vez</b><small>Roleta inteligente de leads</small></span></a>
           <a href="/maquina-de-followup/"><i style="--d:#BE123C"></i><span><b>Máquina de Follow-up</b><small>Follow-up e recuperação de leads</small></span></a>
+          <a href="/retencao-de-carteira/"><i style="--d:#0B6E8E"></i><span><b>Retenção de Carteira</b><small>Proprietários e inquilinos</small></span></a>
           <a href="/plantao-24h/"><i style="--d:#D97706"></i><span><b>Plantão 24h</b><small>Monitoramento das conversas</small></span></a>
           <a href="/dna/"><i style="--d:#059669"></i><span><b>DNA Imob</b><small>Diagnóstico da operação</small></span></a>
           <a href="/raiox/"><i style="--d:#2433E8"></i><span><b>Raio-X</b><small>Análise de negociação · corretor</small></span></a>
@@ -1144,7 +1149,7 @@ a.agent{text-decoration:none;color:inherit}
           <div class="j-body" id="ji-b5" hidden>
             <h4>Inquilino e proprietário atendidos sem fila no telefone</h4>
             <p>Depois da assinatura, cada pedido vai para o agente certo: cobrança, manutenção, desocupação, repasse e conciliação. Os casos de risco chegam ao gerente antes de virar reclamação.</p>
-            <ul class="j-agents"><li><b>Triagem</b></li><li><b>Cobrança</b></li><li><b>Manutenção</b></li><li><b>Desocupação</b></li><li><b>Retenção</b></li><li><b>Conciliação</b></li><li><b>Pós-venda</b></li></ul>
+            <ul class="j-agents"><li><b>Triagem</b></li><li><b>Cobrança</b></li><li><b>Manutenção</b></li><li><b>Desocupação</b></li><li class="lk"><a href="/retencao-de-carteira/"><b>Retenção de Carteira</b><span>Proprietários e inquilinos</span><em aria-hidden="true">&rarr;</em></a></li><li><b>Conciliação</b></li><li><b>Pós-venda</b></li></ul>
             <p class="j-ints"><span>Conecta com</span><em>seu ERP de locação</em><em>omnichannel</em></p>
             <div class="j-slot"></div>
           </div>
@@ -1454,7 +1459,56 @@ a.agent{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <div class="show show-sn">
+    <div class="show show-rx show-rc noflip">
+      <div class="show-head">
+        <p class="show-kicker">Para a gestão de locação e da carteira</p>
+        <h3>Retenção de Carteira</h3>
+        <p class="show-line">A IA ouve proprietários e inquilinos nos momentos certos e avisa o gestor antes de a carteira ir embora.</p>
+      </div>
+      <div class="show-vis">
+        <div class="car car-dna car-sn" data-car>
+          <div class="car-track" tabindex="0" aria-label="Telas da Retenção de Carteira">
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Retenção de Carteira · Imobiliária Modelo</span></div><div class="shot"><img src="/retencao-de-carteira/img/1.jpg" alt="Retenção de Carteira: Antes da rescisão" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">01</span><span><b>Antes da rescisão</b> A IA pergunta ao proprietário como está a administração e o gestor recebe o alerta de risco.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Retenção de Carteira · Imobiliária Modelo</span></div><div class="shot"><img src="/retencao-de-carteira/img/2.jpg" alt="Retenção de Carteira: Preço do bairro" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">02</span><span><b>Preço do bairro</b> Imóvel parado recebe o comparativo com a mediana de imóveis iguais no bairro.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Retenção de Carteira · Imobiliária Modelo</span></div><div class="shot"><img src="/retencao-de-carteira/img/3.jpg" alt="Retenção de Carteira: Três frentes" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">03</span><span><b>Três frentes</b> Proprietários de locação, inquilinos e proprietários de venda, cada um no momento certo.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Retenção de Carteira · Imobiliária Modelo</span></div><div class="shot"><img src="/retencao-de-carteira/img/4.jpg" alt="Retenção de Carteira: Risco com prioridade" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">04</span><span><b>Risco com prioridade</b> Baixo, atenção ou máxima atenção: só o que precisa chega ao gestor.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Retenção de Carteira · Imobiliária Modelo</span></div><div class="shot"><img src="/retencao-de-carteira/img/5.jpg" alt="Retenção de Carteira: Conversas com um toque" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">05</span><span><b>Conversas com um toque</b> Conferência da carteira e renovação com botões de resposta rápida.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Retenção de Carteira · Imobiliária Modelo</span></div><div class="shot"><img src="/retencao-de-carteira/img/6.jpg" alt="Retenção de Carteira: Saúde da carteira" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">06</span><span><b>Saúde da carteira</b> Quem está em risco, renovações, imóveis parados e captações em um relatório.</span></figcaption>
+            </figure>
+          </div>
+          <div class="car-nav">
+            <button class="car-btn car-prev" type="button" aria-label="Tela anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="car-dots" role="tablist" aria-label="Telas da Retenção de Carteira"></div>
+            <button class="car-btn car-next" type="button" aria-label="Próxima tela"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="show-rest">
+        <ul class="chips"><li>Proprietários e inquilinos</li><li>Preço médio do bairro</li><li>Alerta antes da rescisão</li></ul>
+        <div class="show-cta">
+          <a class="btn btn-acc btn-sm" href="/retencao-de-carteira/">Conhecer a Retenção de Carteira <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="show show-sn flip">
       <div class="show-head">
         <p class="show-kicker">Para a gestão</p>
         <h3>Plantão 24h</h3>
@@ -1507,7 +1561,7 @@ a.agent{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <div class="show show-dna flip">
+    <div class="show show-dna noflip">
       <div class="show-head">
         <p class="show-kicker">Para a diretoria</p>
         <h3>DNA Imob</h3>
@@ -1797,6 +1851,7 @@ a.agent{text-decoration:none;color:inherit}
           <li><a href="/plantao-24h/">Plantão 24h</a></li>
           <li><a href="/roleta/">Corretor da Vez</a></li>
           <li><a href="/maquina-de-followup/">Máquina de Follow-up</a></li>
+          <li><a href="/retencao-de-carteira/">Retenção de Carteira</a></li>
           <li><a href="/imersao/">Imers&atilde;o de implanta&ccedil;&atilde;o</a></li>
           <li><a href="/diagnostico/">Diagn&oacute;stico gratuito</a></li>
         </ul>
