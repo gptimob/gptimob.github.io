@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ília Residenza 553 · Foco Ijuí Imóveis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0d0e; --graphite:#1b1b1d; --stone:#2a2a2d;
+  --wood:#b4723c; --wood-l:#d39a5f; --glow:#f3c27a;
+  --paper:#f4efe7; --muted:rgba(244,239,231,.62);
+  --u:min(1vw,1.7778vh);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--ink);color:var(--paper);overflow:hidden;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.stage{position:fixed;inset:0;display:grid;place-items:center;background:#000}
+.frame{position:relative;width:calc(var(--u)*100);height:calc(var(--u)*56.25);overflow:hidden;background:var(--ink)}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.1s ease,visibility 0s linear 1.1s}
+.slide.on{opacity:1;visibility:visible;transition:opacity 1.1s ease}
+.bg{position:absolute;inset:-2%;background-size:cover;background-position:center;transform:scale(1.04)}
+.slide.on .bg{animation:kb 14s ease-out forwards}
+@keyframes kb{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.13) translate(-1.2%,-1%)}}
+.shade-l{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,11,.94) 0%,rgba(10,10,11,.78) 38%,rgba(10,10,11,.15) 70%,rgba(10,10,11,0) 100%)}
+.shade-b{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,11,.92) 0%,rgba(10,10,11,.35) 45%,rgba(10,10,11,.05) 100%)}
+.shade-full{position:absolute;inset:0;background:rgba(10,10,11,.72)}
+.pad{position:absolute;inset:0;padding:calc(var(--u)*6) calc(var(--u)*6.5)}
+/* reveal */
+.r{opacity:0;transform:translateY(calc(var(--u)*1.6))}
+.slide.on .r{animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
+.slide.on .r:nth-child(2){animation-delay:.15s}.slide.on .r:nth-child(3){animation-delay:.3s}
+.slide.on .r:nth-child(4){animation-delay:.45s}.slide.on .r:nth-child(5){animation-delay:.6s}
+.slide.on .r:nth-child(6){animation-delay:.75s}
+@keyframes up{to{opacity:1;transform:none}}
+.kicker{font-weight:700;letter-spacing:.32em;text-transform:uppercase;font-size:calc(var(--u)*1.05);color:var(--glow);display:flex;align-items:center;gap:calc(var(--u)*1)}
+.kicker:before{content:"";width:calc(var(--u)*3.4);height:1px;background:var(--glow)}
+.num{font-family:"Cormorant Garamond",serif;color:var(--wood-l);font-style:italic}
+h1,h2{font-family:"Cormorant Garamond",serif;font-weight:600;line-height:.95;letter-spacing:-.01em}
+h1{font-size:calc(var(--u)*9.2)}
+h2{font-size:calc(var(--u)*5.6)}
+h2 em,h1 em{font-style:italic;color:var(--glow);font-weight:500}
+.lead{font-size:calc(var(--u)*1.75);line-height:1.45;color:var(--muted);font-weight:300;max-width:calc(var(--u)*46)}
+.lead b{color:var(--paper);font-weight:600}
+.stack>*+*{margin-top:calc(var(--u)*2.2)}
+/* top bar */
+.top{position:absolute;z-index:20;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(var(--u)*2.4) calc(var(--u)*3.2);pointer-events:none}
+.brand{font-weight:800;letter-spacing:.24em;font-size:calc(var(--u)*.95);text-transform:uppercase;display:flex;gap:calc(var(--u)*1.2);align-items:center}
+.brand .dot{width:calc(var(--u)*.55);height:calc(var(--u)*.55);border-radius:50%;background:var(--glow);box-shadow:0 0 calc(var(--u)*1) var(--glow);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.brand span.sep{opacity:.35}
+.clock{font-weight:500;font-size:calc(var(--u)*1.05);letter-spacing:.08em;color:var(--muted);text-align:right}
+.clock b{color:var(--paper);font-weight:700;font-size:calc(var(--u)*1.5);letter-spacing:.02em;margin-left:calc(var(--u)*.8)}
+/* bottom bar */
+.bottom{position:absolute;z-index:20;left:0;right:0;bottom:0;padding:0 calc(var(--u)*3.2) calc(var(--u)*2);display:flex;align-items:center;gap:calc(var(--u)*1.4)}
+.bars{display:flex;gap:calc(var(--u)*.5);flex:1}
+.bar{flex:1;height:calc(var(--u)*.22);background:rgba(244,239,231,.18);border-radius:9px;overflow:hidden;cursor:pointer}
+.bar i{display:block;height:100%;width:0;background:var(--glow)}
+.bar.done i{width:100%;background:rgba(244,239,231,.55)}
+.cap{font-size:calc(var(--u)*.8);color:rgba(244,239,231,.45);letter-spacing:.08em;white-space:nowrap}
+/* hero */
+.hero-name{font-size:calc(var(--u)*10.5)}
+.hero-name small{display:block;font-family:Manrope;font-weight:300;font-size:calc(var(--u)*1.9);letter-spacing:.5em;color:var(--paper);margin-top:calc(var(--u)*1.2)}
+.badge{display:inline-flex;align-items:center;gap:calc(var(--u)*1);border:1px solid rgba(243,194,122,.5);background:rgba(243,194,122,.1);padding:calc(var(--u)*.9) calc(var(--u)*1.6);border-radius:99px;font-weight:700;letter-spacing:.2em;font-size:calc(var(--u)*1);text-transform:uppercase;color:var(--glow)}
+/* cards */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*2)}
+.card{background:rgba(27,27,29,.82);backdrop-filter:blur(8px);border:1px solid rgba(244,239,231,.1);border-radius:calc(var(--u)*1.2);padding:calc(var(--u)*2.6)}
+.card .m2{font-family:"Cormorant Garamond",serif;font-size:calc(var(--u)*8);line-height:.9;color:var(--paper);font-weight:600}
+.card .m2 sup{font-size:.35em;vertical-align:top;margin-left:.1em;color:var(--glow)}
+.card h3{font-size:calc(var(--u)*1.9);font-weight:700;margin-top:calc(var(--u)*1)}
+.card p{font-size:calc(var(--u)*1.35);color:var(--muted);margin-top:calc(var(--u)*.6);line-height:1.4}
+.tag{display:inline-block;margin-top:calc(var(--u)*1.4);font-size:calc(var(--u)*.95);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:var(--glow);padding:calc(var(--u)*.5) calc(var(--u)*1);border-radius:6px}
+.tag.alt{background:transparent;color:var(--glow);border:1px solid var(--glow)}
+/* features */
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:calc(var(--u)*1.4)}
+.feat .card{padding:calc(var(--u)*2)}
+.ico{width:calc(var(--u)*3.4);height:calc(var(--u)*3.4);color:var(--glow)}
+.feat h3{font-size:calc(var(--u)*1.55)}
+.feat p{font-size:calc(var(--u)*1.15)}
+/* location */
+.map{position:relative;width:calc(var(--u)*34);height:calc(var(--u)*34)}
+.map svg{width:100%;height:100%}
+.ring{position:absolute;left:50%;top:50%;border:1px solid rgba(243,194,122,.45);border-radius:50%;transform:translate(-50%,-50%);animation:ring 3.2s ease-out infinite}
+@keyframes ring{from{width:4%;height:4%;opacity:1}to{width:70%;height:70%;opacity:0}}
+.big100{font-family:"Cormorant Garamond",serif;font-size:calc(var(--u)*15);line-height:.8;font-weight:600}
+.big100 span{font-size:.32em;color:var(--glow);font-style:italic;margin-left:.1em}
+/* construtora */
+.logo-card{background:#fff;border-radius:calc(var(--u)*1.6);padding:calc(var(--u)*2.2);width:calc(var(--u)*24);box-shadow:0 calc(var(--u)*2) calc(var(--u)*5) rgba(0,0,0,.55)}
+.logo-card img{width:100%;display:block}
+/* timeline */
+.tl{position:relative;margin-top:calc(var(--u)*4);height:calc(var(--u)*14)}
+.tl-line{position:absolute;left:0;right:0;top:calc(var(--u)*3.2);height:2px;background:rgba(244,239,231,.15)}
+.tl-fill{position:absolute;left:0;top:calc(var(--u)*3.2);height:2px;background:linear-gradient(90deg,var(--wood),var(--glow));width:0;transition:width 2.4s ease .6s}
+.slide.on .tl-fill{width:var(--to)}
+.tl-pt{position:absolute;top:0;transform:translateX(-50%);text-align:center;width:calc(var(--u)*18)}
+.tl-pt .d{width:calc(var(--u)*1.4);height:calc(var(--u)*1.4);border-radius:50%;margin:calc(var(--u)*2.5) auto calc(var(--u)*1.6);background:var(--ink);border:2px solid var(--glow)}
+.tl-pt.now .d{background:var(--glow);box-shadow:0 0 0 calc(var(--u)*.7) rgba(243,194,122,.2)}
+.tl-pt .y{font-family:"Cormorant Garamond",serif;font-size:calc(var(--u)*3.6);font-weight:600;line-height:1}
+.tl-pt .l{font-size:calc(var(--u)*1.05);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:calc(var(--u)*.5);font-weight:600}
+.count{display:flex;gap:calc(var(--u)*1.4);align-items:flex-end}
+.count .n{font-family:"Cormorant Garamond",serif;font-size:calc(var(--u)*11);line-height:.8;font-weight:600;color:var(--glow)}
+.count .t{font-size:calc(var(--u)*1.5);color:var(--muted);line-height:1.3;padding-bottom:calc(var(--u)*.8)}
+.count .t b{color:var(--paper)}
+/* motivation */
+.quote{font-family:"Cormorant Garamond",serif;font-size:calc(var(--u)*5.4);line-height:1.08;font-weight:500;max-width:calc(var(--u)*72)}
+.quote em{color:var(--glow)}
+.mission{display:flex;gap:calc(var(--u)*1.6);align-items:flex-start;border-left:3px solid var(--glow);padding-left:calc(var(--u)*2);max-width:calc(var(--u)*62)}
+.mission .lbl{font-size:calc(var(--u)*1);letter-spacing:.28em;font-weight:800;color:var(--glow);text-transform:uppercase}
+.mission p{font-size:calc(var(--u)*2);line-height:1.35;margin-top:calc(var(--u)*.5);font-weight:500}
+/* pitch */
+.pitch{font-family:"Cormorant Garamond",serif;font-size:calc(var(--u)*4.4);line-height:1.15;font-weight:500;max-width:calc(var(--u)*80)}
+.pitch b{color:var(--glow);font-weight:600}
+/* gallery */
+.gal{position:absolute;inset:0;display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:calc(var(--u)*.6)}
+.gal div{background-size:cover;background-position:center;transform:scale(1.08);opacity:0}
+.slide.on .gal div{animation:gin 1.2s ease forwards}
+.gal div:nth-child(1){grid-row:span 2}
+.slide.on .gal div:nth-child(2){animation-delay:.2s}.slide.on .gal div:nth-child(3){animation-delay:.35s}
+.slide.on .gal div:nth-child(4){animation-delay:.5s}.slide.on .gal div:nth-child(5){animation-delay:.65s}
+@keyframes gin{to{opacity:1;transform:scale(1)}}
+.ilus{position:absolute;right:calc(var(--u)*3.2);bottom:calc(var(--u)*4.4);font-size:calc(var(--u)*.78);color:rgba(244,239,231,.5);letter-spacing:.1em;z-index:5}
+/* start overlay */
+.start{position:absolute;inset:0;z-index:50;display:grid;place-items:center;background:rgba(8,8,9,.86);cursor:pointer;transition:opacity .6s}
+.start.hide{opacity:0;pointer-events:none}
+.start .inner{text-align:center}
+.start .play{width:calc(var(--u)*8);height:calc(var(--u)*8);border-radius:50%;border:2px solid var(--glow);display:grid;place-items:center;margin:0 auto calc(var(--u)*2.4);animation:pulse 2.2s infinite}
+.start .play:after{content:"";border-left:calc(var(--u)*2.2) solid var(--glow);border-top:calc(var(--u)*1.3) solid transparent;border-bottom:calc(var(--u)*1.3) solid transparent;margin-left:calc(var(--u)*.6)}
+.start h3{font-family:"Cormorant Garamond",serif;font-size:calc(var(--u)*3.4);font-weight:600}
+.start p{color:var(--muted);font-size:calc(var(--u)*1.2);margin-top:calc(var(--u)*1)}
+.start kbd{font-family:Manrope;border:1px solid rgba(244,239,231,.3);border-radius:4px;padding:0 .4em;font-size:.9em}
+.paused{position:absolute;z-index:30;top:calc(var(--u)*5.6);right:calc(var(--u)*3.2);font-size:calc(var(--u)*.9);letter-spacing:.2em;font-weight:700;color:var(--glow);display:none}
+.paused.show{display:block}
+.nav{position:absolute;top:0;bottom:0;width:18%;z-index:15;cursor:pointer}
+.nav.l{left:0}.nav.r2{right:0}
+</style>
+</head>
+<body>
+<div class="stage"><div class="frame" id="frame">
+
+  <div class="top">
+    <div class="brand"><i class="dot"></i>Ijuí Imóveis <span class="sep">/</span> <span style="color:var(--glow)">Empreendimento foco</span></div>
+    <div class="clock" id="clock">—</div>
+  </div>
+  <div class="paused" id="paused">❚❚ PAUSADO</div>
+
+  <!-- 1 HERO -->
+  <section class="slide" data-t="12">
+    <div class="bg" style="background-image:url(img/noite-frente.jpg)"></div>
+    <div class="shade-l"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stack">
+        <div class="r"><span class="badge">★ Foco da Ijuí Imóveis agora</span></div>
+        <h1 class="r hero-name">Ília<br><em>Residenza</em><small>— 553 —</small></h1>
+        <p class="r lead">Apartamentos novos, com elevador, a <b>100 metros do Estádio 19 de Outubro</b>. Construção e qualidade <b>Construtora Scherer</b>.</p>
+      </div>
+    </div>
+    <div class="ilus">Imagem ilustrativa</div>
+  </section>
+
+  <!-- 2 POR QUE -->
+  <section class="slide" data-t="11">
+    <div class="bg" style="background-image:url(img/dia-rua.jpg)"></div>
+    <div class="shade-l"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stack">
+        <div class="r kicker">Recado para o time</div>
+        <h2 class="r">Todo atendimento<br>é uma chance de<br><em>apresentar o Ília.</em></h2>
+        <p class="r lead">Este é o empreendimento foco da casa. Cliente procurando apartamento novo, primeiro imóvel ou investimento em Ijuí? <b>Comece por ele.</b></p>
+      </div>
+    </div>
+    <div class="ilus">Imagem ilustrativa</div>
+  </section>
+
+  <!-- 3 PLANTAS -->
+  <section class="slide" data-t="13">
+    <div class="bg" style="background-image:url(img/dia-calcada.jpg)"></div>
+    <div class="shade-full"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stack">
+        <div class="r kicker">Duas plantas para vender</div>
+        <h2 class="r">Escolha a medida <em>certa</em> para o seu cliente.</h2>
+        <div class="r grid2" style="margin-top:calc(var(--u)*3.2)">
+          <div class="card">
+            <div class="m2">53<sup>m²</sup></div>
+            <h3>2 dormitórios</h3>
+            <p>Unidades de meio de prédio. Ideal para casal jovem, primeiro imóvel e investidor de aluguel.</p>
+            <span class="tag alt">Meio de prédio</span>
+          </div>
+          <div class="card" style="border-color:rgba(243,194,122,.45)">
+            <div class="m2">58<sup>m²</sup></div>
+            <h3>1 suíte + 1 dormitório</h3>
+            <p>Unidades de frente e de fundos. Para quem quer a privacidade de uma suíte.</p>
+            <span class="tag">Frente e fundos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 DIFERENCIAIS -->
+  <section class="slide" data-t="12">
+    <div class="bg" style="background-image:url(img/noite-letreiro.jpg)"></div>
+    <div class="shade-b"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:calc(var(--u)*8)">
+      <div class="stack">
+        <div class="r kicker">O que o cliente vai ouvir de você</div>
+        <h2 class="r" style="font-size:calc(var(--u)*4.6)">Argumentos que <em>fecham</em>.</h2>
+        <div class="r feat" style="margin-top:calc(var(--u)*2.4)">
+          <div class="card">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="2.5" width="14" height="19" rx="1.5"/><path d="M12 2.5v19M8.5 9l1.5-2 1.5 2M12.5 15l1.5 2 1.5-2"/></svg>
+            <h3>Prédio com elevador</h3><p>Conforto em todos os andares — argumento forte para famílias e pais.</p>
+          </div>
+          <div class="card">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+            <h3>100 m do estádio</h3><p>Rua Jane Thorsteber, ao lado do 19 de Outubro. Endereço que todo mundo conhece.</p>
+          </div>
+          <div class="card">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5M9 11h.01M15 11h.01"/></svg>
+            <h3>Construtora Scherer</h3><p>Construtora de Ijuí: o cliente conhece quem está construindo.</p>
+          </div>
+          <div class="card">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4.5" width="18" height="16" rx="1.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+            <h3>Compra na planta</h3><p>Obras em 03/2027 e entrega em 03/2031: tempo para o cliente se planejar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ilus">Imagem ilustrativa</div>
+  </section>
+
+  <!-- 5 LOCALIZAÇÃO -->
+  <section class="slide" data-t="11">
+    <div class="bg" style="background-image:url(img/rua-casas.jpg);filter:saturate(.6)"></div>
+    <div class="shade-full" style="background:rgba(10,10,11,.84)"></div>
+    <div class="pad" style="display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:calc(var(--u)*4)">
+      <div class="stack">
+        <div class="r kicker">Localização</div>
+        <div class="r big100">100<span>metros</span></div>
+        <h2 class="r" style="font-size:calc(var(--u)*4.2)">do Estádio <em>19 de Outubro.</em></h2>
+        <p class="r lead"><b>Rua Jane Thorsteber</b> · Ijuí/RS. Um ponto de referência que ninguém precisa procurar no mapa.</p>
+      </div>
+      <div class="r map" style="justify-self:center">
+        <i class="ring"></i><i class="ring" style="animation-delay:1.6s"></i>
+        <svg viewBox="0 0 400 400" fill="none">
+          <defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0v40" stroke="rgba(244,239,231,.07)"/></pattern></defs>
+          <circle cx="200" cy="200" r="196" fill="url(#g)" stroke="rgba(244,239,231,.15)"/>
+          <path d="M20 250 L380 170" stroke="rgba(244,239,231,.35)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M140 30 L170 370" stroke="rgba(244,239,231,.18)" stroke-width="6" stroke-linecap="round"/>
+          <rect x="235" y="70" width="120" height="78" rx="38" stroke="#f3c27a" stroke-width="2" fill="rgba(243,194,122,.08)" transform="rotate(-12 295 109)"/>
+          <rect x="262" y="88" width="66" height="42" rx="20" stroke="rgba(243,194,122,.5)" stroke-width="1.5" transform="rotate(-12 295 109)"/>
+          <text x="295" y="60" fill="#f3c27a" font-family="Manrope" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="2">ESTÁDIO 19 DE OUTUBRO</text>
+          <path d="M215 195 L270 140" stroke="#f3c27a" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <text x="262" y="186" fill="rgba(244,239,231,.8)" font-family="Manrope" font-size="14" font-weight="700">100 m</text>
+          <circle cx="200" cy="208" r="12" fill="#f3c27a"/><circle cx="200" cy="208" r="5" fill="#0d0d0e"/>
+          <text x="200" y="248" fill="#f4efe7" font-family="Cormorant Garamond" font-size="22" font-weight="700" text-anchor="middle">Ília Residenza 553</text>
+          <text x="200" y="268" fill="rgba(244,239,231,.6)" font-family="Manrope" font-size="11" text-anchor="middle" letter-spacing="1.5">RUA JANE THORSTEBER</text>
+        </svg>
+      </div>
+    </div>
+    <div class="ilus">Mapa esquemático, sem escala</div>
+  </section>
+
+  <!-- 6 CONSTRUTORA -->
+  <section class="slide" data-t="10">
+    <div class="bg" style="background-image:url(img/fachada-lateral.jpg)"></div>
+    <div class="shade-l"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stack">
+        <div class="r kicker">Quem constrói</div>
+        <div class="r logo-card"><img src="img/scherer.png" alt="Construtora Scherer"></div>
+        <h2 class="r" style="font-size:calc(var(--u)*4.4)">Construtora <em>Scherer.</em></h2>
+        <p class="r lead">Construção e venda de apartamentos em Ijuí. <b>Fale o nome da construtora</b> no primeiro contato — ele abre portas.</p>
+      </div>
+    </div>
+    <div class="ilus">Imagem ilustrativa</div>
+  </section>
+
+  <!-- 7 CRONOGRAMA -->
+  <section class="slide" data-t="13">
+    <div class="bg" style="background-image:url(img/dia-perspectiva.jpg)"></div>
+    <div class="shade-full" style="background:rgba(10,10,11,.82)"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stack">
+        <div class="r kicker">Cronograma</div>
+        <div class="r count"><div class="n" id="cd">—</div><div class="t" id="cdt">dias para o<br><b>início das obras</b></div></div>
+        <p class="r lead" style="max-width:none">Quem compra agora escolhe <b>a melhor unidade e o melhor andar</b>. Use isso.</p>
+        <div class="r tl" id="tl">
+          <div class="tl-line"></div><div class="tl-fill" id="tlfill"></div>
+          <div class="tl-pt now" id="tlnow" style="left:6%"><div class="d"></div><div class="y">Hoje</div><div class="l">Pré-obra · vendas</div></div>
+          <div class="tl-pt" style="left:40%"><div class="d"></div><div class="y">03/2027</div><div class="l">Início das obras</div></div>
+          <div class="tl-pt" style="left:90%"><div class="d"></div><div class="y">03/2031</div><div class="l">Entrega</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 PITCH -->
+  <section class="slide" data-t="13">
+    <div class="bg" style="background-image:url(img/dia-frente.jpg)"></div>
+    <div class="shade-full" style="background:rgba(10,10,11,.8)"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stack">
+        <div class="r kicker">Pitch de 15 segundos · decore</div>
+        <p class="r pitch">“É o <b>Ília Residenza</b>, da <b>Construtora Scherer</b>: prédio novo com elevador, a <b>100 metros do Estádio 19 de Outubro</b>. Tem 2 dormitórios com <b>53 m²</b> e suíte mais 1 com <b>58 m²</b>. Quer que eu te mostre as plantas?”</p>
+        <p class="r lead">Termine sempre com uma pergunta. Quem pergunta, conduz.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 MOTIVAÇÃO DO DIA -->
+  <section class="slide" data-t="13">
+    <div class="bg" style="background-image:url(img/noite-frente.jpg);filter:blur(2px)"></div>
+    <div class="shade-full" style="background:rgba(10,10,11,.8)"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="stack">
+        <div class="r kicker" id="motday">Motivação do dia</div>
+        <p class="r quote" id="motq">—</p>
+        <div class="r mission" style="margin-top:calc(var(--u)*3.4)">
+          <div><div class="lbl">Missão de hoje</div><p id="motm">—</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 GALERIA -->
+  <section class="slide" data-t="11">
+    <div class="gal">
+      <div style="background-image:url(img/noite-frente.jpg)"></div>
+      <div style="background-image:url(img/noite-letreiro.jpg)"></div>
+      <div style="background-image:url(img/dia-calcada.jpg)"></div>
+      <div style="background-image:url(img/rua-casas.jpg)"></div>
+      <div style="background-image:url(img/fundos.jpg)"></div>
+    </div>
+    <div class="shade-b" style="background:linear-gradient(0deg,rgba(10,10,11,.95) 0%,rgba(10,10,11,.2) 40%,rgba(10,10,11,0) 60%)"></div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:calc(var(--u)*7)">
+      <div class="stack">
+        <h2 class="r" style="font-size:calc(var(--u)*6.4)">Ília Residenza <em>553</em></h2>
+        <p class="r lead" style="max-width:none">Hoje, qual cliente seu vai conhecer o Ília? <b>Ijuí Imóveis.</b></p>
+      </div>
+    </div>
+    <div class="ilus">Imagens ilustrativas</div>
+  </section>
+
+  <div class="nav l" id="navl"></div><div class="nav r2" id="navr"></div>
+
+  <div class="bottom">
+    <div class="bars" id="bars"></div>
+    <div class="cap">Ília Residenza 553 · Construtora Scherer · imagens ilustrativas</div>
+  </div>
+
+  <div class="start" id="start">
+    <div class="inner">
+      <div class="play"></div>
+      <h3>Toque para iniciar o Modo TV</h3>
+      <p>Tela cheia e apresentação em loop · <kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Espaço</kbd> pausar · <kbd>F</kbd> tela cheia</p>
+    </div>
+  </div>
+</div></div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var barsEl=document.getElementById('bars'), idx=0, t0=0, paused=false, raf;
+  slides.forEach(function(s,i){var b=document.createElement('div');b.className='bar';b.innerHTML='<i></i>';b.onclick=function(e){e.stopPropagation();go(i)};barsEl.appendChild(b)});
+  var bars=[].slice.call(barsEl.children);
+
+  function go(i){
+    idx=(i+slides.length)%slides.length;
+    slides.forEach(function(s,j){s.classList.toggle('on',j===idx)});
+    bars.forEach(function(b,j){b.classList.toggle('done',j<idx);b.firstChild.style.width=j<idx?'100%':'0'});
+    // restart animations on re-entry
+    var s=slides[idx]; s.querySelectorAll('.bg,.r,.gal div,.tl-fill').forEach(function(el){el.style.animation='none';el.offsetHeight;el.style.animation=''});
+    t0=performance.now(); pausedAt=0;
+  }
+  var pausedAt=0;
+  function tick(now){
+    var dur=(+slides[idx].dataset.t||11)*1000;
+    if(!paused){
+      var p=Math.min(1,(now-t0)/dur);
+      bars[idx].firstChild.style.width=(p*100)+'%';
+      if(p>=1) go(idx+1);
+    }
+    raf=requestAnimationFrame(tick);
+  }
+  function togglePause(){
+    paused=!paused;
+    document.getElementById('paused').classList.toggle('show',paused);
+    if(paused){pausedAt=performance.now()}else{t0+=performance.now()-pausedAt}
+  }
+  function fs(){
+    try{var d=document.documentElement;
+      if(!document.fullscreenElement){var r=(d.requestFullscreen||d.webkitRequestFullscreen).call(d);if(r&&r.catch)r.catch(function(){})}
+      else{document.exitFullscreen()}
+    }catch(e){}
+  }
+  document.getElementById('start').onclick=function(){this.classList.add('hide');fs();go(0)};
+  document.getElementById('navl').onclick=function(){go(idx-1)};
+  document.getElementById('navr').onclick=function(){go(idx+1)};
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown'){go(idx+1)}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(idx-1)}
+    else if(e.key===' '){e.preventDefault();togglePause()}
+    else if(e.key==='f'||e.key==='F'){fs()}
+    document.getElementById('start').classList.add('hide');
+  });
+
+  // relógio
+  var DIAS=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+  var MESES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  function clock(){
+    var d=new Date(),h=('0'+d.getHours()).slice(-2),m=('0'+d.getMinutes()).slice(-2);
+    document.getElementById('clock').innerHTML=DIAS[d.getDay()]+', '+d.getDate()+' '+MESES[d.getMonth()]+'<b>'+h+':'+m+'</b>';
+  }
+  clock(); setInterval(clock,10000);
+
+  // contagem e linha do tempo
+  function cron(){
+    var now=new Date(), start=new Date(2027,2,1), end=new Date(2031,2,1), ref=new Date(2026,10,1);
+    var days=Math.ceil((start-now)/864e5);
+    var cd=document.getElementById('cd'), cdt=document.getElementById('cdt');
+    if(days>0){cd.textContent=days;cdt.innerHTML=(days===1?'dia':'dias')+' para o<br><b>início das obras</b>'}
+    else{var left=Math.ceil((end-now)/864e5);
+      if(left>0){cd.textContent=left;cdt.innerHTML='dias para a<br><b>entrega das chaves</b>'}
+      else{cd.textContent='✓';cdt.innerHTML='Empreendimento<br><b>entregue</b>'}}
+    // posição do "hoje" na linha: ref(6%) → início(40%) → entrega(90%)
+    var pos;
+    if(now<start){pos=6+34*Math.max(0,(now-ref)/(start-ref))}
+    else{pos=40+50*Math.min(1,(now-start)/(end-start))}
+    document.getElementById('tlnow').style.left=pos+'%';
+    document.getElementById('tlfill').style.setProperty('--to',pos+'%');
+  }
+  cron(); setInterval(cron,36e5);
+
+  // motivação por dia da semana
+  var MOT=[
+    {q:'Descanse hoje. <em>Amanhã</em> tem cliente esperando pelo Ília.',m:'Pense em 3 nomes da sua carteira que combinam com 53 m² ou 58 m².'},
+    {q:'Semana nova, <em>carteira nova.</em> Quem não aparece, não vende.',m:'Envie o Ília para 5 clientes da sua carteira até o meio-dia.'},
+    {q:'O cliente não compra metro quadrado. Compra <em>a vida</em> que vai ter ali.',m:'Ligue para 3 clientes que moram de aluguel e apresente a planta de 53 m².'},
+    {q:'Quem pergunta mais, <em>vende mais.</em>',m:'Em todo atendimento de hoje, pergunte: “você já pensou em comprar na planta?”'},
+    {q:'Follow-up não é insistência. <em>É cuidado.</em>',m:'Retome 3 clientes que esfriaram e mostre o cronograma do Ília.'},
+    {q:'Sexta é dia de <em>agendar</em> a semana que vem.',m:'Marque pelo menos 2 apresentações do Ília para a próxima semana.'},
+    {q:'Sábado é dia de cliente com <em>tempo para ouvir.</em>',m:'Poste o Ília no seu status e responda cada pessoa que reagir.'}
+  ];
+  function mot(){var d=new Date().getDay();
+    document.getElementById('motday').textContent='Motivação de '+DIAS[d].toLowerCase();
+    document.getElementById('motq').innerHTML=MOT[d].q;document.getElementById('motm').textContent=MOT[d].m}
+  mot(); setInterval(mot,36e5);
+
+  try{if(window.self!==window.top){document.getElementById('start').classList.add('hide')}}catch(e){document.getElementById('start').classList.add('hide')}
+  go(0); requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

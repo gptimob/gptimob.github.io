@@ -855,6 +855,16 @@ footer .ft-one a:hover{text-decoration:underline}
 .pk-c b{color:var(--am-ink)}
 @media(max-width:900px){.pk-l{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.pk{padding:18px}.pk-l{grid-template-columns:1fr}}
+/* caso real */
+.cs{margin-top:30px;background:var(--night);border-radius:22px;padding:28px;display:grid;grid-template-columns:.9fr 1.1fr;gap:26px;align-items:center}
+.cs > *{min-width:0}
+.cs-t{display:grid;gap:12px;justify-items:start}
+.cs-t .eyebrow{color:var(--am-light)}
+.cs-t h3{color:#fff;font-size:1.4rem;letter-spacing:-.02em;line-height:1.2}
+.cs-t p{color:#C9D1DD}
+.cs-f{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:6px solid #1F2937;background:#000}
+.cs-f iframe{width:100%;height:100%;border:0;display:block}
+@media(max-width:860px){.cs{grid-template-columns:1fr;padding:20px}}
 /* TELAS CV CRM (reprodução ilustrativa) */
 :root{--cv-nav:#1B2440;--cv-nav2:#232E52;--cv-acc:#F26B2A;--cv-acc-bg:#FEF0E8;--cv-blue:#2F6FED;--cv-ground:#F2F4F8;--cv-line:#E0E4EC;--cv-ink:#1F2937;--cv-mute:#6B7280}
 .cv{display:grid;grid-template-columns:58px minmax(0,1fr);min-width:1000px;background:var(--cv-ground);color:var(--cv-ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:12.5px}
@@ -1177,6 +1187,15 @@ footer .ft-one a:hover{text-decoration:underline}
       </ul>
     </div>
     <p class="fine-note">Tela e QR code ilustrativos.</p>
+    <div class="cs" id="caso">
+      <div class="cs-t">
+        <span class="eyebrow">Caso real · Ijuí Imóveis</span>
+        <h3>A TV da Ijuí Imóveis com o Ília Residenza, lançamento da Construtora Scherer.</h3>
+        <p>Dez telas em loop na sala dos corretores: plantas, argumentos que fecham, localização, contagem regressiva para o início das obras, o pitch de 15 segundos e uma missão diferente para cada dia da semana.</p>
+        <a class="cta" href="https://gptimob.com.br/treino-de-lancamento/exemplo-tv/" target="_blank" rel="noopener">Ver a apresentação em tela cheia <i aria-hidden="true">→</i></a>
+      </div>
+      <div class="cs-f"><iframe src="exemplo-tv/" title="Apresentação de TV do Ília Residenza para a Ijuí Imóveis" loading="lazy"></iframe></div>
+    </div>
   </div>
 </section>
 
