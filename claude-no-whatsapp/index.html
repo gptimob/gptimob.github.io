@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Claude no WhatsApp · Curso para corretores: respostas prontas e etiquetas no WhatsApp | GPTImob</title>
-<meta name="robots" content="noindex,follow">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://gptimob.com.br/claude-no-whatsapp/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23D9F99D'/%3E%3Cstop offset='.5' stop-color='%234D7C0F'/%3E%3Cstop offset='1' stop-color='%231A2E05'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M52 32a20 20 0 0 1-29.6 17.4L12 52l3-10A20 20 0 1 1 52 32z' fill='none' stroke='white' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0A0E15">
@@ -1034,6 +1034,52 @@ footer .ft-one a:hover{text-decoration:underline}
 .sc-win{margin:0 40px 0 0}
 .sc-ph{left:auto;right:0;top:215px;bottom:auto;width:160px}
 @media(max-width:560px){.scene{padding:0}.sc-win{margin:0}.sc-ph{position:relative;top:auto;right:auto;width:170px;margin:-60px 12px 0 auto}.sc-ph .sp-i:nth-child(n+6){display:none}}
+/* antes e depois em destaque */
+.vsec{background:#0B0F07;color:#F6F7EF}
+.vsec h2{color:#F6F7EF}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);gap:14px 12px;align-items:stretch;max-width:1000px;margin:0 auto}
+.vs-h{margin:0 0 6px;text-align:center;font:800 1.05rem var(--f-display);letter-spacing:.02em;text-transform:uppercase;padding:14px;border-radius:14px;font-style:italic}
+.vs-h.n{background:#E11D48;color:#fff}
+.vs-h.y{background:#BEF264;color:#1A2E05}
+.vs-n,.vs-y{display:flex;gap:14px;align-items:center;border-radius:16px;padding:16px 18px;min-width:0}
+.vs-n{background:#161B12;border:1px solid #2A3122}
+.vs-n p{color:#AEB8A2;font-size:.98rem}
+.vs-y{background:#171F0E;border:1.5px solid #BEF264;box-shadow:0 0 30px -14px rgba(190,242,100,.6)}
+.vs-y p{color:#F6F7EF;font-size:.98rem}
+.vs-y b{color:#BEF264}
+.vs-x,.vs-v{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.vs-x{background:#E11D48;color:#fff}
+.vs-v{background:#BEF264;color:#1A2E05}
+.vs-ar{align-self:center;justify-self:center;width:32px;height:32px;border-radius:50%;border:1px solid #3A4430;color:#BEF264;display:grid;place-items:center;font-weight:700}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(max-width:720px){.vs{grid-template-columns:1fr;gap:8px}.vs-h,.vs > span:not(.vs-ar){display:none}.vs-ar{transform:rotate(90deg);width:26px;height:26px}.vs-n{margin-top:14px}}
+/* faz a conta */
+.fc{position:relative;overflow:hidden;max-width:980px;margin:0 auto;border:1.5px solid #BEF264;border-radius:28px;padding:40px;background:radial-gradient(380px 260px at 95% 0%,rgba(190,242,100,.18),transparent 70%),#12170D;display:grid;gap:16px}
+.fc-k{justify-self:start;background:#BEF264;color:#1A2E05;font:800 .72rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+.fc-v{font:800 clamp(3.2rem,9vw,5.6rem)/.9 var(--f-display);color:#BEF264;letter-spacing:-.03em;margin-top:6px}
+.fc-s{font:800 clamp(1.4rem,3vw,2rem)/1 var(--f-display);color:#F6F7EF;text-transform:uppercase}
+.fc-l{color:#D6DCCB;font-size:1.05rem}.fc-l b{color:#BEF264}
+.fc-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fc-g > div{display:flex;gap:12px;align-items:center;background:#1A2014;border:1px solid #2C3524;border-radius:14px;padding:12px 14px;color:#EEF2E6;font-size:.95rem}
+.fc-g .gi,.fc-p .gi{flex:none}
+.fc h3{font:800 clamp(1.4rem,3.2vw,2.1rem)/1.15 var(--f-display);color:#F6F7EF;margin-top:10px;text-transform:uppercase;letter-spacing:-.01em}
+.fc-p{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fc-p li{display:flex;gap:12px;align-items:center;color:#D6DCCB}
+.fc-p b{color:#BEF264}
+.fc-cta{justify-self:stretch;justify-content:center;margin-top:8px}
+@media(max-width:620px){.fc{padding:24px}.fc-g{grid-template-columns:1fr}}
+/* três opções */
+.op3{display:grid;gap:16px;max-width:860px;margin:0 auto}
+.op{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 24px;display:grid;gap:12px}
+.op-k{justify-self:stretch;text-align:center;font:800 .95rem var(--f-display);background:#EEF2E6;color:var(--ink);border-radius:999px;padding:8px}
+.op p{color:var(--muted);font-size:1rem}
+.op.hi{border:2px solid var(--am);box-shadow:0 24px 50px -34px rgba(77,124,15,.6)}
+.op.hi .op-k{background:var(--am);color:#fff}
+.op.hi p{color:var(--ink);font-weight:500}
+.op.hi .cta{justify-self:center}
+.vsec .metal{background:none;-webkit-text-fill-color:#BEF264;color:#BEF264}
+.fc .fc-v{color:#BEF264}
+.fc .fc-s{color:#F6F7EF}
 /* TELAS CV CRM (reprodução ilustrativa) */
 :root{--cv-nav:#1B2440;--cv-nav2:#232E52;--cv-acc:#F26B2A;--cv-acc-bg:#FEF0E8;--cv-blue:#2F6FED;--cv-ground:#F2F4F8;--cv-line:#E0E4EC;--cv-ink:#1F2937;--cv-mute:#6B7280}
 .cv{display:grid;grid-template-columns:58px minmax(0,1fr);min-width:1000px;background:var(--cv-ground);color:var(--cv-ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:12.5px}
@@ -1199,50 +1245,6 @@ footer .ft-one a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- DEPOIMENTOS -->
-<section class="sec" id="depoimentos">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">Quem já usa</span>
-      <h2>Corretores que já colocaram <span class="metal">o Claude no WhatsApp.</span></h2>
-      <p>Depoimentos de corretores que fizeram o treinamento e usam no dia a dia.</p>
-    </div>
-    <div class="vids">
-      <div class="vid"><div class="vid-f"><span class="vid-p" aria-hidden="true">▶</span><span class="vid-s">Depoimento em vídeo</span></div><b>[Nome do corretor]</b><span>[Imobiliária · Cidade]</span></div>
-      <div class="vid"><div class="vid-f"><span class="vid-p" aria-hidden="true">▶</span><span class="vid-s">Depoimento em vídeo</span></div><b>[Nome do corretor]</b><span>[Imobiliária · Cidade]</span></div>
-      <div class="vid"><div class="vid-f"><span class="vid-p" aria-hidden="true">▶</span><span class="vid-s">Depoimento em vídeo</span></div><b>[Nome do corretor]</b><span>[Imobiliária · Cidade]</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ANTES E DEPOIS -->
-<section class="sec tint">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">O seu dia</span>
-      <h2>O WhatsApp deixa de ser a sua segunda jornada.</h2>
-    </div>
-    <div class="ba2">
-      <div class="ba-n"><span class="ba-k">Sem o Claude</span><ul>
-        <li>Abre o WhatsApp e não sabe por onde começar</li>
-        <li>Cliente que pediu algo na semana passada fica sem resposta</li>
-        <li>Lead esfria porque o retorno ficou para depois</li>
-        <li>Fim do dia respondendo conversa por conversa</li>
-        <li>Não sabe quem está em visita, em proposta ou parado</li>
-        <li>Visita combinada que ninguém confirmou na véspera</li>
-      </ul></div>
-      <div class="ba-y"><span class="ba-k">Com o Claude</span><ul>
-        <li>O dia começa pela conversa que mais importa</li>
-        <li>Todo cliente parado recebe uma resposta pronta para enviar</li>
-        <li>Cada retorno usa o que o próprio cliente disse</li>
-        <li>Dez minutos para revisar e enviar tudo</li>
-        <li>Cada conversa com a etiqueta da etapa em que está</li>
-        <li>As visitas no Google Agenda e confirmadas na véspera</li>
-      </ul></div>
-    </div>
-  </div>
-</section>
-
 <!-- COMANDOS -->
 <section class="sec" id="comandos">
   <div class="wrap">
@@ -1295,19 +1297,21 @@ footer .ft-one a:hover{text-decoration:underline}
   </div>
 </section>
 
-<!-- ENQUANTO VOCÊ TRABALHA -->
-<section class="sec dark" id="dia">
+<!-- ANTES E DEPOIS -->
+<section class="sec vsec" id="antes-depois">
   <div class="wrap">
-    <div class="head">
-      <span class="eyebrow" style="color:var(--am-light)">Enquanto você trabalha</span>
-      <h2>Você na rua. <span class="metal">O Claude no WhatsApp.</span></h2>
-      <p>Cada comando vira um atalho agendado. Com o computador ligado e o Chrome aberto, o Claude roda sozinho nos horários que você escolher, e deixa um resumo para você ler quando voltar.</p>
+    <div class="head center">
+      <span class="eyebrow" style="color:var(--am-light)">O que muda na prática</span>
+      <h2>O WhatsApp deixa de ser <span class="metal">a sua segunda jornada.</span></h2>
     </div>
-    <div class="day4">
-      <div><span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>08:00</span><b>/resumo e /visitas</b><p>Rodam sozinhos: a conversa mais importante do dia e as visitas combinadas já no Google Agenda.</p></div>
-      <div><span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>12:00</span><b>/etiquetas</b><p>Enquanto você almoça, cada conversa vai para a etapa certa do funil.</p></div>
-      <div><span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>17:00</span><b>/confirma</b><p>As confirmações das visitas de amanhã ficam prontas para você enviar.</p></div>
-      <div><span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>18:00</span><b>/recuperar</b><p>Na volta da última visita, a resposta de cada cliente parado está escrita. Dez minutos para revisar e enviar.</p></div>
+    <div class="vs">
+      <p class="vs-h n">Sem o Claude</p><span></span><p class="vs-h y">Com o Claude</p>
+      <div class="vs-n"><span class="vs-x" aria-hidden="true">✕</span><p><span class="sr">Sem o Claude: </span>Abre o WhatsApp e não sabe por onde começar</p></div><span class="vs-ar" aria-hidden="true">→</span><div class="vs-y"><span class="vs-v" aria-hidden="true">✓</span><p><span class="sr">Com o Claude: </span>O dia começa pela <b>conversa que mais importa</b></p></div>
+      <div class="vs-n"><span class="vs-x" aria-hidden="true">✕</span><p><span class="sr">Sem o Claude: </span>Cliente que pediu algo na semana passada fica sem resposta</p></div><span class="vs-ar" aria-hidden="true">→</span><div class="vs-y"><span class="vs-v" aria-hidden="true">✓</span><p><span class="sr">Com o Claude: </span>Todo cliente parado recebe uma <b>resposta pronta para enviar</b></p></div>
+      <div class="vs-n"><span class="vs-x" aria-hidden="true">✕</span><p><span class="sr">Sem o Claude: </span>Lead esfria porque o retorno ficou para depois</p></div><span class="vs-ar" aria-hidden="true">→</span><div class="vs-y"><span class="vs-v" aria-hidden="true">✓</span><p><span class="sr">Com o Claude: </span>Cada retorno usa <b>o que o próprio cliente disse</b></p></div>
+      <div class="vs-n"><span class="vs-x" aria-hidden="true">✕</span><p><span class="sr">Sem o Claude: </span>Fim do dia respondendo conversa por conversa</p></div><span class="vs-ar" aria-hidden="true">→</span><div class="vs-y"><span class="vs-v" aria-hidden="true">✓</span><p><span class="sr">Com o Claude: </span><b>Dez minutos</b> para revisar e enviar tudo</p></div>
+      <div class="vs-n"><span class="vs-x" aria-hidden="true">✕</span><p><span class="sr">Sem o Claude: </span>Não sabe quem está em visita, em proposta ou parado</p></div><span class="vs-ar" aria-hidden="true">→</span><div class="vs-y"><span class="vs-v" aria-hidden="true">✓</span><p><span class="sr">Com o Claude: </span>Cada conversa com a <b>etiqueta da etapa</b> em que está</p></div>
+      <div class="vs-n"><span class="vs-x" aria-hidden="true">✕</span><p><span class="sr">Sem o Claude: </span>Visita combinada que ninguém confirmou na véspera</p></div><span class="vs-ar" aria-hidden="true">→</span><div class="vs-y"><span class="vs-v" aria-hidden="true">✓</span><p><span class="sr">Com o Claude: </span>Visitas no <b>Google Agenda e confirmadas</b> na véspera</p></div>
     </div>
   </div>
 </section>
@@ -1338,6 +1342,23 @@ footer .ft-one a:hover{text-decoration:underline}
         <li><b>Atualizações da skill</b><span>Quando a skill melhora, você recebe a versão nova.</span></li>
         <li><b>Comandos numa tela</b><span>A cola com todos os comandos, para não precisar decorar.</span></li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUANTO VOCÊ TRABALHA -->
+<section class="sec dark" id="dia">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" style="color:var(--am-light)">Enquanto você trabalha</span>
+      <h2>Você na rua. <span class="metal">O Claude no WhatsApp.</span></h2>
+      <p>Cada comando vira um atalho agendado. Com o computador ligado e o Chrome aberto, o Claude roda sozinho nos horários que você escolher, e deixa um resumo para você ler quando voltar.</p>
+    </div>
+    <div class="day4">
+      <div><span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>08:00</span><b>/resumo e /visitas</b><p>Rodam sozinhos: a conversa mais importante do dia e as visitas combinadas já no Google Agenda.</p></div>
+      <div><span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>12:00</span><b>/etiquetas</b><p>Enquanto você almoça, cada conversa vai para a etapa certa do funil.</p></div>
+      <div><span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>17:00</span><b>/confirma</b><p>As confirmações das visitas de amanhã ficam prontas para você enviar.</p></div>
+      <div><span class="t"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>18:00</span><b>/recuperar</b><p>Na volta da última visita, a resposta de cada cliente parado está escrita. Dez minutos para revisar e enviar.</p></div>
     </div>
   </div>
 </section>
@@ -1373,6 +1394,30 @@ footer .ft-one a:hover{text-decoration:underline}
   </div>
 </section>
 
+<!-- FAZ A CONTA -->
+<section class="sec dark" id="conta">
+  <div class="wrap">
+    <div class="fc">
+      <span class="fc-k">Faz a conta</span>
+      <p class="fc-v">R$ 297</p>
+      <p class="fc-s">uma vez só</p>
+      <p class="fc-l">Menos de <b>R$ 1 por dia</b> no primeiro ano. Você gasta mais do que isso por dia com:</p>
+      <div class="fc-g">
+        <div><span class="gi c-am" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M4 10h10M14 8h2a2 2 0 0 1 2 2v7a1.5 1.5 0 0 0 3 0V9l-3-3"/></svg></span><span>Gasolina rodando para visita que não acontece</span></div>
+        <div><span class="gi c-am" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v4a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 2-2.5 5-2.5 8H17v10"/></svg></span><span>Almoço e lanche na rua entre um atendimento e outro</span></div>
+        <div><span class="gi c-am" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1zM17 9a4 4 0 0 1 0 6"/></svg></span><span>Anúncio no portal que gera lead que ninguém responde</span></div>
+        <div><span class="gi c-am" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>A noite respondendo WhatsApp em vez de descansar</span></div>
+      </div>
+      <h3>Se o curso te ajudar a recuperar <span class="metal">um único cliente parado</span> em um ano, ele já se pagou.</h3>
+      <ul class="fc-p">
+        <li><span class="gi c-am" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg></span><span>Com <b>uma única comissão</b>, você paga o curso muitas vezes.</span></li>
+        <li><span class="gi c-am" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span><b>Garantia de 7 dias:</b> se não for para você, devolvemos o valor.</span></li>
+      </ul>
+      <a class="cta wa fc-cta" href="#">Quero o curso por R$ 297 <i aria-hidden="true">→</i></a>
+    </div>
+  </div>
+</section>
+
 <!-- PREÇO -->
 <section class="sec tint" id="preco">
   <div class="wrap">
@@ -1390,12 +1435,11 @@ footer .ft-one a:hover{text-decoration:underline}
       </div>
       <div class="pr-r">
         <span class="pr-k">Pagamento único</span>
-        <div class="pr-v">R$ [VALOR]</div>
-        <span class="pr-x">[ou em até 12x no cartão]</span>
+        <div class="pr-v">R$ 297</div>
+        <span class="pr-x">ou parcelado no cartão</span>
         <a class="cta wa" href="#">Quero o curso <i aria-hidden="true">→</i></a>
         <p class="pr-g"><span class="gi c-em" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span><b>Garantia de 7 dias.</b> Se não for para você, devolvemos o valor.</span></p>
-        <p class="pr-n">A compra é feita pelo WhatsApp, com a gente.</p>
-      </div>
+              </div>
     </div>
   </div>
 </section>
@@ -1419,6 +1463,21 @@ footer .ft-one a:hover{text-decoration:underline}
   </div>
 </section>
 
+<!-- TRÊS OPÇÕES -->
+<section class="sec tint" id="opcoes">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow">Chegou até aqui?</span>
+      <h2>Agora você tem <span class="metal">três opções.</span></h2>
+    </div>
+    <div class="op3">
+      <div class="op"><span class="op-k">Opção 1</span><p>Continuar como está: responder conversa por conversa no fim do dia, deixar cliente esperando e perder lead porque o retorno ficou para depois.</p></div>
+      <div class="op"><span class="op-k">Opção 2</span><p>Tentar montar sozinho: testar comandos sem saber o que funciona, gastar horas e arriscar o seu número com automação errada.</p></div>
+      <div class="op hi"><span class="op-k">Opção 3 · a mais inteligente</span><p>Fazer o curso Claude no WhatsApp por R$ 297, com garantia de 7 dias, e amanhã começar o dia com o resumo pronto e a resposta escrita para cada cliente parado.</p><a class="cta wa" href="#">Quero o curso <i aria-hidden="true">→</i></a></div>
+    </div>
+  </div>
+</section>
+
 <!-- FINAL -->
 <section class="dark final">
   <div class="wrap">
@@ -1429,6 +1488,8 @@ footer .ft-one a:hover{text-decoration:underline}
   </div>
 </section>
 </main>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Claude no WhatsApp","description":"Curso gravado para corretores de imóveis: o Claude ao lado do WhatsApp Web encontra os clientes parados, deixa a resposta de cada um em rascunho, organiza as etiquetas do WhatsApp Business e põe as visitas no Google Agenda.","inLanguage":"pt-BR","url":"https://gptimob.com.br/claude-no-whatsapp/","provider":{"@type":"Organization","name":"GPTImob","url":"https://gptimob.com.br/"},"offers":{"@type":"Offer","price":"297.00","priceCurrency":"BRL","category":"Paid","availability":"https://schema.org/InStock","url":"https://gptimob.com.br/claude-no-whatsapp/"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"PT1H"},"audience":{"@type":"Audience","audienceType":"Corretores de imóveis"}}</script>
+
 <script>
 (function(){
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
