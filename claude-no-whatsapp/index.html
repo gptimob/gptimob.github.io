@@ -951,6 +951,89 @@ footer .ft-one a:hover{text-decoration:underline}
 .ba2 .ba-k{display:inline-block;width:auto}
 .pk{box-shadow:0 24px 50px -34px rgba(77,124,15,.5)}
 .cmd3b{margin-top:16px}
+/* cena do topo: computador + celular */
+.scene{position:relative;padding:0 0 70px 0;min-width:0}
+.sc-win{background:#0F1720;border:1px solid var(--nline);border-radius:16px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45);margin-right:70px}
+.sc-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#1A2330;border-bottom:1px solid var(--nline)}
+.sc-bar i{width:9px;height:9px;border-radius:50%;background:#3A4656}
+.sc-bar span{margin-left:10px;font:500 .72rem var(--f-mono);color:#AEB8C6;background:#0F1720;padding:3px 10px;border-radius:6px}
+.sc-body{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}
+.sc-list{background:#111B21;padding:6px 0;min-width:0}
+.sc-lh{font:700 .82rem var(--f-display);color:#E9EDEF;padding:6px 12px 8px}
+.sc-i{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:9px;align-items:center;padding:7px 12px;transition:background .3s}
+.sc-i.act{background:#202C33}
+.sc-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font:700 .78rem var(--f-display);flex:none}
+.sc-t{min-width:0}
+.sc-t b{display:flex;align-items:center;gap:6px;color:#E9EDEF;font-size:.82rem;font-weight:600;white-space:nowrap}
+.sc-t p{font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:1px 0 0}
+.sc-pv{color:#8696A0}
+.sc-dr{color:#25D366;display:none}
+.sc-i small{color:#8696A0;font-size:.66rem;align-self:start;margin-top:3px}
+.sc-tg{font-size:.52rem!important;padding:1px 6px!important}
+.scene .sc-tg{opacity:1;transform:none;transition:opacity .35s,transform .35s}
+.scene .sc-i .sc-dr{display:block}.scene .sc-i .sc-pv{display:none}
+.scene.play .sc-i:not(.done) .sc-dr{display:none}.scene.play .sc-i:not(.done) .sc-pv{display:block}
+.scene.play .sc-i:not(.done) .sc-tg,.scene.play .sp-i:not(.done) .sc-tg{opacity:0;transform:scale(.6)}
+.sc-i.done .sc-dr{animation:fadeIn .4s both}
+.sc-cp{background:#1B1F27;border-left:1px solid var(--nline);display:flex;flex-direction:column;min-width:0}
+.sc-ch{display:flex;align-items:center;gap:7px;padding:9px 12px;font:700 .8rem var(--f-display);color:#F1F1F1;border-bottom:1px solid #2A303A}
+.sc-logo{width:20px;height:20px;border-radius:6px;background:#D97757;color:#fff;display:grid;place-items:center;font-size:.68rem}
+.sc-msgs{flex:1;padding:12px;display:flex;flex-direction:column;gap:9px;min-height:190px}
+.sc-u{align-self:flex-end;background:#2D3340;color:#F1F1F1;font:600 .78rem var(--f-mono);padding:7px 11px;border-radius:12px 12px 4px 12px;min-height:1em}
+.sc-caret{display:none;width:2px;height:.9em;background:#BEF264;margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.scene.play .sc-caret{display:inline-block}
+.sc-s,.sc-ok{font-size:.76rem;line-height:1.45;color:#C9D1DD;opacity:0;transition:opacity .4s}
+.sc-s.on,.sc-ok.on{opacity:1}
+.scene:not(.play) .sc-ok{opacity:1}
+.sc-s.on::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#BEF264;margin-right:7px;animation:pulse 1s ease-in-out infinite}
+.sc-ok b{color:#fff}
+.sc-in{margin:10px;padding:8px 11px;border:1px solid #2F3642;border-radius:10px;color:#7C8696;font-size:.74rem}
+.sc-ph{position:absolute;right:0;bottom:0;width:172px;background:#0B141A;border:7px solid #1D1B2E;border-radius:26px;padding:8px 0 10px;box-shadow:0 30px 60px rgba(0,0,0,.55)}
+.sp-top{padding:4px 12px 6px;font:700 .72rem var(--f-display);color:#E9EDEF}
+.sp-f{display:flex;gap:5px;padding:0 10px 6px}
+.sp-f i{font-style:normal;font-size:.58rem;color:#8696A0;border:1px solid #2A3942;border-radius:999px;padding:2px 7px}
+.sp-f i.on{color:#0B141A;background:#BEF264;border-color:#BEF264}
+.sp-i{display:flex;gap:7px;align-items:center;padding:5px 10px}
+.sp-i .sc-av{width:22px;height:22px;font-size:.6rem}
+.sp-i b{display:block;color:#E9EDEF;font-size:.66rem;font-weight:600;margin-bottom:2px}
+@keyframes blink{50%{opacity:0}}
+@keyframes pulse{50%{opacity:.3}}
+@keyframes fadeIn{from{opacity:0}}
+@media(max-width:560px){.sc-win{margin-right:40px}.sc-body{grid-template-columns:minmax(0,1fr)}.sc-cp{border-left:0;border-top:1px solid var(--nline)}.sc-msgs{min-height:120px}.sc-ph{width:140px}.sc-i:nth-child(n+5){display:none}}
+/* animações dos cartões */
+.an-n{font-style:normal;font-variant-numeric:tabular-nums}
+[data-anim].go .an-fade{animation:fadeIn .6s both}
+.an-type.typing::after{content:"";display:inline-block;width:2px;height:1em;background:var(--am-ink);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+[data-anim="tags"].go .lb{animation:pop .35s both}
+[data-anim="tags"].go .lb:nth-child(2){animation-delay:.25s}[data-anim="tags"].go .lb:nth-child(3){animation-delay:.5s}[data-anim="tags"].go .lb:nth-child(4){animation-delay:.75s}[data-anim="tags"].go .lb:nth-child(5){animation-delay:1s}[data-anim="tags"].go .lb:nth-child(6){animation-delay:1.25s}
+@keyframes pop{from{opacity:0;transform:scale(.6)}}
+.an-chat{display:flex;flex-direction:column;gap:5px;margin-bottom:6px}
+.an-b{font-size:.82rem;padding:5px 10px;border-radius:10px;max-width:75%}
+.an-b.out{align-self:flex-end;background:#D9FDD3;color:#111B21}
+.an-b.in{align-self:flex-start;background:#fff;color:#111B21;border:1px solid var(--line)}
+.an-ev{display:grid;gap:3px;background:#fff;border:1px solid var(--line);border-left:4px solid #1A73E8;border-radius:8px;padding:8px 10px}
+[data-anim="agenda"].go .an-b.out{animation:fadeUp .4s both}
+[data-anim="agenda"].go .an-b.in{animation:fadeUp .4s .7s both}
+[data-anim="agenda"].go .an-ev{animation:slideIn .5s 1.5s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-14px)}}
+.an-r{display:flex;align-items:center;gap:10px;font:600 .88rem var(--f-mono);color:var(--ink)}
+.an-r b{color:var(--am-ink)}
+.an-r i{font-style:normal;color:#16A34A;font-weight:800;margin-left:auto}
+[data-anim="rotina"].go .an-r i{animation:pop .35s both}
+[data-anim="rotina"].go .an-r:nth-of-type(1) i{animation-delay:.5s}
+[data-anim="rotina"].go .an-r:nth-of-type(2) i{animation-delay:1.1s}
+[data-anim="rotina"].go .an-r:nth-of-type(3) i{animation-delay:1.7s}
+@media (prefers-reduced-motion:reduce){.sc-caret,.sc-s.on::before{animation:none}}
+/* celular à esquerda, sem cobrir o painel do Claude */
+.scene{padding:0 0 90px 0}
+.sc-win{margin:0 0 0 70px}
+.sc-ph{left:0;right:auto;width:158px}
+@media(max-width:560px){.scene{padding:0}.sc-win{margin:0}.sc-ph{position:relative;left:auto;bottom:auto;width:170px;margin:-36px 12px 0 auto}.sc-i:nth-child(n+5){display:grid}}
+.scene{padding:0 0 190px 0}
+.sc-win{margin:0 40px 0 0}
+.sc-ph{left:auto;right:0;top:215px;bottom:auto;width:160px}
+@media(max-width:560px){.scene{padding:0}.sc-win{margin:0}.sc-ph{position:relative;top:auto;right:auto;width:170px;margin:-60px 12px 0 auto}.sc-ph .sp-i:nth-child(n+6){display:none}}
 /* TELAS CV CRM (reprodução ilustrativa) */
 :root{--cv-nav:#1B2440;--cv-nav2:#232E52;--cv-acc:#F26B2A;--cv-acc-bg:#FEF0E8;--cv-blue:#2F6FED;--cv-ground:#F2F4F8;--cv-line:#E0E4EC;--cv-ink:#1F2937;--cv-mute:#6B7280}
 .cv{display:grid;grid-template-columns:58px minmax(0,1fr);min-width:1000px;background:var(--cv-ground);color:var(--cv-ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:12.5px}
@@ -1080,15 +1163,38 @@ footer .ft-one a:hover{text-decoration:underline}
       <div class="chips" aria-label="Resumo"><span>aulas gravadas</span><span>computador com Chrome</span><span>nada é enviado sem você</span><span>suporte pelo WhatsApp</span></div>
     </div>
 
-    <div class="console" role="img" aria-label="Exemplo do WhatsApp Web com respostas prontas em rascunho e etiquetas aplicadas pelo Claude">
-      <div class="c-bar"><span>web.whatsapp.com · Claude ao lado</span><em>● 08:12</em></div>
-      <div class="wl">
-        <div class="wl-i"><span class="av">M</span><div><b>Marina <i class="lb l1">Visita marcada</i></b><p><em>Rascunho:</em> Oi, Marina! O condomínio do apto do Centro é…</p></div><small>ontem</small></div>
-        <div class="wl-i"><span class="av">J</span><div><b>Juliana <i class="lb l2">Proposta</i></b><p><em>Rascunho:</em> Juliana, consegui a resposta do proprietário…</p></div><small>seg</small></div>
-        <div class="wl-i"><span class="av">P</span><div><b>Pedro <i class="lb l3">Parado</i></b><p><em>Rascunho:</em> Pedro, separei duas opções no seu perfil…</p></div><small>12/11</small></div>
-        <div class="wl-i"><span class="av">C</span><div><b>Carlos <i class="lb l4">Lead novo</i></b><p><em>Rascunho:</em> Oi, Carlos! Recebi seu contato pelo portal…</p></div><small>08:03</small></div>
+    <div class="scene" id="scene" role="img" aria-label="Simulação: o corretor digita recuperar 7 no painel do Claude, ao lado do WhatsApp Web. O Claude deixa uma resposta em rascunho em cada conversa parada e aplica as etiquetas, que aparecem também no WhatsApp do celular.">
+      <div class="sc-win" aria-hidden="true">
+        <div class="sc-bar"><i></i><i></i><i></i><span>web.whatsapp.com</span></div>
+        <div class="sc-body">
+          <div class="sc-list">
+            <div class="sc-lh">Conversas</div>
+            <div class="sc-i" data-i="0"><span class="sc-av" style="background:#7C9A3E">M</span><div class="sc-t"><b>Marina<i class="lb l2 sc-tg">Proposta</i></b><p class="sc-pv">E o condomínio, quanto fica?</p><p class="sc-dr">Rascunho: Oi, Marina! O condomínio é [CONDOMÍNIO] e aceita…</p></div><small>ontem</small></div>
+            <div class="sc-i" data-i="1"><span class="sc-av" style="background:#5B7FB8">P</span><div class="sc-t"><b>Pedro<i class="lb l3 sc-tg">Parado</i></b><p class="sc-pv">ok, vou ver</p><p class="sc-dr">Rascunho: Pedro, separei duas opções perto da escola…</p></div><small>seg</small></div>
+            <div class="sc-i" data-i="2"><span class="sc-av" style="background:#B8735B">J</span><div class="sc-t"><b>Juliana<i class="lb l1 sc-tg">Visita marcada</i></b><p class="sc-pv">🎤 Áudio (0:42)</p><p class="sc-dr">Rascunho: Juliana, sábado às 10h fica bom pra visita?</p></div><small>12/11</small></div>
+            <div class="sc-i" data-i="3"><span class="sc-av" style="background:#8A6BB8">C</span><div class="sc-t"><b>Carlos<i class="lb l4 sc-tg">Lead novo</i></b><p class="sc-pv">Vi o anúncio no portal</p><p class="sc-dr">Rascunho: Oi, Carlos! Recebi seu contato pelo portal…</p></div><small>08:03</small></div>
+            <div class="sc-i" data-i="4"><span class="sc-av" style="background:#3E8A86">A</span><div class="sc-t"><b>Ana<i class="lb l5 sc-tg">Em atendimento</i></b><p class="sc-pv">Vou falar com meu marido</p><p class="sc-dr">Rascunho: Ana, conseguiu conversar com o Rodrigo?</p></div><small>10/11</small></div>
+          </div>
+          <div class="sc-cp">
+            <div class="sc-ch"><span class="sc-logo">C</span>Claude</div>
+            <div class="sc-msgs">
+              <p class="sc-u"><span id="scType">recuperar 7</span><i class="sc-caret"></i></p>
+              <p class="sc-s" id="scStat">Lendo as conversas dos últimos 7 dias…</p>
+              <p class="sc-ok" id="scOk"><b>Pronto: 5 rascunhos e 5 etiquetas.</b> Revise e envie você.</p>
+            </div>
+            <div class="sc-in">Escreva aqui…</div>
+          </div>
+        </div>
       </div>
-      <div class="cl"><span class="cl-a" aria-hidden="true">C</span><p><b>Pronto: 14 rascunhos e 38 conversas com etiqueta.</b> Revise e envie você.</p></div>
+      <div class="sc-ph" aria-hidden="true">
+        <div class="sp-top"><span>WhatsApp Business</span></div>
+        <div class="sp-f"><i>Tudo</i><i class="on">Etiquetas</i></div>
+          <div class="sp-i" data-i="0"><span class="sc-av" style="background:#7C9A3E">M</span><div><b>Marina</b><i class="lb l2 sc-tg">Proposta</i></div></div>
+          <div class="sp-i" data-i="1"><span class="sc-av" style="background:#5B7FB8">P</span><div><b>Pedro</b><i class="lb l3 sc-tg">Parado</i></div></div>
+          <div class="sp-i" data-i="2"><span class="sc-av" style="background:#B8735B">J</span><div><b>Juliana</b><i class="lb l1 sc-tg">Visita marcada</i></div></div>
+          <div class="sp-i" data-i="3"><span class="sc-av" style="background:#8A6BB8">C</span><div><b>Carlos</b><i class="lb l4 sc-tg">Lead novo</i></div></div>
+          <div class="sp-i" data-i="4"><span class="sc-av" style="background:#3E8A86">A</span><div><b>Ana</b><i class="lb l5 sc-tg">Em atendimento</i></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1150,19 +1256,19 @@ footer .ft-one a:hover{text-decoration:underline}
         <code>resumo do dia</code>
         <h3>Por onde começar</h3>
         <p>A conversa mais importante de hoje, quem está esperando você e quem sumiu. Ele abre só as conversas que você já leu: ninguém recebe tique azul antes de você decidir responder.</p>
-        <div class="cm-m"><span>🎯 A única conversa</span><b>Marina · quer saber o condomínio do apto do Centro</b><span>Esperando você: 4 · Sumiram: 6</span></div>
+        <div class="cm-m" data-anim="resumo"><span>🎯 A única conversa</span><b class="an-fade">Marina · quer saber o condomínio do apto do Centro</b><span>Esperando você: <em class="an-n" data-to="4">4</em> · Sumiram: <em class="an-n" data-to="6">6</em></span></div>
       </div>
       <div class="cmd">
         <code>recuperar 30</code>
         <h3>Todos os clientes parados</h3>
         <p>Encontra quem ficou sem retorno nos últimos 30 dias e deixa a resposta escrita dentro de cada conversa, com o que o cliente falou. Você revisa e aperta enviar.</p>
-        <div class="cm-m"><span>Rascunho · não enviado</span><b>"Oi, Pedro! Separei duas opções de 2 dormitórios perto da escola que você comentou. Posso te mandar?"</b></div>
+        <div class="cm-m" data-anim="type"><span>Rascunho · não enviado</span><b class="an-type">"Oi, Pedro! Separei duas opções de 2 dormitórios perto da escola que você comentou. Posso te mandar?"</b></div>
       </div>
       <div class="cmd">
         <code>organiza as etiquetas</code>
         <h3>O funil dentro do WhatsApp</h3>
         <p>Cria as etiquetas da sua venda e coloca cada conversa na etapa certa pelo que foi conversado. No celular, você filtra e vê todo mundo em proposta ou parado.</p>
-        <div class="cm-m cm-tags"><i class="lb l4">Lead novo</i><i class="lb l5">Em atendimento</i><i class="lb l1">Visita marcada</i><i class="lb l2">Proposta</i><i class="lb l3">Parado</i><i class="lb l6">Fechado</i></div>
+        <div class="cm-m cm-tags" data-anim="tags"><i class="lb l4">Lead novo</i><i class="lb l5">Em atendimento</i><i class="lb l1">Visita marcada</i><i class="lb l2">Proposta</i><i class="lb l3">Parado</i><i class="lb l6">Fechado</i></div>
       </div>
     </div>
     <div class="cmd3 cmd3b">
@@ -1170,19 +1276,19 @@ footer .ft-one a:hover{text-decoration:underline}
         <code>visitas na agenda</code>
         <h3>Nenhuma visita esquecida</h3>
         <p>Toda visita combinada no WhatsApp, com dia e horário, vira evento no Google Agenda, com endereço e telefone do cliente.</p>
-        <div class="cm-m"><span>Google Agenda</span><b>Sáb 10:00 · Visita — Juliana — Apto Centro</b><span>Criado a partir da conversa</span></div>
+        <div class="cm-m" data-anim="agenda"><div class="an-chat"><p class="an-b out">Sábado às 10h?</p><p class="an-b in">Pode ser!</p></div><div class="an-ev"><span>Google Agenda</span><b>Sáb 10:00 · Visita — Juliana — Apto Centro</b></div></div>
       </div>
       <div class="cmd">
         <code>confirma as visitas de amanhã</code>
         <h3>A confirmação da véspera</h3>
         <p>O Claude olha a agenda de amanhã e deixa a mensagem de confirmação pronta na conversa de cada cliente.</p>
-        <div class="cm-m"><span>Rascunho · não enviado</span><b>"Oi, Juliana! Tudo certo para amanhã às 10h no apê do Centro?"</b></div>
+        <div class="cm-m" data-anim="confirma"><span class="an-fade">Amanhã 10:00 · Visita — Juliana</span><span>Rascunho · não enviado</span><b class="an-type">"Oi, Juliana! Tudo certo para amanhã às 10h no apê do Centro?"</b></div>
       </div>
       <div class="cmd">
         <code>/ atalhos agendados</code>
         <h3>Roda sozinho</h3>
         <p>Cada comando vira um atalho do Claude no Chrome, com dia e hora para rodar. Você só abre e encontra tudo pronto.</p>
-        <div class="cm-m"><span>Agendado</span><b>/resumo 8h · /confirma 17h · /recuperar 18h</b><span>Com o computador ligado e o Chrome aberto</span></div>
+        <div class="cm-m" data-anim="rotina"><span>Agendado · roda sozinho</span><p class="an-r"><b>08:00</b> /resumo <i>✓</i></p><p class="an-r"><b>17:00</b> /confirma <i>✓</i></p><p class="an-r"><b>18:00</b> /recuperar <i>✓</i></p></div>
       </div>
     </div>
     <div class="adj"><span class="gi c-am" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><p><b>Nada sai sem você.</b> O Claude escreve, mas não aperta enviar. É isso que deixa o seu número seguro: não existe disparo em massa, só mensagens que você mesmo envia, uma a uma, como sempre fez.</p></div>
@@ -1323,6 +1429,50 @@ footer .ft-one a:hover{text-decoration:underline}
   </div>
 </section>
 </main>
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* cena do topo */
+  var sc=document.getElementById('scene');
+  if(sc&&!reduce){
+    var items=[].slice.call(sc.querySelectorAll('.sc-i')), pitems=[].slice.call(sc.querySelectorAll('.sp-i'));
+    var typ=document.getElementById('scType'), stat=document.getElementById('scStat'), ok=document.getElementById('scOk');
+    var full=typ.textContent, timers=[];
+    function at(t,f){timers.push(setTimeout(f,t))}
+    function run(){
+      timers.forEach(clearTimeout);timers=[];
+      sc.classList.add('play');
+      items.forEach(function(e){e.classList.remove('act','done')});
+      pitems.forEach(function(e){e.classList.remove('done')});
+      typ.textContent='';stat.classList.remove('on');ok.classList.remove('on');
+      for(var k=1;k<=full.length;k++)(function(k){at(500+k*90,function(){typ.textContent=full.slice(0,k)})})(k);
+      var t=500+full.length*90+500;
+      at(t,function(){stat.classList.add('on')});
+      items.forEach(function(e,n){
+        at(t+600+n*1100,function(){e.classList.add('act')});
+        at(t+1300+n*1100,function(){e.classList.remove('act');e.classList.add('done');pitems[n]&&pitems[n].classList.add('done')});
+      });
+      var end=t+1300+items.length*1100;
+      at(end,function(){stat.classList.remove('on');ok.classList.add('on')});
+      at(end+5000,run);
+    }
+    run();
+  }
+  /* cartões */
+  var cards=[].slice.call(document.querySelectorAll('[data-anim]'));
+  if(reduce||!('IntersectionObserver' in window))return;
+  function typeIt(el,delay){var txt=el.dataset.full||(el.dataset.full=el.textContent);el.textContent='';el.classList.add('typing');var i=0;setTimeout(function step(){i++;el.textContent=txt.slice(0,i);if(i<txt.length)setTimeout(step,28);else el.classList.remove('typing')},delay||0)}
+  function play(c){
+    c.classList.remove('go');void c.offsetWidth;c.classList.add('go');
+    var k=c.dataset.anim;
+    if(k==='resumo'){c.querySelectorAll('.an-n').forEach(function(n){var to=+n.dataset.to,v=0;n.textContent='0';var iv=setInterval(function(){v++;n.textContent=v;if(v>=to)clearInterval(iv)},180)})}
+    if(k==='type')typeIt(c.querySelector('.an-type'),300);
+    if(k==='confirma')typeIt(c.querySelector('.an-type'),900);
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){play(e.target);io.unobserve(e.target)}})},{threshold:.6});
+  cards.forEach(function(c){io.observe(c)});
+})();
+</script>
 
 
 <footer><div class="wrap ft-one" style="display:flex;justify-content:center;text-align:center"><span>Mais um produto <a href="https://gptimob.com.br/">GPTImob</a></span></div></footer>
