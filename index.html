@@ -954,6 +954,8 @@ a.agent{text-decoration:none;color:inherit}
     padding:6px var(--pad) 18px;box-shadow:0 24px 40px -28px rgba(12,26,43,.45);
   }
   .nav.open .nav-links{display:flex}
+  .nav-links{max-height:calc(100vh - 66px);max-height:calc(100dvh - 66px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  html.nav-lock,html.nav-lock body{overflow:hidden}
   .nav-links a{padding:15px 0;font-size:17px;color:var(--ink);border-bottom:1px solid var(--line)}
   .nav-links a:last-child{border-bottom:0}
 }
@@ -2155,7 +2157,7 @@ a.agent{text-decoration:none;color:inherit}
 (function(){
   var nav=document.querySelector('.nav'),btn=nav&&nav.querySelector('.nav-tog');
   if(!btn) return;
-  function set(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o?'true':'false');btn.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');}
+  function set(o){nav.classList.toggle('open',o);document.documentElement.classList.toggle('nav-lock',o);btn.setAttribute('aria-expanded',o?'true':'false');btn.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');}
   btn.addEventListener('click',function(){set(!nav.classList.contains('open'));});
   nav.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
