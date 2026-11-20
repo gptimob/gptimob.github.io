@@ -791,6 +791,39 @@ table.ms .g{background:rgba(52,211,153,.18);color:#6EE7B7}
 table.ms .y{background:rgba(250,204,21,.16);color:#FDE047}
 table.ms .r{background:rgba(248,113,113,.18);color:#FCA5A5}
 .ms-note{margin-top:16px;color:#C9D1DD;font-size:.95rem;max-width:70ch}
+.vb div{grid-template-rows:1fr auto auto auto}
+.vb em{font:700 .72rem var(--f-mono);font-style:normal;color:var(--muted)}
+.vb em.up{color:var(--am-ink)}.vb em.lo{color:#B91C1C}
+/* teia */
+.rdr{display:grid;grid-template-columns:200px minmax(0,1fr) 300px;gap:22px;align-items:center;border:1px solid var(--nline);border-radius:22px;padding:22px;background:rgba(255,255,255,.02)}
+.rdr > *{min-width:0}
+.rdr-tabs{display:grid;gap:8px}
+.rdr-tabs button{appearance:none;text-align:left;border:1px solid var(--nline);background:transparent;color:#E2E8F0;border-radius:14px;padding:12px 14px;cursor:pointer;font:inherit;display:grid;gap:2px}
+.rdr-tabs button b{font-size:1rem}
+.rdr-tabs button span{font-size:.8rem;color:var(--nmuted)}
+.rdr-tabs button[aria-selected="true"]{border-color:#22D3EE;background:rgba(8,145,178,.18)}
+.rdr-tabs button:focus-visible{outline:2px solid #67E8F9;outline-offset:2px}
+.rdr-c{display:grid;justify-items:center;gap:6px}
+#rdr-svg{width:100%;max-width:440px;height:auto;overflow:visible}
+#rdr-svg .rg{fill:none;stroke:#2A3445;stroke-width:1}
+#rdr-svg .rl{stroke:#2A3445;stroke-width:1}
+#rdr-svg .rt2{fill:#C9D1DD;font:600 9.5px var(--f-body)}
+#rdr-svg .tm{fill:rgba(148,163,184,.12);stroke:#94A3B8;stroke-width:1.5;stroke-dasharray:4 3}
+#rdr-svg .me{fill:rgba(34,211,238,.22);stroke:#22D3EE;stroke-width:2.2;transition:all .35s ease}
+#rdr-svg .dt{fill:#67E8F9;stroke:#0B1220;stroke-width:1.5}
+.rdr-leg{display:flex;gap:16px;font-size:.8rem;color:var(--nmuted)}
+.rdr-leg i{display:inline-block;width:14px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.rdr-leg i.me{background:rgba(34,211,238,.5);border:1.5px solid #22D3EE}
+.rdr-leg i.tm{border:1.5px dashed #94A3B8}
+.rdr-k{font:600 .7rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--am-light)}
+.rdr-w{color:#fff;font-size:1rem;line-height:1.45;margin:6px 0 14px}
+.rdr-l{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.rdr-l li{display:grid;grid-template-columns:minmax(0,1fr) 54px 64px;gap:8px;align-items:center;font-size:.86rem;color:#C9D1DD}
+.rdr-l b{text-align:center;border-radius:7px;padding:2px 6px;font-weight:700}
+.rdr-l b.g{background:rgba(52,211,153,.18);color:#6EE7B7}.rdr-l b.y{background:rgba(250,204,21,.16);color:#FDE047}.rdr-l b.r{background:rgba(248,113,113,.18);color:#FCA5A5}
+.rdr-l small{font:600 .7rem var(--f-mono);color:var(--nmuted);text-align:right}
+@media(max-width:1000px){.rdr{grid-template-columns:1fr}.rdr-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}.rdr-tabs button{padding:10px;text-align:center}}
+@media(max-width:480px){.rdr{padding:16px}.rdr-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}#rdr-svg .rt2{font-size:12px}}
 /* TELAS CV CRM (reprodução ilustrativa) */
 :root{--cv-nav:#1B2440;--cv-nav2:#232E52;--cv-acc:#F26B2A;--cv-acc-bg:#FEF0E8;--cv-blue:#2F6FED;--cv-ground:#F2F4F8;--cv-line:#E0E4EC;--cv-ink:#1F2937;--cv-mute:#6B7280}
 .cv{display:grid;grid-template-columns:58px minmax(0,1fr);min-width:1000px;background:var(--cv-ground);color:var(--cv-ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:12.5px}
@@ -924,8 +957,8 @@ table.ms .r{background:rgba(248,113,113,.18);color:#FCA5A5}
     <div class="console" role="img" aria-label="Exemplo do roteiro de fechamento de locação com os primeiros passos e o dado de cada um">
       <div class="c-bar"><span>Roteiro que Fecha · locação</span><em>● Imobiliária Modelo</em></div>
       <ol class="rt">
-        <li><span class="rt-t">Até 4 h</span><div><b>Responder antes de o cliente esfriar</b><small>Chance quando passa de 4 h</small></div><em class="neg">0,6×</em></li>
-        <li class="hi"><span class="rt-t">No 1º dia</span><div><b>Propor visita com dia e horário</b><small>"Consigo te mostrar amanhã às 10h ou às 17h."</small></div><em>3,1×</em></li>
+        <li><span class="rt-t">Até 4 h</span><div><b>Responder antes de o cliente esfriar</b><small>Passou de 4 h, a chance de fechar cai</small></div><em class="neg">−40%</em></li>
+        <li class="hi"><span class="rt-t">No 1º dia</span><div><b>Propor visita com dia e horário</b><small>"Consigo te mostrar amanhã às 10h ou às 17h."</small></div><em>3× mais</em></li>
         <li><span class="rt-t">Antes da visita</span><div><b>Mandar o valor total e as garantias</b><small>Proposta sai 2 dias mais cedo</small></div><em>−2 dias</em></li>
         <li><span class="rt-t">Na retomada</span><div><b>Curta, pessoal, em 1 ou 2 dias</b><small>Respondem: curta e pessoal × "se não, encerro"</small></div><em>58% × 3%</em></li>
       </ol>
@@ -959,9 +992,9 @@ table.ms .r{background:rgba(248,113,113,.18);color:#FCA5A5}
       <p>Este é o roteiro de locação de uma imobiliária modelo. O da sua imobiliária sai das suas conversas, e pode ter outros passos.</p>
     </div>
     <ol class="steps8">
-      <li><span class="n">1</span><span class="w">Até 4 h</span><div><h3>Responder antes de o cliente esfriar</h3><p>Contando da última mensagem do cliente. Quem fechou esperou <b>29 min</b> pela 1ª resposta; quem não fechou, <b>44 min</b>.</p></div><div class="st"><b>0,6×</b><span>chance quando a resposta passa de 4 h</span></div></li>
-      <li><span class="n">2</span><span class="w">Primeiras 48 h</span><div><h3>Acompanhar o ritmo do cliente</h3><p>Responder cada mensagem em até 15 minutos enquanto o cliente estiver conversando. Quem fechou: <b>8 min</b>. Quem não fechou: <b>17 min</b>.</p></div><div class="st"><b>1,6×</b><span>chance com resposta em até 15 min</span></div></li>
-      <li class="hi"><span class="n">3</span><span class="w">No 1º dia</span><div><h3>Propor visita com dia e horário</h3><q>Consigo te mostrar amanhã às 10h ou às 17h. Qual fica melhor?</q><p>Quem fechou recebeu essa proposta em 31% das conversas; quem não fechou, em 9%. Mandar mais imóveis não fez diferença.</p></div><div class="st"><b>3,1×</b><span>chance com visita proposta em até 24 h</span></div></li>
+      <li><span class="n">1</span><span class="w">Até 4 h</span><div><h3>Responder antes de o cliente esfriar</h3><p>Contando da última mensagem do cliente. Quem fechou esperou <b>29 min</b> pela 1ª resposta; quem não fechou, <b>44 min</b>.</p></div><div class="st"><b>−40%</b><span>de chance de fechar quando a resposta passa de 4 h</span></div></li>
+      <li><span class="n">2</span><span class="w">Primeiras 48 h</span><div><h3>Acompanhar o ritmo do cliente</h3><p>Responder cada mensagem em até 15 minutos enquanto o cliente estiver conversando. Quem fechou: <b>8 min</b>. Quem não fechou: <b>17 min</b>.</p></div><div class="st"><b>+60%</b><span>de chance de fechar com resposta em até 15 min</span></div></li>
+      <li class="hi"><span class="n">3</span><span class="w">No 1º dia</span><div><h3>Propor visita com dia e horário</h3><q>Consigo te mostrar amanhã às 10h ou às 17h. Qual fica melhor?</q><p>Quem fechou recebeu essa proposta em 31% das conversas; quem não fechou, em 9%. Mandar mais imóveis não fez diferença.</p></div><div class="st"><b>3× mais</b><span>chance de fechar com visita proposta em até 24 h</span></div></li>
       <li><span class="n">4</span><span class="w">Antes da visita</span><div><h3>Mandar o valor total e as garantias</h3><q>Fica R$ 1.380 de aluguel + R$ 240 de condomínio. Aceitamos seguro fiança, caução ou fiador.</q><p>Quem recebeu o valor total antes da visita chegou à proposta mais cedo.</p></div><div class="st"><b>2 dias</b><span>a menos da visita à proposta</span></div></li>
       <li><span class="n">5</span><span class="w">No dia da visita</span><div><h3>Mandar outras opções logo depois</h3><q>Separei mais dois parecidos com o que você gostou. Posso te mostrar amanhã?</q><p>Quase metade de quem visitou e não fechou saiu com "gostei, mas quero ver outras opções".</p></div><div class="st"><b>46%</b><span>de quem visitou e não fechou queria outras opções</span></div></li>
       <li><span class="n">6</span><span class="w">Primeiras 48 h</span><div><h3>Testar um áudio curto</h3><p>Os corretores quase não mandam áudio. Entre clientes igualmente engajados, o áudio aparece mais nas conversas que fecham.</p></div><div class="st"><b>9% × 2%</b><span>conversas com áudio: fechou × não fechou</span></div></li>
@@ -994,15 +1027,15 @@ table.ms .r{background:rgba(248,113,113,.18);color:#FCA5A5}
         </tbody>
       </table></div>
       <div class="cbx">
-        <h3>Chance de fechar pela espera da 1ª resposta</h3><p class="sub">1,0× = média da imobiliária</p>
-        <div class="vb" role="img" aria-label="Chance de fechar: até 5 min 1,2×; 5 a 15 min 1,1×; 15 a 60 min 1,1×; 1 a 4 h 0,9×; mais de 4 h 0,6×">
-          <div><i style="--h:100%"></i><b>1,2×</b><span>até 5 min</span></div>
-          <div><i style="--h:92%"></i><b>1,1×</b><span>5–15 min</span></div>
-          <div><i style="--h:92%"></i><b>1,1×</b><span>15–60 min</span></div>
-          <div><i style="--h:75%"></i><b>0,9×</b><span>1–4 h</span></div>
-          <div class="low"><i style="--h:50%"></i><b>0,6×</b><span>+4 h</span></div>
+        <h3>Quantos fecham, pela espera da 1ª resposta</h3><p class="sub">De cada 100 clientes de locação · média da imobiliária: 10</p>
+        <div class="vb" role="img" aria-label="De cada 100 clientes, fecham: 12 com resposta em até 5 minutos, 11 entre 5 e 15 minutos, 11 entre 15 e 60 minutos, 9 entre 1 e 4 horas e 6 com mais de 4 horas">
+          <div><i style="--h:100%"></i><b>12</b><em class="up">+20%</em><span>até 5 min</span></div>
+          <div><i style="--h:92%"></i><b>11</b><em class="up">+10%</em><span>5–15 min</span></div>
+          <div><i style="--h:92%"></i><b>11</b><em class="up">+10%</em><span>15–60 min</span></div>
+          <div><i style="--h:75%"></i><b>9</b><em>−10%</em><span>1–4 h</span></div>
+          <div class="low"><i style="--h:50%"></i><b>6</b><em class="lo">−40%</em><span>+4 h</span></div>
         </div>
-        <p class="sub" style="margin-top:12px">O que mais pesa não é responder em 5 minutos. É não deixar o cliente para o dia seguinte.</p>
+        <p class="sub" style="margin-top:12px">Quem espera mais de 4 horas fecha <b>40% menos</b> que a média: são 6 em cada 100, contra 12 de quem é respondido em até 5 minutos. O que mais pesa não é responder em 5 minutos. É não deixar o cliente para o dia seguinte.</p>
       </div>
     </div>
   </div>
@@ -1032,18 +1065,49 @@ table.ms .r{background:rgba(248,113,113,.18);color:#FCA5A5}
     <div class="head">
       <span class="eyebrow" style="color:var(--am-light)">Todo mês</span>
       <h2>Quem cumpre cada passo. <span class="metal">Corretor por corretor.</span></h2>
-      <p>Depois do roteiro, a medição mostra se o time está seguindo e onde cada um precisa de ajuda. Exemplo com quatro passos e nomes fictícios.</p>
+      <p>Depois do roteiro, a medição mostra se o time está seguindo e onde cada um precisa de ajuda. Toque em cada corretor. Nomes e números fictícios.</p>
     </div>
-    <div class="tw dk"><table class="ms">
-      <thead><tr><th>Corretor</th><th class="n">Responde em até 4 h</th><th class="n">Visita no 1º dia</th><th class="n">Valor total antes</th><th class="n">Retoma em 2 dias</th><th class="n">Fechou</th></tr></thead>
-      <tbody>
-        <tr><td><b>Aline</b></td><td class="n"><span class="g">94%</span></td><td class="n"><span class="g">48%</span></td><td class="n"><span class="g">81%</span></td><td class="n"><span class="g">77%</span></td><td class="n"><b>11</b></td></tr>
-        <tr><td><b>Bruno</b></td><td class="n"><span class="g">89%</span></td><td class="n"><span class="y">27%</span></td><td class="n"><span class="g">70%</span></td><td class="n"><span class="y">52%</span></td><td class="n"><b>7</b></td></tr>
-        <tr><td><b>Carla</b></td><td class="n"><span class="y">71%</span></td><td class="n"><span class="r">12%</span></td><td class="n"><span class="y">55%</span></td><td class="n"><span class="g">69%</span></td><td class="n"><b>5</b></td></tr>
-        <tr><td><b>Diego</b></td><td class="n"><span class="r">58%</span></td><td class="n"><span class="r">9%</span></td><td class="n"><span class="r">31%</span></td><td class="n"><span class="r">28%</span></td><td class="n"><b>2</b></td></tr>
-      </tbody>
-    </table></div>
-    <p class="ms-note">A Carla responde bem, mas quase não propõe visita no primeiro dia. É ali que ela perde, e é ali que o gestor ajuda.</p>
+    <div class="rdr">
+      <div class="rdr-tabs" role="tablist" aria-label="Corretores">
+        <button type="button" role="tab" aria-selected="true" data-k="0"><b>Aline</b><span>11 negócios</span></button>
+        <button type="button" role="tab" aria-selected="false" data-k="1"><b>Bruno</b><span>7 negócios</span></button>
+        <button type="button" role="tab" aria-selected="false" data-k="2"><b>Carla</b><span>5 negócios</span></button>
+        <button type="button" role="tab" aria-selected="false" data-k="3"><b>Diego</b><span>2 negócios</span></button>
+      </div>
+      <div class="rdr-c">
+        <svg id="rdr-svg" viewBox="-215 -150 430 300" role="img" aria-label="Gráfico de teia: quanto das conversas do corretor cumpriu cada passo do roteiro, comparado com a média do time"></svg>
+        <div class="rdr-leg"><span><i class="me"></i>corretor</span><span><i class="tm"></i>média do time</span></div>
+      </div>
+      <div class="rdr-r">
+        <p class="rdr-k">Onde mais perde</p>
+        <p class="rdr-w" id="rdr-w"></p>
+        <ul class="rdr-l" id="rdr-l"></ul>
+      </div>
+    </div>
+    <script>
+    (function(){
+      var ax=['Responde em até 4 h','Ritmo de 15 min','Visita no 1º dia','Valor total antes','Opções após visita','Retoma em 2 dias'];
+      var D=[[94,82,48,81,63,77],[89,71,27,70,48,52],[71,64,12,55,41,69],[58,39,9,31,22,28]];
+      var W=['Responde rápido e propõe visita cedo. É o jeito que o roteiro quer espalhar pelo time.','Responde bem, mas propõe visita no 1º dia em só 27% das conversas e retoma pouco.','Responde bem, mas quase não propõe visita no 1º dia: só 12%. É ali que ela perde, e é ali que o gestor ajuda.','Fica abaixo da média em todos os passos. Começar pelo tempo de resposta e pela visita no 1º dia.'];
+      var T=ax.map(function(_,i){return Math.round((D[0][i]+D[1][i]+D[2][i]+D[3][i])/4)});
+      var R=110,n=ax.length,svg=document.getElementById('rdr-svg');if(!svg)return;
+      function pt(i,v){var a=-Math.PI/2+i*2*Math.PI/n;return [Math.cos(a)*R*v/100,Math.sin(a)*R*v/100]}
+      function poly(vals){return vals.map(function(v,i){return pt(i,v).map(function(x){return x.toFixed(1)}).join(',')}).join(' ')}
+      var g='';[25,50,75,100].forEach(function(l){g+='<polygon points="'+poly(ax.map(function(){return l}))+'" class="rg"/>'});
+      ax.forEach(function(a,i){var e=pt(i,100),t=pt(i,124);g+='<line x1="0" y1="0" x2="'+e[0]+'" y2="'+e[1]+'" class="rl"/><text x="'+t[0].toFixed(1)+'" y="'+(t[1]+4).toFixed(1)+'" text-anchor="'+(Math.abs(t[0])<8?'middle':(t[0]>0?'start':'end'))+'" class="rt2">'+a+'</text>'});
+      g+='<polygon points="'+poly(T)+'" class="tm"/><polygon id="rdr-me" class="me" points="'+poly(D[0])+'"/><g id="rdr-dots"></g>';
+      svg.innerHTML=g;
+      function show(k){
+        document.getElementById('rdr-me').setAttribute('points',poly(D[k]));
+        document.getElementById('rdr-dots').innerHTML=D[k].map(function(v,i){var p=pt(i,v);return '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="4" class="dt"/>'}).join('');
+        document.getElementById('rdr-w').textContent=W[k];
+        document.getElementById('rdr-l').innerHTML=ax.map(function(a,i){var v=D[k][i],d=v-T[i];return '<li><span>'+a+'</span><b class="'+(d>=5?'g':d<=-5?'r':'y')+'">'+v+'%</b><small>time '+T[i]+'%</small></li>'}).join('');
+        [].forEach.call(document.querySelectorAll('.rdr-tabs button'),function(b){b.setAttribute('aria-selected',b.dataset.k==k?'true':'false')});
+      }
+      [].forEach.call(document.querySelectorAll('.rdr-tabs button'),function(b){b.addEventListener('click',function(){show(+b.dataset.k)})});
+      show(2);
+    })();
+    </script>
   </div>
 </section>
 
