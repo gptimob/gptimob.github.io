@@ -744,6 +744,10 @@ a.agent{text-decoration:none;color:inherit}
   --acc:#C2410C;--acc-soft:#FFF7ED;--acc-tint:#FFEDD5;
   --acc-metal:linear-gradient(100deg,#431407 0%,#C2410C 30%,#FB923C 47%,#C2410C 62%,#431407 100%);
 }
+.show-rf{
+  --acc:#0E7490;--acc-soft:#ECFEFF;--acc-tint:#CFFAFE;
+  --acc-metal:linear-gradient(100deg,#164E63 0%,#0E7490 28%,#22D3EE 46%,#0891B2 66%,#155E75 100%);
+}
 .show-tm{
   --acc:#A16207;--acc-soft:#FEFCE8;--acc-tint:#FEF9C3;
   --acc-metal:linear-gradient(100deg,#854D0E 0%,#CA8A04 24%,#EAB308 42%,#F97316 68%,#C2410C 100%);
@@ -1026,6 +1030,7 @@ a.agent{text-decoration:none;color:inherit}
           <a href="/maquina-de-followup/"><i style="--d:#BE123C"></i><span><b>Máquina de Follow-up</b><small>Follow-up e recuperação de leads</small></span></a>
           <a href="/retencao-de-carteira/"><i style="--d:#0B6E8E"></i><span><b>Retenção de Carteira</b><small>Proprietários e inquilinos</small></span></a>
           <a href="/termometro-do-mercado/"><i style="--d:#F59E0B"></i><span><b>Termômetro do Mercado</b><small>Preço por bairro e concorrência</small></span></a>
+          <a href="/roteiro-que-fecha/"><i style="--d:#0891B2"></i><span><b>Roteiro que Fecha</b><small>O roteiro de quem fecha</small></span></a>
           <a href="/treino-de-lancamento/"><i style="--d:#A21CAF"></i><span><b>Treino de Lançamento</b><small>Roleplay por voz para corretores</small></span></a>
           <a href="/plantao-24h/"><i style="--d:#D97706"></i><span><b>Plantão 24h</b><small>Monitoramento das conversas</small></span></a>
           <a href="/dna/"><i style="--d:#059669"></i><span><b>DNA Imob</b><small>Diagnóstico da operação</small></span></a>
@@ -1195,7 +1200,7 @@ a.agent{text-decoration:none;color:inherit}
           <div class="j-body" id="ji-b4" hidden>
             <h4>O corretor começa o dia sabendo o que fazer</h4>
             <p>O assistente do corretor prepara a abordagem, organiza agenda e pipeline, registra as interações no CRM e avisa o corretor do que precisa de atenção hoje.</p>
-            <ul class="j-agents"><li><b>Assistente do corretor</b></li><li class="lk"><a href="/treino-de-lancamento/"><b>Treino de Lançamento</b><span>Roleplay por voz</span><em aria-hidden="true">&rarr;</em></a></li></ul>
+            <ul class="j-agents"><li><b>Assistente do corretor</b></li><li class="lk"><a href="/treino-de-lancamento/"><b>Treino de Lançamento</b><span>Roleplay por voz</span><em aria-hidden="true">&rarr;</em></a></li><li class="lk"><a href="/roteiro-que-fecha/"><b>Roteiro que Fecha</b><span>O roteiro de quem fecha</span><em aria-hidden="true">&rarr;</em></a></li></ul>
             <p class="j-ints"><span>Conecta com</span><em>seu CRM</em><em>Google Agenda</em></p>
             <div class="j-slot"></div>
           </div>
@@ -1712,7 +1717,56 @@ a.agent{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <div class="show show-sn noflip">
+    <div class="show show-rx show-rf noflip">
+      <div class="show-head">
+        <p class="show-kicker">Para o dono e o gestor da imobiliária</p>
+        <h3>Roteiro que Fecha</h3>
+        <p class="show-line">O jeito de quem fecha vira o jeito do time: o roteiro de atendimento tirado das conversas da sua imobiliária, com o dado que prova cada passo.</p>
+      </div>
+      <div class="show-vis">
+        <div class="car car-dna car-sn" data-car>
+          <div class="car-track" tabindex="0" aria-label="Telas do Roteiro que Fecha">
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Roteiro que Fecha · Imobiliária Modelo</span></div><div class="shot"><img src="/roteiro-que-fecha/img/1.jpg" alt="Roteiro que Fecha: O que o corretor que fecha faz diferente?" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">01</span><span><b>O que o corretor que fecha faz diferente?</b> O roteiro do time, tirado das conversas de quem fechou e de quem não fechou.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Roteiro que Fecha · Imobiliária Modelo</span></div><div class="shot"><img src="/roteiro-que-fecha/img/2.jpg" alt="Roteiro que Fecha: Oito passos, em ordem" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">02</span><span><b>Oito passos, em ordem</b> Cada passo com o momento certo, a mensagem modelo e o dado que prova.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Roteiro que Fecha · Imobiliária Modelo</span></div><div class="shot"><img src="/roteiro-que-fecha/img/3.jpg" alt="Roteiro que Fecha: Quem fechou × quem não fechou" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">03</span><span><b>Quem fechou × quem não fechou</b> A diferença que aparece nas conversas da casa vira passo do roteiro.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Roteiro que Fecha · Imobiliária Modelo</span></div><div class="shot"><img src="/roteiro-que-fecha/img/4.jpg" alt="Roteiro que Fecha: O que o time recebe" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">04</span><span><b>O que o time recebe</b> Roteiro por setor, mensagens prontas, cola, apresentação, treino e medição.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Roteiro que Fecha · Imobiliária Modelo</span></div><div class="shot"><img src="/roteiro-que-fecha/img/5.jpg" alt="Roteiro que Fecha: Medição corretor por corretor" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">05</span><span><b>Medição corretor por corretor</b> O gráfico de teia mostra em que passo cada corretor perde.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Roteiro que Fecha · Imobiliária Modelo</span></div><div class="shot"><img src="/roteiro-que-fecha/img/6.jpg" alt="Roteiro que Fecha: Em duas semanas" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">06</span><span><b>Em duas semanas</b> Doze meses de conversas viram o roteiro e a apresentação ao time.</span></figcaption>
+            </figure>
+          </div>
+          <div class="car-nav">
+            <button class="car-btn car-prev" type="button" aria-label="Tela anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="car-dots" role="tablist" aria-label="Telas do Roteiro que Fecha"></div>
+            <button class="car-btn car-next" type="button" aria-label="Próxima tela"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="show-rest">
+        <ul class="chips"><li>Conversas da sua casa</li><li>Passo a passo</li><li>Medição mensal</li></ul>
+        <div class="show-cta">
+          <a class="btn btn-acc btn-sm" href="/roteiro-que-fecha/">Conhecer o Roteiro que Fecha <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="show show-sn flip">
       <div class="show-head">
         <p class="show-kicker">Para a gestão</p>
         <h3>Plantão 24h</h3>
@@ -1765,7 +1819,7 @@ a.agent{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <div class="show show-dna flip">
+    <div class="show show-dna noflip">
       <div class="show-head">
         <p class="show-kicker">Para a diretoria</p>
         <h3>DNA Imob</h3>
@@ -2095,6 +2149,7 @@ a.agent{text-decoration:none;color:inherit}
           <li><a href="/maquina-de-followup/">Máquina de Follow-up</a></li>
           <li><a href="/retencao-de-carteira/">Retenção de Carteira</a></li>
           <li><a href="/termometro-do-mercado/">Termômetro do Mercado</a></li>
+          <li><a href="/roteiro-que-fecha/">Roteiro que Fecha</a></li>
           <li><a href="/treino-de-lancamento/">Treino de Lançamento</a></li>
           <li><a href="/primeira-hora/">Primeira Hora</a></li>
           <li><a href="/imersao/">Imers&atilde;o de implanta&ccedil;&atilde;o</a></li>
