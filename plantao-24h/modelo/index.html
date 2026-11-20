@@ -201,6 +201,41 @@ td b{font-weight:700}
 .bars.wide .bar{grid-template-columns:minmax(0,240px) minmax(0,1fr) 54px}
 @media(max-width:560px){.bars.wide .bar{grid-template-columns:minmax(0,1fr) 70px 44px}}
 @media(max-width:760px){.alc{grid-template-columns:1fr}.alc .st{grid-column:1;grid-row:auto;border-left:0;border-top:1px dashed var(--line);padding:10px 0 0}.wkb{gap:6px}}
+
+/* menu lateral, no padrão do DNA Imob */
+.side{position:fixed;left:0;top:0;bottom:0;width:260px;z-index:70;background:var(--night);color:var(--ntext);border-right:1px solid var(--nline);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.side-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:20px 14px 14px 20px;border-bottom:1px solid var(--nline)}
+.side-t{font:700 15px/1.15 var(--f-display);color:#fff}
+.side-t small{display:block;margin-top:5px;font:600 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--nmuted)}
+.side-x{appearance:none;border:0;background:none;color:var(--nmuted);width:36px;height:36px;border-radius:8px;display:none;place-items:center;cursor:pointer;flex:none}
+.side-x:hover{background:rgba(255,255,255,.06);color:#fff}
+.side-x svg,.menu-btn svg{width:20px;height:20px}
+.side .tabs{display:flex;flex-direction:column;gap:2px;overflow-y:auto;padding:10px 10px 24px;counter-reset:tb;scrollbar-width:thin}
+.side .tab{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;color:var(--nmuted);text-decoration:none;font:500 14px/1.3 var(--f-body);counter-increment:tb}
+.side .tab::before{content:counter(tb,decimal-leading-zero);font:600 11px var(--f-mono);color:var(--nmuted);opacity:.7;width:20px;flex:none}
+.side .tab:hover{background:rgba(255,255,255,.05);color:#fff}
+.side .tab.on{background:rgba(255,255,255,.08);color:#fff;box-shadow:inset 3px 0 0 var(--am)}
+.side .tab.on::before{color:var(--am);opacity:1}
+.side .tab:focus-visible,.side-x:focus-visible,.menu-btn:focus-visible{outline:2px solid var(--am);outline-offset:2px}
+.side-bg{display:none}
+.menu-btn{display:none}
+@media(min-width:1100px){
+  body{padding-left:260px}
+  .getbar{left:260px}
+}
+@media(max-width:1099px){
+  .side{width:min(86vw,300px);transform:translateX(-100%);transition:transform .25s ease;box-shadow:0 0 40px rgba(0,0,0,.35)}
+  .side-x{display:grid}
+  html.side-on .side{transform:none}
+  .side-bg{display:block;position:fixed;inset:0;z-index:65;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s}
+  html.side-on .side-bg{opacity:1;pointer-events:auto}
+  html.side-on,html.side-on body{overflow:hidden}
+  .menu-btn{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;width:100%;appearance:none;border:0;border-bottom:1px solid var(--line);background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px max(16px,env(safe-area-inset-left,0px));font:600 14px var(--f-body);color:var(--ink);cursor:pointer;text-align:left}
+  .menu-btn span{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--am-ink)}
+  .menu-btn b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+}
+@media(prefers-reduced-motion:reduce){.side,.side-bg{transition:none}}
+@media print{.side,.menu-btn,.side-bg{display:none}body{padding-left:0}}
 </style>
 </head>
 <body>
@@ -234,9 +269,9 @@ td b{font-weight:700}
   </div>
 </header>
 
-<nav class="toc" aria-label="Seções do relatório"><div class="wrap">
-  <a href="#alertas">1 · Alertas do dia</a><a href="#setores">2 · Mapa do atendimento</a><a href="#sem-dono">3 · Sem dono</a><a href="#prazos">4 · Prazos</a><a href="#semana">5 · A semana</a><a href="#assuntos">6 · Assuntos</a><a href="#hoje">7 · Para hoje</a><a href="#notas">Como é feito</a>
-</div></nav>
+<button class="menu-btn" type="button" aria-controls="side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Seções</span><b id="cur">Alertas do dia</b></button>
+<aside class="side" id="side" aria-label="Seções do relatório"><div class="side-head"><span class="side-t">Plantão 24h<small>Imobiliária Modelo · 19 de novembro</small></span><button class="side-x" type="button" aria-label="Fechar menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><nav class="tabs"><a class="tab" href="#alertas">Alertas do dia</a><a class="tab" href="#setores">Mapa do atendimento</a><a class="tab" href="#sem-dono">Sem dono</a><a class="tab" href="#prazos">Prazos</a><a class="tab" href="#semana">A semana</a><a class="tab" href="#assuntos">Assuntos</a><a class="tab" href="#hoje">Para hoje</a><a class="tab" href="#notas">Como é feito</a></nav></aside>
+<div class="side-bg" aria-hidden="true"></div>
 
 <main class="wrap">
 
@@ -329,5 +364,22 @@ td b{font-weight:700}
 <p class="foot">Plantão 24h · relatório de exemplo com imobiliária, pessoas e números fictícios · <a href="https://gptimob.com.br/plantao-24h/">GPTImob</a></p>
 </main>
 <div class="getbar" role="region" aria-label="Quero na minha imobiliária"><div class="gb-in"><div class="gb-txt"><b>Quer o Plantão na sua imobiliária?</b><span>Todas as conversas lidas a cada hora · relatório todo dia às 7h30</span></div><a class="gb-btn" href="https://wa.me/5554999166672?text=Ol%C3%A1%2C%20Rafael%21%20Vi%20o%20relat%C3%B3rio%20modelo%20do%20Plant%C3%A3o%2024h%20e%20quero%20na%20minha%20imobili%C3%A1ria.%0A%0AImobili%C3%A1ria%3A%20%0ACidade%3A%20" target="_blank" rel="noopener">Quero na minha imobiliária</a></div></div>
+<script>
+(function(){
+  var root=document.documentElement,side=document.getElementById('side'),btn=document.querySelector('.menu-btn'),cur=document.getElementById('cur');
+  if(!side)return;
+  var tabs=[].slice.call(side.querySelectorAll('.tab'));
+  function set(o){root.classList.toggle('side-on',o);btn.setAttribute('aria-expanded',o?'true':'false');}
+  btn.addEventListener('click',function(){set(!root.classList.contains('side-on'))});
+  side.querySelector('.side-x').addEventListener('click',function(){set(false)});
+  document.querySelector('.side-bg').addEventListener('click',function(){set(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+  tabs.forEach(function(t){t.addEventListener('click',function(){set(false)})});
+  function mark(id){tabs.forEach(function(t){var on=t.getAttribute('href')==='#'+id;t.classList.toggle('on',on);if(on){t.setAttribute('aria-current','true');if(cur)cur.textContent=t.textContent;}else t.removeAttribute('aria-current')})}
+  var secs=tabs.map(function(t){return document.getElementById(t.getAttribute('href').slice(1))}).filter(Boolean);
+  function onScroll(){var y=window.innerHeight*0.3,id=secs[0]&&secs[0].id;secs.forEach(function(s){if(s.getBoundingClientRect().top<y)id=s.id});if(id)mark(id)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
 </body>
 </html>
