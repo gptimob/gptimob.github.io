@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Relatório modelo do Termômetro do Mercado | GPTImob</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Exemplo do relatório mensal do Termômetro do Mercado: preço por bairro, a carteira da imobiliária comparada com o mercado, quem anuncia mais, tempo no ar, movimentos do mês e plano de ação. Números fictícios.">
+<meta name="theme-color" content="#14100A">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FDE047'/%3E%3Cstop offset='.5' stop-color='%23F59E0B'/%3E%3Cstop offset='1' stop-color='%23EA580C'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M37 38V16a5 5 0 0 0-10 0v22a9 9 0 1 0 10 0z' fill='none' stroke='%23241300' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Relatório mensal impresso na tela: capa escura com o degradê de fogo, depois folhas claras numeradas. Cores fixas (documento), tons quentes = acima do mercado, frios = abaixo. */
+:root{
+  color-scheme:light;
+  --paper:#FFFDF8; --page:#F6F2EA; --ink:#1C1710; --ink2:#4A4336; --muted:#6F6656; --faint:#9A907E; --line:#E8E0D0; --tint:#FBF6EC;
+  --night:#14100A; --night2:#1E180F; --nline:#3A3020; --ntext:#F3EBDD; --nmuted:#C9BFAE;
+  --am:#F59E0B; --am-ink:#B45309; --am-soft:#FEF3C7; --or:#EA580C; --hot:#DC2626; --cold:#0284C7; --ok:#15803D;
+  --fire:linear-gradient(100deg,#FACC15 0%,#F59E0B 45%,#F97316 100%);
+  --f-display:'Inter Tight',Arial,sans-serif; --f-body:'Instrument Sans',Arial,sans-serif; --f-mono:'IBM Plex Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font:400 16px/1.55 var(--f-body);padding-bottom:84px}
+h1,h2,h3,h4{font-family:var(--f-display);margin:0;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sample{background:#FEF3C7;color:#78350F;font-size:.84rem;text-align:center;padding:8px 16px}
+
+/* capa */
+.cover{background:radial-gradient(700px 360px at 85% 0%,rgba(249,115,22,.35),transparent 70%),radial-gradient(600px 300px at 0% 100%,rgba(250,204,21,.18),transparent 70%),var(--night);color:var(--ntext);padding-block:44px 40px}
+.cv-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;font:600 .72rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--nmuted)}
+.cv-brand{display:flex;gap:10px;align-items:center;color:#fff}
+.cv-brand i{width:30px;height:30px;border-radius:9px;background:var(--fire);display:grid;place-items:center}
+.cover h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.02;margin-top:28px;color:#fff}
+.cover h1 span{background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cv-sub{margin-top:12px;color:var(--nmuted);max-width:62ch}
+.cv-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.cv-meta span{font:600 .74rem var(--f-mono);border:1px solid var(--nline);border-radius:999px;padding:6px 12px;color:var(--ntext);background:rgba(255,255,255,.03)}
+.five{margin-top:30px;display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+.five > *{min-width:0}
+.box-n{border:1px solid var(--nline);background:rgba(255,255,255,.035);border-radius:20px;padding:22px}
+.box-n h2{font-size:1.05rem;color:#fff;margin-bottom:12px}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:l}
+.lines li{counter-increment:l;display:grid;grid-template-columns:28px 1fr;gap:10px;color:var(--ntext);font-size:.97rem}
+.lines li::before{content:counter(l);width:24px;height:24px;border-radius:7px;background:var(--fire);color:#241300;font:700 .8rem var(--f-display);display:grid;place-items:center;margin-top:1px}
+.lines b{color:#fff}
+.gauge{display:grid;gap:14px}
+.g-bar{position:relative;height:16px;border-radius:999px;background:linear-gradient(90deg,#38BDF8,#34D399 38%,#FACC15 60%,#F97316 80%,#DC2626)}
+.g-bar i{position:absolute;top:-7px;width:7px;height:30px;margin-left:-3.5px;border-radius:4px;background:#fff;box-shadow:0 0 0 2px var(--night),0 0 16px rgba(255,255,255,.7)}
+.g-l{display:flex;justify-content:space-between;font:600 .66rem var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--nmuted)}
+.g-k{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.g-k div{border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid var(--nline)}
+.g-k b{display:block;font:800 1.5rem/1 var(--f-display)}
+.g-k span{font-size:.8rem;color:var(--nmuted)}
+.g-k .h b{color:#FB923C}.g-k .m b{color:#FDE047}.g-k .c b{color:#7DD3FC}
+
+/* índice */
+.toc{position:sticky;top:0;z-index:20;background:rgba(246,242,234,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.toc a{flex:none;font:600 .82rem var(--f-body);color:var(--ink2);text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);white-space:nowrap}
+.toc a:hover{border-color:var(--am)}
+
+/* folhas */
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:30px;margin-top:22px;scroll-margin-top:70px}
+.sh-h{display:grid;gap:6px;margin-bottom:22px}
+.sh-n{font:600 .7rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--am-ink)}
+.sh-h h2{font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.1}
+.sh-h p{color:var(--muted);max-width:70ch}
+.take{margin-top:18px;background:var(--tint);border-left:4px solid var(--am);border-radius:12px;padding:14px 16px;color:var(--ink2);font-size:.95rem}
+.take b{color:var(--ink)}
+.take a,.foot a{color:var(--am-ink);font-weight:600}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.grid2 > *{min-width:0}
+.card{border:1px solid var(--line);border-radius:18px;padding:20px;background:#fff;min-width:0}
+.card h3{font-size:1.05rem;margin-bottom:4px}
+.card .sub{font-size:.85rem;color:var(--muted);margin-bottom:14px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--tint);border-radius:14px;padding:14px 16px}
+.kpi span{font:600 .66rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.kpi b{display:block;font:800 1.55rem/1.1 var(--f-display);margin-top:4px}
+.kpi small{font-size:.8rem;color:var(--muted)}
+.up{color:var(--or)}.dn{color:var(--cold)}
+
+/* tabelas */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:.9rem;color:inherit}
+th{font:600 .66rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint);text-align:left;padding:11px 12px;background:var(--tint);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td b{font-weight:700}
+.heat{display:inline-block;min-width:58px;text-align:center;border-radius:7px;padding:3px 8px;font-weight:700;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font:700 .72rem var(--f-mono);border-radius:999px;padding:3px 9px}
+.pill.h{background:#FFEDD5;color:#9A3412}.pill.x{background:#FEE2E2;color:#991B1B}
+
+/* barras */
+.bars{display:grid;gap:9px}
+.bar{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) 64px;gap:10px;align-items:center;font-size:.88rem}
+.bar > span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar i{height:12px;border-radius:999px;background:#EFE8DA;position:relative;overflow:hidden}
+.bar i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);border-radius:999px;background:var(--c,#B9AE9A)}
+.bar b{text-align:right;font-variant-numeric:tabular-nums}
+.bar b small{display:block;font:600 .68rem var(--f-mono);color:var(--muted)}
+.bar.you{font-weight:700}.bar.you i::after{background:var(--fire)}
+.pair{display:grid;gap:12px}
+.pr{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:10px;align-items:center;font-size:.88rem}
+.pr div{display:grid;gap:4px}
+.pr i{height:10px;border-radius:999px;display:block}
+.pr i.y{background:var(--fire)}.pr i.c{background:#B9AE9A}
+.pr em{font-style:normal;font:600 .7rem var(--f-mono);color:var(--muted)}
+.leg{display:flex;gap:14px;font-size:.8rem;color:var(--muted);margin-top:12px;flex-wrap:wrap}
+.leg i{display:inline-block;width:12px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+
+/* movimentos e plano */
+.mv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.mv div{border-radius:16px;padding:16px;border:1px solid var(--line);background:#fff}
+.mv b{display:block;font:800 2rem/1 var(--f-display)}
+.mv span{font-size:.86rem;color:var(--muted)}
+.plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.act{border:1px solid var(--line);border-radius:18px;padding:20px;background:#fff;display:grid;gap:8px;align-content:start;position:relative;overflow:hidden}
+.act::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--fire)}
+.act .who{font:600 .68rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--am-ink)}
+.act h3{font-size:1.08rem}
+.act p{font-size:.92rem;color:var(--ink2)}
+.act .why{font-size:.84rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.notes{font-size:.88rem;color:var(--muted);display:grid;gap:8px}
+.notes b{color:var(--ink2)}
+.foot{color:var(--faint);font-size:.8rem;text-align:center;padding-block:28px}
+
+/* barra de ação */
+.getbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,253,248,.88);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-top:1px solid var(--line);box-shadow:0 -10px 30px rgba(60,40,10,.08);padding-bottom:env(safe-area-inset-bottom,0px)}
+.gb-in{max-width:780px;margin:0 auto;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:10px 18px;align-items:center;justify-content:space-between}
+.gb-txt{display:grid;gap:2px;min-width:0;flex:1 1 auto}
+.gb-txt b{font-size:1rem;line-height:1.25}
+.gb-txt span{font-size:.84rem;color:var(--muted)}
+.gb-btn{flex:none;background:var(--fire);color:#241300;text-decoration:none;font-weight:700;font-size:.95rem;padding:12px 22px;border-radius:999px;box-shadow:0 8px 20px rgba(249,115,22,.35);white-space:nowrap}
+.gb-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+@media(max-width:860px){.five,.grid2,.plan{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.sheet{padding:20px 16px;border-radius:18px}.mv{grid-template-columns:1fr}.bar{grid-template-columns:minmax(0,110px) minmax(0,1fr) 54px}.gb-txt span{display:none}.gb-txt b{font-size:.9rem}.g-k b{font-size:1.2rem}}
+@media print{.toc,.getbar,.sample{display:none}body{padding:0}}
+</style>
+</head>
+<body>
+<p class="sample">Relatório de exemplo · cidade, imobiliárias e números fictícios</p>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="cv-top"><span class="cv-brand"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#241300" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg></i>Termômetro do Mercado</span><span>Relatório de novembro · 2026</span></div>
+    <h1>Imobiliária Modelo<br><span>o mercado de novembro.</span></h1>
+    <p class="cv-sub">A leitura dos anúncios de venda e locação da Cidade Modelo, comparada com a sua carteira. Coleta semanal de 3 a 28 de novembro.</p>
+    <div class="cv-meta"><span>2.410 anúncios de venda</span><span>1.186 de locação</span><span>4 portais + 12 sites</span><span>131 imóveis seus à venda</span></div>
+    <div class="five">
+      <div class="box-n"><h2>O mês em cinco linhas</h2>
+        <ol class="lines">
+          <li><span><b>38 imóveis seus estão mais de 10% acima do bairro.</b> Ficam no ar, em média, 96 dias. Os que estão no preço, 44.</span></li>
+          <li><span>A <b>Imobiliária Horizonte</b> colocou <b>31 anúncios novos</b>, 18 deles no Boqueirão. É quem mais cresceu na cidade.</span></li>
+          <li><span><b>Santa Marta</b> é o bairro que mais gira: 29 dias no ar. Você tem 2 dos 118 imóveis de lá.</span></li>
+          <li><span><b>212 imóveis baixaram o preço</b> na cidade, 6% em média. 14 são parecidos com imóveis seus.</span></li>
+          <li><span>O metro quadrado da cidade subiu <b>0,8%</b> no mês, puxado por Santa Marta e Boqueirão.</span></li>
+        </ol>
+      </div>
+      <div class="box-n gauge" role="img" aria-label="Termômetro da carteira: 38 imóveis acima do bairro, 71 no preço e 22 abaixo">
+        <h2>Termômetro da sua carteira · venda</h2>
+        <div class="g-bar"><i style="left:66%"></i></div>
+        <div class="g-l"><span>abaixo</span><span>no preço</span><span>acima</span></div>
+        <div class="g-k"><div class="c"><b>22</b><span>abaixo do bairro</span></div><div class="m"><b>71</b><span>no preço (±10%)</span></div><div class="h"><b>38</b><span>acima do bairro</span></div></div>
+        <p style="color:var(--nmuted);font-size:.86rem">Sua carteira está, na mediana, <b style="color:#FDBA74">7% acima</b> dos imóveis parecidos do mesmo bairro. Em outubro, 5%.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Seções do relatório"><div class="wrap">
+  <a href="#carteira">1 · Sua carteira</a><a href="#bairros">2 · Preço por bairro</a><a href="#quem">3 · Quem anuncia</a><a href="#mix">4 · Onde captar</a><a href="#mov">5 · Movimentos</a><a href="#loc">6 · Locação</a><a href="#plano">7 · Plano do mês</a><a href="#notas">Como é feito</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="sheet" id="carteira">
+  <div class="sh-h"><span class="sh-n">1 · Sua carteira × o bairro</span><h2>Os imóveis mais longe do preço do bairro</h2><p>Cada imóvel seu comparado com os anúncios parecidos do mesmo bairro: mesmo tipo, quartos e área próxima. Ordenados pela diferença.</p></div>
+  <div class="kpis">
+    <div class="kpi"><span>Acima do bairro</span><b class="up">38</b><small>mais de 10% acima</small></div>
+    <div class="kpi"><span>Dias no ar · acima</span><b>96</b><small>mediana</small></div>
+    <div class="kpi"><span>Dias no ar · no preço</span><b>44</b><small>mediana</small></div>
+    <div class="kpi"><span>Abaixo do bairro</span><b class="dn">22</b><small>mais de 10% abaixo</small></div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Imóvel</th><th>Bairro</th><th>Tipo</th><th class="n">Seu preço</th><th class="n">Mediana parecidos</th><th class="n">Diferença</th><th class="n">No ar</th></tr></thead>
+    <tbody id="t-acima"></tbody>
+  </table></div>
+  <p class="take">Os 8 imóveis da lista estão há <b>90 dias no ar</b>, em mediana. Com a régua do bairro na mão, cada um vira uma conversa de ajuste com o proprietário. A <a href="https://gptimob.com.br/retencao-de-carteira/">Retenção de Carteira</a> faz esse contato automaticamente.</p>
+</section>
+
+<section class="sheet" id="bairros">
+  <div class="sh-h"><span class="sh-n">2 · Preço por bairro · venda</span><h2>Quanto custa e quanto tempo leva, bairro a bairro</h2><p>Preço pedido, em mediana, de todos os anúncios ativos de venda. Cor da variação: laranja subiu, azul caiu. Cor do tempo no ar: quanto mais quente, mais rápido o bairro gira.</p></div>
+  <div class="tw"><table>
+    <thead><tr><th>Bairro</th><th class="n">Anúncios</th><th class="n">Preço mediano</th><th class="n">m²</th><th class="n">Variação no mês</th><th class="n">Dias no ar</th><th class="n">Seus imóveis</th><th class="n">Você × bairro</th></tr></thead>
+    <tbody id="t-bairros"></tbody>
+  </table></div>
+  <p class="take"><b>Vila Nova e Cidade Nova</b> são onde a sua carteira está mais cara (14% e 11% acima) e estão entre os bairros que giram mais devagar. É a combinação que mais segura imóvel parado.</p>
+</section>
+
+<section class="sheet" id="quem">
+  <div class="sh-h"><span class="sh-n">3 · Quem anuncia</span><h2>A fatia de cada imobiliária na cidade</h2><p>Anúncios únicos de venda: o mesmo imóvel em vários portais conta uma vez. Ao lado, quantos anúncios cada uma ganhou ou perdeu no mês.</p></div>
+  <div class="grid2">
+    <div class="card"><h3>Cidade · venda</h3><p class="sub">2.410 anúncios únicos</p><div class="bars" id="b-quem"></div></div>
+    <div class="card"><h3>Quem mais cresceu no mês</h3><p class="sub">saldo de anúncios: novos menos os que saíram</p><div class="bars" id="b-cresceu"></div>
+      <p class="take" style="margin-top:14px">A Horizonte cresceu concentrada: <b>18 dos 31</b> anúncios novos são casas de 3 dormitórios no Boqueirão.</p></div>
+  </div>
+</section>
+
+<section class="sheet" id="mix">
+  <div class="sh-h"><span class="sh-n">4 · Sua carteira × a cidade</span><h2>Onde falta imóvel para captar</h2><p>O tipo de imóvel da sua carteira comparado com o que está anunciado na cidade. E os bairros que giram rápido onde você tem pouco.</p></div>
+  <div class="grid2">
+    <div class="card"><h3>Mix por tipo de imóvel</h3><p class="sub">% dos anúncios de venda</p><div class="pair" id="p-mix"></div>
+      <div class="leg"><span><i style="background:var(--fire)"></i>Sua carteira</span><span><i style="background:#B9AE9A"></i>Cidade</span></div></div>
+    <div class="card"><h3>Oportunidades de captação</h3><p class="sub">bairro gira rápido e a sua fatia é pequena</p>
+      <div class="tw"><table><thead><tr><th>Bairro · tipo</th><th class="n">Dias no ar</th><th class="n">Sua fatia</th></tr></thead><tbody id="t-op"></tbody></table></div></div>
+  </div>
+  <p class="take">A sua carteira tem <b>34% de apartamentos de 2 dormitórios</b>, contra 27% da cidade, e pouca casa e terreno. As três oportunidades da direita são casas e apartamentos em bairros que vendem em até 41 dias.</p>
+</section>
+
+<section class="sheet" id="mov">
+  <div class="sh-h"><span class="sh-n">5 · Movimentos do mês</span><h2>O que entrou, o que saiu e o que baixou</h2><p>Comparação entre a primeira e a última coleta do mês.</p></div>
+  <div class="mv"><div><b>386</b><span>anúncios novos de venda</span></div><div><b>341</b><span>saíram do ar · prováveis vendidos ou pausados</span></div><div><b class="dn">212</b><span>baixaram o preço · 6% em média</span></div></div>
+  <div class="card"><h3>Baixaram o preço e são parecidos com imóveis seus</h3><p class="sub">mesmo bairro, tipo e faixa de área · concorrência direta</p>
+    <div class="tw"><table><thead><tr><th>Bairro</th><th>Tipo</th><th class="n">Antes</th><th class="n">Agora</th><th class="n">Queda</th><th>Anunciante</th></tr></thead><tbody id="t-baixou"></tbody></table></div></div>
+  <p class="take">No Centro, dois apartamentos de 2 dormitórios parecidos com o seu V-2187 baixaram para <b>R$ 279 mil e R$ 285 mil</b>. O seu está anunciado por R$ 320 mil.</p>
+</section>
+
+<section class="sheet" id="loc">
+  <div class="sh-h"><span class="sh-n">6 · Locação</span><h2>O aluguel bairro a bairro</h2><p>Aluguel pedido, em mediana, dos anúncios ativos. Sem condomínio.</p></div>
+  <div class="kpis">
+    <div class="kpi"><span>Anúncios ativos</span><b>1.186</b><small>−3% no mês</small></div>
+    <div class="kpi"><span>Aluguel mediano</span><b>R$ 1.650</b><small><span class="up">+1,1%</span> no mês</small></div>
+    <div class="kpi"><span>Dias vago no ar</span><b>23</b><small>mediana da cidade</small></div>
+    <div class="kpi"><span>Sua fatia</span><b>9,4%</b><small>112 imóveis</small></div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Bairro</th><th class="n">Anúncios</th><th class="n">Aluguel mediano</th><th class="n">m²</th><th class="n">Variação</th><th class="n">Dias vago</th><th class="n">Você × bairro</th></tr></thead>
+    <tbody id="t-loc"></tbody>
+  </table></div>
+  <p class="take">Na locação, o seu preço está alinhado com o mercado. O ponto de atenção é <b>Vila Nova</b>: 34 dias vago no ar, contra 23 da cidade.</p>
+</section>
+
+<section class="sheet" id="plano">
+  <div class="sh-h"><span class="sh-n">7 · Plano do mês</span><h2>Quatro ações para dezembro</h2><p>O que o relatório sugere fazer, em ordem de impacto.</p></div>
+  <div class="plan">
+    <div class="act"><span class="who">Captação · gestor de venda</span><h3>Conversar com os proprietários dos 8 imóveis mais acima</h3><p>Levar a régua do bairro de cada um. Começar pelo V-2034, na Vila Nova: 21% acima e 118 dias no ar.</p><p class="why">Imóvel no preço fica 44 dias no ar. Acima do bairro, 96.</p></div>
+    <div class="act"><span class="who">Captação · time</span><h3>Campanha de captação de casas no Boqueirão e na Santa Marta</h3><p>São os bairros que mais giram, e a sua fatia é de 4% e 2%. A Horizonte já está ocupando o Boqueirão.</p><p class="why">Casas de 3 dormitórios no Boqueirão: 33 dias no ar.</p></div>
+    <div class="act"><span class="who">Proprietário · V-2187</span><h3>Mostrar os dois concorrentes que baixaram o preço</h3><p>Dois apartamentos parecidos, no mesmo bairro, agora por R$ 279 mil e R$ 285 mil. O seu está em R$ 320 mil.</p><p class="why">Concorrência direta na mesma rua de busca do cliente.</p></div>
+    <div class="act"><span class="who">Reunião do time</span><h3>Abrir a reunião com as cinco linhas do mês</h3><p>Quem cresceu, onde a carteira está cara e onde captar. Uma página para alinhar o time inteiro.</p><p class="why">O próximo relatório mostra se a carteira esfriou.</p></div>
+  </div>
+</section>
+
+<section class="sheet" id="notas">
+  <div class="sh-h"><span class="sh-n">Como é feito</span><h2>De onde vêm os números</h2></div>
+  <div class="notes">
+    <p><b>Fontes.</b> Anúncios públicos de venda e locação em 4 portais imobiliários e nos sites de 12 imobiliárias da cidade, coletados toda semana. A sua carteira vem do arquivo que o seu CRM gera para os portais.</p>
+    <p><b>Preço pedido.</b> Os valores são o preço anunciado, não o de fechamento.</p>
+    <p><b>Mediana.</b> Todas as contas usam a mediana, para um anúncio fora da realidade não distorcer o bairro. Bairros com menos de 10 anúncios parecidos são agrupados com os vizinhos.</p>
+    <p><b>Imóveis parecidos.</b> Mesmo bairro, tipo e número de quartos, com área de até 20% para mais ou para menos.</p>
+    <p><b>"Saiu do ar".</b> O anúncio não apareceu mais nas coletas. Pode ter sido vendido, alugado ou pausado. É um sinal do mercado, não venda confirmada.</p>
+  </div>
+</section>
+
+<p class="foot">Termômetro do Mercado · relatório de exemplo com cidade, imobiliárias e números fictícios · <a href="https://gptimob.com.br/termometro-do-mercado/">GPTImob</a></p>
+</main>
+
+<div class="getbar" role="region" aria-label="Quero na minha imobiliária"><div class="gb-in"><div class="gb-txt"><b>Quer este relatório da sua cidade?</b><span>Montado com os anúncios da sua cidade e a sua carteira · todo mês</span></div><a class="gb-btn" href="https://wa.me/5554999166672?text=Ol%C3%A1%2C%20Rafael%21%20Vi%20o%20relat%C3%B3rio%20modelo%20do%20Term%C3%B4metro%20do%20Mercado%20e%20quero%20o%20da%20minha%20cidade.%0A%0AImobili%C3%A1ria%3A%20%0ACidade%3A%20" target="_blank" rel="noopener">Quero na minha imobiliária</a></div></div>
+
+<script>
+(function(){
+  var brl=function(v){return 'R$ '+(v>=1000?(v/1000).toLocaleString('pt-BR',{minimumFractionDigits:v%1000?2:0,maximumFractionDigits:2})+' mi':v+' mil')};
+  var pc=function(v){return (v>0?'+':v<0?'−':'')+Math.abs(v).toLocaleString('pt-BR',{maximumFractionDigits:1})+'%'};
+  function heatVar(v){var a=Math.min(Math.abs(v)/3.5,1);return v>0?'background:rgba(249,115,22,'+(.12+a*.45)+');color:#7C2D12':v<0?'background:rgba(2,132,199,'+(.10+a*.35)+');color:#0C4A6E':'background:#F1ECE2;color:#6F6656'}
+  function heatDays(d){var a=Math.max(0,Math.min((75-d)/46,1));return 'background:rgba(245,158,11,'+(.08+a*.55)+');color:'+(a>.5?'#7C2D12':'#4A4336')}
+  function heatYou(v){if(v===null)return 'background:#F1ECE2;color:#9A907E';var a=Math.min(Math.abs(v)/15,1);return v>0?'background:rgba(220,38,38,'+(.08+a*.35)+');color:#7F1D1D':'background:rgba(2,132,199,'+(.08+a*.3)+');color:#0C4A6E'}
+  function rows(id,html){document.getElementById(id).innerHTML=html}
+
+  var acima=[['V-2034','Vila Nova','Casa 3 dorm. · 140 m²',490,405,118],['V-1988','Cidade Nova','Casa 2 dorm. · 92 m²',290,248,133],['V-2266','Centro','Sala comercial · 48 m²',240,205,79],['V-2240','Vila Nova','Apto 2 dorm. · 61 m²',255,220,87],['V-2155','Petrópolis','Cobertura · 210 m²',1250,1090,101],['V-2291','Centro','Apto 3 dorm. · 96 m²',560,495,92],['V-2302','Jardim América','Apto 3 dorm. · 118 m²',890,790,65],['V-2187','Centro','Apto 2 dorm. · 68 m²',320,285,74]];
+  rows('t-acima',acima.map(function(r){var d=Math.round((r[3]/r[4]-1)*100);return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td>'+r[2]+'</td><td class="n"><b>'+brl(r[3])+'</b></td><td class="n">'+brl(r[4])+'</td><td class="n"><span class="pill '+(d>=17?'x':'h')+'">+'+d+'%</span></td><td class="n">'+r[5]+' dias</td></tr>'}).join(''));
+
+  var b=[['Centro',612,395,5480,1.2,48,41,9],['Petrópolis',344,520,5910,.6,39,18,2],['Vila Nova',298,285,3650,-.8,61,22,14],['Cidade Nova',233,245,3050,.4,58,11,11],['Boqueirão',212,430,4120,2.4,33,9,4],['São Cristóvão',187,310,3420,0,55,6,-3],['Jardim América',156,680,6240,1.9,44,15,6],['Lucas Araújo',141,260,3180,-1.4,72,3,1],['Santa Marta',118,360,3880,3.1,29,2,null],['Integração',109,390,4460,.9,41,4,7]];
+  rows('t-bairros',b.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td class="n">'+r[1].toLocaleString('pt-BR')+'</td><td class="n">'+brl(r[2])+'</td><td class="n">R$ '+r[3].toLocaleString('pt-BR')+'</td><td class="n"><span class="heat" style="'+heatVar(r[4])+'">'+(r[4]===0?'0%':pc(r[4]))+'</span></td><td class="n"><span class="heat" style="'+heatDays(r[5])+'">'+r[5]+'</span></td><td class="n">'+r[6]+'</td><td class="n"><span class="heat" style="'+heatYou(r[7])+'">'+(r[7]===null?'poucos':pc(r[7]))+'</span></td></tr>'}).join(''));
+
+  var q=[['Proprietário direto',288,12],['Imobiliária Horizonte',198,31],['Você · Imob. Modelo',131,-4,1],['Casa Nova Imóveis',122,6],['Prime Negócios',104,2],['Lar & Cia',96,-7],['Outras 61 imobiliárias',1471,9]];
+  var tot=2410;
+  document.getElementById('b-quem').innerHTML=q.map(function(r){var p=r[1]/tot*100;return '<div class="bar'+(r[3]?' you':'')+'"><span>'+r[0]+'</span><i style="--w:'+Math.min(p*1.4,100)+'%'+(r[0].indexOf('Outras')===0?';--c:#DDD3C1':'')+'"></i><b>'+p.toLocaleString('pt-BR',{maximumFractionDigits:1})+'%<small>'+r[1]+'</small></b></div>'}).join('');
+  var c=q.filter(function(r){return r[0].indexOf('Outras')!==0}).sort(function(a,b){return b[2]-a[2]});
+  document.getElementById('b-cresceu').innerHTML=c.map(function(r){var neg=r[2]<0;return '<div class="bar'+(r[3]?' you':'')+'"><span>'+r[0]+'</span><i style="--w:'+Math.abs(r[2])/31*100+'%;--c:'+(neg?'#7DB7DA':'#F59E0B')+'"></i><b class="'+(neg?'dn':'up')+'">'+(r[2]>0?'+':'−')+Math.abs(r[2])+'</b></div>'}).join('');
+
+  var mix=[['Apto 2 dorm.',34,27],['Apto 3 dorm.',22,21],['Casa',18,24],['Terreno',6,14],['Comercial',9,7],['Cobertura e outros',11,7]];
+  document.getElementById('p-mix').innerHTML=mix.map(function(r){return '<div class="pr"><span>'+r[0]+'</span><div><i class="y" style="width:'+r[1]/34*100+'%"></i><em>você '+r[1]+'%</em><i class="c" style="width:'+r[2]/34*100+'%"></i><em>cidade '+r[2]+'%</em></div></div>'}).join('');
+  rows('t-op',[['Santa Marta · casas',29,'2%'],['Boqueirão · casas 3 dorm.',33,'4%'],['Integração · apto 2 dorm.',41,'4%']].map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td class="n"><span class="heat" style="'+heatDays(r[1])+'">'+r[1]+'</span></td><td class="n">'+r[2]+'</td></tr>'}).join(''));
+
+  rows('t-baixou',[['Centro','Apto 2 dorm. · 66 m²',310,285,'Casa Nova Imóveis'],['Centro','Apto 2 dorm. · 70 m²',299,279,'Proprietário direto'],['Vila Nova','Casa 3 dorm. · 132 m²',450,415,'Imobiliária Horizonte'],['Petrópolis','Apto 3 dorm. · 104 m²',640,598,'Prime Negócios'],['Cidade Nova','Casa 2 dorm. · 88 m²',265,249,'Lar & Cia']].map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td class="n">'+brl(r[2])+'</td><td class="n"><b>'+brl(r[3])+'</b></td><td class="n"><span class="heat" style="'+heatVar(-3)+'">'+pc((r[3]/r[2]-1)*100)+'</span></td><td>'+r[4]+'</td></tr>'}).join(''));
+
+  var L=[['Centro',318,1700,38,1.4,19,2],['Petrópolis',162,2350,41,.8,21,-1],['Vila Nova',148,1250,29,-.6,34,4],['Cidade Nova',121,1150,27,.3,27,0],['Boqueirão',109,1900,36,2.2,16,-2],['Santa Marta',74,1600,33,1.8,14,null]];
+  rows('t-loc',L.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td class="n">'+r[1]+'</td><td class="n">R$ '+r[2].toLocaleString('pt-BR')+'</td><td class="n">R$ '+r[3]+'</td><td class="n"><span class="heat" style="'+heatVar(r[4])+'">'+pc(r[4])+'</span></td><td class="n"><span class="heat" style="'+heatDays(r[5]+30)+'">'+r[5]+'</span></td><td class="n"><span class="heat" style="'+heatYou(r[6])+'">'+(r[6]===null?'poucos':r[6]===0?'0%':pc(r[6]))+'</span></td></tr>'}).join(''));
+})();
+</script>
+</body>
+</html>
