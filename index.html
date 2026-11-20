@@ -744,6 +744,10 @@ a.agent{text-decoration:none;color:inherit}
   --acc:#C2410C;--acc-soft:#FFF7ED;--acc-tint:#FFEDD5;
   --acc-metal:linear-gradient(100deg,#431407 0%,#C2410C 30%,#FB923C 47%,#C2410C 62%,#431407 100%);
 }
+.show-tm{
+  --acc:#A16207;--acc-soft:#FEFCE8;--acc-tint:#FEF9C3;
+  --acc-metal:linear-gradient(100deg,#854D0E 0%,#CA8A04 24%,#EAB308 42%,#F97316 68%,#C2410C 100%);
+}
 .show-tl{
   --acc:#A21CAF;--acc-soft:#FDF4FF;--acc-tint:#FAE8FF;
   --acc-metal:linear-gradient(100deg,#4A044E 0%,#A21CAF 30%,#E879F9 47%,#A21CAF 62%,#4A044E 100%);
@@ -1019,6 +1023,7 @@ a.agent{text-decoration:none;color:inherit}
           <a href="/roleta/"><i style="--d:#6A4BE0"></i><span><b>Corretor da Vez</b><small>Roleta inteligente de leads</small></span></a>
           <a href="/maquina-de-followup/"><i style="--d:#BE123C"></i><span><b>Máquina de Follow-up</b><small>Follow-up e recuperação de leads</small></span></a>
           <a href="/retencao-de-carteira/"><i style="--d:#0B6E8E"></i><span><b>Retenção de Carteira</b><small>Proprietários e inquilinos</small></span></a>
+          <a href="/termometro-do-mercado/"><i style="--d:#F59E0B"></i><span><b>Termômetro do Mercado</b><small>Preço por bairro e concorrência</small></span></a>
           <a href="/treino-de-lancamento/"><i style="--d:#A21CAF"></i><span><b>Treino de Lançamento</b><small>Roleplay por voz para corretores</small></span></a>
           <a href="/plantao-24h/"><i style="--d:#D97706"></i><span><b>Plantão 24h</b><small>Monitoramento das conversas</small></span></a>
           <a href="/dna/"><i style="--d:#059669"></i><span><b>DNA Imob</b><small>Diagnóstico da operação</small></span></a>
@@ -1207,8 +1212,8 @@ a.agent{text-decoration:none;color:inherit}
           <button class="j-head" type="button" aria-expanded="false" aria-controls="ji-b6"><span class="j-n">08</span><span class="j-name">Gestão e dados</span></button>
           <div class="j-body" id="ji-b6" hidden>
             <h4>A diretoria enxerga a operação inteira</h4>
-            <p>As conversas viram aviso e dado. O Plantão 24h lê as conversas de todos os setores e chama o gestor no WhatsApp quando alguém reclama, fica sem resposta ou ameaça ir embora. O DNA Imob cruza CRM e WhatsApp num painel com quem fecha, o que gira e o que fazer no mês.</p>
-            <ul class="j-agents"><li class="lk"><a href="/plantao-24h/"><b>Plantão 24h</b><span>Monitoramento das conversas</span><em aria-hidden="true">&rarr;</em></a></li><li class="lk"><a href="/dna/"><b>DNA Imob</b><span>Inteligência de negócios</span><em aria-hidden="true">&rarr;</em></a></li><li class="lk"><a href="/primeira-hora/"><b>Primeira Hora</b><span>O resumo do dia do dono</span><em aria-hidden="true">&rarr;</em></a></li></ul>
+            <p>As conversas viram aviso e dado. O Plantão 24h lê as conversas de todos os setores e chama o gestor no WhatsApp quando alguém reclama, fica sem resposta ou ameaça ir embora. O DNA Imob cruza CRM e WhatsApp num painel com quem fecha, o que gira e o que fazer no mês. O Termômetro do Mercado mostra, todo mês, o preço de cada bairro e onde a carteira está acima do mercado.</p>
+            <ul class="j-agents"><li class="lk"><a href="/plantao-24h/"><b>Plantão 24h</b><span>Monitoramento das conversas</span><em aria-hidden="true">&rarr;</em></a></li><li class="lk"><a href="/dna/"><b>DNA Imob</b><span>Inteligência de negócios</span><em aria-hidden="true">&rarr;</em></a></li><li class="lk"><a href="/primeira-hora/"><b>Primeira Hora</b><span>O resumo do dia do dono</span><em aria-hidden="true">&rarr;</em></a></li><li class="lk"><a href="/termometro-do-mercado/"><b>Termômetro do Mercado</b><span>Preço por bairro e concorrência</span><em aria-hidden="true">&rarr;</em></a></li></ul>
             
             <div class="j-slot"></div>
           </div>
@@ -1655,7 +1660,57 @@ a.agent{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <div class="show show-sn flip">
+    <div class="show show-rx show-tm">
+      <div class="show-head">
+        <p class="show-kicker">Para o dono e o gestor da imobiliária</p>
+        <h3>Termômetro do Mercado</h3>
+        <p class="show-line">Todo mês, o mercado da sua cidade: o preço de cada bairro, onde a sua carteira está acima e quem está crescendo.</p>
+      </div>
+      <div class="show-vis">
+        <div class="car car-dna car-sn" data-car>
+          <div class="car-track" tabindex="0" aria-label="Telas do Termômetro do Mercado">
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Termômetro do Mercado · Imobiliária Modelo</span></div><div class="shot"><img src="/termometro-do-mercado/img/1.jpg" alt="Termômetro do Mercado: Seu preço está acima do bairro?" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">01</span><span><b>Seu preço está acima do bairro?</b> O preço de cada bairro e a sua carteira comparada com o mercado, todo mês.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Termômetro do Mercado · Imobiliária Modelo</span></div><div class="shot"><img src="/termometro-do-mercado/img/2.jpg" alt="Termômetro do Mercado: Seis leituras do mercado" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">02</span><span><b>Seis leituras do mercado</b> Preço do bairro, você × mercado, quem anuncia, mix, tempo no ar e o que mudou.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Termômetro do Mercado · Imobiliária Modelo</span></div><div class="shot"><img src="/termometro-do-mercado/img/3.jpg" alt="Termômetro do Mercado: A régua do bairro" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">03</span><span><b>A régua do bairro</b> O número que faltava na conversa com o proprietário, imóvel por imóvel.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Termômetro do Mercado · Imobiliária Modelo</span></div><div class="shot"><img src="/termometro-do-mercado/img/4.jpg" alt="Termômetro do Mercado: O mês em cinco linhas" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">04</span><span><b>O mês em cinco linhas</b> O relatório abre com o que mais pede atenção e o termômetro da carteira.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Termômetro do Mercado · Imobiliária Modelo</span></div><div class="shot"><img src="/termometro-do-mercado/img/5.jpg" alt="Termômetro do Mercado: Preço por bairro" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">05</span><span><b>Preço por bairro</b> Quanto custa e quanto tempo leva para vender, bairro a bairro.</span></figcaption>
+            </figure>
+            <figure class="car-slide">
+              <div class="bw"><div class="bw-bar"><i></i><i></i><i></i><span>Termômetro do Mercado · Imobiliária Modelo</span></div><div class="shot"><img src="/termometro-do-mercado/img/6.jpg" alt="Termômetro do Mercado: O plano do mês" loading="lazy"></div></div>
+              <figcaption><span class="cap-n">06</span><span><b>O plano do mês</b> Quatro ações para o mês seguinte, cada uma com o dado que a sustenta.</span></figcaption>
+            </figure>
+          </div>
+          <div class="car-nav">
+            <button class="car-btn car-prev" type="button" aria-label="Tela anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="car-dots" role="tablist" aria-label="Telas do Termômetro do Mercado"></div>
+            <button class="car-btn car-next" type="button" aria-label="Próxima tela"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="show-rest">
+        <ul class="chips"><li>Relatório mensal</li><li>Preço por bairro</li><li>Você × concorrentes</li></ul>
+        <div class="show-cta">
+          <a class="btn btn-acc btn-sm" href="/termometro-do-mercado/">Conhecer o Termômetro do Mercado <span aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn-ghost btn-sm" href="/termometro-do-mercado/modelo/">Ver o relatório modelo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="show show-sn noflip">
       <div class="show-head">
         <p class="show-kicker">Para a gestão</p>
         <h3>Plantão 24h</h3>
@@ -1708,7 +1763,7 @@ a.agent{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <div class="show show-dna noflip">
+    <div class="show show-dna flip">
       <div class="show-head">
         <p class="show-kicker">Para a diretoria</p>
         <h3>DNA Imob</h3>
@@ -1772,7 +1827,7 @@ a.agent{text-decoration:none;color:inherit}
       <h2>Para quem está na ponta, <span class="grad-txt">conversa por conversa</span>.</h2>
     </div>
 
-    <div class="show show-rx noflip">
+    <div class="show show-rx flip">
       <div class="show-head">
         <p class="show-kicker">Para o corretor e para quem vende</p>
         <h3>Raio-X da Negociação</h3>
@@ -2037,6 +2092,7 @@ a.agent{text-decoration:none;color:inherit}
           <li><a href="/roleta/">Corretor da Vez</a></li>
           <li><a href="/maquina-de-followup/">Máquina de Follow-up</a></li>
           <li><a href="/retencao-de-carteira/">Retenção de Carteira</a></li>
+          <li><a href="/termometro-do-mercado/">Termômetro do Mercado</a></li>
           <li><a href="/treino-de-lancamento/">Treino de Lançamento</a></li>
           <li><a href="/primeira-hora/">Primeira Hora</a></li>
           <li><a href="/imersao/">Imers&atilde;o de implanta&ccedil;&atilde;o</a></li>
