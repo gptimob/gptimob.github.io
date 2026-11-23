@@ -18,7 +18,6 @@
 - [Relatório modelo do Termômetro do Mercado](https://gptimob.com.br/termometro-do-mercado/modelo/): exemplo com cidade, imobiliárias e números fictícios do relatório mensal: o mês em cinco linhas, termômetro da carteira, imóveis mais acima do bairro, preço e dias no ar por bairro, fatia de cada imobiliária, onde captar, movimentos do mês, locação e plano de ação.
 - [DNA Imob](https://gptimob.com.br/dna/): inteligência de negócios. Cruza o CRM e as conversas de WhatsApp e entrega um painel com quem fecha, os imóveis que giram, a carga ideal por corretor e um plano de ação.
 - [Agentes de IA](https://gptimob.com.br/#imobiliarias): pré-atendimento, distribuição, recuperação de descartados, ativação de base, assistente do corretor, locação, cobrança e agentes integrados ao Sienge para construtoras.
-- [Imersão de implantação](https://gptimob.com.br/imersao/): treinamento para o time interno implantar IA na operação.
 
 ## Soluções para corretores
 
@@ -26,10 +25,11 @@
 - [Raio-X da Negociação](https://gptimob.com.br/raiox/): análise de uma conversa de WhatsApp entre corretor e cliente, com temperatura do lead, objeções e a próxima mensagem a enviar.
 - [Followup Matador](https://gptimob.com.br/followup/): assistente que organiza os follow-ups do corretor.
 
-## Cursos para corretores
+## Cursos e treinamentos
 
 - [Claude no WhatsApp](https://gptimob.com.br/claude-no-whatsapp/): curso gravado para corretores de imóveis recuperarem os clientes parados no WhatsApp, R$ 297 em pagamento único, com garantia de 7 dias. Ensina a instalar o Claude ao lado do WhatsApp Web (extensão do Chrome e uma skill pronta) para: resumo do dia (a conversa mais importante e quem espera, sem gerar tique azul), recuperar clientes parados (resposta pronta em rascunho em cada conversa; o Claude nunca envia, sem disparo em massa), organizar etiquetas do funil no WhatsApp Business, passar visitas combinadas para o Google Agenda e confirmar as visitas da véspera, e atalhos agendados que rodam sozinhos. Seis módulos gravados, guia com as telas, suporte pelo WhatsApp e atualizações da skill. Requisitos: computador com Chrome, assinatura do Claude Pro (à parte), WhatsApp (Business para as etiquetas) e conta Google. Compra pela Hotmart, com checkout na própria página.
 - [Kit Essencial do Corretor](https://gptimob.com.br/kit-essencial/): seis skills de IA que instalam a IA na rotina do corretor de imóveis: onboarding, persona, conteúdo, roteiros, follow-up e fechamento. Pagamento único.
+- [Imersão de implantação](https://gptimob.com.br/imersao/): treinamento para o time interno implantar IA na operação.
 
 ## Contato
 
