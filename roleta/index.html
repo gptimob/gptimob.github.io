@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<!-- Google tag (Google Ads) -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=AW-756698465"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-756698465');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Corretor da Vez · Roleta inteligente de leads para imobiliárias | GPTImob</title>
@@ -757,6 +765,16 @@ footer .ft-one a:hover{text-decoration:underline}
   var msg = 'Olá, Rafael! Quero ver a roleta de leads (Corretor da Vez) na minha imobiliária.\n\nImobiliária: \nCidade: \nQuantos corretores: \nCRM que usamos: ';
   var url = 'https://wa.me/5554999166672?text=' + encodeURIComponent(msg);
   document.querySelectorAll('a.wa').forEach(function (a) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; });
+
+  // Conversão do Google Ads: clique em "Quero a roleta na minha imobiliária".
+  // Preencher o rótulo da conversão (Google Ads > Metas > Conversões) para ativar.
+  var CONV = 'AW-756698465/';
+  var CONV_LABEL = '';
+  document.querySelectorAll('a.wa').forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (CONV_LABEL && window.gtag) gtag('event', 'conversion', { send_to: CONV + CONV_LABEL });
+    });
+  });
 
   var tabs = [].slice.call(document.querySelectorAll('.vtabs [role=tab]'));
   function sel(t) {
