@@ -400,6 +400,20 @@ a.agent{text-decoration:none;color:inherit}
   font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
   color:rgba(255,255,255,.6);margin-top:24px;
 }
+/* destaques coloridos nos cases */
+.case-box{--hl:#7DE3FF;background:rgba(6,16,52,.32);border-color:rgba(255,255,255,.16);border-top:3px solid var(--hl)}
+.case-box.hl-mint{--hl:#5EEAD4}
+.case-box.hl-sun{--hl:#FCD34D}
+.case-box.hl-sky{--hl:#7DE3FF}
+.case-box h4{color:var(--hl)}
+.case-hero,.case-rows b{color:var(--hl)}
+.case-hero{text-shadow:0 0 34px color-mix(in srgb,var(--hl) 35%,transparent)}
+.case-title em{font-style:normal;color:#5EEAD4}
+.ba-before b{color:#FDA4AF}
+.ba-before h5{color:#FDA4AF}
+.ba-after b{color:#5EEAD4}
+.ba-after h5{color:#5EEAD4}
+.ba-before{opacity:.9}
 
 .start-note{
   display:flex;gap:14px;align-items:flex-start;
@@ -1340,9 +1354,9 @@ a.agent{text-decoration:none;color:inherit}
 
     <div class="panel" role="tabpanel" id="p-c1" aria-labelledby="tab-c1">
       <p class="case-lbl">Imobiliária com operação de vendas e locação · Cascavel, PR</p>
-      <h3 class="case-title">84% das locações fechadas começaram numa conversa com a IA.</h3>
+      <h3 class="case-title"><em>84%</em> das locações fechadas começaram numa conversa com a IA.</h3>
       <div class="case-grid">
-        <div class="case-box">
+        <div class="case-box hl-mint">
           <h4>Operação de locação</h4>
           <p class="case-hero">84%</p>
           <p class="case-hero-lbl">das 502 locações fechadas de março a outubro de 2026 começaram numa conversa com a IA</p>
@@ -1351,7 +1365,7 @@ a.agent{text-decoration:none;color:inherit}
             <li><b>9 em 10</b><span>atendimentos de locação passam pela IA desde abril de 2026</span></li>
           </ul>
         </div>
-        <div class="case-box">
+        <div class="case-box hl-sun">
           <h4>Operação de vendas</h4>
           <p class="case-hero">53%</p>
           <p class="case-hero-lbl">das vendas fechadas no mesmo período começaram numa conversa com a IA</p>
@@ -1360,7 +1374,7 @@ a.agent{text-decoration:none;color:inherit}
             <li><b>6 em 10</b><span>atendimentos de venda passam pela IA desde abril de 2026</span></li>
           </ul>
         </div>
-        <div class="case-box" style="grid-column:1/-1">
+        <div class="case-box hl-sky" style="grid-column:1/-1">
           <h4>Atendimento</h4>
           <ul class="case-rows">
             <li><b>&lt; 1 min</b><span>para a primeira resposta, a qualquer hora. Antes, levava 17 minutos no horário comercial e 12,4 horas à noite e no fim de semana.</span></li>
@@ -1373,7 +1387,7 @@ a.agent{text-decoration:none;color:inherit}
     </div>
 
     <div class="panel" role="tabpanel" id="p-c2" aria-labelledby="tab-c2" hidden>
-      <p class="case-lbl">Imobiliária com equipe de corretores e fila de distribuição</p>
+      <p class="case-lbl">Imobiliária com equipe de corretores e fila de distribuição · Santa Maria, RS</p>
       <h3 class="case-title">O lead parou de esperar na fila. Agora ele procura o corretor.</h3>
       <p class="lede" style="max-width:70ch;margin-bottom:26px">A mudança não foi de esforço, foi de sentido. O lead deixou de aguardar no CRM até alguém lembrar de buscá-lo: agora é oferecido ao corretor da vez no WhatsApp, e o aceite já direciona o atendimento para o usuário dele dentro do sistema.</p>
 
@@ -1391,16 +1405,16 @@ a.agent{text-decoration:none;color:inherit}
           <div class="ba-col ba-after">
             <h5>Depois · o lead chega ao corretor</h5>
             <ul class="ba-list">
-              <li><b>88%</b><span>dos leads aceitos por um corretor</span></li>
-              <li><b>11min36s</b><span>de tempo médio até o aceite — mediana de 1min24s</span></li>
-              <li><b>1,4</b><span>corretores convocados, em média, até alguém assumir</span></li>
+              <li><b>88%</b><span>dos 1.522 leads da roleta aceitos por um corretor, desde maio de 2026</span></li>
+              <li><b>2 min</b><span>de mediana até o aceite; 37% das ofertas são aceitas no primeiro minuto</span></li>
+              <li><b>53%</b><span>dos leads novos têm corretor em até 10 minutos, e 80% em até 30 minutos</span></li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="case-box">
-        <p class="case-quote" style="max-width:46ch">E o gestor passou a enxergar a performance de cada corretor.</p>
+      <div class="case-box hl-sun">
+        <p class="case-quote" style="max-width:46ch">E o gestor passou a enxergar <em style="font-style:normal;color:#FCD34D">a performance de cada corretor</em>.</p>
         <p class="lede" style="max-width:64ch">Quantas ofertas cada um recebeu, quantas aceitou, em quanto tempo. O que antes era percepção virou painel — e a conversa sobre produtividade deixou de depender de memória.</p>
       </div>
     </div>
