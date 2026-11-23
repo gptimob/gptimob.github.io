@@ -414,6 +414,7 @@ a.agent{text-decoration:none;color:inherit}
 .ba-after b{color:#5EEAD4}
 .ba-after h5{color:#5EEAD4}
 .ba-before{opacity:.9}
+@media (max-width:560px){.case-rows li,.ba-list li{flex-direction:column;gap:6px}.case-rows b,.ba-list b{min-width:0}}
 
 .start-note{
   display:flex;gap:14px;align-items:flex-start;
@@ -1344,7 +1345,7 @@ a.agent{text-decoration:none;color:inherit}
     <div class="sec-head">
       <p class="eyebrow">Resultado em operação real</p>
       <h2>Problemas diferentes. O mesmo tipo de virada.</h2>
-      <p class="lede">Cada operação chega com uma dor. Abaixo, dois recortes — os números saíram do CRM e do painel de fila dos próprios clientes.</p>
+      <p class="lede">Cada operação chega com uma dor. Abaixo, dois exemplos, com números tirados do CRM e da fila de atendimento dos próprios clientes.</p>
     </div>
 
     <div class="tabs tabs-dark" role="tablist" aria-label="Cases">
@@ -1361,8 +1362,8 @@ a.agent{text-decoration:none;color:inherit}
           <p class="case-hero">84%</p>
           <p class="case-hero-lbl">das 502 locações fechadas de março a outubro de 2026 começaram numa conversa com a IA</p>
           <ul class="case-rows">
-            <li><b>R$ 34,8 mi</b><span>em contratos de aluguel vindos dos leads que a IA atendeu</span></li>
-            <li><b>9 em 10</b><span>atendimentos de locação passam pela IA desde abril de 2026</span></li>
+            <li><b>R$ 34,8 mi</b><span>em contratos de aluguel de clientes que a IA atendeu primeiro</span></li>
+            <li><b>9 em 10</b><span>clientes de locação passam pela IA desde abril de 2026</span></li>
           </ul>
         </div>
         <div class="case-box hl-sun">
@@ -1370,16 +1371,16 @@ a.agent{text-decoration:none;color:inherit}
           <p class="case-hero">53%</p>
           <p class="case-hero-lbl">das vendas fechadas no mesmo período começaram numa conversa com a IA</p>
           <ul class="case-rows">
-            <li><b>R$ 23,7 mi</b><span>em imóveis vendidos e R$ 1,3 mi em comissão, 44% da comissão de todas as vendas</span></li>
-            <li><b>6 em 10</b><span>atendimentos de venda passam pela IA desde abril de 2026</span></li>
+            <li><b>R$ 23,7 mi</b><span>em imóveis vendidos e R$ 1,3 mi em comissão, quase metade de toda a comissão de vendas do período</span></li>
+            <li><b>6 em 10</b><span>clientes de venda passam pela IA desde abril de 2026</span></li>
           </ul>
         </div>
         <div class="case-box hl-sky" style="grid-column:1/-1">
           <h4>Atendimento</h4>
           <ul class="case-rows">
-            <li><b>&lt; 1 min</b><span>para a primeira resposta, a qualquer hora. Antes, levava 17 minutos no horário comercial e 12,4 horas à noite e no fim de semana.</span></li>
-            <li><b>97% e 92%</b><span>dos leads de locação e de venda que chegam por anúncio, portal, site ou WhatsApp passam pela IA, que entende o que o cliente procura, registra no CRM e entrega ao corretor certo</span></li>
-            <li><b>≈ R$ 23.800</b><span>por mês: o custo de 4 pessoas em turnos para responder 24 horas por dia, todos os dias, como a IA responde</span></li>
+            <li><b>&lt; 1 min</b><span>para o cliente receber a primeira resposta, a qualquer hora. Antes, levava 17 minutos no horário comercial e mais de 12 horas à noite e no fim de semana.</span></li>
+            <li><b>97%</b><span>dos clientes de locação (e 92% dos de venda) que chegam por anúncio, portal, site ou WhatsApp são atendidos primeiro pela IA, que entende o que procuram, registra no CRM e passa ao corretor certo</span></li>
+            <li><b>R$ 23,8 mil</b><span>por mês é quanto custariam 4 pessoas revezando turnos para responder 24 horas por dia, todos os dias, como a IA faz</span></li>
           </ul>
         </div>
       </div>
@@ -1389,25 +1390,25 @@ a.agent{text-decoration:none;color:inherit}
     <div class="panel" role="tabpanel" id="p-c2" aria-labelledby="tab-c2" hidden>
       <p class="case-lbl">Imobiliária com equipe de corretores e fila de distribuição · Santa Maria, RS</p>
       <h3 class="case-title">O lead parou de esperar na fila. Agora ele procura o corretor.</h3>
-      <p class="lede" style="max-width:70ch;margin-bottom:26px">A mudança não foi de esforço, foi de sentido. O lead deixou de aguardar no CRM até alguém lembrar de buscá-lo: agora é oferecido ao corretor da vez no WhatsApp, e o aceite já direciona o atendimento para o usuário dele dentro do sistema.</p>
+      <p class="lede" style="max-width:70ch;margin-bottom:26px">A mudança não foi de esforço, foi de sentido. O cliente deixou de esperar no CRM até alguém lembrar dele: agora ele é oferecido ao corretor da vez pelo WhatsApp, e quem aceita já recebe o atendimento no seu usuário do sistema.</p>
 
       <div class="case-box" style="padding:0;margin-bottom:16px">
         <div class="ba">
           <div class="ba-col ba-before">
             <h5>Antes · o corretor buscava o lead</h5>
             <ul class="ba-list">
-              <li><b>55,7%</b><span>dos leads nunca foram retirados da fila por ninguém</span></li>
-              <li><b>17,4%</b><span>só foram assumidos depois de mais de 24 horas na fila</span></li>
-              <li><b>20,9%</b><span>foi tudo o que saiu da fila em até uma hora</span></li>
+              <li><b>56%</b><span>dos clientes nunca foram puxados da fila por nenhum corretor</span></li>
+              <li><b>17%</b><span>esperaram mais de um dia na fila até alguém assumir</span></li>
+              <li><b>21%</b><span>foram atendidos na primeira hora, e só</span></li>
             </ul>
           </div>
           <div class="ba-mid" aria-hidden="true"><span>depois</span></div>
           <div class="ba-col ba-after">
             <h5>Depois · o lead chega ao corretor</h5>
             <ul class="ba-list">
-              <li><b>88%</b><span>dos 1.522 leads da roleta aceitos por um corretor, desde maio de 2026</span></li>
-              <li><b>2 min</b><span>de mediana até o aceite; 37% das ofertas são aceitas no primeiro minuto</span></li>
-              <li><b>53%</b><span>dos leads novos têm corretor em até 10 minutos, e 80% em até 30 minutos</span></li>
+              <li><b>88%</b><span>dos 1.522 clientes que entraram na roleta desde maio de 2026 foram assumidos por um corretor</span></li>
+              <li><b>2 min</b><span>é o tempo em que metade dos clientes já tem corretor. 4 em cada 10 são aceitos no primeiro minuto</span></li>
+              <li><b>8 em 10</b><span>clientes novos têm corretor em até meia hora</span></li>
             </ul>
           </div>
         </div>
