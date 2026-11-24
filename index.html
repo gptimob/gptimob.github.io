@@ -8,6 +8,14 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'AW-756698465');
+  // Conversão Diagnóstico – site GPTImob: qualquer clique no WhatsApp da GPTImob, em qualquer página.
+  // Os botões a.wa da /roleta/ ficam de fora: contam como "Clique WhatsApp – Corretor da Vez".
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="wa.me/5554999166672"]');
+    if (!a) return;
+    if (location.pathname.indexOf('/roleta/') === 0 && a.classList.contains('wa')) return;
+    gtag('event', 'conversion', { send_to: 'AW-756698465/JS76CLHgk74dEOGa6egC' });
+  }, true);
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -2350,12 +2358,6 @@ a.agent{text-decoration:none;color:inherit}
     place(); go(0,false); raf=requestAnimationFrame(tick);
   });
 })();
-</script>
-<script>
-// Google Ads: Diagnóstico – site GPTImob (clique nos botões de WhatsApp da home)
-document.querySelectorAll('a[href*="wa.me/"]').forEach(function(a){
-  a.addEventListener('click',function(){ if(window.gtag) gtag('event','conversion',{send_to:'AW-756698465/JS76CLHgk74dEOGa6egC'}); });
-});
 </script>
 </body>
 </html>
