@@ -131,6 +131,11 @@ textarea:focus,input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
   .prow .pcell:nth-child(3){order:4;grid-column:1/-1}
   .plab{position:static;width:auto;height:auto;clip:auto;display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;color:var(--ink-2)}
 }
+.fixed{background:var(--ka-bg);border:1px solid #F0D58A;border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+.fixed .k{color:#8A6100;font-size:10.5px}
+.fxrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:15px}
+.fxrow span{color:var(--ink-2)}
+.fxrow b{font-weight:600;color:var(--ink)}
 .btn-save{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:999px;background:var(--ka);color:#1A1400;font-family:var(--display);font-weight:800;font-size:19px;border:0;cursor:pointer}
 .btn-save:hover{filter:brightness(1.05)}
 .btn-save:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
@@ -268,10 +273,8 @@ textarea:focus,input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
       ["oferta","Oferta e criativo","Condição vigente e imagem oficial do empreendimento"],
       ["datas","Datas de disparo","A 1ª logo depois do Omnichannel no ar"],
       ["quem","Quem recebe os leads reativados","O rodízio da cidade de cada campanha"]]},
-    {id:"faturamento", n:"9", t:"Faturamento", lead:"A implantação é paga em 4 parcelas de R$ 3.980,00, e as mensalidades começam conforme o fechamento.", items:[
+    {id:"faturamento", n:"9", t:"Faturamento", lead:"A implantação é paga em 4 parcelas de R$ 3.980,00, e as mensalidades começam conforme o fechamento.", fixed:[["1ª parcela da implantação","05/12/2026"],["Demais parcelas","Todo dia 05: 05/01, 05/02 e 05/03/2027"]], items:[
       ["forma","Forma de pagamento das parcelas","Boleto ou Pix"],
-      ["venc1","Vencimento da 1ª parcela","Na assinatura do contrato"],
-      ["vencn","Dia de vencimento das demais","Mesmo dia nos 3 meses seguintes"],
       ["inicio","Início das mensalidades","Omnichannel isento nos 2 primeiros meses; Kássia a partir do primeiro mês no ar"],
       ["meta","Pagamento das mensagens da Meta","Cartão da KA cadastrado direto no Business Manager"],
       ["nf","E-mail para notas fiscais","Contato do financeiro"]]}
@@ -322,6 +325,12 @@ textarea:focus,input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 
 
   SECTIONS.forEach(function(sec){
     var s = addSection(sec.id, sec.n, sec.t, sec.lead);
+    if (sec.fixed){
+      var fx = el("div","fixed");
+      fx.appendChild(el("span","k","Já definido"));
+      sec.fixed.forEach(function(f){ var r = el("div","fxrow"); r.appendChild(el("span",null,f[0])); r.appendChild(el("b",null,f[1])); fx.appendChild(r); });
+      s.appendChild(fx);
+    }
     sec.items.forEach(function(it){
       var key = sec.id+"."+it[0];
       var row = el("div","item");
