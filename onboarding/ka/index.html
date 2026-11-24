@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Onboarding KA Empreendimentos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+html,body{margin:0}
+/* Layout: faixa de marca no topo, coluna única de leitura com cartões por tema, barra de progresso fixa, envio no fim */
+:root{
+  color-scheme:light;
+  --bg:#FAFAF7; --surface:#FFFFFF; --surface-2:#F4F6F9;
+  --ink:#0D1A30; --ink-2:#3C4A61; --muted:#6B778A; --line:#E4E7EC; --line-strong:#D5DAE3;
+  --navy:#0A2A7A; --blue:#2356E8; --ia-bg:#EEF3FE; --ia-ink:#1740C4; --ia-line:#C9D6FB;
+  --ka:#F5B800; --ka-bg:#FFF6D6; --teal:#0E8C7E; --teal-bg:#E6F4F1; --teal-line:#A9DDD3;
+  --coral:#D9503B; --wa:#25D366; --wa-ink:#0B2A17;
+  --display:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 80px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.wrap{max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}
+.k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+/* topo */
+.hero{border-radius:24px;overflow:hidden;background:linear-gradient(120deg,#0A1A45 0%,#0A2A7A 50%,#2356E8 100%);color:#FFFFFF;padding:28px 32px 30px;display:flex;flex-direction:column;gap:18px}
+.brands{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brands img{height:58px;width:auto;display:block}
+.brands .plus{font-family:var(--display);font-weight:800;font-size:28px;color:var(--ka)}
+.brands .gpt{font-family:var(--display);font-weight:800;font-size:40px;line-height:1;color:#FFFFFF}
+.hero .k{color:var(--ka)}
+.hero h1{font-size:clamp(30px,5vw,46px);font-weight:800;line-height:1.05}
+.hero p{max-width:62ch;color:rgba(255,255,255,.9);font-size:16.5px}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.how div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px 14px;font-size:14px;color:rgba(255,255,255,.92)}
+.how b{display:block;font-family:var(--display);font-size:16px;color:#FFFFFF}
+@media (max-width:720px){.brands{gap:12px;flex-wrap:nowrap}.brands img{height:42px}.brands .gpt{font-size:28px}.brands .plus{font-size:22px}.how{grid-template-columns:1fr}.hero{padding:22px 18px}}
+
+/* barra de progresso */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;padding:10px 14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 8px 24px -16px rgba(13,26,48,.4)}
+.bar .meter{flex:1 1 120px;height:10px;border-radius:999px;background:var(--surface-2);overflow:hidden}
+.bar .meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:999px;transition:width .3s}
+.bar .count{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.save{font-family:var(--mono);font-size:11.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.save.ok{color:var(--teal);border-color:var(--teal-line);background:var(--teal-bg)}
+.save.local{color:#8A6100;border-color:#F0D58A;background:var(--ka-bg)}
+.save.err{color:var(--coral);border-color:#F3B9AB;background:#FDEFEC}
+
+/* sumário */
+.toc{display:flex;flex-wrap:wrap;gap:6px}
+.toc a{font-size:13px;font-weight:600;color:var(--ink-2);text-decoration:none;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);display:inline-flex;gap:6px;align-items:center}
+.toc a:hover,.toc a:focus-visible{border-color:var(--blue);outline:none}
+.toc a .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.toc a.done{border-color:var(--teal-line);background:var(--teal-bg);color:var(--teal)}
+
+/* cartões */
+#sections{display:flex;flex-direction:column;gap:20px}
+@media (max-width:520px){.bar{gap:8px 10px}.bar .count{font-size:11.5px}}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:16px;scroll-margin-top:84px}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sec-h .k{color:var(--ia-ink)}
+.sec-h h2{font-size:clamp(21px,3vw,26px);font-weight:800;margin-top:2px}
+.sec-h .pc{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sec-h .pc.full{color:var(--teal)}
+.sec > p.lead{color:var(--ink-2);max-width:68ch}
+.item{border-top:1px solid var(--line);padding-top:14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:8px 18px}
+.item:first-of-type{border-top:0;padding-top:0}
+.q label,.q .lbl{font-weight:600;font-size:15px;display:block}
+.sug{margin-top:6px;font-size:13.5px;color:var(--ink-2);background:var(--ia-bg);border:1px solid var(--ia-line);border-radius:10px;padding:8px 10px}
+.sug .k{color:var(--ia-ink);font-size:10px;display:block;margin-bottom:2px}
+.use{margin-top:6px;font:inherit;font-size:12.5px;font-weight:600;color:var(--ia-ink);background:none;border:0;padding:2px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.use:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+textarea,input[type=text],input[type=email],input[type=date]{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface);border:1.5px solid var(--line-strong);border-radius:12px;padding:10px 12px;min-height:46px}
+textarea{resize:vertical;min-height:76px}
+textarea:focus,input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(35,86,232,.15)}
+.filled textarea,.filled input{border-color:var(--teal-line);background:#FBFEFD}
+@media (max-width:720px){.item{grid-template-columns:1fr}.sec{padding:18px 16px}}
+
+/* contrato e checklist */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field label{display:block;font-weight:600;font-size:14.5px;margin-bottom:6px}
+.field.full{grid-column:1/-1}
+@media (max-width:720px){.grid2{grid-template-columns:1fr}}
+.note{font-size:13px;color:var(--muted);border-left:3px solid var(--ka);padding:2px 0 2px 12px}
+.checks{display:flex;flex-direction:column;gap:6px}
+.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.chk input{width:20px;height:20px;margin-top:2px;accent-color:var(--teal);flex:none}
+.chk.on{background:var(--teal-bg);border-color:var(--teal-line)}
+
+/* envio */
+.send{border-radius:24px;background:linear-gradient(120deg,#0A1A45 0%,#0A2A7A 60%,#1740C4 100%);color:#FFFFFF;padding:28px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.send .k{color:var(--ka)}
+.send h2{font-size:clamp(22px,3.4vw,30px);font-weight:800}
+.send p{color:rgba(255,255,255,.88);max-width:62ch}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;background:var(--wa);color:var(--wa-ink);font-family:var(--display);font-weight:800;font-size:19px;text-decoration:none;border:0;cursor:pointer}
+.btn-wa:hover,.btn-wa:focus-visible{filter:brightness(1.06);outline:3px solid var(--ka);outline-offset:3px}
+.plist{display:flex;flex-direction:column;gap:8px}
+.prow{display:grid;grid-template-columns:1.3fr 1fr 1.3fr .9fr;gap:8px;align-items:end}
+.prow input{width:100%;font:inherit;font-size:14.5px;color:var(--ink);background:var(--surface);border:1.5px solid var(--line-strong);border-radius:10px;padding:8px 10px;min-height:42px}
+.prow input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(35,86,232,.15)}
+.prow.ok input{border-color:var(--teal-line);background:#FBFEFD}
+.phead span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.plab{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.addp{align-self:flex-start;font:inherit;font-weight:600;font-size:14px;color:var(--ia-ink);background:var(--ia-bg);border:1px dashed var(--ia-line);border-radius:999px;padding:9px 16px;cursor:pointer}
+.addp:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media (max-width:720px){
+  .phead{display:none}
+  .prow{grid-template-columns:1fr 1fr;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2)}
+  .prow .pcell:first-child{grid-column:1/-1}
+  .prow .pcell:nth-child(2){order:2}
+  .prow .pcell:nth-child(4){order:3}
+  .prow .pcell:nth-child(3){order:4;grid-column:1/-1}
+  .plab{position:static;width:auto;height:auto;clip:auto;display:block;font-size:12.5px;font-weight:600;margin-bottom:4px;color:var(--ink-2)}
+}
+.btn-save{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:999px;background:var(--ka);color:#1A1400;font-family:var(--display);font-weight:800;font-size:19px;border:0;cursor:pointer}
+.btn-save:hover{filter:brightness(1.05)}
+.btn-save:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.btn-save:disabled{opacity:.6;cursor:progress}
+.btn-save.sm{padding:7px 16px;font-size:14px;font-family:var(--body);font-weight:600;background:var(--navy);color:#FFFFFF}
+.btn-save.sm:focus-visible{outline:2px solid var(--blue)}
+.who{display:flex;flex-direction:column;gap:6px;width:min(100%,380px)}
+.who label{font-weight:600;font-size:14px;color:#FFFFFF}
+.who input{border-color:rgba(255,255,255,.4)}
+.send .alt{font-size:14px;color:rgba(255,255,255,.8)}
+.send .alt a,.linkbtn{color:#FFFFFF;font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;background:none;border:0;padding:0;cursor:pointer}
+.send .alt a:focus-visible,.linkbtn:focus-visible{outline:2px solid var(--ka);outline-offset:2px}
+.btn-copy{font:inherit;font-weight:600;font-size:14px;color:#FFFFFF;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:10px 18px;cursor:pointer}
+.btn-copy:focus-visible{outline:3px solid var(--ka);outline-offset:3px}
+.send .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.send small{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.7)}
+.foot{font-size:12.5px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="brands">
+      <img src="data:image/png;base64,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" alt="KA Empreendimentos" width="120" height="58">
+      <span class="plus" aria-hidden="true">+</span>
+      <span class="gpt">GPTImob</span>
+    </div>
+    <span class="k">Onboarding · reunião inicial</span>
+    <h1>Bem-vinda à GPTImob, KA!</h1>
+    <p>A partir de agora, quem chamar a KA em Chapecó, Passo Fundo, Joaçaba ou Xanxerê é atendido em segundos pela Kássia, de dia ou de noite, e chega ao corretor certo com tudo o que já disse. Cada resposta desta página vira uma regra da Kássia e do Omnichannel.</p>
+    <div class="how">
+      <div><b>1. Leia a sugestão</b>Cada item traz o ponto de partida da GPTImob.</div>
+      <div><b>2. Responda</b>Escreva a decisão da KA ou toque em "Usar a sugestão".</div>
+      <div><b>3. Pronto</b>Tudo é salvo sozinho enquanto você escreve. Dá para parar e continuar depois, e cada pessoa da KA pode preencher a sua parte.</div>
+    </div>
+  </header>
+
+  <div class="bar" role="status">
+    <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+    <span class="count" id="count">0 de 0 respondidos</span>
+    <span class="save" id="save">Carregando…</span>
+    <button class="btn-save sm" id="save-bar" type="button">Salvar</button>
+  </div>
+
+  <nav class="toc" id="toc" aria-label="Temas do onboarding"></nav>
+
+  <div id="sections"></div>
+
+  <section class="send" id="enviar">
+    <span class="k">Último passo</span>
+    <h2>Suas respostas já estão salvas</h2>
+    <p>Cada resposta vai para a GPTImob alguns segundos depois de escrita. Ao voltar a esta página, de qualquer aparelho, o que já foi preenchido aparece aqui. Deixe seu nome para sabermos quem respondeu.</p>
+    <div class="who">
+      <label for="quem">Seu nome</label>
+      <input type="text" id="quem" autocomplete="name" placeholder="Quem está preenchendo">
+    </div>
+    <div class="row">
+      <button class="btn-save" id="save-main" type="button">Salvar agora</button>
+    </div>
+    <p class="alt">Prefere mandar por mensagem? <a id="wa" href="#" target="_blank" rel="noopener">Enviar pelo WhatsApp</a> · <button class="linkbtn" id="copy" type="button">Copiar as respostas</button></p>
+    <small>Dúvidas: Rafael Comin, GPTImob · 54 9 9916-6672</small>
+  </section>
+
+  <p class="foot">GPTImob · Onboarding KA Empreendimentos</p>
+</div>
+
+<script>
+(function(){
+  var SECTIONS = [
+    {id:"equipe", n:"1", t:"Equipe e responsáveis", lead:"Cada frente precisa de uma pessoa na KA que decide e responde no grupo de suporte.", items:[
+      ["focal","Ponto focal do projeto","Uma pessoa do comercial com autonomia para aprovar ajustes"],
+      ["aprova","Quem aprova textos e regras","Gerência comercial, com a diretoria nas regras de distribuição"],
+      ["setores","Responsável por cada setor no Omnichannel","Um nome por setor: SAC, Engenharia, Financeiro, Qualidade, Compras, RH e Novos negócios"],
+      ["grupo","Participantes do grupo de suporte no WhatsApp","Ponto focal, gerência comercial e um representante de TI ou marketing"],
+      ["parceiras","Responsável pelas imobiliárias parceiras","Quem fala com as imobiliárias de cada cidade sobre as regras novas"],
+      ["fin","Contato financeiro","Quem recebe boletos e notas fiscais"]]},
+    {id:"whatsapp", n:"2", t:"WhatsApp e Omnichannel", lead:"O WhatsApp da KA passa a ser atendido dentro do Omnichannel, pela API oficial, com uma equipe por cidade e por setor.", items:[
+      ["numero","Número que será conectado","O WhatsApp de vendas do site, (49) 99171-1042"],
+      ["api","Situação na API oficial","Confirmar se o número já está na API pela Vtex e quem administra o Business Manager da Meta"],
+      ["outros","Outros números da KA","Números de setores ou de cidades que também devem entrar"],
+      ["equipes","Equipes no Omnichannel","Vendas Chapecó, Passo Fundo, Joaçaba e Xanxerê, e os setores internos"],
+      ["horario","Horário de atendimento de cada setor","Horário comercial nos setores e plantão em vendas"],
+      ["vtex","Fluxos da Vtex a migrar","Fluxos, equipes, respostas prontas e roteamento usados hoje"],
+      ["desligar","Data para desligar a Vtex","Depois de 1 semana com o Omnichannel no ar"]]},
+    {id:"kassia", n:"3", t:"Kássia, a agente de IA", lead:"A Kássia só responde com o que a KA validar: estas definições viram as regras dela.", items:[
+      ["tom","Apresentação e tom de voz","\"Sou a Kássia, assistente virtual da KA\", tom próximo e objetivo"],
+      ["emps","Empreendimentos que ela atende","Todos à venda nas 4 cidades, com a lista oficial e o status de cada um"],
+      ["materiais","Materiais por empreendimento","Book, plantas, tabela, memorial, fotos da obra e link da LP"],
+      ["precos","Preços e condições","Informar valores e condições só da tabela vigente, sem negociar"],
+      ["espelho","Consulta ao espelho do CV","Mostrar só unidades livres no espelho, sem reservar"],
+      ["nao","O que ela não responde","Descontos, financiamento personalizado, prazos jurídicos e reclamações vão direto para uma pessoa"],
+      ["faq","Perguntas frequentes","Lista com as 20 dúvidas mais comuns e a resposta oficial"],
+      ["triagem","Triagem dos setores","Clientes, fornecedores, candidatos, corretores parceiros e ofertas de terreno, cada um para a sua equipe"],
+      ["passa","Quando passar para uma pessoa","Pedido de visita, simulação, pedido expresso do cliente ou dúvida fora das regras"]]},
+    {id:"distribuicao", n:"4", t:"Distribuição por cidade", lead:"Cada cidade é uma equipe no Omnichannel, e o corretor da vez recebe o alerta no WhatsApp com o link da conversa.", items:[
+      ["chapeco","Imobiliárias e corretores de Chapecó","Nome, imobiliária e WhatsApp de cada corretor"],
+      ["pf","Imobiliárias e corretores de Passo Fundo","Nome, imobiliária e WhatsApp de cada corretor"],
+      ["joacaba","Imobiliárias e corretores de Joaçaba","Nome, imobiliária e WhatsApp de cada corretor"],
+      ["xanxere","Imobiliárias e corretores de Xanxerê","Nome, imobiliária e WhatsApp de cada corretor"],
+      ["rodizio","Tipo de rodízio","Direto entre os corretores da cidade"],
+      ["prazo","Prazo para o corretor responder","10 minutos, e depois passa para o próximo da fila"],
+      ["plantao","Horário e plantão de cada cidade","Quem recebe à noite e no fim de semana"],
+      ["volta","Cliente que volta","Volta para o corretor que já o atendeu"],
+      ["indicado","Cliente indicado por imobiliária","Fica com o corretor e a imobiliária de origem"],
+      ["enxerga","O que cada imobiliária enxerga","Só as conversas dos seus corretores"]]},
+    {id:"cv", n:"5", t:"CV CRM", lead:"A Kássia cadastra o lead, grava o corretor e a imobiliária e registra a conversa pela API do CV.", items:[
+      ["acesso","Acesso à API","Usuário e token de integração criados pelo administrador do CV"],
+      ["origens","Origens e mídias","Site, LPs de cada empreendimento, Instagram, anúncios Meta, portais, placa e indicação"],
+      ["campos","Campos de qualificação","Finalidade, tipologia, forma de pagamento, uso do FGTS e prazo de compra"],
+      ["funil","Situações do funil","Usar as que a KA já tem, conferidas pela API"],
+      ["cadastro","Corretores e imobiliárias no CV","Mesmo cadastro do Omnichannel, para o corretor certo aparecer no lead"],
+      ["descarte","Motivo de descarte da IA","\"Chegou no final do follow-up. Sem resposta (IA).\""],
+      ["tarefa","Tarefa de primeiro contato","Criada no lead com prazo de 10 minutos"]]},
+    {id:"followup", n:"6", t:"Jornada de follow-up", lead:"A jornada retoma o cliente que parou de responder em D7, D15, D30, D45, D60, D90, D120 e D150, na mesma conversa do Omnichannel.", items:[
+      ["fase1","Fase 1, nas primeiras 24 horas","Corretor faz os contatos, e a Kássia cobre em horário comercial se ele não fizer"],
+      ["d3","Contato no D3","Incluir, com a planta e a posição solar das unidades livres"],
+      ["hora","Horário fixo da retomada","12h30, em dia útil"],
+      ["textos","Textos de cada marco","Revisar e aprovar os textos sugeridos"],
+      ["modelos","Modelos na API oficial","Aprovar na Meta os modelos com botões do D7 e do D150"],
+      ["conteudo","Conteúdo real","Quem envia as fotos da obra e confirma as condições vigentes"],
+      ["para","Quando a jornada para","Visita agendada, reserva, venda ou \"não tenho interesse\""],
+      ["limite","Limite de jornadas por lead","No máximo duas"]]},
+    {id:"relatorios", n:"7", t:"Monitoramento, relatórios e inteligência", lead:"A diretoria e a gerência recebem no WhatsApp o que aconteceu no atendimento, sem precisar abrir sistema.", items:[
+      ["diaria","Quem recebe a prestação de contas diária","Diretoria e gerência comercial"],
+      ["horadiaria","Horário da mensagem diária","8h, com o resumo do dia anterior"],
+      ["alertas","Alertas do monitoramento","Cliente sem resposta, reclamação, pedido de desconto e lead redistribuído"],
+      ["quemalerta","Quem recebe cada alerta","Corretor e gerência em vendas, responsável do setor nos demais"],
+      ["analise","Período da análise conversacional","Mensal, com reunião de 30 minutos para apresentar"],
+      ["gestores","Gestores das imobiliárias parceiras","Se recebem o resumo da sua equipe"]]},
+    {id:"ativacao", n:"8", t:"Ativação da base", lead:"As 2 ativações de bônus voltam a falar com a base de leads do CV enquanto o atendimento é implantado.", items:[
+      ["emp1","Empreendimento da 1ª ativação","Unique View, em Passo Fundo"],
+      ["emp2","Empreendimento da 2ª ativação","Um lançamento de Chapecó"],
+      ["base","Base de cada campanha","Leads do CV dos últimos 24 meses, por cidade"],
+      ["oferta","Oferta e criativo","Condição vigente e imagem oficial do empreendimento"],
+      ["datas","Datas de disparo","A 1ª logo depois do Omnichannel no ar"],
+      ["quem","Quem recebe os leads reativados","O rodízio da cidade de cada campanha"]]},
+    {id:"faturamento", n:"9", t:"Faturamento", lead:"A implantação é paga em 4 parcelas de R$ 3.980,00, e as mensalidades começam conforme o fechamento.", items:[
+      ["forma","Forma de pagamento das parcelas","Boleto ou Pix"],
+      ["venc1","Vencimento da 1ª parcela","Na assinatura do contrato"],
+      ["vencn","Dia de vencimento das demais","Mesmo dia nos 3 meses seguintes"],
+      ["inicio","Início das mensalidades","Omnichannel isento nos 2 primeiros meses; Kássia a partir do primeiro mês no ar"],
+      ["meta","Pagamento das mensagens da Meta","Cartão da KA cadastrado direto no Business Manager"],
+      ["nf","E-mail para notas fiscais","Contato do financeiro"]]}
+  ];
+  var CONTRACT = [
+    ["cnpj","CNPJ","text"],["razao","Razão social","text"],["end","Endereço completo da empresa","text",1],
+    ["rep","Nome do representante legal","text"],["cpf","CPF do representante legal","text"],["civil","Estado civil do representante legal","text"],
+    ["endrep","Endereço completo do representante legal","text",1],["email","E-mail do representante legal (para envio do contrato)","email"],["nasc","Data de nascimento do representante legal","date"]
+  ];
+  var CHECKS = [
+    ["c1","Dados para o contrato preenchidos"],
+    ["c2","Acesso de administrador ao Business Manager da Meta, ou quem administra o número hoje"],
+    ["c3","Acesso à Vtex para levantar os fluxos e as respostas prontas"],
+    ["c4","Usuário e token da API do CV CRM"],
+    ["c5","Lista de usuários do Omnichannel por equipe, com nome e e-mail"],
+    ["c6","Lista de imobiliárias e corretores de cada cidade, com WhatsApp"],
+    ["c7","Materiais de cada empreendimento: book, plantas, tabela, memorial e link da LP"],
+    ["c8","Perguntas frequentes com as respostas oficiais"],
+    ["c9","Base de leads para as 2 ativações"],
+    ["c10","Logo e identidade visual da KA para os modelos de mensagem"]
+  ];
+
+  var values = {};           // chave -> texto ou true/false
+  var LS = "ka-onboarding-v1";
+  try { var raw = localStorage.getItem(LS); if (raw) values = JSON.parse(raw) || {}; } catch(e) {}
+
+  var secRoot = document.getElementById("sections");
+  var toc = document.getElementById("toc");
+  var saveEl = document.getElementById("save");
+  var inputs = {};
+
+  function el(tag, cls, text){ var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+
+  function addSection(id, n, title, lead){
+    var s = el("section","sec"); s.id = id;
+    var h = el("div","sec-h");
+    var hl = el("div"); hl.appendChild(el("span","k", n ? "Tema "+n : "Contrato e acessos")); hl.appendChild(el("h2",null,title));
+    var pc = el("span","pc"); pc.id = "pc-"+id;
+    h.appendChild(hl); h.appendChild(pc); s.appendChild(h);
+    if (lead) s.appendChild(el("p","lead",lead));
+    secRoot.appendChild(s);
+    var a = el("a"); a.href = "#"+id; a.id = "toc-"+id;
+    if (n) a.appendChild(el("span","n",n));
+    a.appendChild(document.createTextNode(n ? title.split(",")[0] : title));
+    toc.appendChild(a);
+    return s;
+  }
+
+  SECTIONS.forEach(function(sec){
+    var s = addSection(sec.id, sec.n, sec.t, sec.lead);
+    sec.items.forEach(function(it){
+      var key = sec.id+"."+it[0];
+      var row = el("div","item");
+      var q = el("div","q");
+      var lab = el("label",null,it[1]); lab.htmlFor = "f-"+key.replace(".","-");
+      q.appendChild(lab);
+      var sug = el("div","sug"); sug.appendChild(el("span","k","Sugestão GPTImob")); sug.appendChild(document.createTextNode(it[2]));
+      q.appendChild(sug);
+      var use = el("button","use","Usar a sugestão"); use.type="button";
+      q.appendChild(use);
+      var a = el("div","a");
+      var ta = el("textarea"); ta.id = "f-"+key.replace(".","-"); ta.rows = 2; ta.placeholder = "Decisão da KA";
+      a.appendChild(ta);
+      row.appendChild(q); row.appendChild(a); s.appendChild(row);
+      inputs[key] = {el: ta, wrap: a, sec: sec.id, label: it[1], secTitle: sec.t};
+      use.addEventListener("click", function(){ ta.value = it[2]; onInput(key); ta.focus(); });
+      ta.addEventListener("input", function(){ onInput(key); });
+    });
+  });
+
+  // pessoas da KA (vão para a planilha de cadastros)
+  var SETORES = ["Vendas Chapecó","Vendas Passo Fundo","Vendas Joaçaba","Vendas Xanxerê","SAC","Engenharia","Financeiro","Qualidade","Compras","RH","Novos negócios","Gerência comercial","Diretoria","Marketing"];
+  var SEED = ["Cynthia Candido Alves","Jessica Jaqueline De Aguiar Oliveira","Marciane Rahmeier","Maricleia Bageston de Camargo","Ezequiel Leites Almeida","Brenda Rafaela de Almeida"];
+  var PF = [["nome","Nome","text","name"],["setor","Setor","text","off"],["email","E-mail corporativo","email","email"],["whatsapp","WhatsApp","tel","tel"]];
+  var LSP = LS + "-pessoas";
+  function uid(){ return "p" + Math.random().toString(36).slice(2,9); }
+  var people = [], dirtyP = {};
+  try { people = JSON.parse(localStorage.getItem(LSP) || "null") || []; dirtyP = JSON.parse(localStorage.getItem(LSP+"-dirty") || "{}") || {}; } catch(e) { people = []; dirtyP = {}; }
+  if (!people.length) people = SEED.map(function(n){ return {uid: uid(), orig: n, nome: n, setor: "", email: "", whatsapp: ""}; });
+  function keepPeople(){ try { localStorage.setItem(LSP, JSON.stringify(people)); localStorage.setItem(LSP+"-dirty", JSON.stringify(dirtyP)); } catch(e) {} }
+
+  var sp = addSection("pessoas", null, "Pessoas da KA no Omnichannel", "Cada pessoa desta lista ganha um acesso ao Omnichannel da KA. Complete o setor, o e-mail corporativo e o WhatsApp, e adicione quem estiver faltando.");
+  sp.querySelector(".k").textContent = "Equipe e acessos";
+  secRoot.insertBefore(sp, document.getElementById("kassia"));
+  toc.insertBefore(document.getElementById("toc-pessoas"), document.getElementById("toc-kassia"));
+  var dl = el("datalist"); dl.id = "setores";
+  SETORES.forEach(function(s){ var o = el("option"); o.value = s; dl.appendChild(o); });
+  sp.appendChild(dl);
+  var plist = el("div","plist"); sp.appendChild(plist);
+  var addBtn = el("button","addp","+ Adicionar pessoa"); addBtn.type = "button"; sp.appendChild(addBtn);
+
+  function personDone(p){ return PF.every(function(f){ return String(p[f[0]]||"").trim() !== ""; }); }
+  function peopleCount(){
+    var done = people.filter(personDone).length;
+    var pc = document.getElementById("pc-pessoas"), tl = document.getElementById("toc-pessoas");
+    pc.textContent = done + " de " + people.length + " completos";
+    pc.classList.toggle("full", people.length > 0 && done === people.length);
+    tl.classList.toggle("done", people.length > 0 && done === people.length);
+  }
+  function renderPeople(){
+    plist.textContent = "";
+    var head = el("div","prow phead");
+    PF.forEach(function(f){ head.appendChild(el("span",null,f[1])); });
+    plist.appendChild(head);
+    people.forEach(function(p, idx){
+      var row = el("div","prow");
+      PF.forEach(function(f){
+        var cell = el("div","pcell");
+        var id = "p-" + p.uid + "-" + f[0];
+        var lab = el("label","plab", f[1]); lab.htmlFor = id;
+        var inp = el("input"); inp.type = f[2]; inp.id = id; inp.autocomplete = f[3];
+        inp.value = p[f[0]] || "";
+        if (f[0] === "setor"){ inp.setAttribute("list","setores"); inp.placeholder = "Ex.: Vendas Chapecó"; }
+        if (f[0] === "whatsapp"){ inp.inputMode = "tel"; inp.placeholder = "(49) 99999-9999"; }
+        if (f[0] === "email") inp.placeholder = "nome@ka.com.br";
+        inp.addEventListener("input", function(){
+          p[f[0]] = inp.value; dirtyP[p.uid] = true; keepPeople();
+          row.classList.toggle("ok", personDone(p)); peopleCount(); changed();
+        });
+        cell.appendChild(lab); cell.appendChild(inp); row.appendChild(cell);
+      });
+      row.classList.toggle("ok", personDone(p));
+      plist.appendChild(row);
+    });
+    peopleCount();
+  }
+  addBtn.addEventListener("click", function(){
+    var p = {uid: uid(), orig: "", nome: "", setor: "", email: "", whatsapp: ""};
+    people.push(p); keepPeople(); renderPeople();
+    var f = document.getElementById("p-" + p.uid + "-nome"); if (f) f.focus();
+  });
+  renderPeople();
+
+  // contrato
+  var sc = addSection("contrato", null, "Informações para o contrato", "Com estes 9 dados, a GPTImob prepara o contrato e envia para assinatura no e-mail do representante legal.");
+  var g = el("div","grid2");
+  CONTRACT.forEach(function(c){
+    var key = "contrato."+c[0];
+    var f = el("div","field"+(c[3]?" full":""));
+    var lab = el("label",null,c[1]); lab.htmlFor = "f-contrato-"+c[0];
+    var inp = el("input"); inp.type = c[2]; inp.id = "f-contrato-"+c[0];
+    if (c[0]==="cpf") inp.inputMode = "numeric";
+    if (c[0]==="cnpj") inp.inputMode = "numeric";
+    f.appendChild(lab); f.appendChild(inp); g.appendChild(f);
+    inputs[key] = {el: inp, wrap: f, sec: "contrato", label: c[1], secTitle: "Informações para o contrato"};
+    inp.addEventListener("input", function(){ onInput(key); });
+  });
+  sc.appendChild(g);
+  sc.appendChild(el("p","note","Por segurança, depois de salvos, estes dados vão só para a planilha da GPTImob e não aparecem de novo nesta página."));
+
+  // checklist
+  var sk = addSection("acessos", null, "O que precisamos receber da KA", "A implantação começa quando estes acessos e materiais chegam no grupo de suporte. Marque o que já foi enviado.");
+  var box = el("div","checks");
+  CHECKS.forEach(function(c){
+    var key = "acessos."+c[0];
+    var lab = el("label","chk");
+    var cb = el("input"); cb.type = "checkbox"; cb.id = "f-acessos-"+c[0];
+    lab.appendChild(cb); lab.appendChild(el("span",null,c[1]));
+    box.appendChild(lab);
+    inputs[key] = {el: cb, wrap: lab, sec: "acessos", label: c[1], secTitle: "O que precisamos receber da KA", check: true};
+    cb.addEventListener("change", function(){ onInput(key); });
+  });
+  sk.appendChild(box);
+
+  function getVal(key){ var i = inputs[key]; return i.check ? !!i.el.checked : i.el.value; }
+  function isFilled(key){ var v = getVal(key); return inputs[key].check ? v === true : String(v).trim() !== ""; }
+
+  function paintAll(){
+    Object.keys(inputs).forEach(function(key){
+      var i = inputs[key], v = values[key];
+      if (document.activeElement === i.el) return;
+      if (i.check) i.el.checked = v === true;
+      else i.el.value = typeof v === "string" ? v : "";
+    });
+    refresh();
+  }
+
+  function refresh(){
+    var total = 0, done = 0, per = {};
+    Object.keys(inputs).forEach(function(key){
+      var i = inputs[key]; var f = isFilled(key);
+      total++; if (f) done++;
+      per[i.sec] = per[i.sec] || [0,0]; per[i.sec][1]++; if (f) per[i.sec][0]++;
+      i.wrap.classList.toggle(i.check ? "on" : "filled", f);
+    });
+    document.getElementById("meter").style.width = (total ? Math.round(done/total*100) : 0) + "%";
+    document.getElementById("count").textContent = done + " de " + total + " respondidos";
+    Object.keys(per).forEach(function(sec){
+      var pc = document.getElementById("pc-"+sec), t = document.getElementById("toc-"+sec);
+      if (pc){ pc.textContent = per[sec][0]+" de "+per[sec][1]; pc.classList.toggle("full", per[sec][0]===per[sec][1]); }
+      if (t) t.classList.toggle("done", per[sec][0]===per[sec][1]);
+    });
+    buildWa();
+  }
+
+  function summary(){
+    var out = ["Onboarding KA Empreendimentos — respostas", ""];
+    var last = null;
+    Object.keys(inputs).forEach(function(key){
+      var i = inputs[key];
+      if (!isFilled(key) && !i.check) return;
+      if (i.secTitle !== last){ out.push(""); out.push("*"+i.secTitle+"*"); last = i.secTitle; }
+      if (i.check) out.push((isFilled(key) ? "✅ " : "⬜ ") + i.label);
+      else out.push("• " + i.label + ": " + String(getVal(key)).trim());
+    });
+    var ps = people.filter(function(p){ return String(p.nome||"").trim(); });
+    if (ps.length){ out.push(""); out.push("*Pessoas da KA no Omnichannel*");
+      ps.forEach(function(p){ out.push("• " + [p.nome, p.setor, p.email, p.whatsapp].map(function(v){ return String(v||"").trim(); }).filter(Boolean).join(" · ")); }); }
+    return out.join("\n").replace(/\n{3,}/g,"\n\n");
+  }
+  function buildWa(){
+    document.getElementById("wa").href = "https://api.whatsapp.com/send?phone=5554999166672&text=" + encodeURIComponent(summary());
+  }
+  document.getElementById("copy").addEventListener("click", function(){
+    var btn = this, txt = summary();
+    function done(msg){ btn.textContent = msg; setTimeout(function(){ btn.textContent = "Copiar as respostas"; }, 2200); }
+    try {
+      navigator.clipboard.writeText(txt).then(function(){ done("Respostas copiadas"); }, function(){ fallback(); });
+    } catch(e){ fallback(); }
+    function fallback(){
+      var t = document.createElement("textarea"); t.value = txt; document.body.appendChild(t); t.select();
+      try { document.execCommand("copy"); done("Respostas copiadas"); } catch(e){ done("Selecione e copie"); }
+      t.remove();
+    }
+  });
+
+  // gravação na planilha (Google Apps Script) — automática, 2,5 s depois da última alteração
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbxVwSPv8JE9y3zi6hqxUIRtc8IglZ-DI1dJiEXD4jD-sq8eoaTxPAcqaPry58CXqng9sA/exec";
+  var dirty = {};
+  var saving = false, autoT = null, retryT = null;
+  var saveBtns = [document.getElementById("save-bar"), document.getElementById("save-main")];
+  var quemEl = document.getElementById("quem");
+  try { quemEl.value = localStorage.getItem(LS+"-quem") || ""; } catch(e) {}
+  quemEl.addEventListener("input", function(){ try { localStorage.setItem(LS+"-quem", quemEl.value); } catch(e) {} });
+  try { dirty = JSON.parse(localStorage.getItem(LS+"-dirty") || "{}") || {}; } catch(e) { dirty = {}; }
+  function keepDirty(){ try { localStorage.setItem(LS+"-dirty", JSON.stringify(dirty)); } catch(e) {} }
+  function pendingCount(){ return Object.keys(dirty).length + Object.keys(dirtyP).length; }
+
+  function setSave(cls, text){ saveEl.className = "save " + cls; saveEl.textContent = text; }
+  function hhmm(d){ return ("0"+d.getHours()).slice(-2)+"h"+("0"+d.getMinutes()).slice(-2); }
+
+  function changed(){
+    setSave("local", "Salvando em instantes…");
+    clearTimeout(autoT); autoT = setTimeout(save, 2500);
+  }
+  function onInput(key){
+    values[key] = getVal(key);
+    dirty[key] = true; keepDirty();
+    try { localStorage.setItem(LS, JSON.stringify(values)); } catch(e) {}
+    refresh(); changed();
+  }
+
+  function payload(){
+    var keys = Object.keys(dirty), answers = {};
+    keys.forEach(function(k){ answers[k] = values[k] === undefined ? "" : values[k]; });
+    var sent = people.filter(function(p){ return dirtyP[p.uid] && String(p.nome||"").trim(); })
+      .map(function(p){ return {uid: p.uid, orig: p.orig || "", nome: p.nome.trim(), setor: (p.setor||"").trim(), email: (p.email||"").trim(), whatsapp: (p.whatsapp||"").trim()}; });
+    return {keys: keys, answers: answers, sent: sent,
+      body: JSON.stringify({ cliente: "ka", quem: quemEl.value.trim(), answers: answers, pessoas: sent })};
+  }
+
+  function save(){
+    clearTimeout(autoT); clearTimeout(retryT);
+    if (saving){ autoT = setTimeout(save, 1500); return; }
+    if (!pendingCount()){ setSave("ok", "Tudo salvo"); return; }
+    var pl = payload();
+    if (!pl.keys.length && !pl.sent.length){ setSave("local", "Preencha o nome da pessoa para salvar"); return; }
+    saving = true; saveBtns.forEach(function(b){ b.disabled = true; });
+    setSave("", "Salvando…");
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: pl.body })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (!res || !res.ok) throw new Error("recusado");
+        pl.keys.forEach(function(k){ if (values[k] === pl.answers[k]) delete dirty[k]; });
+        pl.sent.forEach(function(s){
+          var p = people.filter(function(x){ return x.uid === s.uid; })[0];
+          if (!p) return;
+          p.orig = s.nome;
+          if (p.nome.trim() === s.nome && (p.setor||"").trim() === s.setor && (p.email||"").trim() === s.email && (p.whatsapp||"").trim() === s.whatsapp) delete dirtyP[p.uid];
+        });
+        keepDirty(); keepPeople();
+        setSave("ok", "Salvo às " + hhmm(new Date()));
+        if (pendingCount()) changed();
+      })
+      .catch(function(){
+        setSave("err", "Sem conexão. Tentando de novo…");
+        retryT = setTimeout(save, 15000);
+      })
+      .then(function(){ saving = false; saveBtns.forEach(function(b){ b.disabled = false; }); });
+  }
+  saveBtns.forEach(function(b){ b.addEventListener("click", save); });
+  // ao fechar ou trocar de aba, envia o que faltou
+  function flushOnLeave(){
+    if (!pendingCount() || saving) return;
+    try { var pl = payload(); if (pl.keys.length || pl.sent.length) navigator.sendBeacon(ENDPOINT, new Blob([pl.body], {type: "text/plain;charset=utf-8"})); } catch(e) {}
+  }
+  document.addEventListener("visibilitychange", function(){ if (document.visibilityState === "hidden") flushOnLeave(); });
+  window.addEventListener("pagehide", flushOnLeave);
+
+  paintAll();
+  setSave("", "Carregando respostas…");
+  fetch(ENDPOINT).then(function(r){ return r.json(); }).then(function(res){
+    if (!res || !res.ok) throw new Error();
+    var remote = res.answers || {};
+    Object.keys(remote).forEach(function(k){ if (inputs[k] && !dirty[k]) values[k] = remote[k]; });
+    try { localStorage.setItem(LS, JSON.stringify(values)); } catch(e) {}
+    (res.pessoas || []).forEach(function(rp){
+      var key = String(rp.nome||"").trim().toLowerCase(); if (!key) return;
+      var p = people.filter(function(x){ return String(x.orig||x.nome||"").trim().toLowerCase() === key; })[0];
+      if (!p){ p = {uid: uid(), orig: rp.nome, nome: rp.nome, setor: "", email: "", whatsapp: ""}; people.push(p); }
+      if (dirtyP[p.uid]) return;
+      p.orig = rp.nome; p.nome = rp.nome; p.setor = rp.setor || ""; p.email = rp.email || ""; p.whatsapp = rp.whatsapp || "";
+    });
+    keepPeople(); renderPeople();
+    paintAll();
+    if (pendingCount()) save(); else setSave("ok", "Tudo salvo");
+  }).catch(function(){ setSave("local", pendingCount() ? "Salvo neste aparelho" : "Sem conexão com a planilha"); });
+})();
+</script>
+
+</body>
+</html>
