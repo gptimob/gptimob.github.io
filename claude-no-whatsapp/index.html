@@ -1245,14 +1245,14 @@ footer .ft-one a:hover{text-decoration:underline}
 .bk-tag{background:var(--am-light);color:#1A2E05;font:800 .66rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:999px}
 .bk-card h3{margin:0;font:700 1.35rem/1.15 var(--f-display);letter-spacing:-.02em}
 .bk-card p{margin:0;color:var(--muted)}
-.bk-mock{position:relative;height:250px;border-radius:18px;background:radial-gradient(120% 90% at 50% 0%,#F7FEE7 0%,#E9EDE1 100%);display:grid;place-items:center;overflow:hidden}
-.bk-pg{position:absolute;top:50%;width:30%;height:66%;background:#fff;border-radius:10px;box-shadow:0 18px 30px -18px rgba(18,16,12,.45);padding:12px 10px;opacity:.92}
-.bk-pg i{display:block;height:44%;border-radius:5px;background:linear-gradient(135deg,#D9F99D,#BEF264);margin-bottom:9px}
-.bk-pg b{display:block;height:100%;max-height:36%;background:repeating-linear-gradient(#D6D1C6 0 3px,transparent 3px 9px)}
-.bk-pg.l{left:7%;transform:translateY(-50%) rotate(-5deg)}
-.bk-pg.r{right:7%;transform:translateY(-50%) rotate(5deg)}
-.bk-tab{position:relative;z-index:1;height:84%;aspect-ratio:3/4;background:#12100C;border-radius:16px;padding:6px;transform:rotate(4deg);box-shadow:0 26px 40px -18px rgba(18,16,12,.65)}
-.bk-cv{height:100%;border-radius:11px;background:linear-gradient(150deg,#D9F99D 0%,#4D7C0F 52%,#1A2E05 100%);color:#fff;padding:12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.bk-mock{position:relative;height:320px;border-radius:18px;background:radial-gradient(120% 90% at 50% 0%,#F7FEE7 0%,#E9EDE1 100%);display:flex;justify-content:center;align-items:center;overflow:hidden}
+.bk-pg{position:absolute;top:50%;height:210px;width:calc(210px*900/1274);background:#fff;border-radius:6px;box-shadow:0 18px 30px -18px rgba(18,16,12,.5);overflow:hidden;opacity:.96}
+.bk-cv{position:relative}
+.bk-pg img,.bk-cv img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.bk-pg.l{left:6%;transform:translateY(-50%) rotate(-5deg)}
+.bk-pg.r{right:6%;transform:translateY(-50%) rotate(5deg)}
+.bk-tab{position:relative;z-index:1;flex:none;height:290px;width:calc(290px*900/1274);background:#12100C;border-radius:16px;padding:6px;transform:rotate(4deg);box-shadow:0 26px 40px -18px rgba(18,16,12,.65)}
+.bk-cv{height:100%;border-radius:11px;background:#0A0E15;overflow:hidden}
 .bk-cv small{font:600 .5rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;opacity:.9}
 .bk-cv strong{font:800 1.45rem/.95 var(--f-display);letter-spacing:-.04em;color:#fff}
 .bk-cv span{font:700 .72rem/1.2 var(--f-display)}
@@ -1263,6 +1263,17 @@ footer .ft-one a:hover{text-decoration:underline}
 .bk-live i::before{content:"";position:absolute;left:50%;top:34%;width:34%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:var(--ntext);opacity:.5}
 .bk-live i::after{content:"";position:absolute;left:50%;top:64%;width:62%;height:50%;transform:translateX(-50%);border-radius:50% 50% 0 0;background:var(--ntext);opacity:.32}
 .bk-live i:first-of-type{grid-column:span 3;grid-row:span 1}
+.bk-peek{justify-self:start;display:inline-flex;gap:8px;align-items:center;background:var(--night);color:#fff;border:0;border-radius:999px;padding:10px 18px;font:600 .9rem var(--f-body);cursor:pointer}
+.bk-peek:hover{background:var(--am-ink)}
+.bk-dlg{border:0;border-radius:20px;padding:0;max-width:min(980px,94vw);width:100%;background:#fff;box-shadow:0 40px 80px -20px rgba(0,0,0,.6)}
+.bk-dlg::backdrop{background:rgba(10,14,21,.78)}
+.bk-dlg-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:1}
+.bk-dlg-h b{font:700 1rem var(--f-display)}
+.bk-dlg-x{border:0;background:var(--tint);border-radius:999px;padding:8px 14px;font:600 .85rem var(--f-body);cursor:pointer}
+.bk-dlg-b{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:16px;max-height:78vh;overflow:auto}
+.bk-dlg-b img{width:100%;height:auto;border-radius:8px;box-shadow:0 10px 24px -14px rgba(0,0,0,.5)}
+.bk-dlg-f{padding:0 16px 16px;text-align:center}
+@media(max-width:680px){.bk-dlg-b{grid-template-columns:1fr}.bk-mock{height:280px}.bk-tab{height:250px;width:calc(250px*900/1274)}.bk-pg{height:180px;width:calc(180px*900/1274)}}
 .bk-note{margin:28px 0 0;text-align:center;color:var(--muted);font-size:.95rem}
 .bk-cta{display:flex;justify-content:center;margin-top:20px}
 @media(max-width:820px){.bk-grid{grid-template-columns:1fr}}
@@ -1461,13 +1472,14 @@ footer .ft-one a:hover{text-decoration:underline}
     </div>
     <div class="bk-grid">
       <article class="bk-card">
-        <div class="bk-mock" role="img" aria-label="Mockup do e-book 100 comandos do Claude no WhatsApp em um tablet">
-          <div class="bk-pg l"><i></i><b></b></div>
-          <div class="bk-pg r"><i></i><b></b></div>
-          <div class="bk-tab"><div class="bk-cv"><small>E-book bônus · GPTImob</small><strong>100<br>COMANDOS</strong><span>Claude no<br>WhatsApp</span></div></div>
+        <div class="bk-mock" role="img" aria-label="Mockup do e-book 100 comandos do Claude no WhatsApp: capa em um tablet e duas páginas internas">
+          <div class="bk-pg l"><img src="img/ebook-p2.jpg" width="900" height="1274" loading="lazy" decoding="async" alt="Página interna do e-book com os comandos de resumo do dia"></div>
+          <div class="bk-pg r"><img src="img/ebook-p3.jpg" width="900" height="1274" loading="lazy" decoding="async" alt="Página interna do e-book com os comandos de recuperar e etiquetas"></div>
+          <div class="bk-tab"><div class="bk-cv"><img src="img/ebook-capa.jpg" width="900" height="1274" loading="lazy" decoding="async" alt="Capa do e-book: 100 comandos prontos para o seu WhatsApp"></div></div>
         </div>
         <div class="bk-top"><span class="bk-n">1</span><h3>E-book com 100 comandos</h3><span class="bk-tag">50 primeiros</span></div>
-        <p>Os 100 comandos prontos para copiar, colar e usar no Claude. Você ganha tempo e não precisa começar do zero.</p>
+        <p>100 comandos prontos para copiar e colar no painel do Claude: resumo do dia, recuperar clientes parados, etiquetas, visitas na agenda, atalhos e mais. Você não precisa começar do zero.</p>
+        <button type="button" class="bk-peek" data-bk-open>👀 Espiar por dentro do e-book</button>
       </article>
       <article class="bk-card">
         <div class="bk-live" role="img" aria-label="Ilustração de um encontro online ao vivo"><u>AO VIVO</u><i></i><i></i><i></i></div>
@@ -1711,6 +1723,21 @@ footer .ft-one a:hover{text-decoration:underline}
     }, 2800);
   }
 })();
+</script>
+<dialog class="bk-dlg" id="bkDlg" aria-label="Prévia do e-book 100 comandos">
+  <div class="bk-dlg-h"><b>Prévia do e-book: 100 comandos do Claude no WhatsApp</b><button type="button" class="bk-dlg-x" data-bk-close>Fechar</button></div>
+  <div class="bk-dlg-b">
+    <img src="img/ebook-capa.jpg" width="900" height="1274" loading="lazy" decoding="async" alt="Capa do e-book 100 comandos">
+    <img src="img/ebook-p2.jpg" width="900" height="1274" loading="lazy" decoding="async" alt="Página 2 do e-book: resumo do dia e recuperar">
+  </div>
+  <div class="bk-dlg-f"><a class="cta buy" href="https://pay.hotmart.com/T108577119K?checkoutMode=10">Quero o curso com os bônus <i aria-hidden="true">→</i></a></div>
+</dialog>
+<script>
+(function(){var d=document.getElementById('bkDlg');if(!d||!d.showModal)return;
+document.addEventListener('click',function(e){var t=e.target;
+if(t.closest&&t.closest('[data-bk-open]')){d.showModal();}
+else if(t.closest&&t.closest('[data-bk-close]')){d.close();}
+else if(t===d){d.close();}});})();
 </script>
 </body>
 </html>
